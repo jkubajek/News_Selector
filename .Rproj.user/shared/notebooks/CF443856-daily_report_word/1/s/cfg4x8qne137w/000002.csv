@@ -1,0 +1,103 @@
+"0","for(name in names(list_topics)){
+    
+    cat(paste0('#Temat ', iter))
+    cat(""  \n"") 
+    
+    topic_words <- list_topics[[name]][[""word""]]
+    
+    if(length(topic_words) > 40){
+        scale_font <- c(4, 2)
+    } else {
+        scale_font <- c(5, 3)
+    }
+    
+    .wykres <- Plot_topic_correlation(topic_words, dlPairs, scale_font = scale_font, class_num = 6, min_association = 0.4, lambda_daily_DF)
+    
+    print(.wykres)
+    
+    cat(""  \n"") 
+    cat(""  \n"") 
+    sentences <- list_topics[[name]][[""sentences""]]
+    sites <- list_topics[[name]][[""site_name""]]
+    urls <- list_topics[[name]][[""url""]]
+    for(i in 1:length(sentences)){
+        cat(paste0(sentences[i], "" ["", sites[i], ""]("", urls[i], "")""))
+        cat(""  \n"")
+        cat(""  \n"")
+    }
+    
+    if(iter < length(list_topics)){
+        # insert page break
+        cat(""#####\n"")
+    }
+    
+    
+    # if(iter == 3) break
+    iter <- iter + 1
+}
+"
+"1","#Temat 1"
+"1","  
+"
+"1","  
+"
+"1","  
+"
+"1","Sprawę Mariusza Krasonia nagłośniło Stowarzyszenie prokuratorów ""Lex super omnia"", które w liście otwartym do prokuratora krajowego wezwało do natychmiastowego wstrzymania decyzji o oddelegowaniu prokuratora do Wrocławia. [Interia](https://fakty.interia.pl/polska/news-staja-murem-za-krasoniem-kolejny-apel-do-prokuratora-krajowe,nId,3084727)"
+"1","  
+"
+"1","  
+"
+"1","To kolejna nieludzka, bezduszna decyzja naszych przełożonych - tak dziś szef stowarzyszenia prokuratorów ""Lex Super Omnia"" Krzysztof Parchimowicz mówi o bulwersującym przeniesieniu z dnia na dzień prokuratora Mariusza Krasonia z Krakowa do Wrocławia. [RMF 24](https://www.rmf24.pl/fakty/polska/news-znany-prokurator-oddelegowany-mozliwe-akcje-prawne-przeciwko,nId,3084541)"
+"1","  
+"
+"1","  
+"
+"1","List ten powstał w związku z nagłym oddelegowaniem prokuratora Mariusza Krasonia do prokuratury we Wrocławiu. [Interia](https://fakty.interia.pl/polska/news-staja-murem-za-krasoniem-kolejny-apel-do-prokuratora-krajowe,nId,3084727)"
+"1","  
+"
+"1","  
+"
+"1","W tę metodę wpisuje się decyzja podjęta przez Pana wobec Mariusza Krasonia, który w maju tego roku, wspólnie z członkami zgromadzenia prokuratorów regionu krakowskiego, głosował za przyjęciem uchwały piętnującej naruszanie niezależności prokuratorów"" - napisano w piśmie skierowanym do Święczkowskiego. [TVN24](https://www.tvn24.pl/wiadomosci-z-kraju,3/bodnar-o-sprawie-prokuratura-krasonia-nie-jestem-w-stanie-zrozumiec-decyzji,950937.html)"
+"1","  
+"
+"1","  
+"
+"1","Będziemy podejmować akcje prawne wobec prokuratora generalnego, wobec prokuratora krajowego w związku z decyzjami, które upokarzają, pozbawiają niezależności naszych kolegów. [Interia](https://fakty.interia.pl/polska/news-staja-murem-za-krasoniem-kolejny-apel-do-prokuratora-krajowe,nId,3084727)"
+"1","  
+"
+"1","  
+"
+"1","Stowarzyszenie ""Lex super omnia"" zapowiada także, że możliwe są akcję prawne przeciwko prokuratorowi generalnemu Zbigniewowi Ziobrze i prokuratorowi krajowemu Bogdanowi Święczkowskiemu. [Interia](https://fakty.interia.pl/polska/news-staja-murem-za-krasoniem-kolejny-apel-do-prokuratora-krajowe,nId,3084727)"
+"1","  
+"
+"1","  
+"
+"1","Potępiamy Pana decyzję o delegowaniu Pana Prokuratora Mariusza Krasonia do Prokuratury Rejonowej Wrocław Krzyki. [RMF 24](https://www.rmf24.pl/fakty/polska/news-znany-prokurator-oddelegowany-mozliwe-akcje-prawne-przeciwko,nId,3084541)"
+"1","  
+"
+"1","  
+"
+"1","Ponownie dotyczy prokuratora znajdującego się w trudnej sytuacji życiowej, o nieposzlakowanej opinii, stanowiącego wzór dla innych"" - napisali autorzy listu do prokuratora krajowego. [TVN24](https://www.tvn24.pl/wiadomosci-z-kraju,3/bodnar-o-sprawie-prokuratura-krasonia-nie-jestem-w-stanie-zrozumiec-decyzji,950937.html)"
+"1","  
+"
+"1","  
+"
+"1","Stowarzyszenie prokuratorów ""Lex Super Omnia"" opublikowało list otwarty do Prokuratora Krajowego, zarzucając mu przekraczanie prawa. [RMF 24](https://www.rmf24.pl/fakty/polska/news-zleknieni-prokuratorzy-nie-sa-w-stanie-stawic-czola-przestep,nId,3084597)"
+"1","  
+"
+"1","  
+"
+"1","""Wzywamy Pana do natychmiastowego anulowania podjętej decyzji, która może wywołać negatywne skutki nie tylko dla Mariusza Krasonia, ale również jego najbliższych. [RMF 24](https://www.rmf24.pl/fakty/polska/news-znany-prokurator-oddelegowany-mozliwe-akcje-prawne-przeciwko,nId,3084541)"
+"1","  
+"
+"1","  
+"
+"1","#####
+"
+"1","#Temat 2"
+"1","  
+"
+"2","Error in igraph::graph_from_data_frame(., vertices = lambda_daily_DF %>%  : 
+  Some vertex names in edge list are not listed in vertex data frame
+"

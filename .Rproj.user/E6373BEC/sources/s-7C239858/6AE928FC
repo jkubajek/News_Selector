@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1562605498983.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "6AE928FC",
+    "lastKnownWriteTime" : 1562616710,
+    "last_content_update" : 1562616710810,
+    "path" : "D:/Osobiste/GitHub/News_Selector/scripts/reports/daily_report_html.Rmd",
+    "project_path" : "scripts/reports/daily_report_html.Rmd",
+    "properties" : {
+        "cursorPosition" : "99,108",
+        "scrollLine" : "95"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,7 @@
+"0","knitr::opts_chunk$set("
+"0","	echo = FALSE,"
+"0","	message = FALSE,"
+"0","	warning = FALSE,"
+"0","	cashe = TRUE,"
+"0","	dev=""png"", dev.args=list(type=""cairo""), dpi = 300"
+"0",")"

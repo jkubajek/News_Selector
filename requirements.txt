@@ -1,0 +1,7 @@
+scrapy
+
+w3lib
+
+bs4
+
+lxml

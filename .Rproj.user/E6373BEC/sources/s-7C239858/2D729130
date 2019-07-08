@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560588419758.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4247610453",
+    "id" : "2D729130",
+    "lastKnownWriteTime" : 1560588441,
+    "last_content_update" : 1560588441786,
+    "path" : "D:/Osobiste/GitHub/News_Selector/scripts/PL_stop_words.R",
+    "project_path" : "scripts/PL_stop_words.R",
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

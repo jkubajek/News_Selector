@@ -1,0 +1,194 @@
+---
+title: "Raport dzienny"
+date: "`r as.character(as.Date(lubridate::ymd_hms(Sys.time())) - 1)`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	cashe = TRUE,
+	dev="png", dev.args=list(type="cairo"), dpi = 300
+)
+#http://www.datadreaming.org/post/r-markdown-theme-gallery/ 
+```
+
+```{r echo = FALSE}
+working_dir <- "D:/Osobiste/GitHub/"
+
+library(tidyselect)
+library(tokenizers)
+library(tidyr)
+library(dplyr)
+library(widyr)
+library(tidytext)
+library(ggplot2)
+library(stringr)
+library(DT)
+
+library(wordcloud)
+library(RColorBrewer)
+
+library(knitr)
+
+library(lexRankr)
+library(arrangements)
+
+load(paste0(working_dir, "News_Selector/data/topics/daily_topics_list.RData"))
+
+source(paste0(working_dir, "News_Selector/scripts/topic_selection_functions.R"), encoding = "UTF8")
+
+kexpand <- function(wt, ht, cat) {
+  cat(knitr::knit(text = knitr::knit_expand(text = 
+     sprintf("```{r %s, echo = FALSE, fig.height=%s, fig.width=%s, fig.align = 'center'}\nprint(.wykres)\n```", cat, ht, wt)
+  )))}
+
+kable_expand <- function() {
+  cat(knitr::knit(text = "```{r kable, echo = FALSE, fig.align = 'center'}\nkable(DF, digits = 0, position = 'c')\n```", quiet = T
+  ))}
+
+knit_table <- function(i){
+    cat(knitr::knit(text = "```{r %s, echo = FALSE, message = FALSE}\ndatatable(sen_DF, rownames = FALSE, options = list(pageLength = 10, scrollX=T), escape = F)\n```", i, quiet = T))
+}
+
+# https://stackoverflow.com/questions/47704329/how-to-format-kable-table-when-knit-from-rmd-to-word-with-bookdown
+extract_lambda_DF <- function(list_topics, r = 0){
+    
+    first_name <- names(list_topics)[1]
+    iter <- 1
+    for(name in names(list_topics)){
+        if(name == first_name){
+            DF <- list_topics[[name]][["words_DF"]] %>%
+                mutate(Temat = iter)
+        } else {
+            DF <- DF %>%
+                union_all(list_topics[[name]][["words_DF"]] %>%
+                mutate(Temat = iter))
+        }
+        iter <- iter + 1
+    }
+    
+    DF <- DF %>%
+        arrange(desc(lambda)) %>%
+        mutate(lambda = round(lambda, r))
+    
+    colnames(DF) <- c("Słowo", "Kluczowość", "Liczba wystąpień", "Temat")
+    
+    return(DF)
+}
+
+```
+
+# Wstęp
+Raport przedstawia dominujące tematy w agendzie mediów internetowych w danym dniu i jest przygotowywany w oparciu o artykuły publikowane w ośmiu portalach informacyjnych: RMF 24, TVN24, TVN24 bis, Radio ZET, Gazeta.pl, Dziennik.pl, PAP oraz Interia. Metodyka opracowywania raportu uwzględnia tematy zawierające słowa, które wystąpiły więcej  niż 15 razy w danym dniu oraz były kluczowe - tzn. ich statystyka Dunninga wyniosła co najmniej 10. Dokładna miara kluczowości statystycznej [Dunninga (1993)](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.14.5962) została podana w pierwszej tabeli. Przy wyliczaniu tej miary częstość występowania słowa w danym dniu porównywana jest z wielokrotnością jego pojawiania się w okresie od 1 stycznia 2018 do bieżącego dnia. Wysoka wartość statystyki oznacza, że dane słowo wystąpiło częściej niż w okresie referencyjnym.
+
+Poszczególne słowa zostały pogrupowane w tematy na podstawie występowania w tych samych akapitach.
+
+Na wykresach przedstawiono współwystępowanie poszczególnych słów oraz ich kluczowość. Im czcionka jest większa i posiada ciemniejszą barwę, tym wyższa kluczowość danego słowa. Linie łączące wybrane słowa oznaczają, że [podobieństwo cosinusowe](https://towardsdatascience.com/overview-of-text-similarity-metrics-3397c4601f50) między nimi wynosi co najmniej 0,4. Podobieństwo cosinusowe jest wyznaczane na podstawie występowania słów w tych samych akapitach.
+
+Zdania, które podsumowują poszczególne tematy zostały wybrane za pomocą zmodyfikowanego algorytmu [LexRank](https://blog.nus.edu.sg/soctalent/2010/02/11/a-brief-summary-of-lexrank-graph-based-lexical-centrality-as-salience-in-text-summarization/), który po raz pierwszy został opisany w [artykule](https://pdfs.semanticscholar.org/44fc/a068eecce2203d111213e3691647914a3945.pdf) z 2004 r. W tym przypadku polega on na wyznaczeniu zdań, które zawierają najwięcej istotnych informacji dla danego tematu – zmodyfikowany algorytm uwzględnia częstotliwość występowania poszczególnych słów, ich istotność oraz powiązanie z tematem (podobieństwo cosinusowe).
+
+
+```{r echo = FALSE, message=FALSE, fig.width=7, fig.height=8, fig.align = 'center', results='asis'}
+# knitr::opts_current$set(fig.width=7, fig.height=9) 
+.wykres <- Plot_all_words_correlation(dlPairs, scale_font = c(14, 10), class_num = 6, min_association = 0.45,
+                           lambda_daily_DF)
+
+cat("  \n") 
+cat("  \n") 
+cat('# Powiązania między słowami')
+print(.wykres)
+
+
+
+
+```
+
+```{r echo = FALSE, message = FALSE, fig.width=7, fig.height=8, fig.align = 'center', results='asis'}
+# Tablica
+# cat("#####\n")
+cat('# Wybrane słowa kluczowe')
+cat("  \n") 
+cat("  \n") 
+
+DF <- extract_lambda_DF(list_topics)
+    
+# https://rstudio.github.io/DT/
+# https://holtzy.github.io/Pimp-my-rmd/
+datatable(DF, rownames = FALSE, filter="top", options = list(pageLength = 10, scrollX=T))
+    
+
+cat("  \n") 
+cat("  \n") 
+    
+# cat("#####\n")
+
+```
+
+```{r echo = FALSE, message = F, fig.width=6, fig.height=3, fig.align = 'center', results='asis'}
+# https://stackoverflow.com/questions/49561077/creating-a-new-line-within-an-rmarkdown-chunk
+# https://stackoverflow.com/questions/24672111/how-to-add-a-page-break-in-word-document-generated-by-rstudio-markdown
+
+cat("  \n") 
+cat("  \n") 
+cat('# Lista tematów')
+cat("  \n")
+cat("  \n")  
+
+iter <- 1
+for(name in names(list_topics)){
+    
+    cat("  \n") 
+    cat("  \n") 
+    cat(paste0('## Temat ', iter))
+    cat("  \n") 
+    cat("  \n") 
+    
+    topic_words <- list_topics[[name]][["word"]]
+    
+    if(length(topic_words) > 40){
+        scale_font <- c(4, 2)
+    } else {
+        scale_font <- c(5, 3)
+    }
+    
+    .wykres <- Plot_topic_correlation(topic_words, dlPairs, scale_font = scale_font, class_num = 6, min_association = 0.4, lambda_daily_DF)
+    
+    print(.wykres)
+    
+    cat("  \n") 
+    cat("  \n") 
+    cat("  \n")
+    
+    sen_DF <- data.frame(sentence = list_topics[[name]][["sentences"]],
+                         site_name = list_topics[[name]][["site_name"]],
+                         url = list_topics[[name]][["url"]], stringsAsFactors = F) %>%
+        mutate(site_name = paste0("<a href='", url, "'>", site_name, "</a>")) %>%
+        dplyr::select(-url) %>%
+        rename(Tekst = sentence,
+               Strona = site_name) %>%
+        mutate(Tekst = gsub('[^(\x20-\xFF)]', '', Tekst),
+               Strona = gsub('[^(\x20-\xFF)]', '', Strona))
+
+    knit_table(iter)
+    cat("  \n")
+    cat("  \n")
+    
+    # 
+    # if(iter < length(list_topics)){
+    #     # insert page break
+    #     cat("#####\n")
+    # }
+    
+    
+    # if(iter == 3) break
+    iter <- iter + 1
+}
+```
+

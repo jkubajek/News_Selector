@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560587526594.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "C60F2879",
+    "lastKnownWriteTime" : 1562613779,
+    "last_content_update" : 1562613779356,
+    "path" : "D:/Osobiste/GitHub/News_Selector/scripts/topic_selection_functions.R",
+    "project_path" : "scripts/topic_selection_functions.R",
+    "properties" : {
+        "cursorPosition" : "698,0",
+        "scrollLine" : "691"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
