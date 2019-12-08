@@ -1,46 +1,37 @@
 # ###################################################################
-# Biblioteki
+# Libraries
 # ###################################################################
 library(tibble)
 library(rjson)
-library(xml2) #
+library(xml2)
 library(tidytext)
 library(tokenizers)
 library(tidyr)
 library(dplyr)
-library(widyr) #
-# library(ggplot2)
-library(chron) #
-library(scales)
-library(openxlsx) #
-library(stargazer) #
-
+library(widyr)
+library(chron) 
+library(openxlsx) 
+library(reticulate)
 library(lubridate)
-
-library(wordcloud) #
-library(RColorBrewer)
-
-library(glmnet) #
-
 library(stringr)
 
-library(ggpage) #
+# Shoudl topics be printed at the end
+print_topics <- FALSE
 
-library(lexRankr) #
-library(arrangements) #
-
-# Ladowanie funkcji
+# Loading functions
+# Setting main directory
 working_dir <- "D:/Osobiste/GitHub/"
 
+# Sourcing R code
 source(paste0(working_dir, "News_Selector/scripts/dunning_functions.R"), encoding = "UTF8")
-source(paste0(working_dir, "News_Selector/scripts/my_lex_rank_functions.R"), encoding = "UTF8")
 source(paste0(working_dir, "News_Selector/scripts/text_cleaning_functions.R"), encoding = "UTF8")
 source(paste0(working_dir, "News_Selector/scripts/topic_selection_functions.R"), encoding = "UTF8")
+
+# Sourcing Python code
+source_python(paste0(working_dir, "News_Selector/scripts/python_functions.py"))
+
 # Stop Words
 source(paste0(working_dir, "News_Selector/scripts/PL_stop_words.R"), encoding = "UTF8")
-
-# Minimalna liczba wystapien w artykulach
-v_min_lambda_daily <- 10
 # ###################################################################
 # Load files
 # ###################################################################
@@ -53,7 +44,7 @@ DF_6 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/p
 DF_7 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_TVN24_daily.json")) %>% clean_TVN24(.)
 DF_8 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_TVN24bis_daily.json")) %>% clean_TVN24bis(.)
 
-# Laczenie wszystkich stron
+# Meeging all sites
 DF <- DF_1 %>%
     dplyr::select(id, date, time, site, url, text) %>%
     union_all(DF_2 %>%
@@ -72,53 +63,53 @@ DF <- DF_1 %>%
                   dplyr::select(id, date, time, site, url, text))
 rm(DF_1, DF_2, DF_3, DF_4, DF_5, DF_6, DF_7, DF_8)
 
-# Data do analizy
+# Setting as date to analyse yesterday
 v_date <- Sys.time() %>% ymd_hms() %>% as.Date() - 1
 v_date <- v_date %>% as.character()
+# v_date <- "2019-12-04"
 
 DF <- DF %>%
     filter(date == v_date) %>%
     mutate(date = date %>% as.character())
 
-# Zapisywanie artykulow i ustawienie sciezki
+# Saving articles 
 save(DF, file = paste0(working_dir, "News_Selector/data/daily_articles/archiv/articles_", v_date, ".RData"))
 
 
 # ###################################################################
-# Load Dictionaries
+# Load grammar dictionary
 # ###################################################################
-# Slownik gramatyczny
 load(paste0(working_dir, "News_Selector/data/grammar_data.RData"))
 
 gc(reset = T)
 # ###################################################################
-# Obrobka tekstu
+# Modification of dataset
 # ###################################################################
 # TO DO:
-# Poprawic rozbicie RMF24 - to chyba wynika z twardej spacji
+# Correct sentence splitting (RMF24 - it's probably hard space)
 
-## Glowna czesc rozbicia plikow
+# Selecting sentences that are to be included in analysis
 articles_sentences <- DF %>%
-    # Podzial na paragrafy
+    # Split into paragraphs
     unnest_tokens(text, text, token = "regex", pattern = " \\|\\| ", to_lower = F) %>%
-    # Wyznaczanie id paragrafow
+    # Set paragraphs ids
     group_by(id) %>%
     mutate(paragraph_id = paste0(id, "_", seq(1, n()))) %>%
     ungroup() %>%
-    # Podzial na zdania
+    # Split into sentences
     unnest_tokens(text, text, token = "sentences", to_lower = F) %>%
-    # Usuniecie bardzo krotkich zdan
+    # Delete too short sentences
     filter(nchar(text) > 80) %>%
-    # Wyznaczenie id zdan
+    # Set sentences ids
     group_by(id) %>%
     mutate(sentence_id = paste0(id, "_", seq(1, n()))) %>%
     ungroup() %>%
-    # Usuniecie zdan gdzie ponad 35 porcent stanowia wielkie litery
+    # Delete sentences with too many capital letters
     mutate(characters = nchar(text),
            capital_letters = stringr::str_count(text,"[A-Z]")) %>%
     filter((capital_letters / characters) < 0.35)
     
-
+# Unnest sentences
 articles_unnested <- articles_sentences %>%
     unnest_tokens(word, text, to_lower = F) %>%
     group_by(sentence_id) %>%
@@ -131,22 +122,16 @@ articles_unnested <- articles_sentences %>%
     dplyr::select(-slowo) %>%
     filter(!word %in% stop_words_pl) 
 
-# Check distribution of data
+# Select minimum number of tokens occurence basing on distribution of data
 data_grouped <-  articles_unnested %>%
     group_by(word) %>%
     summarise(counts = n())
-
-v_min_counts <- quantile(data_grouped$counts, probs = 0.90) # lub 0.91
-
-# Filter out rare words
-filtered_sentences_unnested <- articles_unnested %>%
-    group_by(word) %>%
-    filter(n() > 3) %>%
-    ungroup()
+v_min_counts <- quantile(data_grouped$counts, probs = 0.90) # or 0.91
 
 gc(reset = T)
+
 # ###################################################################
-# Statystyki ogolne
+# General statistics needed for Dunning statistic
 # ###################################################################
 # Data Set of dates used in general stats
 used_dates <- read.csv2(paste0(working_dir, "News_Selector/data/Used_dates_in_stats.csv")) %>%
@@ -154,6 +139,7 @@ used_dates <- read.csv2(paste0(working_dir, "News_Selector/data/Used_dates_in_st
 # Statistics
 load(paste0(working_dir, "News_Selector/data/General_stats_updated.RData"))
 
+# Update statistics if date is new
 if (! v_date %in% used_dates$date){
 
     general_stats <- general_stats %>%
@@ -168,78 +154,97 @@ if (! v_date %in% used_dates$date){
         mutate(perc_general = counts_general / sum(counts_general)) %>%
         dplyr::select(word, perc_general, counts_general)
     
-    # Aktualizacja dat
+    # Update dates included in general statistics
     used_dates <- bind_rows(used_dates, tibble(date = v_date))
 
     save(general_stats, file = paste0(working_dir, "News_Selector/data/General_stats_updated.RData"))
     write.csv2(used_dates, file = paste0(working_dir, "News_Selector/data/Used_dates_in_stats.csv"), row.names = F)
 }
 
-
 #####################################################################
-# Grupowanie slow do tematow
+# Cluster and summarise with embeddings in Python
 # ###################################################################
-# Wyznaczenie podobienstwa na poziomie paragrafow
-res <- TopicClustering(articles_unnested, general_stats, paragraph_id, word, id, min_counts = v_min_counts, 
-                       min_lambda_daily = v_min_lambda_daily, min_association = 0.5, association_type = "Cosinus",
-                       min_words_topic = 2) # 4
-dlPairs <- res[[1]]
-mat <- res[[2]]
+# Prepare inputs for Python
+inputs <- prepare_python_inputs(articles_unnested,
+                                articles_sentences,
+                                general_stats,
+                                id, paragraph_id, sentence_id, word, 
+                                v_min_counts, 
+                                v_min_lambda_daily)
 
-dlPairs <- DescTools::as.matrix.xtabs(dlPairs)
+sections_and_articles <- inputs[[1]]
+filtered_lambda_statistics <- inputs[[2]]
+log_lambda_statistics_df <- inputs[[3]]
+lemmatized_sentences <- inputs[[4]]
+lemmatized_articles <- inputs[[5]]
+sentences_text <- inputs[[6]]
 
-## TO DO:
-## Add this to the TopicClustering
 
-# Grupowanie slow do tematow
-cos_res <- CosineClustering(dlPairs, mat, 0.25, silhouette_flag = F) # 0.25 - paragrafy lub 0.01 dla silhouette_flag = T
-list_topics <- cos_res[[1]]
-# mat_topics <- cos_res[[2]]
-# max_val_history <- cos_res[[3]]
-# silhouette_history <- cos_res[[4]]
-# 
-# plot(seq(1, length(max_val_history)), max_val_history)
-# plot(seq(1, length(silhouette_history)), silhouette_history)
-# max_silhouette <- which(silhouette_history == max(silhouette_history))
-# max_val_history[max_silhouette]
+# Sending data to Python for clustering and summarisation with the
+# use of dimensions reduction (LSA)
+# The algorithm is to select approximately 5% of the sentences that include 
+# topic tokens (words), but no less than 3 and no more than 10. 
+topics <- cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
+                               # Clustering
+                               min_association=0.25, do_silhouette=TRUE, 
+                               singularity_penalty=-0.1,
+                               # Summarization
+                               lemmatized_sentences=lemmatized_sentences, 
+                               lemmatized_articles=lemmatized_articles,
+                               sentences_text=sentences_text,
+                               log_lambda_statistics_df=log_lambda_statistics_df,
+                               min_key_freq=0.8, max_sentence_simil=0.5,
+                               section_id="section_id", word_col="word",
+                               use_sparse=TRUE)
 
-# Tutaj slowa sa juz przypisane do tematow
-# Dodawanie do listy informacji o statystyce Dunninga (Lambda) oraz sortowanie listy wg najwyzszej wartosci statystyki w danym temacie
-list_topics <- Lambd_Extractor(list_topics, articles_unnested, general_stats, min_counts = v_min_counts, 
+list_topics <- topics[[1]]
+words_similarity_matrix <- topics[[2]]
+selected_tokens <- topics[[3]]
+silhouette_history <- topics[[4]]
+max_simil_history <- topics[[5]]
+plot(silhouette_history)
+colnames(words_similarity_matrix) <- selected_tokens
+rownames(words_similarity_matrix) <- selected_tokens
+
+# Adding names to topics
+names(list_topics) <- paste0("Gr_", seq(length(list_topics)))
+
+# Add info about Dunning statistics, sort topics and clean sentences
+list_topics <- lambd_extractor(list_topics, articles_unnested, 
+                               general_stats, min_counts = v_min_counts, 
                                min_lambda_daily = v_min_lambda_daily)
-list_topics <- Arrange_Topics(list_topics, "max_lambda")
+list_topics <- arrange_topics(list_topics, "max_lambda")
+list_topics <- clear_sentences(list_topics)
 
 #####################################################################
-# Wyznaczanie zdan ktore podsumowuja poszczegolne tematy
+# Topics listing
 # ###################################################################
-# Wybrane zdania stanowia ok 5% wszystkich ktore opisuja dany temat - wybieranych jest nie mniej niz 3 zdania oraz nie wiecej niz 10 zdan
+# This enables to print out and check all topics
+if(print_topics){
+    for(name in names(list_topics)){
+        print(list_topics[[name]][["max_lambda"]])
+        print(list_topics[[name]][["words_DF"]])
+        print("")
+        print(paste0(list_topics[[name]][["site_name"]], ": ", list_topics[[name]][["sentences"]]))
+        print("----------------------------------")
+    }
+}
 
-# Ta funcja znajduje i przypisuje zdania do poszczegolnych tematow
-# Zdania sa posortowane wg wartosci zwroconej przez LexRank
-list_topics <- Topics_Summariser(list_topics, filtered_sentences_unnested, articles_sentences, paragraph_id, word, 
-                                 sentence_id, general_stats, filtered_similarity = F, min_key_freq = 0.8, 
-                                 value_log_log, min_association = 0.5, sites)
-
-
-list_topics <- Clear_Sentences(list_topics)
-
-# # Ten fragment kodu sluzy do sprawdzenia jakie slowa i zdania zostaly przypisane do poszczegolnych tematow
-# for(name in names(list_topics)){
-#     # print(list_topics[[name]][["word"]])
-#     print(list_topics[[name]][["max_lambda"]])
-#     print(list_topics[[name]][["words_DF"]])
-#     print("")
-#     print(paste0(list_topics[[name]][["site_name"]], ": ", list_topics[[name]][["sentences"]]))
-#     print("----------------------------------")
-# }
-
-# Data Frame ze statystyka Dunninga dla wybranych slow
-lambda_daily_DF <- calculate_lambda_statistics(articles_unnested, general_stats, min_counts = v_min_counts, min_lambda_daily = v_min_lambda_daily) %>% 
+#####################################################################
+# Saving output for report
+# ###################################################################
+# Data frame with Dunning statistics for plotting
+lambda_daily_DF <- calculate_lambda_statistics(articles_unnested, general_stats, 
+                                               min_counts = v_min_counts, 
+                                               min_lambda_daily = v_min_lambda_daily) %>% 
     mutate(lambda_log = log(lambda + 1) ) %>%
     rename(name = word) %>%
     dplyr::select(name, lambda, lambda_log)
 
-# Zapisywanie listy tematow z wybranymi slowami oraz zdaniami podsumowujacymi dany temat, macierzy podobienstwa miedzy slowami oraz tablicy ze statystyka Dunninga dla wybranych slow
-save(list_topics, dlPairs, lambda_daily_DF, file = paste0(working_dir, "News_Selector/data/topics/daily_topics_list.RData"))
+# Saving topics list, similarity matrix and df with Dunning statistics
+save(list_topics, 
+     words_similarity_matrix, 
+     lambda_daily_DF, 
+     file = paste0(working_dir, "News_Selector/data/topics/daily_topics_list.RData"))
 
 
