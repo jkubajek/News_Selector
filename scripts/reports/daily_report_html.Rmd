@@ -97,7 +97,8 @@ Zdania, które podsumowują poszczególne tematy zostały wybrane za pomocą zmo
 
 ```{r echo = FALSE, message=FALSE, fig.width=7, fig.height=8, fig.align = 'center', results='asis'}
 # knitr::opts_current$set(fig.width=7, fig.height=9) 
-.wykres <- Plot_all_words_correlation(dlPairs, scale_font = c(14, 10), class_num = 6, min_association = 0.45,
+quant <- count_quantile(nrow(words_similarity_matrix))
+.wykres <- plot_all_words_correlation(words_similarity_matrix, scale_font = c(14, 10), class_num = 6, min_association = quantile(words_similarity_matrix, quant),
                            lambda_daily_DF)
 
 cat("  \n") 
@@ -158,7 +159,7 @@ for(name in names(list_topics)){
         scale_font <- c(5, 3)
     }
     
-    .wykres <- Plot_topic_correlation(topic_words, dlPairs, scale_font = scale_font, class_num = 6, min_association = 0.4, lambda_daily_DF)
+    .wykres <- plot_topic_correlation(topic_words, words_similarity_matrix, scale_font = scale_font, class_num = 6, min_association = 0.4, lambda_daily_DF)
     
     print(.wykres)
     
