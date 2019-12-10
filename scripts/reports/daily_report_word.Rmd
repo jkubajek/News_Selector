@@ -35,7 +35,7 @@ library(RColorBrewer)
 library(knitr)
 
 library(lexRankr)
-library(arrangements)
+# library(arrangements)
 
 load(paste0(working_dir, "News_Selector/data/topics/daily_topics_list.RData"))
 
@@ -98,7 +98,7 @@ Zdania, które podsumowują poszczególne tematy zostały wybrane za pomocą zmo
 ```{r echo = FALSE, fig.width=7, fig.height=8, fig.align = 'center', results='asis'}
 # knitr::opts_current$set(fig.width=7, fig.height=9)
 quant <- count_quantile(nrow(words_similarity_matrix))
-.wykres <- plot_all_words_correlation(words_similarity_matrix, scale_font = c(14, 10), class_num = 6, min_association = quantile(words_similarity_matrix, quant),
+.wykres <- plot_all_words_correlation(words_similarity_matrix, scale_font = c(14, 10), class_num = 6, min_association = 0.6,
                            lambda_daily_DF)
 
 cat('#Powiązania między słowami')
@@ -145,7 +145,7 @@ for(name in names(list_topics)){
         scale_font <- c(5, 3)
     }
     
-    .wykres <- plot_topic_correlation(topic_words, words_similarity_matrix, scale_font = scale_font, class_num = 6, min_association = 0.4, lambda_daily_DF)
+    .wykres <- plot_topic_correlation(topic_words, words_similarity_matrix, scale_font = scale_font, class_num = 6, min_association = 0.5, lambda_daily_DF)
     
     print(.wykres)
     
