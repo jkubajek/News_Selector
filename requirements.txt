@@ -4,5 +4,3 @@ lxml
 scipy
 numpy
 sklearn
-itertools
-math

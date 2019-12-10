@@ -174,12 +174,15 @@ plot_all_words_correlation <- function(words_similarity_matrix, scale_font = c(8
     # Plot
     plot <- simil_df %>%
         filter(simil > min_association) %>%
+        group_by(name) %>%
+        top_n(2, simil) %>%
+        ungroup() %>%
         mutate(simil = simil - 0.001) %>%
         igraph::graph_from_data_frame(vertices = lambda_daily_DF %>%
                                           inner_join(simil_df %>%
                                                          filter(simil > min_association) %>%
                                                          distinct(name), by = "name")) %>%
-        ggraph::ggraph(layout = "fr") +
+        ggraph::ggraph(layout = "fr", niter = 4000) +
         ggraph::geom_edge_link(aes(edge_width = simil*1.5), edge_colour = "cyan4", edge_alpha = 0.2,
                                check_overlap = T, show.legend = F) +
         ggraph::geom_node_point(aes(size = size_plot), color = "lightblue", show.legend = F) +
@@ -232,10 +235,13 @@ plot_topic_correlation <- function(topic_words, words_similarity_matrix, scale_f
     plot <- similarity_df %>%
         filter(col_1 %in% topic_words & col_2 %in% topic_words) 
     
-    quant <- count_quantile(length(topic_words))
-    min_association <- quantile(plot$simil, quant)
+    # quant <- count_quantile(length(topic_words))
+    # min_association <- quantile(plot$simil, quant)
     plot <- plot %>%
-        filter(simil > min_association) 
+        filter(simil > min_association) %>%
+        group_by(name) %>%
+        top_n(2, simil) %>%
+        ungroup()
     
     if(nrow(plot) == 0){
         plot <- similarity_df %>%
@@ -251,7 +257,7 @@ plot_topic_correlation <- function(topic_words, words_similarity_matrix, scale_f
     }
     
     plot <- plot %>%
-        ggraph::ggraph(layout = "kk")+
+        ggraph::ggraph(layout = "fr", niter = 3000)+
         ggraph::geom_edge_link(aes(edge_width = simil*1.5), edge_colour = "cyan4", edge_alpha = 0.2,
                                check_overlap = T, show.legend = F)+
         ggraph::geom_node_point(aes(size = size_plot), color = "lightblue", show.legend = F)+

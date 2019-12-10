@@ -18,6 +18,9 @@ library(stringr)
 # Shoudl topics be printed at the end
 print_topics <- FALSE
 
+# Minimal lambda value
+v_min_lambda_daily <- 10
+
 # Loading functions
 # Setting main directory
 working_dir <- "D:/Osobiste/GitHub/"
@@ -66,7 +69,6 @@ rm(DF_1, DF_2, DF_3, DF_4, DF_5, DF_6, DF_7, DF_8)
 # Setting as date to analyse yesterday
 v_date <- Sys.time() %>% ymd_hms() %>% as.Date() - 1
 v_date <- v_date %>% as.character()
-# v_date <- "2019-12-04"
 
 DF <- DF %>%
     filter(date == v_date) %>%
