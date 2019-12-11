@@ -198,6 +198,7 @@ def page_rank(matrix, damping_factor=0.85):
 
     # Row-normalise input matrix
     row_sums = np.sum(matrix, axis=1)
+    row_sums = np.absolute(row_sums)
     non_zero = row_sums != 0
     matrix[non_zero, :] = np.divide(matrix[non_zero, :], row_sums[non_zero, None])
     matrix = np.multiply(matrix, damping_factor)
@@ -389,10 +390,13 @@ class TopicsSummariser:
         if self.use_sparse:
             importance = sp.csr_matrix(importance)
             topic_sentences_tf_matrix = topic_sentences_tf_matrix.multiply(importance)
+            topic_sentences_tf_matrix = topic_sentences_tf_matrix.dot(self.embeddings)
         else:
             topic_sentences_tf_matrix = topic_sentences_tf_matrix.toarray()
             topic_sentences_tf_matrix = np.multiply(topic_sentences_tf_matrix,
                                                     importance)
+            topic_sentences_tf_matrix = np.dot(topic_sentences_tf_matrix,
+                                                    self.embeddings)
 
         # PageRank
         simil_matrix = cos(topic_sentences_tf_matrix)
