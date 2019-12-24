@@ -1,0 +1,189 @@
+---
+title: "BBC report"
+date: "2019-12-09"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	cashe = TRUE,
+	dev="png", dev.args=list(type="cairo"), dpi = 300
+)
+#http://www.datadreaming.org/post/r-markdown-theme-gallery/ 
+```
+
+```{r echo = FALSE}
+working_dir <- "D:/Osobiste/GitHub/"
+
+library(tidyselect)
+library(tokenizers)
+library(tidyr)
+library(dplyr)
+library(widyr)
+library(tidytext)
+library(ggplot2)
+library(stringr)
+library(DT)
+
+library(wordcloud)
+library(RColorBrewer)
+
+library(knitr)
+
+library(lexRankr)
+# library(arrangements)
+
+load(paste0(working_dir, "News_Selector/data/topics/daily_topics_list_en.RData"))
+
+source(paste0(working_dir, "News_Selector/scripts/topic_selection_functions.R"), encoding = "UTF8")
+
+kexpand <- function(wt, ht, cat) {
+  cat(knitr::knit(text = knitr::knit_expand(text = 
+     sprintf("```{r %s, echo = FALSE, fig.height=%s, fig.width=%s, fig.align = 'center'}\nprint(.wykres)\n```", cat, ht, wt)
+  )))}
+
+kable_expand <- function() {
+  cat(knitr::knit(text = "```{r kable, echo = FALSE, fig.align = 'center'}\nkable(DF, digits = 0, position = 'c')\n```", quiet = T
+  ))}
+
+knit_table <- function(i){
+    cat(knitr::knit(text = "```{r %s, echo = FALSE, message = FALSE}\ndatatable(sen_DF, rownames = FALSE, options = list(pageLength = 10, scrollX=T), escape = F)\n```", i, quiet = T))
+}
+
+# https://stackoverflow.com/questions/47704329/how-to-format-kable-table-when-knit-from-rmd-to-word-with-bookdown
+extract_lambda_DF <- function(list_topics, r = 0){
+    
+    first_name <- names(list_topics)[1]
+    iter <- 1
+    for(name in names(list_topics)){
+        if(name == first_name){
+            DF <- list_topics[[name]][["words_DF"]] %>%
+                mutate(Temat = iter)
+        } else {
+            DF <- DF %>%
+                union_all(list_topics[[name]][["words_DF"]] %>%
+                mutate(Temat = iter))
+        }
+        iter <- iter + 1
+    }
+    
+    DF <- DF %>%
+        arrange(desc(lambda)) %>%
+        mutate(lambda = round(lambda, r))
+    
+    colnames(DF) <- c("Word", "Importance", "Counts", "Topic")
+    
+    return(DF)
+}
+
+```
+
+# Introduction
+This report presents the most important topics in BBC World News publish between 1. and 9. December 2019.
+
+
+```{r echo = FALSE, message=FALSE, fig.width=7, fig.height=8, fig.align = 'center', results='asis'}
+# knitr::opts_current$set(fig.width=7, fig.height=9) 
+quant <- count_quantile(nrow(words_similarity_matrix))
+.wykres <- plot_all_words_correlation(words_similarity_matrix, scale_font = c(14, 10), class_num = 6, min_association = 0.6,
+                           lambda_daily_DF)
+
+cat("  \n") 
+cat("  \n") 
+cat('# Graph of key words')
+print(.wykres)
+
+
+
+
+```
+
+```{r echo = FALSE, message = FALSE, fig.width=7, fig.height=8, fig.align = 'center', results='asis'}
+# Tablica
+# cat("#####\n")
+cat('# Key words')
+cat("  \n") 
+cat("  \n") 
+
+DF <- extract_lambda_DF(list_topics)
+    
+# https://rstudio.github.io/DT/
+# https://holtzy.github.io/Pimp-my-rmd/
+datatable(DF, rownames = FALSE, filter="top", options = list(pageLength = 10, scrollX=T))
+    
+
+cat("  \n") 
+cat("  \n") 
+    
+# cat("#####\n")
+
+```
+
+```{r echo = FALSE, message = F, fig.width=6, fig.height=3, fig.align = 'center', results='asis'}
+# https://stackoverflow.com/questions/49561077/creating-a-new-line-within-an-rmarkdown-chunk
+# https://stackoverflow.com/questions/24672111/how-to-add-a-page-break-in-word-document-generated-by-rstudio-markdown
+
+cat("  \n") 
+cat("  \n") 
+cat('# List of topics')
+cat("  \n")
+cat("  \n")  
+
+iter <- 1
+for(name in names(list_topics)){
+    
+    cat("  \n") 
+    cat("  \n") 
+    cat(paste0('## Topic ', iter))
+    cat("  \n") 
+    cat("  \n") 
+    
+    topic_words <- list_topics[[name]][["word"]]
+    
+    if(length(topic_words) > 40){
+        scale_font <- c(4, 2)
+    } else {
+        scale_font <- c(5, 3)
+    }
+    
+    .wykres <- plot_topic_correlation(topic_words, words_similarity_matrix, scale_font = scale_font, class_num = 6, min_association = 0.5, lambda_daily_DF)
+    
+    print(.wykres)
+    
+    cat("  \n") 
+    cat("  \n") 
+    cat("  \n")
+    
+    sen_DF <- data.frame(sentence = list_topics[[name]][["sentences"]],
+                         site_name = list_topics[[name]][["site_name"]],
+                         url = list_topics[[name]][["url"]], stringsAsFactors = F) %>%
+        mutate(site_name = paste0("<a href='", url, "'>", site_name, "</a>")) %>%
+        dplyr::select(-url) %>%
+        rename(Text = sentence,
+               Site = site_name) %>%
+        mutate(Text = gsub('[^(\x20-\xFF)]', '', Text),
+               Site = gsub('[^(\x20-\xFF)]', '', Site))
+
+    knit_table(iter)
+    cat("  \n")
+    cat("  \n")
+    
+    # 
+    # if(iter < length(list_topics)){
+    #     # insert page break
+    #     cat("#####\n")
+    # }
+    
+    
+    # if(iter == 3) break
+    iter <- iter + 1
+}
+```
+

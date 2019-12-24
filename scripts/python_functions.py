@@ -5,13 +5,18 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity as cos
 from itertools import chain
 import math
+# from memory_profiler import profile, LogFile
+import logging
+import sys
+import pandas as pd
 
 
 def space_tokenizer(text):
     return text.split(" ")
 
 
-def create_embeddings(articles, lambda_statistics, pipeline=False):
+def create_embeddings(articles, lambda_statistics,
+                      log_lambda_statistics_df, pipeline=False):
     """
     This function creates embeddings for each word in data frame.
     
@@ -27,12 +32,15 @@ def create_embeddings(articles, lambda_statistics, pipeline=False):
     vectorizer = CountVectorizer(lowercase=False, tokenizer=space_tokenizer,
                                  min_df=1, encoding="UTF-8")
     tfidf_matrix = vectorizer.fit_transform(corpus)
-    # tfidf_matrix_normalized = tfidf_matrix
     tfidf_matrix = tfidf_matrix.transpose()
-    # tfidf_matrix_normalized = tfidf_matrix_normalized.transpose()
 
     svd = TruncatedSVD(n_components=256, n_iter=15, random_state=42)
     embeddings = svd.fit_transform(tfidf_matrix)
+
+    # Scale embeddings by log lambda
+    lambda_log_array = set_lambda_order(log_lambda_statistics_df, vectorizer.vocabulary_)
+    embeddings = np.multiply(embeddings, lambda_log_array, out=embeddings)
+
     selected_words.sort()
     selected_words_indices = []
     for word in selected_words:
@@ -198,18 +206,23 @@ def page_rank(matrix, damping_factor=0.85):
 
     # Row-normalise input matrix
     row_sums = np.sum(matrix, axis=1)
-    row_sums = np.absolute(row_sums)
+    row_sums = np.absolute(row_sums, out=row_sums)
     non_zero = row_sums != 0
-    matrix[non_zero, :] = np.divide(matrix[non_zero, :], row_sums[non_zero, None])
-    matrix = np.multiply(matrix, damping_factor)
+    for i in range(matrix.shape[0]):
+        if non_zero[i]:
+            matrix[i, :] = np.divide(matrix[i, :], row_sums[i, None],
+                                     out=matrix[i, :])
+    matrix = np.multiply(matrix, damping_factor, out=matrix)
+
     # Subtract from identity transposition of normalised matrix
-    identity = np.eye(n_rows)
-    matrix = np.subtract(identity, matrix.T)
+    matrix = np.transpose(matrix)
+    matrix = np.multiply(matrix, -1, out=matrix)
+    np.fill_diagonal(matrix, matrix.diagonal() + 1.0)
 
     # Create damping vector that asserts convergence of markov chain
     damping_vector = np.ones((n_rows, 1))
     scaling_factor = (1.0 - damping_factor) / n_rows
-    damping_vector = np.multiply(damping_vector, scaling_factor)
+    damping_vector = np.multiply(damping_vector, scaling_factor, out=damping_vector)
 
     x = np.linalg.solve(matrix, damping_vector)
 
@@ -234,6 +247,8 @@ class TopicsSummariser:
         self.log_lambda_statistics_df = log_lambda_statistics_df
         self.log_lambda_statistics = np.array((0,))
         self.embeddings = embeddings
+        if use_sparse:
+            self.sparse_embeddings = sp.csr_matrix(np.copy(embeddings))
         self.embeddings_vocab = embeddings_vocab
         self.selected_sentences = []
         self.sentences_in_articles = []
@@ -289,29 +304,32 @@ class TopicsSummariser:
         self.embeddings = self.embeddings[ordered_embeddings, :].copy()
 
     @staticmethod
-    def scale_ranking(ranking, topic_words_sums, all_words_sums):
+    def scale_ranking(ranking, unique_topic_words, all_words_sums):
         """
         Scale PageRank ranking by log(topic_words)/log(all_words).
         This modification upscales sentences with more topic words and
         downscales long sentences.
 
         :param ranking numpy array of ranking values
-        :param topic_words_sums numpy array with sums of topic words' occurences in sentences
+        :param unique_topic_words numpy array with the number of unique topic words' 
+        occurences in sentences
         :param all_words_sums numpy array with number of tokens in sentences
         """
-        topic_words_sums = np.array(topic_words_sums)
+        unique_topic_words = np.array(unique_topic_words)
         all_words_sums = np.array(all_words_sums)
 
-        pos = topic_words_sums > 0
-        topic_tokens_count_log = np.zeros(topic_words_sums.shape)
-        topic_tokens_count_log[pos] = np.log(topic_words_sums[pos])
+        unique_topic_words.resize(all_words_sums.shape)
+        unique_topic_words = np.log(unique_topic_words + 1.0)
+
         all_tokens_count_log = np.log(all_words_sums)
         all_pos = all_tokens_count_log > 0
         scaling_factors = np.zeros(all_tokens_count_log.shape)
-        scaling_factors[all_pos] = np.divide(topic_tokens_count_log[all_pos],
-                                             all_tokens_count_log[all_pos])
-
-        ranking = np.multiply(ranking, scaling_factors).flatten()
+        scaling_factors[all_pos] = np.divide(unique_topic_words[all_pos],
+                                             all_tokens_count_log[all_pos],
+                                             out=scaling_factors[all_pos])
+        scaling_factors.resize(ranking.shape)
+        ranking = np.multiply(ranking, scaling_factors, out=ranking)
+        ranking = ranking.flatten()
         return ranking
 
     def select_non_duplicated_sentences(self, simil_matrix, ranking, topic_sentences, order):
@@ -342,8 +360,7 @@ class TopicsSummariser:
         non_zero_sentences = sentence_number - zero_rankings
         num_selected = min(max(math.ceil(non_zero_sentences * 0.05), 3), 10)
         selected_sentences_ids = selected_sentences_ids[:num_selected]
-        selected_sentences_ids = [sent_id for index, sent_id in enumerate(topic_sentences)
-                                  if index in selected_sentences_ids]
+        selected_sentences_ids = [topic_sentences[topic_index] for topic_index in selected_sentences_ids]
         return selected_sentences_ids
 
     def sentences_selection(self, topic_words):
@@ -366,7 +383,7 @@ class TopicsSummariser:
         topic_words_freq = np.divide(topic_words_sums, all_words_sums)
         all_articles_mean = np.divide(np.sum(topic_words_sums),
                                       np.sum(all_words_sums))
-        selected_articles = np.where(topic_words_freq > all_articles_mean)[0]
+        selected_articles = np.where(topic_words_freq > all_articles_mean * self.min_key_freq)[0]
         topic_articles = [article_index for index, article_index in
                           enumerate(topic_articles)
                           if index in selected_articles]
@@ -380,39 +397,60 @@ class TopicsSummariser:
 
         # Calculate cosine simillarity between words and topic
         topic_embedding = np.sum(self.embeddings[topic_words_indices, :], axis=0, keepdims=True)
-        words_topic_simil = cos(self.embeddings, topic_embedding).flatten()
+        # words_topic_simil = cos(self.embeddings, topic_embedding).flatten()
 
         # Tokens importance
-        importance = np.multiply(words_topic_simil, self.log_lambda_statistics)
+        # importance = np.multiply(words_topic_simil, self.log_lambda_statistics)
+        # importance = self.log_lambda_statistics
 
         # Multiplication of sentence TF matrix by log_lambda_statistic and cosine 
         # simillarity between words and topic
         if self.use_sparse:
-            importance = sp.csr_matrix(importance)
-            topic_sentences_tf_matrix = topic_sentences_tf_matrix.multiply(importance)
-            topic_sentences_tf_matrix = topic_sentences_tf_matrix.dot(self.embeddings)
+            # importance = sp.csr_matrix(importance)
+            # topic_sentences_tf_matrix = topic_sentences_tf_matrix.multiply(importance)
+            topic_sentences_tf_matrix = topic_sentences_tf_matrix.dot(self.sparse_embeddings)
         else:
-            topic_sentences_tf_matrix = topic_sentences_tf_matrix.toarray()
-            topic_sentences_tf_matrix = np.multiply(topic_sentences_tf_matrix,
-                                                    importance)
+            # topic_sentences_tf_matrix = topic_sentences_tf_matrix.toarray()
+            # topic_sentences_tf_matrix = np.multiply(topic_sentences_tf_matrix,
+            #                                         importance)
             topic_sentences_tf_matrix = np.dot(topic_sentences_tf_matrix,
-                                                    self.embeddings)
+                                               self.embeddings)
 
-        # PageRank
+        # Similarity between sentences and topic
+        topic_sentences_tf_matrix = topic_sentences_tf_matrix.toarray()
+        sentences_topic_simil = cos(topic_sentences_tf_matrix, topic_embedding)
+        ranking = sentences_topic_simil
+        ranking = ranking.flatten()
+
+        # Select 25% the most similar sentences to the topic
+        order = np.argsort(ranking)[::-1]
+        selected_number = math.ceil(len(order) * 0.25)
+        order = order[:selected_number]
+        ranking_simil = ranking[order]
+        topic_sentences = [topic_sentences[_id] for _id in order]
+
+        # PageRank on selected sentences
+        topic_sentences_tf_matrix = topic_sentences_tf_matrix[order, :]
         simil_matrix = cos(topic_sentences_tf_matrix)
-        simil_matrix = np.array(simil_matrix)
         np.fill_diagonal(simil_matrix, 0.0)
+        # negative_values = simil_matrix < 0.0
+        # simil_matrix[negative_values] = 0.0
         ranking = page_rank(simil_matrix)
+        ranking = ranking.flatten()
+
+        # Multiply PageRank ranking by similarity to the topic
+        ranking = np.multiply(ranking, ranking_simil, out=ranking)
 
         # Scale ranking
-        topic_sentences_tf_matrix = self.tf_matrix_sentences[topic_sentences, :].copy()
-        topic_words_sums = topic_sentences_tf_matrix[:, topic_words_indices].sum(axis=1)
+        topic_sentences_tf_matrix = self.tf_matrix_sentences[topic_sentences, :]
+        unique_topic_words = topic_sentences_tf_matrix[:, topic_words_indices].getnnz(axis=1)
+        unique_topic_words = np.divide(unique_topic_words, len(topic_words))
         all_words_sums = topic_sentences_tf_matrix.sum(axis=1)
-        ranking = self.scale_ranking(ranking, topic_words_sums, all_words_sums)
+        ranking = self.scale_ranking(ranking, unique_topic_words, all_words_sums)
 
         # Order TF matrix by scaled ranking
-        order = np.argsort(ranking)[::-1]  # .flatten()
-        topic_sentences_tf_matrix = topic_sentences_tf_matrix[order, :].toarray()
+        order = np.argsort(ranking)[::-1]
+        topic_sentences_tf_matrix = topic_sentences_tf_matrix[order, :]
 
         # Select sentences with non duplicated meaning
         simil_matrix = cos(topic_sentences_tf_matrix)
@@ -496,6 +534,19 @@ def summarise_topics(topics, lemmatized_sentences, lemmatized_articles,
     return topics
 
 
+def set_lambda_order(log_lambda_statistics_df, vocabulary):
+    """Selects only statistics for tokens present in vocabulary and adjusts thier order"""
+    tokens = list(log_lambda_statistics_df["word"])
+    values = list(log_lambda_statistics_df["lambda"])
+    statistics = {token: values[index] for index, token in enumerate(tokens)}
+    inv_vocab = {v: k for k, v in vocabulary.items()}
+    ordered_vocabulary = [inv_vocab[i] for i in range(len(inv_vocab))]
+    ordered_statistics = [statistics[token] for token in ordered_vocabulary]
+    log_lambda_statistics = np.array(ordered_statistics)
+    log_lambda_statistics.resize(log_lambda_statistics.shape[0], 1)
+    return log_lambda_statistics
+
+
 def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
                           # Clustering
                           min_association, do_silhouette, singularity_penalty,
@@ -534,6 +585,7 @@ def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
     # Create embeddings
     outputs = create_embeddings(sections_and_articles,
                                 filtered_lambda_statistics,
+                                log_lambda_statistics_df,
                                 pipeline=True)
 
     similarity_matrix = outputs[0]
@@ -557,3 +609,48 @@ def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
                               section_id, word_col, use_sparse)
 
     return topics, similarity_matrix, selected_tokens, silhouette_history, max_simil_history
+
+# if __name__ == '__main__':
+#     # create logger
+#     logger = logging.getLogger('memory_profile_log')
+#     logger.setLevel(logging.DEBUG)
+# 
+#     # create file handler which logs even debug messages
+#     fh = logging.FileHandler("D:/Osobiste/GitHub/files/memory_profile.log")
+#     fh.setLevel(logging.DEBUG)
+# 
+#     # create formatter
+#     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+#     fh.setFormatter(formatter)
+# 
+#     # add the handlers to the logger
+#     logger.addHandler(fh)
+# 
+#     sys.stdout = LogFile('memory_profile_log', reportIncrementFlag=False)
+# 
+#     main_dir = "D:/Osobiste/GitHub/files/"
+#     file = main_dir + "sections_and_articles.csv"
+#     sections_and_articles = pd.read_csv(file)
+#     file = main_dir + "filtered_lambda_statistics.csv"
+#     filtered_lambda_statistics = pd.read_csv(file)
+#     file = main_dir + "lemmatized_sentences.csv"
+#     lemmatized_sentences = pd.read_csv(file)
+#     file = main_dir + "lemmatized_articles.csv"
+#     lemmatized_articles = pd.read_csv(file)
+#     file = main_dir + "sentences_text.csv"
+#     sentences_text = pd.read_csv(file)
+#     file = main_dir + "log_lambda_statistics_df.csv"
+#     log_lambda_statistics_df = pd.read_csv(file)
+# 
+# 
+#     cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
+#                           # Clustering
+#                           min_association=0.01, do_silhouette=True, singularity_penalty=0.0,
+#                           # Summarization
+#                           lemmatized_sentences=lemmatized_sentences,
+#                           lemmatized_articles=lemmatized_articles,
+#                           sentences_text=sentences_text,
+#                           log_lambda_statistics_df=log_lambda_statistics_df,
+#                           min_key_freq=1.0, max_sentence_simil=0.9,
+#                           section_id="section_id", word_col="word",
+#                           use_sparse=True)

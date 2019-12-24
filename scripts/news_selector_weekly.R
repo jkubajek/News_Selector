@@ -67,16 +67,19 @@ DF <- DF_1 %>%
 rm(DF_1, DF_2, DF_3, DF_4, DF_5, DF_6, DF_7, DF_8)
 
 # Setting as date to analyse yesterday
-v_date <- Sys.time() %>% ymd_hms() %>% as.Date() - 1
-v_date <- v_date %>% as.character()
+v_date_0 <- Sys.time() %>% ymd_hms() %>% as.Date() - 1
+v_date_1 <- Sys.time() %>% ymd_hms() %>% as.Date() - 7
+v_date_0 <- as.Date("2019-12-06", format="%Y-%m-%d")
+v_date_1 <- as.Date("2019-12-12", format="%Y-%m-%d")
+selected_dates <- seq(from=v_date_0, to=v_date_1, by="day")
+selected_dates <- selected_dates %>% as.character()
 
 DF <- DF %>%
-    filter(date == v_date) %>%
-    mutate(date = date %>% as.character())
+    mutate(date = date %>% as.character()) %>%
+    filter(date %in% selected_dates)
 
 # Saving articles 
-save(DF, file = paste0(working_dir, "News_Selector/data/daily_articles/archiv/articles_", v_date, ".RData"))
-
+# save(DF, file = paste0(working_dir, "News_Selector/data/daily_articles/archiv/articles_", v_date, ".RData"))
 
 # ###################################################################
 # Load grammar dictionary
@@ -128,10 +131,11 @@ articles_unnested <- articles_sentences %>%
 data_grouped <-  articles_unnested %>%
     group_by(word) %>%
     summarise(counts = n())
-v_min_counts <- quantile(data_grouped$counts, probs = 0.90) # or 0.91
+v_min_counts <- quantile(data_grouped$counts, probs = 0.95) # or 0.91
 
+
+rm(grammar_data)
 gc(reset = T)
-
 # ###################################################################
 # General statistics needed for Dunning statistic
 # ###################################################################
@@ -141,12 +145,15 @@ used_dates <- read.csv2(paste0(working_dir, "News_Selector/data/Used_dates_in_st
 # Statistics
 load(paste0(working_dir, "News_Selector/data/General_stats_updated.RData"))
 
+dates_to_include <- selected_dates[!(selected_dates %in% used_dates$date)]
+
 # Update statistics if date is new
 if (! v_date %in% used_dates$date){
 
     general_stats <- general_stats %>%
         dplyr::select(word, counts_general) %>%
         union_all(articles_unnested %>%
+                      filter(date %in% dates_to_include) %>%
                       group_by(word) %>%
                       summarise(counts_general = n()) %>%
                       ungroup()) %>%
@@ -157,10 +164,10 @@ if (! v_date %in% used_dates$date){
         dplyr::select(word, perc_general, counts_general)
     
     # Update dates included in general statistics
-    used_dates <- bind_rows(used_dates, tibble(date = v_date))
+    # used_dates <- bind_rows(used_dates, tibble(date = v_date))
 
-    save(general_stats, file = paste0(working_dir, "News_Selector/data/General_stats_updated.RData"))
-    write.csv2(used_dates, file = paste0(working_dir, "News_Selector/data/Used_dates_in_stats.csv"), row.names = F)
+    # save(general_stats, file = paste0(working_dir, "News_Selector/data/General_stats_updated.RData"))
+    # write.csv2(used_dates, file = paste0(working_dir, "News_Selector/data/Used_dates_in_stats.csv"), row.names = F)
 }
 
 #####################################################################
@@ -181,6 +188,13 @@ lemmatized_sentences <- inputs[[4]]
 lemmatized_articles <- inputs[[5]]
 sentences_text <- inputs[[6]]
 
+# write.csv(sections_and_articles, file=paste0(working_dir, "files/sections_and_articles.csv"), fileEncoding = "UTF-8", row.names = FALSE)
+# write.csv(filtered_lambda_statistics, file=paste0(working_dir, "files/filtered_lambda_statistics.csv"), fileEncoding = "UTF-8", row.names = FALSE)
+# write.csv(log_lambda_statistics_df, file=paste0(working_dir, "files/log_lambda_statistics_df.csv"), fileEncoding = "UTF-8", row.names = FALSE)
+# write.csv(lemmatized_sentences, file=paste0(working_dir, "files/lemmatized_sentences.csv"), fileEncoding = "UTF-8", row.names = FALSE)
+# write.csv(lemmatized_articles, file=paste0(working_dir, "files/lemmatized_articles.csv"), fileEncoding = "UTF-8", row.names = FALSE)
+# write.csv(sentences_text, file=paste0(working_dir, "files/sentences_text.csv"), fileEncoding = "UTF-8", row.names = FALSE)
+
 
 # Sending data to Python for clustering and summarisation with the
 # use of dimensions reduction (LSA)
@@ -195,7 +209,7 @@ topics <- cluster_and_summarise(sections_and_articles, filtered_lambda_statistic
                                lemmatized_articles=lemmatized_articles,
                                sentences_text=sentences_text,
                                log_lambda_statistics_df=log_lambda_statistics_df,
-                               min_key_freq=0.25, max_sentence_simil=0.5,
+                               min_key_freq=0.5, max_sentence_simil=0.4, #0.5
                                section_id="section_id", word_col="word",
                                use_sparse=TRUE)
 
@@ -223,12 +237,15 @@ list_topics <- clear_sentences(list_topics)
 # ###################################################################
 # This enables to print out and check all topics
 if(print_topics){
+    # iter = 0
     for(name in names(list_topics)){
         print(list_topics[[name]][["max_lambda"]])
         print(list_topics[[name]][["words_DF"]])
         print("")
         print(paste0(list_topics[[name]][["site_name"]], ": ", list_topics[[name]][["sentences"]]))
         print("----------------------------------")
+        # if (iter == 10) break
+        # iter = iter +1
     }
 }
 

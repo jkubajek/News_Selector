@@ -77,8 +77,10 @@ prepare_python_inputs <- function(articles_unnested,
     
     log_lambda_statistics_df <- calculate_lambda_statistics(articles_unnested, general_stats, 
                                                             min_counts = 1, min_lambda_daily = -10000) %>% 
-        mutate(lambda = ifelse(lambda < 0, 0, lambda),
-               lambda_log = log(lambda + 1) ) %>%
+        mutate(lambda = ifelse(lambda < -2, 0, lambda),
+               # lambda_log = log(lambda + 2) + 1) %>% # Added one after logarithm to smooth this function
+                # lambda_log = log(lambda + 3) + 1) %>% # Added one after logarithm to smooth this function
+                lambda_log = sqrt(lambda + 3)) %>% # Added one after logarithm to smooth this function
         dplyr::select(word, lambda_log) %>%
         rename(lambda = lambda_log)
     
