@@ -46,6 +46,10 @@ DF_5 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/p
 DF_6 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_PAP_daily.json")) %>% clean_PAP(.)
 DF_7 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_TVN24_daily.json")) %>% clean_TVN24(.)
 DF_8 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_TVN24bis_daily.json")) %>% clean_TVN24bis(.)
+DF_9 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_TVP_INFO_daily.json")) %>% clean_TVP_INFO(.)
+DF_10 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_Polskie_Radio_daily.json")) %>% clean_Polskie_Radio(.)
+DF_11 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_Polsat_News_daily.json")) %>% clean_Polsat_News(.)
+DF_12 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_Wprost_daily.json")) %>% clean_Wprost(.)
 
 # Meeging all sites
 DF <- DF_1 %>%

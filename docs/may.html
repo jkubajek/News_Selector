@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Maj</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.5/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="site_libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="site_libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="site_libs/selectize-0.12.0/selectize.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141513256-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141513256-3');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Podsumowanie 2019 r.</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Wprowadzenie</a>
+</li>
+<li>
+  <a href="methodology.html">Metodologia</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Podsumowania
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="january.html">Styczeń</a>
+    </li>
+    <li>
+      <a href="february.html">Luty</a>
+    </li>
+    <li>
+      <a href="march.html">Marzec</a>
+    </li>
+    <li>
+      <a href="april.html">Kwiecień</a>
+    </li>
+    <li>
+      <a href="may.html">Maj</a>
+    </li>
+    <li>
+      <a href="june.html">Czerwiec</a>
+    </li>
+    <li>
+      <a href="july.html">Lipiec</a>
+    </li>
+    <li>
+      <a href="august.html">Sierpień</a>
+    </li>
+    <li>
+      <a href="september.html">Wrzesień</a>
+    </li>
+    <li>
+      <a href="october.html">Październik</a>
+    </li>
+    <li>
+      <a href="november.html">Listopad</a>
+    </li>
+    <li>
+      <a href="december.html">Grudzień</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="mailto:j.kubajek@gmail.com">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/jkubajek">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/jakub-kubajek-869945158/">
+    <span class="fa fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Maj</h1>
+
+</div>
+
+
+<div id="wstep" class="section level1">
+<h1>Wstęp</h1>
+<p>Opis modelu, wykorzystanego do wygenerowania podsumowania, znajduje się w zakładce <a href="https://jkubajek.github.io/News_Selector/methodology">Metodologia</a>.</p>
+<p>Poszczególne słowa zostały automatycznie pogrupowane w tematy na podstawie informacji o występowaniu w tych samych akapitach i artykułach.</p>
+<p>Na wykresach przedstawiono współwystępowanie poszczególnych słów oraz ich kluczowość. Im czcionka jest większa i posiada ciemniejszą barwę, tym wyższa kluczowość słowa w danym miesiącu. Linie łączące wybrane słowa oznaczają, że <a href="https://towardsdatascience.com/overview-of-text-similarity-metrics-3397c4601f50">podobieństwo cosinusowe</a> między ich embeddingami wynosi co najmniej 0,4. W celu uproszczenia wizualizacji, dla każdego punktu na grafie wybrano maksymalnie dwa połączenia o największym stopniu podobieństwa, które spełniają wskazane kryterium. Podobieństwo cosinusowe wyznaczano za pomocą embeddingów, które są wektorową reprezentacją słów i przechowują informację współwystępowaniu w tych samych akapitach i artykułach. W przypadku grafu, który prezentuje powiązania między słowami ze wszystkich tematów, minimalne podobieństwo wynosi 0,6.</p>
+<p>Na wykresach tematycznych przedstawiono nie więcej niż 40 najistotniejszych słów. Analogicznie, na głównym grafie umieszczono nie więcej niż 200 najistotniejszych słów w danym miesiącu.</p>
+</div>
+<div id="powiazania-miedzy-sowami" class="section level1">
+<h1>Powiązania między słowami<img src="may_files/figure-html/unnamed-chunk-3-1.png" width="1050" style="display: block; margin: auto;" /></h1>
+</div>
+<div id="wybrane-sowa-kluczowe" class="section level1">
+<h1>Wybrane słowa kluczowe</h1>
+<div id="htmlwidget-b77ba3688feecf2c86dd" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b77ba3688feecf2c86dd">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"50\" data-max=\"9599\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"237\" data-max=\"15181\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"27\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["pedofilia","Parlamentu","Wiosna","PE","Europejskiego","Sekielski","Jażdżewski","wybory","Sekielska","pedofil","mandat","Europejskiej","Kościele","ksiądz","film","pedofilski","Kościół","FPOe","Tusk","przeciwpowodziowy","eurowybory","głos","europarlament","Podleśna","Biedroń","Europejska","Kościoła","Konfederacja","ropa","frekwencja","Europa","Koalicji","Koalicja","mowa","Narodowcy","duchowny","Magierowski","Cimoszewicz","wał","Matki","wyborczy","Brudziński","Przyjaźń","aureola","okrąg","wynik","Częstochowskiej","restytucja","Liroy","nikt","zdobyć","wyborca","podtopić","europoseł","wykład","bracia","PiS","małoletni","biskup","karny","kar","Braun","Partia","Joachim","powiat","profanacja","poll","Parlamencie","ostrzegawczy","Cassino","Kodeksu","komisja","Monte","Koalicję","Kurz","alarmowy","przestępstwo","Europejskim","Europejską","KE","opad","seksualny","Bożej","Małopolska","exit","deszcz","abp","Korwin","Uniwersytecie","działka","centymetr","uczucia","kampania","zanieczyścić","molestować","przedawnić","Schetyna","małopolski","roszczenie","podkarpacki","rzeka","sondaż","kościelna","europejski","ofiara","katolicki","język","alarm","świętokrzyski","podłożyć","Unii","dziecko","nr","Robert","rekonstrukcja","Weber","wygrać","Episkopatu","Wisła","Leszek","Unia","zaostrzenie","Podkarpacie","partia","obwodowy","rurociąg","zaostrzać","wizerunek","uzyskać","Beata","Huawei","odszkodować","czyn","hierarcha","ugrupować","religijny","zalać","przekroczyć","głosować","Razem","frakcja","Konfederacji","Płock","Elżbieta","Szydło","szkoła","lider","lądować","woj","województwo","Polska","surowiec","obrażać","Donald","prymas","matura","Kukiz","zbiornik","Holokaustu","próg","Konstytucji","poziom","Tomasz","Morawiecka","Amber","Gold","MSWiA","intensywny","jesienny","lubelski","jesienić","Europejczyk","majątek","surowy","tęczowy","egzamin","UE","skandal","strażak","Austria","list","niedzielny","Warszawska","Sprawiedliwość","Kaczyński","Guaido","przypadek","Kopacz","Wyborczej","więzić","miejsce","ładunek","wicepremier","wykorzystywać","Konferencji","rozszerzyć","Bielan","Madura","parafia","pokrzywdzić","Prawo","diecezja","zwycięstwo","Zełenski","śląski","bezwzględny","milimetr","przystąpić","plakat","Gruzja","raport","kościół","polityk","Teheran","Smoleńsk","Zieloni","emocja","Włodzimierz","zagłosować","dożywocie","sprawca","religia","PKW","równe","wspólnota","spot","podstawowy","prognoza","gmin","metropolita","fala","oddać","przegrać","konfrontacja","jedynka","absolwent","wystąpić","Maryja","naczelny","schronisko","poparcie","Unię","tron","wartość","kryzysowy","przyszłość","manipulacja","krzywda","wystrzelić","rejestr","interes","startować","obowiązkowy","izraelski","woda","burza","liderka","zgwałcić","Jarosław","Wyborcza","Grzegorz","Iran","IMGW","pisemny","walczyć","polityczny","eksport","Polak","otrzymać","jakość","wielki","karać","Pompeo","ambasador","Krak","nieletni","końcowy","procent","partnerski","pójść","lekcja","redaktor","lista","węgiel","sumienie","lubić","pozbawić","elektorat","Dominik","zobaczyć","Bruksela","najwyższy","Lewica","silny","walka","moralny","wysoki","zdawać","mieć","Iwo","opolski","Marcin","mówić","liczyć","naród","Franciszek","prognozować","rządząca","kara","zadośćuczynić","Zielona","interwencja","operator","przemówić","zagrozić","papież","Rafalska","sens","arcybiskup","Gazeta_Wyborcza","wolność","oglądać","Pożarnej","wznowić","Lider","interweniować","równość","Anna","Wenezuela","musić","profil","przestępca","południe","zwrot","Pracy","przekonywać","wybuchowy","poszczególny","podnosić","przewodniczący","król","Kongresu","dokument","grunt","poniżej","sprzed","zdobycie","zjawisko","maszyna","reprezentować","powyżej","dopiero","komitet","chronić","pokazać","uzyskiwać","ostrzec","integracja","Śląsk","słaby","zwyciężyć","ścigać","dobry","Chrystus","Ludowej","Timmermans","Straży","Gaza","padać","polski","trzeci","typ","traktować","białoruski","Marek","Gazeta.pl","koalicja","młodzież","odnieść"],[9599,4297,4241,4056,4024,3221,3104,3089,2929,2863,2854,2793,2606,2481,2171,2103,2035,1860,1827,1796,1738,1737,1701,1687,1669,1528,1454,1443,1393,1364,1346,1329,1328,1319,1306,1303,1266,1265,1235,1231,1202,1174,1121,1059,1044,1020,1001,900,887,883,875,874,867,858,850,842,829,796,770,751,751,741,734,733,727,719,716,689,684,683,682,656,651,640,631,617,604,604,599,583,582,574,571,567,554,550,546,545,541,529,521,516,516,513,509,504,502,501,497,496,492,489,485,482,477,450,450,437,435,434,434,430,427,414,408,405,397,396,393,388,388,387,379,379,378,378,376,373,358,358,353,352,350,350,343,343,336,333,326,324,321,321,316,311,309,308,303,303,300,298,298,297,296,288,286,284,282,276,272,267,264,263,262,253,253,250,247,246,244,243,242,239,239,236,235,234,232,231,228,227,225,225,225,223,222,218,214,211,206,205,204,202,201,201,201,200,197,195,195,195,194,194,191,190,189,184,181,180,180,176,174,174,172,171,169,167,167,166,165,164,164,164,161,160,159,157,156,155,154,151,150,149,148,146,143,142,141,141,140,139,137,135,134,133,133,132,131,131,131,129,128,127,127,126,125,124,123,122,121,119,117,117,116,115,115,114,114,113,113,113,112,112,111,110,108,108,108,106,104,103,102,102,102,101,101,101,101,99,97,97,97,97,96,96,96,95,94,93,93,92,92,92,92,92,90,90,88,88,87,86,86,85,84,84,84,83,82,82,82,82,80,79,79,79,79,79,78,77,77,75,75,72,72,72,72,71,71,70,70,69,67,67,66,66,65,65,63,63,62,61,61,60,60,60,59,59,59,58,58,58,58,57,57,56,56,56,55,54,54,54,53,53,53,52,52,51,51,50,50],[2907,2960,2686,2709,3104,757,645,9996,609,991,3052,5920,1124,2493,2749,669,1272,457,2841,426,593,4301,1045,348,1619,1913,1326,810,1293,805,4690,2141,1450,1357,373,1049,407,499,327,614,4428,1109,372,249,1616,4581,319,282,402,1950,1381,1913,316,1276,430,581,8449,603,931,1795,1778,408,2124,786,1371,276,379,636,340,250,685,3614,249,494,281,488,2292,700,1026,1559,1012,1358,352,561,336,1024,620,426,423,483,518,335,2291,325,570,303,1731,761,574,601,675,1372,387,2520,2666,627,1170,300,550,243,2747,5259,965,1554,406,263,1655,404,888,757,723,369,472,4373,362,478,251,718,2165,1347,297,640,1135,301,1623,612,336,756,2933,831,465,446,372,936,1051,2615,2362,448,1102,1738,15181,432,333,2797,241,360,1404,278,433,495,355,2188,1481,344,565,550,714,504,407,513,473,293,498,362,241,1005,3595,401,852,460,3020,756,441,748,2730,363,3077,257,534,1853,6843,391,1041,1202,331,533,320,457,333,657,872,266,886,298,680,328,266,621,285,438,1397,648,5246,441,349,244,536,439,586,255,1157,352,466,334,676,251,962,384,928,340,552,1101,527,237,328,282,1868,246,265,251,1620,250,240,1764,306,1375,270,251,256,300,1373,668,282,932,1549,362,241,262,2399,492,1352,1340,308,244,1159,4021,343,3806,2156,652,2102,350,409,937,1091,330,305,1478,260,652,295,334,565,583,244,309,1090,355,237,713,1067,720,444,1345,1531,293,2370,475,5134,244,292,1001,11346,1513,1006,701,322,821,1018,247,381,553,281,523,2079,782,377,503,320,261,1991,313,259,411,364,239,284,937,491,1729,416,361,1020,461,474,1225,329,627,439,1464,271,300,1784,394,397,386,336,441,499,706,382,912,783,550,1108,251,705,331,556,501,263,440,2566,249,288,275,436,279,292,8754,1244,947,865,360,1549,248,1151,484,1230],[1,2,2,2,2,1,3,2,1,1,2,2,1,1,1,1,1,4,3,5,2,2,2,6,2,2,1,2,7,2,2,2,2,1,2,1,8,9,5,6,2,2,7,6,2,2,6,8,2,1,2,2,5,2,3,1,2,1,1,1,1,2,2,2,5,6,2,2,5,10,1,11,10,2,4,5,1,2,2,2,5,1,6,5,2,5,1,2,3,12,5,6,2,7,1,1,2,5,8,5,5,2,1,2,1,1,13,13,5,13,2,1,2,2,2,2,2,1,5,3,2,1,5,2,2,7,1,6,2,2,14,8,1,1,2,6,5,5,2,2,2,2,6,2,2,13,2,15,5,5,2,7,6,3,1,13,2,5,8,2,2,13,1,12,11,11,2,5,2,5,2,2,12,1,6,13,2,3,5,4,2,2,3,2,2,16,1,2,12,1,2,13,2,1,1,13,2,16,1,1,2,1,2,17,5,1,5,13,6,18,11,6,2,19,15,2,3,9,2,1,1,20,2,2,2,21,13,5,5,1,5,2,2,1,2,13,3,6,3,22,2,2,23,5,5,2,3,1,24,1,2,2,13,8,5,5,2,1,2,12,2,19,5,13,2,2,7,2,2,7,2,1,16,8,5,1,11,25,26,2,20,3,2,27,3,3,1,2,6,1,2,5,2,2,10,3,2,13,8,12,5,11,2,2,2,1,5,2,1,8,2,5,7,3,5,1,2,3,1,12,1,1,5,7,2,5,2,2,16,2,1,1,5,8,2,2,13,2,1,2,23,8,1,12,1,1,3,1,15,2,5,2,2,1,1,2,5,2,5,5,2,1,2,3,2,2,5,8,5,2,2,1,2,7,8,22,2,1,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Słowo<\/th>\n      <th>Kluczowość<\/th>\n      <th>Liczba wystąpień<\/th>\n      <th>Temat<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="lista-tematow" class="section level1">
+<h1>Lista tematów</h1>
+<div id="temat-1" class="section level2">
+<h2>Temat 1</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-1.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-b28b5b3b37165e1917b3" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b28b5b3b37165e1917b3">{"x":{"filter":"none","data":[["braci Tomasza i Marka Sekielskich.  Pan Sekielski mógł zrobić film o całym zjawisku pedofilii, który by pokazał, że wśród pedofili księża stanowią 1 promil.","Ksiądz z zakazem pracy z dziećmi prowadzący rekolekcje, konfrontacje ofiar pedofilii ze sprawcami, ksiądz grożący wykorzystywanemu dziecku, że jeśli z nim nie wyjedzie, to zacznie molestować jego młodsze rodzeństwo - to jedynie niektóre z historii, pokazanych w filmie \"Tylko nie mów nikomu\".","Sprawa jest już załatwiona, nie jest księdzem - zapewniał były metropolita wrocławski, arcybiskup senior archidiecezji wrocławskiej Marian Gołębiewski, pytany o duchownego pokazanego w filmie braci Sekielskich o przypadkach pedofilii w polskim Kościele.","Według Winnickiego, traktujący o pedofilii w Kościele film dokumentalny braci Marka i Tomasza Sekielskich \"Tylko nie mów nikomu\" pokazuje, że \"dzieci trzeba chronić przed seksualizacją\".","Paweł Kania, jeden z bohaterów szeroko komentowanego dokumentu Tomasza Sekielskiego Tylko nie mów nikomu o przypadkach pedofilii w Kościele, nie jest już księdzem.","Ziobro był też pytany, czy film Sekielskich \"Tylko nie mów nikomu\" traktuje jako atak na Kościół, czy pomoc dla Kościoła, oraz czy sam film wpłynął na tempo pracy nad rządowym projektem zmian w Kodeksie karnym, który zaostrza kary za przestępstwa pedofilii."," Jak najszybciej powinna powstać niezależna świecka komisja umocowana ustawowo, która przejrzy kościelne archiwa, przesłucha księży, przesłucha hierarchów, wysłucha ofiar - mówił w Gazeta.pl Tomasz Sekielski, współtwórca filmu \"Tylko nie mów nikomu\" o pedofilii w polskim Kościele.","Hierarchowie Kościoła katolickiego jak dotąd w różnym tonie komentowali film braci Sekielskich \"Tylko nie mów nikomu\" o przypadkach pedofilii w kościele.","Tylko nie mów nikomu traktujący o pedofilii wśród księży i tuszowaniu takich przestępstw przez wyższych hierarchów Kościoła.","Prymas Polski w środę w Radiu Zet pytany był o problem pedofili w polskim Kościele w kontekście filmu Tomasza i Marka Sekielskich \"Tylko nie mów nikomu\", w którym przedstawione zostały przypadki wykorzystywania seksualnego małoletnich przez osoby duchowne.","\"Tylko nie mów nikomu\", który dokumentuje przypadki seksualnego wykorzystywania dzieci przez księży i przenoszenia sprawców takich czynów z parafii na parafię przez przełożonych.","W projekcie nowelizacji Kodeksu karnego przygotowanym przez Ministerstwo Sprawiedliwości główne zmiany dotyczące walki z pedofilią zakładają, że za zgwałcenie dziecka pedofil trafi do więzienia nawet na 30 lat, najbardziej zaburzonym sprawcom grozić będzie bezwzględne dożywocie, a ofiara będzie miała czas na zgłoszenie przestępstwa do 40. roku życia.","Po premierze filmu Tomasza Sekielskiego \"Tylko nie mów nikomu\" o pedofilii w Kościele, również klub Platforma Obywatelska-Koalicja Obywatelska złożył w Sejmie projekt nowelizacji Kodeksu karnego.","Po publikacji filmu dokumentalnego Tomasza Sekielskiego \"Tylko nie mów nikomu\" o molestowaniu dzieci przez księży, posłowie klubu PO-KO złożyli w Sejmie między innymi projekt zmian w Kodeksie karnym, który zakłada nieprzedawnianie się przestępstw pedofilskich oraz dożywotni zakaz pracy z dziećmi dla tych, którzy dopuszczą się tych przestępstw.","W nawiązaniu do filmu Tomasza Sekielskiego \"Tylko nie mów nikomu\" biskup toruński Wiesław Śmigiel napisał że film ten rodzi smutek i współczucie wobec ofiar oraz jest wezwaniem do wielkiego rachunku sumienia i bezwzględnej walki z pedofilią w szeregach duchownych\".","Pierwszą reakcją arcybiskupa Głodzia na pytanie o film braci Sekielskich, opisujący przypadki wykorzystywania seksualnego dzieci przez duchownych katolickich, była odpowiedź: \"Nie oglądam byle czego\".","Papież Franciszek zaledwie 9 maja ogłosił nowe zasady dla duchownych w zakresie walki z pedofilią w Kościele, a dwa dni później swoją premierę miał film braci Sekielskich \"Tylko nie mów nikomu\".","Przewodniczący Konferencji Episkopatu Polski abp Stanisław Gądecki ocenił, że film Sekielskiego przyczyni się do jeszcze surowszego potępienia przestępstwa pedofilii.","Z kolei w środę w Sejmie rozpoczęły się prace nad projektem nowelizacji Kodeksu karnego, która zakłada między innymi podwyższenie górnej granicy kar za pedofilię do 30 lat, podwyższenie wieku ochrony prawnokarnej dzieci do 16 lat i brak przedawnienia w ściganiu i sądzeniu \"przestępstw polegających na zgwałceniu małoletniego poniżej 16 lat\".","Dokument \"Tylko nie mów nikomu\" traktuje o wykorzystywaniu seksualnym nieletnich przez osoby duchowne, a także tuszowaniu afer pedofilskich w Kościele."],["<a href='https://www.wprost.pl/kraj/10216395/ksieza-stanowia-1-promil-problemu-senyszyn-odpowiedziala-na-komentarz-prof-polaka.html'>Wprost<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24774428,tylko-nie-mow-nikomu-juz-dostepne-ludzie-pisza-plakac-sie.html'>Gazeta.pl<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/arcybiskup-marian-golebiewski-o-skazanym-za-pedofilie-ksiedzu-pawle-k,937374.html'>TVN24<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-konfederacja-korwin-braun-liroy-narodowcy-po-zaostrzeniu-kar,nId,2992018'>RMF 24<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Ksiadz-Pawel-Kania-usuniety-ze-stanu-duchownego-po-filmie-Sekielskich.-Dariusz-Olejniczak-sam-rezygnuje'>Radio ZET<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/nowelizacja-kodeksu-karnego-politycy-komentuja,936458.html'>TVN24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24778898,tomasz-sekielski-w-gazeta-pl-sa-historie-ktore-nie-pojawily.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24778643,przejmujace-kazanie-po-filmie-tylko-nie-mow-nikomu-nadchodzi.html'>Gazeta.pl<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Polityka/Tylko-nie-mow-nikomu.-Ryszard-Terlecki-dzien-przed-premiera-zakazal-poslom-PiS-komentowania-filmu'>Radio ZET<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2309378,Prymas-Polski-trzeba-gasic-pozar-przede-wszystkim-trzeba-zabrac-sie-do-pracy-konkretnej'>Polskie Radio<\/a>","<a href='https://fakty.interia.pl/raporty/raport-pedofilia-w-kosciele/aktualnosci/news-czaputowicz-po-rozmowie-z-gallagherem-ws-pedofilii-w-kosciel,nId,3000726'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/andrzej-dera-o-pedofilii-w-kosciele-i-filmie-tylko-nie-mow-nikomu,936192.html'>TVN24<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2308253,Prezydent-z-pedofilia-musimy-walczyc-bezwzglednie-i-wszedzie'>Polskie Radio<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24781224,po-chce-panstwowej-komisji-ws-pedofilii-kilka-miesiecy-temu.html'>Gazeta.pl<\/a>","<a href='https://fakty.interia.pl/raporty/raport-pedofilia-w-kosciele/aktualnosci/news-biskup-torunski-o-bohaterze-filmu-sekielskiego,nId,2991595'>Interia<\/a>","<a href='https://fakty.interia.pl/raporty/raport-pedofilia-w-kosciele/aktualnosci/news-ksieza-oskarzeni-o-molestowanie-dzieci-kiedy-poznamy-efekty-,nId,2993732'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114881,24794054,kolejna-reakcja-po-tylko-nie-mow-nikomu-ambasador-watykanu.html'>Gazeta.pl<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Polityka/Jaroslaw-Gowin-o-filmie-Sekielskiego-Kosciol-nie-poradzil-sobie-z-problemem-pedofilii'>Radio ZET<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/zaostrzenie-kar-za-pedofilie-premier-morawiecki-przemawial-w-sejmie,935830.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/raporty/raport-copernicus-festival-2019/aktualnosci/news-ks-adam-boniecki-kosciol-stal-sie-firma-obslugujaca-duchowe-,nId,3006216'>Interia<\/a>"],["05-14","05-11","05-21","05-15","05-13","05-17","05-13","05-12","05-23","05-15","05-20","05-16","05-13","05-13","05-15","05-16","05-17","05-13","05-15","05-24"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-2" class="section level2">
+<h2>Temat 2</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-2.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-46ff8f1bfca135bf4577" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-46ff8f1bfca135bf4577">{"x":{"filter":"none","data":[["W wyborach do Parlamentu Europejskiego PiS otrzymało 45,56 proc. głosów, Koalicja Europejska  38,3 proc., Wiosna  6,04 proc., Konfederacja  4,55 proc., Kukiz'15  3,7 proc., Lewica Razem  1,24 proc.  wynika z danych PKW przeliczonych z 99,31 proc. obwodowych komisji wyborczych w Polsce.","Grzegorz Schetyna pytany był przez dziennikarzy w Brukseli o przyszłość Koalicji Europejskiej, która w niedzielnych wyborach do Parlamentu Europejskiego przegrała z Prawem i Sprawiedliwością wyraźną różnicą poparcia: na Koalicję zagłosowało 38,47 procent Polaków, na PiS - 45,38 procent.","Krzysztof Gawkowski w wywiadzie dla tygodnika \"Wprost\" skomentował wynik Wiosny w wyborach do Parlamentu Europejskiego - partia Roberta Biedronia zdobyła w nich 6,06 procent głosów wyborców i jako trzecia siła polityczna - obok Prawa i Sprawiedliwości oraz Koalicji Europejskiej - wyśle swoich trzech eurodeputowanych do Brukseli.","W wyborach do PE w Polsce mandaty europosłów uzyskali wicepremier Beata Szydło, szef MSWiA Joachim Brudziński, minister rodziny, pracy, polityki społecznej Elżbieta Rafalska, szefowa MEN Anna Zalewska, oraz m.in. rzeczniczka rządu Joanna Kopcińska.","W przeprowadzonych w niedzielę wyborach do europarlamentu tylko trzy komitety uzyskały poparcie powyżej 5-procentowego progu wyborczego: na Prawo i Sprawiedliwość zagłosowało 45,38 procent Polaków, na Koalicję Europejską - 38,47 procent, na Wiosnę Roberta Biedronia - 6,06 procent.","W okręgu nr 5 obejmującego Mazowsze PiS zdecydowanie wygrało niedzielne wybory do Parlamentu Europejskiego uzyskując 60,2 proc. poparcia, czyli ponad dwa razy więcej niż Koalicja Europejska, którą poparło 26,69 proc. wyborców.","Beata Szydło zdobyła w wyborach do Parlamentu Europejskiego największą spośród wszystkich 872 kandydatów liczbę głosów: według sondażu Ipsos, swoje głosy oddało na wicepremier ds. społecznych - która startowała w Małopolsce z pierwszego miejsca listy PiS - 471 104 wyborców!","Były minister zdrowia, Bartosz Arłukowicz, jako osoba, która zdobyła dobry wynik w wyborach do Parlamentu Europejskiego (Arłukowicz uzyskał najwięcej głosów w okręgu zachodniopomorsko-lubuskim, startując z drugiego miejsca na liście Koalicji Europejskiej - przyp. red.) może być jedną z twarzy kampanii - uważa politolog z Uniwersytetu Warszawskiego.","Pozostałe komitety wyborcze nie przekroczyłyby progu wyborczego. 4 proc. badanych, którzy zamierzają wziąć udział w wyborach do PE wyraziło poparcie dla Konfederacji KORWIN Braun Liroy Narodowcy, po 3 proc. głosów otrzymały Lewica Razem i Kukiz'15.","Według sondażowych wyników w wyborach do Parlamentu Europejskiego wygrało Prawo i Sprawiedliwość (43,1 proc), przed Koalicją Europejską (38,4 proc.) i Wiosną Roberta Biedronia (6,7 proc.). - Jestem rozczarowany, bo liczyłem, że będzie to przekonujące zwycięstwo.","Według wcześniejszych wyników sondaży Ipsos dla TVP, TVN i Polsat, tzw. exit poll PiS uzyskał poparcie 42,4 proc., Koalicja Europejska 39,1 proc. głosów, Wiosna Roberta Biedronia poparcie 6,6 proc., a Konfederacja Korwin Braun Liroy Narodowcy - 6,1 proc.","Gdyby wybory odbyły się w niedzielę, swoje mandaty w Parlamencie Europejskim zdobyłyby jeszcze Wiosna, Konfederacja - Korwin Braun Liroy Narodowcy oraz Kukiz'15.","Donald Tusk, Jarosław Kaczyński, Andrzej Duda, Beata Szydło, Marek Belka, Joachim Brudziński, Marek Kuchciński, Elżbieta Rafalska, Ewa Kopacz, Katarzyna Lubnauer czy Jarosław Gowin  ci politycy oddali już swój głos w wyborach do Parlamentu Europejskiego .","Apeluję do wszystkich, by poszli na wybory; wybory do Parlamentu Europejskiego są naprawdę ważne, trzeba iść i głosować, oczywiście na listę nr 4, Prawo i Sprawiedliwość - mówił w piątek prezes PiS Jarosław Kaczyński.","Zdobywając 525 tys. głosów, Beata Szydło (PiS) uzyskała w wyborach do PE najlepszy wynik w Polsce.","Partia Jarosława Kaczyńskiego wygrała wybory do europarlamentu, a w Brukseli będzie nas reprezentowało 27 polityków PiS-u.","Z listą nr 1 w wyborach do PE wystartuje Konfederacja Korwin Braun Liroy Narodowcy, z nr 2 - Wiosna Roberta Biedronia, nr 3 wylosowała Koalicja Europejska PO PSL SLD .","W niedzielnych wyborach do PE mandaty europosłów uzyskali: wicemarszałek Senatu Adam Bielan (Porozumienie), który startował z listy PiS, oraz senator Jarosław Duda (PO), który startował z listy Koalicji Europejskiej.","Polacy mieszkający w Niemczech mogli głosować w wyborach do Parlamentu Europejskiego w ośmiu punktach; gdyby to Polacy głosujący nad Renem decydowali o wyniku wyborów, wygrałaby Koalicja Europejska z poparciem 39,6 proc., a PiS zdobyłby drugie miejsce.","Byli premierzy Ewa Kopacz i Leszek Miller (KE), obecny wiceszef PE Zdzisław Krasnodębski i wiceminister Andżelika Możdżanowska (PiS) oraz liderka listy Wiosny Sylwia Spurek zdobyli w niedzielnych wyborach w Wielkopolsce mandaty do Parlamentu Europejskiego - podała PKW."],["<a href='https://www.tvp.info/42810505/kierwinski-wybory-do-pe-pokazaly-koniecznosc-integracji-opozycji'>TVP INFO<\/a>","<a href='https://www.rmf24.pl/raporty/raport-wybory-do-parlamentu-europejskiego/fakty/news-schetyna-o-38-5-proc-koalicji-wzialbym-w-ciemno-lukacijewska,nId,3014782'>RMF 24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24835180,krzysztof-gawkowski-ucina-spekulacje-wiosna-nie-polaczy-sil.html'>Gazeta.pl<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-premier-mamy-bardzo-dobrych-kandydatow-w-miejsce-ustepujacyc,nId,3016252'>RMF 24<\/a>","<a href='https://www.rmf24.pl/raporty/raport-wybory-do-parlamentu-europejskiego/fakty/news-tusk-gdybyscie-sie-mieli-podzielic-to-zastanowcie-sie-trzy-r,nId,3014800'>RMF 24<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C462434%2Cbielan-w-pe-bede-zajmowal-sie-wylaczeniem-statystycznego-warszawy-z-woj'>PAP<\/a>","<a href='https://www.rmf24.pl/raporty/raport-wybory-do-parlamentu-europejskiego/fakty/news-wyniki-wyborow-do-europarlamentu-2019-43-1-procent-dla-pis-3,nId,3011207'>RMF 24<\/a>","<a href='https://fakty.interia.pl/polska/news-rozpoczyna-sie-boj-o-sejm-i-senat,nId,3014866'>Interia<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-24/minimalna-roznica-miedzy-pis-a-koalicja-europejska-sondaz-estymator/'>Polsat News<\/a>","<a href='https://fakty.interia.pl/raporty/raport-unia-europejska/wybory-2019/news-radoslaw-sikorski-pis-ma-z-kim-przegrac,nId,3011332'>Interia<\/a>","<a href='https://fakty.interia.pl/raporty/raport-unia-europejska/wybory-2019/news-sondaz-late-poll-z-godziny-2-00-powieksza-sie-przewaga-pis,nId,3011369'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24771498,sondaz-dla-faktow-tvn-i-tvn24-pis-i-koalicja-europejska-ida.html'>Gazeta.pl<\/a>","<a href='https://wiadomosci.radiozet.pl/Eurowybory-2019/Wiadomosci/Wybory-do-Europarlamentu-2019.-Politycy-juz-zaglosowali-ZDJECIA'>Radio ZET<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C458779%2Cprezes-pis-apeluje-do-wszystkich-poszli-na-wybory.html'>PAP<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2315691,Zdecydowane-zwyciestwo-PiS-w-eurowyborach-Oficjalne-wyniki-PKW'>Polskie Radio<\/a>","<a href='https://www.wprost.pl/wybory-euro-2019/10220549/wybory-do-pe-2019-tak-wyglada-podzial-mandatow.html'>Wprost<\/a>","<a href='https://fakty.interia.pl/polska/news-trwaja-wybory-nie-stwierdzono-incydentow,nId,3011132'>Interia<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C460589%2Ckarczewski-mamy-dwoch-nawet-wiecej-kandydatow-ktorzy-moga-zastapic-adama'>PAP<\/a>","<a href='https://www.rmf24.pl/raporty/raport-wybory-do-parlamentu-europejskiego/fakty/news-pkw-podala-oficjalne-wyniki-wyborow-do-parlamentu-europejski,nId,3012913'>RMF 24<\/a>","<a href='https://www.rmf24.pl/raporty/raport-wybory-do-parlamentu-europejskiego/fakty/news-pkw-podala-oficjalne-wyniki-wyborow-do-parlamentu-europejski,nId,3012913'>RMF 24<\/a>"],["05-27","05-28","05-28","05-29","05-28","05-31","05-26","05-28","05-24","05-27","05-27","05-10","05-26","05-24","05-27","05-27","05-26","05-28","05-27","05-27"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-3" class="section level2">
+<h2>Temat 3</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-3.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-5e248a32fd6a2efc39e9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5e248a32fd6a2efc39e9">{"x":{"filter":"none","data":[["W piątek 3 maja przed wykładem Donalda Tuska na Uniwersytecie Warszawskim wystąpił redaktor naczelny czasopisma \"Liberté\" Leszek Jażdżewski.","Zamiast wielkiego zwrotu akcji na ostatnim odcinku kampanii, którego autorem miał być Donald Tusk i jego przemówienie na Uniwersytecie Warszawskim, opozycja znalazła się w defensywie z powodu antykościelnej tyrady Leszka Jażdżewskiego.","Wicepremier wypowiedział się także na temat przemówienia Donalda Tuska, który został wygłoszony 3 maja na Uniwersytecie Warszawskim.","Przed wystąpieniem Tuska na UW przemówienie wygłosił Leszek Jażdżewski, którego słowa zbulwersowały opinię publiczną.","Jażdżewski przemawiał przed Donaldem Tuskiem na Uniwersytecie Warszawskim. - Kościół katolicki w Polsce, obciążony niewyjaśnionymi skandalami pedofilskimi, opętany walką o pieniądze i o wpływy stracił moralny mandat do tego, aby sprawować funkcję sumienia narodu - mówił m.in. redaktor Leszek Jażdżewski. - Gdyby dzisiaj Chrystus był ponownie ukrzyżowany, to prawdopodobnie przez tych, którzy używają krzyża jako pałki do tego, aby zaganiać pokorne owieczki do zagrody - dodał.","Joachim Brudziński, pytany w niedzielnym programie \"Woronicza 17\" o wystąpienie Donalda Tuska 3 maja na Uniwersytecie Warszawskim oraz poprzedzające go przemówienie szefa pisma \"Liberte\" Leszka Jażdżewskiego zwracał uwagę, że \"ten który ma reprezentować wszystkie kraje europejskie jest osią sporu politycznego tu w Polsce\".","W przeszłości Donald Tusk nie pozwoliłby sobie, żeby ktoś taki jak z całym szacunkiem pan (Leszek) Jażdżewski skradł mu show dosyć kabotyńskim wystąpieniem - mówił Gowin."," To, że Donald Tusk przyjeżdża na zaproszenie Jażdżewskiego i wygłasza ten wykład, nie wzięło się znikąd.","Zdaniem szefa PO wystąpienie Jażdżewskiego zakłóciło \"wielkie zainteresowanie i wsłuchiwanie się w słowa Donalda Tuska, którego wykład był bardzo interesujący, pokazujący przestrzeń dla nas wszystkich\".","Jego \"Liberte\" to krąg o małym zasięgu i bardzo elitarny. - Tusk i Jażdżewski sporo rozmawiali - mówi osoba z tego środowiska. - Przed wykładem na Uniwersytecie Warszawskim."," Nie może być tak, że władza raz do roku obchodzi święto konstytucji, a na co dzień konstytucję obchodzi - powiedział Donald Tusk w swoim wystąpieniu na Uniwersytecie Warszawskim.","Przypomniano także rzekomy wulgarny atak na Kościół Leszka Jażdżewskiego przed wykładem Donalda Tuska, któremu towarzyszyły śmiechy i brawa elit","Jażdżewski powiedział występując przed wykładem Donalda Tuska na Uniwersytecie Warszawskim, m.in.: \"Ten kto szuka transcendentu Absolutu w Kościele będzie zawiedziony, ten kto szuka moralności w Kościele nie znajdzie jej.","Poseł próbował odpowiedzieć na pytanie, czy Donald Tusk wiedział o tym, co w swoim przemówieniu na UW powie Leszek Jażdżewski. - Było duże zaskoczenie na sali - skomentował Szczerba.","Minister obrony narodowej w \"Wydarzeniach i Opiniach\" Polsat News krytykował piątkowy wykład Donalda Tuska na Uniwersytecie Warszawskim.","Z przemówienia Donalda Tuska do historii przejdą słowa Leszka Jażdżewskiego  zauważył na Twitterze wieloletni dziennikarz, obecnie PR-owiec Sławomir Jastrzębowski.","Tego nie da się odciąć od tego, co potem Donald Tusk mówił - uznał prezydencki minister Andrzej Dera, komentując w \"Kawie na ławę\" w TVN24 przemówienie Leszka Jażdżewskiego.","Proszę państwa, ja tam byłem i wiem, bo Jażdżewski zapraszał na scenę Donalda Tuska  stwierdził w programie Strefa starcia radny PSL Konrad Wojnarowski, broniąc prezesa PSL, który  jak widać na materiałach filmowych  oklaskiwał skandaliczne wystąpienie redaktora naczelnego pisma Liberté!.","Dzisiaj Donald Tusk wygłosi wykład na Uniwersytecie Warszawskim.  Zdaje się, że w tym czasie jest akurat planowana defilada, która zresztą wcześniej była zaplanowana, natomiast na pewno będzie jeszcze możliwość wysłuchania tego wystąpienia wielokrotnie  stwierdził Andrzej Duda.  Każdy sam decyduje, co mówi.","Nie odniósł się wprost do przemówień Donalda Tuska ani Leszka Jażdżewskiego, ale podkreślił, że \"zadaniem pracowników uniwersytetu nie jest organizowanie manifestacji politycznych, zwłaszcza zaś partyjno-politycznych\"."],["<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24753700,jazdzewski-odpowiada-na-krytyke-po-wystapieniu-kosciol-nie.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24804107,pis-uwierzylo-w-obraz-polski-ktory-samo-stworzylo-cena-moga.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24755693,gowin-nie-lamiemy-konstytucji-aczkolwiek-pewne-nasze-dzialania.html'>Gazeta.pl<\/a>","<a href='https://fakty.interia.pl/raporty/raport-ue-przed-wyborami-europejskimi/artykuly/news-alfabet-eurokampanii-czyli-black-hawkiem-przez-lomrze-i-grun,nId,3006159'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24751636,episkopat-zabral-glos-w-sprawie-przemowienia-leszka-jazdzewskiego.html'>Gazeta.pl<\/a>","<a href='https://fakty.interia.pl/polska/news-nie-uczestniczmy-w-cyrku-cyrkowca-donalda-tuska,nId,2973842'>Interia<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-gowin-uwazam-tuska-za-zawodnika-politycznego-wagi-ciezkiej,nId,2975486'>RMF 24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/leszek-jazdzewski-wystapil-na-uw-przed-tuskiem-politycy-komentuja,932908.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/leszek-jazdzewski-wystapil-na-uw-przed-tuskiem-politycy-komentuja,932908.html'>TVN24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24757104,pelne-zaskoczenie-zrobil-skandal-czy-czyims-weselu-czy.html'>Gazeta.pl<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2302971,Donald-Tusk-nie-moze-byc-tak-ze-wladza-na-co-dzien-obchodzi-konstytucje'>Polskie Radio<\/a>","<a href='https://www.wprost.pl/kraj/10215988/kontrowersyjne-materialy-wiadomosci-tvp-o-pedofilii-i-atakach-na-kosciol.html'>Wprost<\/a>","<a href='https://fakty.interia.pl/polska/news-oburzenie-po-wystapieniu-leszka-jazdzewskiego-na-uw,nId,2972287'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24755255,czy-donald-tusk-wiedzial-co-powie-leszek-jazdzewski-michal.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24751034,maska-opadla-po-raz-kolejny-blaszczak-o-wykladzie-tuska.html'>Gazeta.pl<\/a>","<a href='https://www.tvp.info/42501342/poploch-w-po-jazdzewski-i-sienkiewicz-szykuja-dla-tuska-nowa-partie'>TVP INFO<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/leszek-jazdzewski-wystapil-na-uw-przed-tuskiem-politycy-komentuja,932908.html'>TVN24<\/a>","<a href='https://www.tvp.info/42495568/komu-klaskal-kosiniak-kamysz-radny-psl-tlumaczy-swojego-przewodniczacego'>TVP INFO<\/a>","<a href='https://www.wprost.pl/kraj/10213194/andrzej-duda-bedzie-ubiegal-sie-o-reelekcje-czuje-sie-jeszcze-wzglednie-mlodo.html'>Wprost<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24762454,abp-gadecki-podczas-mszy-w-poznaniu-upolitycznienie-uniwersytetu.html'>Gazeta.pl<\/a>"],["05-05","05-20","05-06","05-24","05-04","05-05","05-06","05-05","05-05","05-06","05-03","05-12","05-04","05-06","05-04","05-06","05-05","05-06","05-03","05-08"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-4" class="section level2">
+<h2>Temat 4</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-4.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-2fdcc21b778acad15bc8" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2fdcc21b778acad15bc8">{"x":{"filter":"none","data":[["Strache, wicekanclerz Austrii, oświadczył w sobotę, że podał się do dymisji, a Kurz ją przyjmie.","Według nieoficjalnych doniesień kanclerz Austrii Sebastian Kurz wykluczył jednak dalszą współpracę.","W grudniu 2017 r., po niespełna dwumiesięcznych negocjacjach, powstał koalicyjny rząd OeVP i FPOe, na którego czele stanął Kurz.","Kanclerz Austrii Sebastian Kurz poinformował, że ich nazwiska mają być znane najpóźniej dziś wieczorem.","Po wybuchu skandalu rządowego w Austrii Strache zrezygnował z funkcji szefa FPOe i ze stanowiska wicekanclerza."],["<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/sebastian-kurz-zmaga-sie-z-koalicjantem-fpoe,937450.html'>TVN24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114881,24798433,austria-sypie-sie-rzad-po-nagraniach-z-imprezy-na-ibizie-wicekanclerz.html'>Gazeta.pl<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-austria-przedterminowe-wybory-tak-szybko-jak-to-mozliwe,nId,2997416'>RMF 24<\/a>","<a href='https://fakty.interia.pl/swiat/news-prezydent-austrii-zdymisjonowal-wiekszosc-ministrow-z-partii,nId,3002548'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/kronen-zeitung-o-kulisach-nagrania-ktore-wywolalo-kryzys-rzadowy,940004.html'>TVN24<\/a>"],["05-21","05-18","05-18","05-21","05-29"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-5" class="section level2">
+<h2>Temat 5</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-5.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-803e976527e3ab7678df" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-803e976527e3ab7678df">{"x":{"filter":"none","data":[["Małopolska i Śląsk walczą ze skutkami intensywnych opadów deszczu, stan w wielu rzekach przekroczył stanu alarmowe.","Z prognoz IMGW wynika, że w związku z intensywnymi opadami deszczu w województwach: dolnośląskim, opolskim, śląskim, małopolskim i podkarpackim obowiązywać będzie ostrzeżenie pierwszego stopnia.","14.00 odnotowano 1665 interwencji straży pożarnej związanych z intensywnymi opadami deszczu, silnym wiatrem i pompowaniem wody w związku z zagrożeniem powodziowym - poinformowała Komenda Główna Państwowej Straży Pożarnej.Najwięcej interwencji straż odnotowała w województwie śląskim - 713, małopolskim - 687 i podkarpackim -140.","Intensywne opady deszczu prognozowane na niedzielę w województwach podkarpackim i małopolskim spowodują wzrost poziomu wód w rzekach.","Obecnie w woj. dolnośląskim, opolskim, śląskim, małopolskim, świętokrzyskim, podkarpackim i lubelskim występują ostrzeżenia hydrologiczne w związku z możliwością przekroczenia lokalnych stanów ostrzegawczych, a nawet alarmowych.","Obniża się poziom wód w rzekach woj. śląskiego - od kilku dni nie pada deszcz i nie ma już zagrożenia powodziowego.","\"Według ostatnich danych IMGW, opady cały czas mogą być bardzo silne, a to oznacza, że zarówno rzeki z gór będą ostatecznie zrzucały coraz więcej wody do Wisły i może nastąpić tzw. cofka, wtedy różne tereny mogą być zalane, zarówno zachodnia część Podkarpacia, jak i wschodnia część Małopolski, np. okolice Dąbrowy Tarnowskiej, jak i cały powiat tarnowski, mielecki, są cały czas zagrożone\" - powiedział szef rządu.","Na Wiśle i na Odrze przemieszcza się fala wezbraniowa po intensywnych opadach deszczu. - Fala kulminacyjna dojdzie do Warszawy w środę, poziom wody nie będzie powyżej stanu alarmowego - poinformowała Wysocka.","W Małopolsce strażacy interweniowali już 79 razy po niedzielnych burzach i intensywnych opadach deszczu."," Prognozujemy tam przekroczenie stanów alarmowych, woda na dopływach Wisły opada, choć mogą być gdzieniegdzie wzrosty, bo prognozujemy dziś opady lokalnie do 20 mm deszczu, ale nie będą już bardzo gwałtowne wzrosty i nie powinno to spowodować większych utrudnień  powiedziała Małgorzata Maczuga z biura prognoz hydrologicznych w Krakowie.","W weekend przez województwo świętokrzyskie ma przechodzić fala kulminacyjna na Wiśle, dlatego na południu regionu trwa podnoszenie wałów przeciwpowodziowych.","Przez obfite opady deszczu w Małopolsce, na Podkarpaciu, w Świętokrzyskiem i na Śląsku poziomy rzek są podniesione, zalane zostały gospodarstwa i posesje.","W woj. świętokrzyskim w związku z intensywnymi opadami deszczu obowiązuje 11 alarmów i 14 pogotowi przeciwpowodziowych.","Jak powiedział Informacyjnej Agencji Radiowej rzecznik Komendanta Głównego Państwowej Straży Pożarnej Paweł Frątczak, w związku z podtopieniami spowodowanymi intensywnymi opadami deszczu i wezbraniem rzek, od wtorku do dzisiejszego poranka strażacy interweniowali, usuwając skutki nawałnic w całym kraju, ponad 3 tysiące razy - w tym 1725 razy tylko w środę.","Od kilku dni IMGW wydaje ostrzeżenia przed intensywnymi opadami i zagrożeniem podtopień.","Jak podkreślono, aktualnie sytuacja hydrologiczna na rzekach południowej Polski wciąż jest dynamiczna. - Wczorajszy opad na 7 stacjach opadowych przekroczył 100 mm/na dobę (głównie w województwie podkarpackim i małopolskim), co skutkowało podniesieniem się stanu wody na wielu rzekach - karpackich dopływach Wisły - podkreśliło IMGW.","Po kolejnych opadach deszczu w powiecie kazimierskim (województwo świętokrzyskie) podtopionych jest ponad 100 gospodarstw.","Wciąż najtrudniejsza sytuacja jest na południu - w Małopolsce, znaczącej części Śląska i na południu Podkarpacia obowiązują ostrzeżenia przed intensywnymi opadami i burzami.","Jak poinformowała małopolska straż pożarna, w ciągu ostatnich godzin strażacy interweniowali około 300 razy na terenie województwa, przede wszystkim wypompowując wodę z zalanych przez deszcz piwnic i garaży.","Prewencyjne działania podjęli już strażacy w powiecie opolskim, którzy zabezpieczają wał na rzece Chodelce - dopływie Wisły - w gminie Wilków."],["<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24820605,w-krakowie-alarm-przeciwpowodziowy-imigw-wydal-ostrzezenia.html'>Gazeta.pl<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-zimno-i-deszczowo-kiedy-poprawa-pogody,nId,2989984'>RMF 24<\/a>","<a href='https://fakty.interia.pl/polska/news-trudna-sytuacja-pogodowa-zwolano-sztab-kryzysowy,nId,3005937'>Interia<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2303538,W-niedziele-intensywne-opady-deszczu-IMGW-ostrzezenia-hydrologiczne-drugiego-stopnia-w-woj-malopolskim-i-podkarpackim'>Polskie Radio<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24815752,ostrzezenia-3-stopnia-przed-silnym-deszczem-z-burzami-w-krakowie.html'>Gazeta.pl<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-27/spada-poziom-wod-w-rzekach-coraz-mniej-interwencji-strazy/'>Polsat News<\/a>","<a href='https://fakty.interia.pl/polska/news-premier-koncentrujemy-sie-na-bezpieczenstwie-ludzi,nId,3006202'>Interia<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2315753,Sytuacja-pogodowa-w-Polsce-sie-stabilizuje-RCB-sukcesywnie-odwoluje-alarmy'>Polskie Radio<\/a>","<a href='https://fakty.interia.pl/polska/news-burze-nad-polska-alert-imgw,nId,2998987'>Interia<\/a>","<a href='https://www.tvp.info/42773431/trudna-sytuacja-w-malopolsce-fala-wezbraniowa-przechodzi-przez-krakow-wideo'>TVP INFO<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Fala-kulminacyjna-w-Swietokrzyskiem.-Trwa-podnoszenie-walow'>Radio ZET<\/a>","<a href='https://fakty.interia.pl/polska/news-trudna-sytuacja-pogodowa-zwolano-sztab-kryzysowy,nId,3005937'>Interia<\/a>","<a href='https://fakty.interia.pl/polska/news-sandomierz-alarmowy-stan-wisly-przekroczony-o-metr,nId,3011117'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24820058,krakow-przygotowuje-sie-na-fale-wezbraniowa-woda-w-wisle-moze.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24813916,schronisko-dla-zwierzat-pod-mielcem-tonie-chcemy-walczyc-o.html'>Gazeta.pl<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-22/imgw-wciaz-mozliwe-jest-wystapienie-traby-powietrznej/'>Polsat News<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-podtopienia-na-poludniu-polski-prezydent-krakowa-oglasza-ala,nId,3005981'>RMF 24<\/a>","<a href='https://fakty.interia.pl/polska/news-trudna-sytuacja-pogodowa-zwolano-sztab-kryzysowy,nId,3005937'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/zalania-na-poludniu-polski-pogotowie-przeciwpowodziowe-w-kilku-miejscach,937722.html'>TVN24<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Powodz-2019-na-Lubelszczyznie.-Poziom-Wisly-rosnie.-Ogloszono-pogotowie-przeciwpowodziowe'>Radio ZET<\/a>"],["05-23","05-14","05-23","05-04","05-23","05-27","05-23","05-27","05-19","05-24","05-25","05-23","05-26","05-23","05-22","05-22","05-23","05-23","05-22","05-24"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-6" class="section level2">
+<h2>Temat 6</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-6.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-bdf0e7da3d11a186c71a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bdf0e7da3d11a186c71a">{"x":{"filter":"none","data":[["Dominika w Płocku, m.in. na koszach na śmieci i na przenośnych toaletach, plakaty i nalepki z wizerunkiem Matki Bożej Częstochowskiej, na których postaci Maryi i Dzieciątka otoczone były tęczowymi aureolami.","Pytany, czy wizerunek Matki Bożej Częstochowskiej z tęczową aureolą obraża jego uczucia religijne, prezydent stolicy powiedział: - Ja się nie poczułem obrażony.","\"Według Policji Elżbieta Podleśna miała rozklejać w Płocku plakaty z wizerunkiem Matki Boskiej Częstochowskiej z aureolą z tęczowej flagi, co - zdaniem organów ścigania - stanowić może przestępstwo obrazy uczuć religijnych.","Dominika (pod tym wezwaniem jest kościół parafialny) oklejono obrazoburczymi wizerunkami Matki Bożej Częstochowskiej z aureolami w kolorach homotęczy.","51-letniej Elżbiecie Podleśnej przedstawiono zarzut profanacji wizerunku Matki Bożej Częstochowskiej.","Odniósł się do zatrzymania 51-latki pod zarzutem znieważenia uczuć religijnych przez rozklejenie w Płocku wizerunku Maryi i Dzieciątka z tęczowymi aureolami.","Jak podkreśliła, postępowanie w sprawie trwa, a Anna P. to druga osoba, której postawiono zarzuty po tym, jak w nocy z 27 na 28 kwietnia na murach kościoła w Płocku porozklejano plakaty z wizerunkiem Matki Boskiej w tęczowej aureoli.","Papierowe plakaty z tęczowymi aureolami wokół wizerunku MatkiBożej Częstochowskiej rozlepiono w nocy na murach Sanktuarium św.Faustyny i klasztoru Zgromadzenia Sióstr Matki Bożej Miłosierdziaprzy ul.","Pod koniec kwietnia wybuchła afera związana z wyglądem aureoli Matki Boskiej. - Jak się dowiedziałem, w Płocku dokonano profanacji świętego od wieków, dla wszystkich pokoleń Polaków, wizerunku Matki Boskiej Częstochowskiej - napisał szef MSWiA Joachim Brudziński o naklejkach z Maryją w tęczowej aureoli.","W poniedziałek około południa poinformował na Twitterze, że \"Policja zatrzymała osobę podejrzewaną o dokonanie profanacji wizerunku\" Matki Boskiej i zostaną jej postawione zarzuty w związku z obrażaniem uczuć religijnych.","W poniedziałek policja przeszukała dom i zatrzymała mieszkankę Płocka w związku z rozwieszeniem plakatów Matki Boskiej z tęczową aureolą w jednej z parafii.","Czy w MSZ albo w naszych placówkach dyplomatycznych, przedstawiciele dyplomacji innych krajów dopytywali o wizerunek Matki Bożej Częstochowskiej z tęczową flagą?","Plakatów z tęczową aureolą wokół wizerunku Matki BożejCzęstochowskiej - podobnych do tych znalezionych pod konieckwietnia wokół płockiego kościoła św."],["<a href='https://fakty.interia.pl/polska/news-dziennikarz-tvp-probowal-wyrwac-protestujacemu-teczowa-flage,nId,2979414'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/matka-boska-z-teczowa-aureola-elzbieta-podlesna-uslyszala-zarzut,933312.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/matka-boska-z-teczowa-aureola-elzbieta-podlesna-uslyszala-zarzut,933312.html'>TVN24<\/a>","<a href='https://www.tvp.info/42521688/tusk-kramek-i-podlesna-kulisy-nowej-akcji-opozycji'>TVP INFO<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-13/podlesna-zloze-zazalenie-na-zatrzymanie-mnie-przez-policje/'>Polsat News<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/matka-boska-w-teczowej-aureoli-ekspert-nie-popelniono-przestepstwa,933708.html'>TVN24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24788348,kolejna-osoba-z-zarzutami-za-profanacje-obrazu-matki-boskiej.html'>Gazeta.pl<\/a>","<a href='https://www.tvp.info/42513749/teczowe-wizerunki-matki-bozej-na-murach-klasztoru'>TVP INFO<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24814692,czy-teczowa-matka-boska-obraza-uczucia-wierzacych-polakow-wiekszosc.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24758279,swiatowe-media-pisza-o-zatrzymaniu-aktywistki-za-maryje-z-tecza.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24758279,swiatowe-media-pisza-o-zatrzymaniu-aktywistki-za-maryje-z-tecza.html'>Gazeta.pl<\/a>","<a href='https://www.rmf24.pl/tylko-w-rmf24/popoludniowa-rozmowa/news-szymon-szynkowski-vel-sek-o-reparacjach-wojennych-mamy-moral,nId,2977600'>RMF 24<\/a>","<a href='https://www.tvp.info/42513749/teczowe-wizerunki-matki-bozej-na-murach-klasztoru'>TVP INFO<\/a>"],["05-08","05-07","05-07","05-07","05-13","05-08","05-15","05-07","05-23","05-07","05-07","05-07","05-07"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-7" class="section level2">
+<h2>Temat 7</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-7.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-2991f767998ef56d6a77" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2991f767998ef56d6a77">{"x":{"filter":"none","data":[["Ukrtransnafta, ukraiński operator systemów przesyłu ropy naftowej, poinformował o wznowieniu tłoczenia surowca do europejskich odbiorców rurociągiem Przyjaźń.","Od 19 kwietnia rurociągiem Przyjaźń płynęła przez Białoruś w kierunku zachodnim zanieczyszczona ropa.","Strony uzgodniły warianty oczyszczenia białoruskiego systemu rurociągów z zanieczyszczonej ropy."," Prowadzimy rozmowy ze stroną rosyjską w sprawie wznowienia dostaw ropy rurociągiem \"Przyjaźń\".","Rosyjski Komitet Śledczy podejrzewa, że osoby te, by ukryć malwersacje, dostarczyły niewłaściwej jakości ropę do systemu rurociągowego, powodując zanieczyszczenie surowca w rurociągu Przyjaźń.","Ukrtransnafta 25 kwietnia przerwała tranzyt ropy rurociągiem Przyjaźń między białoruskim miastem Mozyrz a miastem Brody na Ukrainie.","Zdaniem ministra problemy wokół rurociągu Przyjaźń nie wpłynęły na wielkość wydobycia ropy i jej eksportu z Rosji.","Tranzyt ropy wstrzymała także ukraińska Ukrtransnafta, a 30 kwietnia także białoruski operator.","Tego dnia rano Homeltransnafta całkowicie wstrzymała pobór ropy z Rosji, aby móc wypompować z rurociągu zanieczyszczony surowiec.","\"Unipetrol otrzymał informację od lokalnego operatora o wznowieniu dostaw dobrej gatunkowo ropy naftowej systemem rurociągów tranzytowych \"Przyjaźń\" do rafinerii w Litvinovie, należącej do Grupy Orlen\" - podał we wtorek PKN Orlen."],["<a href='https://www.rmf24.pl/fakty/swiat/news-ukraina-ukrtransnafta-wznowila-przesyl-ropy-rurociagiem-przy,nId,2984869'>RMF 24<\/a>","<a href='https://tvn24bis.pl/surowce,78/orlen-prowadzi-negocjacje-w-sprawie-rosyjskiej-ropy-z-rurociagu-przyjazn,937959.html'>TVN24 bis<\/a>","<a href='https://fakty.interia.pl/swiat/news-wicepremier-rosji-porozumiemy-sie-z-polska-w-sprawie-ropy-do,nId,3008200'>Interia<\/a>","<a href='http://www.polskieradio24.pl/5/3/Artykul/2316909,Prezes-Orlenu-mysle-ze-najblizsze-spotkanie-z-Rosja-ws-ropy-bedzie-przelomowe'>Polskie Radio<\/a>","<a href='https://tvn24bis.pl/surowce,78/orlen-prowadzi-negocjacje-w-sprawie-rosyjskiej-ropy-z-rurociagu-przyjazn,937959.html'>TVN24 bis<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-czechy-unipetrol-bedzie-korzystal-z-rezerw-ropy-przez-kolejn,nId,2988369'>RMF 24<\/a>","<a href='https://fakty.interia.pl/swiat/news-zatrzymano-cztery-osoby-ws-zanieczyszczen-w-rurociagu-przyja,nId,2977523'>Interia<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-21/nie-ma-zagrozenia-zaklocen-dostaw-paliw-na-rynek-krajowy/'>Polsat News<\/a>","<a href='http://www.polskieradio24.pl/75/921/Artykul/2308195,Bielnieftiechim-transport-ropy-w-kierunku-Polski-nie-zostal-wznowiony'>Polskie Radio<\/a>","<a href='https://www.rmf24.pl/fakty/news-pkn-orlen-wznowiono-dostawy-dobrej-gatunkowo-ropy-do-rafiner,nId,3014666'>RMF 24<\/a>"],["05-11","05-22","05-24","05-29","05-22","05-13","05-07","05-21","05-13","05-28"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-8" class="section level2">
+<h2>Temat 8</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-8.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-e2e23a2aa9daf75f1f1c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e2e23a2aa9daf75f1f1c">{"x":{"filter":"none","data":[["Jednak w momencie, w którym okazało się, że zmieniony został skład izraelskiej delegacji, a jej przewodniczącym został pan ambasador Dan Haezrachi, pełniący funkcję pełnomocnika ds. restytucji mienia z okresu Holokaustu i głównym tematem agendy proponowanej przez stronę izraelską miała być restytucja, spotkanie zostało odwołane.","Według izraelskiej ambasador miała to być \"cicha, spokojna wizyta\". - Dyrektor z Ministerstwa ds.","To niezobowiązujące wezwanie do  tam gdzie to możliwe  zajęcia się prywatnymi roszczeniami ofiar Holokaustu i restytucji ich mienia.","Według ministra Jacka Czaputowicza, ma to związek m.in. z tym, że strona izraelska chciała rozmawiać w Warszawie o restytucji mienia.","Marek Sawicki odniósł się także do tematu roszczeń żydowskich dotyczących tzw. mienia bezspadkowego.","W oświadczeniu podkreślił też, że jego rodzina doświadczyła Holokaustu i że do polskiej ambasady zwrócił się w sprawie zwrotu mienia.","Celem działalności izraelskiego ministerstwa ma być \"promowanie ustawodawstwa związanego z prawami ocalałych z Holocaustu w krajach trzecich oraz zwrotu mienia żydowskiego\".","Bartosz Bednarz, Paweł Sobczak; Interia: Czy najważniejszą sprawą, która będzie determinować przyszłe relacje polsko-izraelskie jest restytucja mienia żydowskiego?","Według izraelskich mediów, ambasador Marek Magierowski został zaatakowany słownie i fizycznie, m.in. miał zostać opluty, przed gmachem polskiej placówki dyplomatycznej.","zauważył, że ustawa 447 jest problemem nie izraelskim, ale amerykańskim.  Kongres stworzył ją po to, by przygotować raport i przekazać amerykańskiemu ministerstwu spraw zagranicznych w celu monitorowania przez nie restytucji mienia po ofiarach Holokaustu  powiedział.","docenił działania Marka Magierowskiego jako ambasadora.  Ostatnie dwa lata w relacjach polsko-izraelskich były bardzo trudne, a mimo to ambasador zachowywał najwyższą klasę  podkreślił.","Rzeczniczka MSZ pytana, czy atak na polskiego ambasadora w Izraelu miał miejsce w związku z kwestią restytucji mienia, powiedziała: \"Łączenie incydentu, który miał wczoraj miejsce z udziałem pana ambasadora Magierowskiego z wszelkimi innymi wydarzeniami bądź też elementami stosunków polsko-izraelskich, nie jest tym, co mogę potwierdzić lub (czemu mogę) zaprzeczyć\".","Resort spraw zagranicznych odprawił z kolei izraelską delegację z uwagi na zmianę jej składu, co - jego zdaniem - mogło \"sugerować, że rozmowy miałyby koncentrować się na kwestiach restytucji mienia\".","Słyszeliśmy, że nowy ambasador i Aleksander Łukaszenka mieli wcześniej jakieś kontakty.","W jego ocenie \"sprawa\" zaczęła się w roku 2009, kiedy to polski rząd podpisał Deklarację Terezińską, \"w której pierwszy raz pojawiła się kwestia odszkodowań i roszczeń do mienia bezdziedzicznego\".","Przedstawiciele Światowego Kongresu Żydów są wstrząśnięci i skonsternowani atakiem na polskiego ambasadora w Izraelu Marka Magierowskiego  napisano w oświadczeniu opublikowanym na stronie internetowej Kongresu.","To miało zdenerwować Arika Ledermana, który otworzył drzwi limuzyny i zaatakował Magierowskiego.","\"W związki z tym domagamy się od rządu polskiego wyjaśnienia, jakie rozmowy toczą się ze stroną izraelską w sprawie nieuprawnionych roszczeń żydowskich co do mienia bezdziedzicznego\" - powiedział poseł Kukiz'15.","Gdyby tak było nie mielibyśmy reakcji tych ambasadorów z Platformy Obywatelskiej czy SLD, którzy w ten sposób właśnie uprawiali politykę zagraniczną  argumentowała.","Tematem będzie kwestia zwrotu mienia żydowskiego, zagrabionego w czasie Holocaustu."],["<a href='https://fakty.interia.pl/polska/news-czaputowicz-nie-zgodzimy-sie-na-dzielenie-polakow,nId,2995503'>Interia<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2318013,Ambasador-Izraela-nasze-relacje-sa-obecnie-absurdalne'>Polskie Radio<\/a>","<a href='https://www.wprost.pl/kraj/10216939/rzeczniczka-rzadu-o-roszczeniach-i-mieniu-bezspadkowym-nie-jestesmy-nikomu-nic-winni.html'>Wprost<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-odwolanie-wizyty-delegacji-izraela-czaputowicz-trzeba-sie-le,nId,2988325'>RMF 24<\/a>","<a href='http://www.polskieradio24.pl/7/473/Artykul/2316911,Marek-Sawicki-oferta-PSL-powinna-byc-skierowana-do-elektoratu-centrowego'>Polskie Radio<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-konfederacja-ambasadorow-rp-po-ataku-na-magierowskiego-dyplo,nId,2997247'>RMF 24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24778376,deklaracja-z-izraela-ma-w-poniedzialek-przyjechac-do-polski.html'>Gazeta.pl<\/a>","<a href='https://fakty.interia.pl/swiat/news-anna-azari-dla-interii-trudno-zrozumiec-pogorszenie-polsko-i,nId,3018546'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114881,24786915,atak-na-marka-magierowskiego-jest-oswiadczenie-strony-izraelskiej.html'>Gazeta.pl<\/a>","<a href='http://www.polskieradio24.pl/9/300/Artykul/2311045,Atak-na-ambasadora-Marka-Magierowskiego-i-relacje-polskoizraelskie-Komentarze-politykow'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/9/300/Artykul/2311045,Atak-na-ambasadora-Marka-Magierowskiego-i-relacje-polskoizraelskie-Komentarze-politykow'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2309286,MSZ-apeluje-do-izraelskich-wladz-o-zabezpieczenie-zycia-i-dobra-polskich-dyplomatow'>Polskie Radio<\/a>","<a href='https://fakty.interia.pl/raporty/raport-ue-przed-wyborami-europejskimi/artykuly/news-alfabet-eurokampanii-czyli-black-hawkiem-przez-lomrze-i-grun,nId,3006159'>Interia<\/a>","<a href='http://www.polskieradio24.pl/9/300/Artykul/2306973,Bezpieczenstwo-Polski-w-centrum-wizyty-prezydenta-w-USA-Komentarz-politykow'>Polskie Radio<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C448382%2Ckukiz15-zlozyl-w-sejmie-projekt-ustawy-anty-447.html'>PAP<\/a>","<a href='https://www.tvp.info/42647562/swiatowy-kongres-zydow-o-ataku-na-ambasadora-polski-w-izraelu'>TVP INFO<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-jest-oswiadczenie-mezczyzny-ktory-zaatakowal-marka-magierows,nId,2993404'>RMF 24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-16/wiceszef-msz-nie-ma-zadnych-tajnych-negocjacji-w-sprawie-roszczen-zydowskich/'>Polsat News<\/a>","<a href='https://www.tvp.info/42703628/koniec-z-polityka-na-kolanach-oni-tylko-jatrza-politycy-o-liscie-bylych-ambasadorow'>TVP INFO<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24778376,deklaracja-z-izraela-ma-w-poniedzialek-przyjechac-do-polski.html'>Gazeta.pl<\/a>"],["05-17","05-31","05-16","05-13","05-29","05-18","05-12","05-31","05-15","05-18","05-18","05-15","05-24","05-11","05-07","05-16","05-16","05-16","05-19","05-12"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-9" class="section level2">
+<h2>Temat 9</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-9.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-22e68cc4853c50eb0b6d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-22e68cc4853c50eb0b6d">{"x":{"filter":"none","data":[["Do wypadku z udziałem Włodzimierza Cimoszewicza doszło w sobotę 4 maja około godziny 9:40.","Jedynką jest Włodzimierz Cimoszewicz  na jego rzecz wspomniane fanpage'e nie agitują.","\"Wyprowadzając się, Włodzimierz Cimoszewicz postanowił zabrać wszystko, co da się wynieść.","Pozostaje jednak pytanie o styl, w jakim Włodzimierz Cimoszewicz zostawił budynek.","W sobotę Włodzimierz Cimoszewicz potrącił 70-letnią rowerzystkę na przejściu dla pieszych."],["<a href='https://www.wprost.pl/wybory-2019/10213637/wlodzimierz-cimoszewicz-zachorowal-na-nowotwor-syn-mowi-o-jego-przyszlosci.html'>Wprost<\/a>","<a href='https://www.tvp.info/42760375/agitacja-na-rzecz-po-na-facebooku-25-mln-odbiorcow-propagandowych-fanpageow'>TVP INFO<\/a>","<a href='https://fakty.interia.pl/polska/news-niezalezna-pl-cimoszewicz-pozwal-gazete-polska,nId,3019893'>Interia<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2317402,Wlodzimierz-Cimoszewicz-pozwal-Gazete-Polska-za-tekst-o-lesniczowce-w-Puszczy-Bialowieskiej'>Polskie Radio<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24758315,wlodzimierz-cimoszewicz-nie-wycofuje-sie-z-wyborow-to-rodzaj.html'>Gazeta.pl<\/a>"],["05-05","05-23","05-31","05-30","05-07"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-10" class="section level2">
+<h2>Temat 10</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-10.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-de66f31b3ce675bf681a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-de66f31b3ce675bf681a">{"x":{"filter":"none","data":[["Do zdobycia włoskiego miasteczka doszło 25 maja 1944 r., tydzień po walkach o Monte Cassino.","Na drugiej ekspozycji będzie można zobaczyć obrazy uczestnika walk o Monte Cassino Tadeusza Wojnarskiego.","Uroczystość odbyła się przed Pomnikiem Bitwy o Monte Cassino z okazji 75. rocznicy rozpoczęcia walk przez 2.","W czasie walk o Monte Cassino poległo 923 żołnierzy 2 Korpusu Polskiego, 2931 zostało rannych, a 345 uznano za zaginionych.","Zaciekłość walk w mieście Cassino i na wzgórzu klasztornym były już wówczas dobrze znane.","Ale, jak zauważyła Stefańska Andreini, sytuacja wokół Monte Cassino i tamtejszego dawnego terenu walk o nazwie Albaneta stanowi poważne wyzwanie także dla kierowanej przez nią organizacji.","Klasztor na Monte Cassino zajęli żołnierze 12 Pułku Ułanów Podolskich, polskie walki o masyw Monte Cassino i Piedimonte trwały 13 dni i były niezwykle krwawe.","Tu pamiętam, że niektórzy chłopcy z mojego szwadronu nie wytrzymywali tego napięcia i wychodzili z tej dróżki, żeby schować się za skałą, i nie wiadomo, co się z nimi później stało  wspominał weteran walkę o Monte Cassino w jednym z wywiadów.","Mam potrzebę serca, by być dziś na Monte Cassino a nie na żadnym marszu organizowanym przez kogokolwiek.","Także w środę w opactwie benedyktynów na Monte Cassino otwarte zostaną dwie wystawy."],["<a href='https://www.pap.pl/aktualnosci/news%2C454429%2Czolnierze-2-korpusu-upamietnili-kolegow-poleglych-pod-piedimonte-san'>PAP<\/a>","<a href='https://fakty.interia.pl/swiat/news-w-cassino-stanal-pomnik-misia-wojtka,nId,2991889'>Interia<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2307781,Warszawa-oddano-hold-zdobywcom-Monte-Cassino'>Polskie Radio<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-75-lat-temu-2-korpus-polski-gen-wladyslawa-andersa-zdobyl-wz,nId,2997214'>RMF 24<\/a>","<a href='https://www.tvp.info/42583662/sowieci-twierdzili-ze-nie-chcemy-bic-niemcow-75-lat-temu-ruszylo-natarcie-na-monte-cassino'>TVP INFO<\/a>","<a href='http://www.polskieradio24.pl/5/3/Artykul/2303665,Stanislaw-Karczewski-z-dwudniowa-wizyta-w-Rzymie'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/7/129/Artykul/2311023,75-rocznica-bitwy-o-Monte-Cassino-Jan-Jozef-Kasprzyk-to-byla-jedna-z-najwazniejszych-bitew'>Polskie Radio<\/a>","<a href='https://www.tvp.info/42863082/zmarl-zolnierz-gen-andersa-walczyl-o-monte-cassino'>TVP INFO<\/a>","<a href='https://fakty.interia.pl/polska/news-brudzinski-w-rmf-fm-o-wystapieniu-tuska-znowu-uslyszymy-ze-p,nId,2997230'>Interia<\/a>","<a href='https://wiadomosci.radiozet.pl/Swiat/Pomnik-misia-Wojtka-stanal-w-miescie-Cassino-we-Wloszech'>Radio ZET<\/a>"],["05-17","05-15","05-12","05-18","05-11","05-05","05-18","05-30","05-18","05-15"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-11" class="section level2">
+<h2>Temat 11</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-11.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-7ac9e751236326eab92b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7ac9e751236326eab92b">{"x":{"filter":"none","data":[["Małgorzata Wassermann zaprezentowała raport końcowy z prac komisji ds. afery Amber Gold.","Mówiła także o tym, że członkowie komisji nie mają żadnych wątpliwości co do tego, że Marcin P., szef Amber Gold, był tzw. słupem.","Był jednak prezesem nie tylko firmy Amber Gold, ale również kilku spółek z tej grupy  wyjaśnił wiceprzewodniczący komisji.","Amber Gold. - Od momentu zmiany w prokuraturze oraz powstania komisji śledczej, poza Marcinem i Katarzyną P., 15 dodatkowych osób ma postawione zarzuty - podkreśliła szefowa komisji.","Członkowie komisji do spraw Amber Gold będą mieli - jak wskazała Wassermann - dwa tygodnie na zapoznanie się z nim (raportem - red.) i kolejne dwa tygodnie na zgłaszanie ewentualnych uwag na piśmie.","Amber Gold nie posiada uprawnień operacyjnych i że na zlecenie komisji działają prokuratura i inne służby.","W projekcie raportu, do którego dotarła PAP, wskazano, że skutkiem działania Amber Gold była utrata zaufania obywateli do państwa, a próbę odbudowy tego zaufania podjął Sejm powołując komisję śledczą.","W listopadzie poprzedniego roku w charakterze świadka wezwano go również na przesłuchanie przed komisję śledczą do spraw afery Amber Gold.","Jak mówiła, zdaniem komisji postępowania prokuratorskie dotyczące Amber Gold były prowadzone nieprawidłowo.","\"W toku prac komisji ujawnione zostało nieprawidłowe i nieetyczne zaangażowanie wysokich funkcjonariuszy publicznych, w tym prominentnych polityków Platformy Obywatelskiej w uwiarygodnianiu działalności podmiotów z Grupy Amber Gold, polegające m.in. na zabieganiu o darowizny na cele publiczne lub kulturalne\" - napisano we wnioskach końcowych projektu raportu.","Podkreśliła, że komisja nie miała za zadanie np. ustalać, gdzie jest przechowywane złoto Amber Gold albo gdzie zostały przekazane pieniądze.","Według szefowej komisji, sprawa Amber Gold pokazała, że rozdzielenie Ministerstwa Sprawiedliwości i Prokuratury Generalnej było ogromnym błędem.","Podano też, że komisja jednoznacznie negatywnie ocenia funkcjonowanie aparatu skarbowego wobec podmiotów z Grupy Amber Gold.","Dopytywana o satysfakcję z pracy w sejmowej komisji stwierdziła, że \"chciałaby, żeby satysfakcję w pierwszej kolejności odczuwali poszkodowani przez o Amber Gold\".","Materiał był tak szeroki, jeżeli chodzi o banki, że komisja Amber Gold wysłała zawiadomienie do prokuratury, mimo iż banki nie podlegały pracy komisji.","W ocenie Witolda Zembaczyńskiego, który w komisji zasiada z ramienia Nowoczesnej, w sprawie Amber Gold nie mógł zapaść inny wyrok niż uznanie małżeństwa P. za winnych."," Przed komisją stawały osoby, które twierdziły, że Marcin P. to wszystko wymyślił.","We wrześniu komisja zdecydowała, że m.in. wobec Parafianowicza złoży zawiadomienie do prokuratury \"za szereg elementów składających się na niedopełnienie obowiązków po jego stronie\" w związku ze sprawą Amber Gold.","Sądy rejestrowe i urzędy skarbowe dostawały co chwila wnioski o rejestrację nowych spółek Marcina P. z \"niebotycznym\" kapitałem zakładowym, a jednocześnie widziały, że firmy twórcy Amber Gold nie składają sprawozdań finansowych - mówiła przewodnicząca komisji śledczej Małgorzata Wassermann.","W przyszłą środę na posiedzeniu komisji zostanie posłom udostępniony raport końcowy - poinformowała w czwartek PAP przewodnicząca komisji śledczej ds."],["<a href='https://www.rmf24.pl/fakty/news-napasc-na-ambasadora-magierowskiego-znamy-date-spotkania-tru,nId,2991763'>RMF 24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24786887,malgorzata-wasserman-godzine-mowila-o-raporcie-ws-amber-gold.html'>Gazeta.pl<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2309234,Malgorzata-Wasserman-nie-ma-watpliwosci-ze-szef-Amber-Gold-byl-slupem'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2309234,Malgorzata-Wasserman-nie-ma-watpliwosci-ze-szef-Amber-Gold-byl-slupem'>Polskie Radio<\/a>","<a href='https://tvn24bis.pl/z-kraju,74/afera-amber-gold-malgorzata-wassermann-przedstawila-projekt-raportu,935739.html'>TVN24 bis<\/a>","<a href='http://www.polskieradio24.pl/130/5561/Artykul/2311027,Tomasz-Rzymkowski-o-Amber-Gold-za-Marcinem-P-stala-mafia-On-byl-tylko-slupem'>Polskie Radio<\/a>","<a href='https://fakty.interia.pl/polska/news-projekt-raportu-komisji-sledczej-ds-amber-gold,nId,2991921'>Interia<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2308585,Joanna-Kopcinska-o-przesluchaniu-Ewy-Kopacz-sprawe-abstrakcyjnych-miliardow-trzeba-wyjasnic'>Polskie Radio<\/a>","<a href='https://www.tvp.info/42639289/wassermann-nie-ma-watpliwosci-ze-szef-amber-gold-byl-slupem'>TVP INFO<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C452994%2Cprojekt-raportu-komisji-ds-ag-donald-tusk-nie-zapewnil-koordynacji-prac'>PAP<\/a>","<a href='https://www.rmf24.pl/raporty/raport-ambergold/glowna/news-w-przyszla-srode-raport-z-pracy-komisji-ds-amber-gold,nId,2981272'>RMF 24<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-konkluzje-sa-miazdzace-sejmowa-komisja-zaprezentowala-raport,nId,2991692'>RMF 24<\/a>","<a href='https://fakty.interia.pl/polska/news-projekt-raportu-komisji-sledczej-ds-amber-gold,nId,2991921'>Interia<\/a>","<a href='http://www.polskieradio24.pl/130/5561/Artykul/2311027,Tomasz-Rzymkowski-o-Amber-Gold-za-Marcinem-P-stala-mafia-On-byl-tylko-slupem'>Polskie Radio<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-konkluzje-sa-miazdzace-sejmowa-komisja-zaprezentowala-raport,nId,2991692'>RMF 24<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2312959,Wyrok-ws-Amber-Gold-uwidocznil-absurdy-polskiego-prawa-Sejm-juz-pracuje-nad-zmiana-przepisow'>Polskie Radio<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-15/wassermann-skrajnie-zle-oceniamy-dzialalnosc-sluzb-specjalnych-i-policji-ws-amber-gold/'>Polsat News<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2304721,Sad-Najwyzszy-pozbawil-referent-sprawy-Amber-Gold-immunitetu'>Polskie Radio<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-konkluzje-sa-miazdzace-sejmowa-komisja-zaprezentowala-raport,nId,2991692'>RMF 24<\/a>","<a href='https://fakty.interia.pl/raporty/raport-komisja-sledcza-amber-gold/newsy/news-wassermann-w-przyszla-srode-raport-z-pracy-komisji-ds-amber-,nId,2981239'>Interia<\/a>"],["05-15","05-15","05-15","05-15","05-15","05-18","05-15","05-14","05-15","05-15","05-09","05-15","05-15","05-18","05-15","05-21","05-15","05-07","05-15","05-09"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-12" class="section level2">
+<h2>Temat 12</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-12.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-c1c9e476fa11c35cd565" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c1c9e476fa11c35cd565">{"x":{"filter":"none","data":[["\"Wyborcza\" zaznacza również, że obecnie właścicielką gruntów jest właśnie Iwona Morawiecka, bowiem małżeństwo dokonało podziału majątku.","Dodatkowo, jak podała \"GW\", Morawiecki nie musiał wpisywać do oświadczenia majątkowego faktu posiadania działki, ponieważ dokonał częściowej rozdzielności majątkowej z żoną i wyłączną właścicielką wspomnianych gruntów jest obecnie Iwona Morawiecka, żona premiera.","\"(Iwona Morawiecka) jest żoną premiera, otrzymała od męża działkę, która jest warta dzisiaj 70 mln zł.","A to oznacza, że przynajmniej część działki od Iwony Morawieckiej miasto Wrocław będzie musiało odkupić - czytamy.","W odpowiedzi zaznaczono, że Iwona Morawiecka dowiedziała się o tych działkach \"od znajomego, który zajmował się pośrednictwem w sprzedaży nieruchomości\".","Dzień po tym jak \"Gazeta Wyborcza\" opisała kulisy przejęcia działki przez rodzinę Morawieckich pojawiają się zaskakujące fakty.","Żona premiera, Iwona Morawiecka w poniedziałkowym oświadczeniu określiła artykuł \"GW\" jako \"zmanipulowany\".","\"Z majątku dorobkowego z żoną Iwoną Morawiecką\" - jak głosi akt notarialny cytowany przez \"Gazetę Wyborczą\" - zapłacił za działkę 700 tysięcy złotych.","Jak zaznaczył, publikacja \"GW\" stawia także \"nieuprawniony zarzut »uwłaszczenia się Iwony i Mateusza Morawieckich«, podczas gdy opisywana działka w chwili zakupu nie stanowiła mienia publicznego, a państwo Morawieccy byli osobami prywatnymi\". - Ceny zakupu działek były cenami rynkowymi - dodał.","\"GW\" napisała, że cena działki Morawieckich sięgnęła 4 mln zł, bo władze Wrocławia zaplanowały na tych terenach inwestycje, a przez środek działki dzisiejszego premiera przebiegać ma trasa szybkiego ruchu."],["<a href='https://www.rmf24.pl/fakty/polska/news-mateusz-morawiecki-o-swoim-majatku-nie-mamy-z-zona-nic-do-uk,nId,3002502'>RMF 24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/kaczynski-o-dzialce-morawieckiego-tezy-z-artykulu-wyborczej-godne-zweryfikowania,937209.html'>TVN24<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C455906%2Cschetyna-skladamy-projekt-ustawy-czyste-rece-apeluje-do-kaczynskiego-o-jego'>PAP<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-wyborcza-mateusz-morawiecki-kupil-od-kosciola-dzialki-warte-,nId,3000478'>RMF 24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/mateusz-morawiecki-kupil-dzialke-od-kosciola-wyborcza-opisuje-transakcje,937049.html'>TVN24<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Polityka/Mateusz-Morawiecki-odkupil-od-ksiedza-dzialke-po-okazyjnej-cenie.-Za-rzadow-PiS-otrzymal-awans-na-generala'>Radio ZET<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/premier-morawiecki-nie-mamy-z-zona-nic-do-ukrycia,937484.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/mateusz-morawiecki-kupil-dzialke-od-kosciola-wyborcza-opisuje-transakcje,937049.html'>TVN24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-20/premier-pozwie-gazete-wyborcza-za-tekst-o-uwlaszczeniu-na-koscielnych-gruntach/'>Polsat News<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C455887%2Ckukiz-kazdy-polityk-kazda-osoba-publiczna-powinna-dokladnie-ujawniac-swoj'>PAP<\/a>"],["05-21","05-20","05-21","05-20","05-20","05-21","05-21","05-20","05-20","05-21"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-13" class="section level2">
+<h2>Temat 13</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-13.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-03ca608c05f64fab3666" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-03ca608c05f64fab3666">{"x":{"filter":"none","data":[["W całym kraju absolwenci szkół średnich przystąpili do obowiązkowego egzaminu pisemnego z języka polskiego.","We wtorek, kiedy maturzyści zdawali obowiązkowy dla wszystkich egzamin z matematyki na poziomie podstawowym, zgłoszenia nadeszły z 663 szkół.","Z danych Okręgowej Komisji Egzaminacyjnej w Łomży wynika, że w obu tych szkołach do matury przystąpiło łącznie 128 uczniów na poziomie podstawowym, dziesięcioro zadeklarowało chęć zdawania egzaminu na poziomie rozszerzonym.","W szkole w Górowie Iławeckim maturę z języka ukraińskiego zdawało 23 maturzystów, a do popołudniowego egzaminu rozszerzonego przystępuje 4 uczniów.","Już po pierwszej maturze - licealiści zdawali w poniedziałek egzamin dojrzałości z języka polskiego na poziomie podstawowym.","Egzamin pisemny na poziomie podstawowym z wybranego języka obcego nowożytnego jest jednym z obowiązkowych na maturze.","Maile o podłożonych ładunkach wybuchowych nieznani sprawcy przesłali w dniu matury z języka polskiego do 122 szkół.","Abiturienci ze szkół dla mniejszości narodowych mają jeszcze obowiązkowy egzamin z języka narodowego.","Maturzyści przystąpią dziś rano do pisemnego egzaminu z matematyki na poziomie rozszerzonym.","W komunikacie opublikowanym we wtorek dyrektor CKE napisał: Podobnie jak podczas egzaminu maturalnego z języka polskiego na poziomie podstawowym, który był przeprowadzony 6 maja br., część szkół zgłosiła okręgowym komisjom egzaminacyjnym otrzymanie wiadomości e-mail informującej o podłożeniu na terenach tych placówek ładunków wybuchowych.","Tylko w jednej szkole ewakuowano wszystkich zdających, którzy do napisani matury przystąpią w czerwcu.","Na poziomie podstawowym chce go zdawać 12,1 tys. tegorocznych absolwentów, a na rozszerzonym  6,6 tys.","W ciągu dwóch dni obowiązkowych pisemnych egzaminów maturalnych, 6 i 7 maja, do szkół napływały fałszywe informacje o podłożonych w placówkach bombach.","Deklaracje przystąpienia do egzaminu na tym poziomie złożyło ponad 56 tys. tegorocznych absolwentów liceów i techników, czyli 21 proc. z nich.","Zakończył się egzamin maturalny z języka polskiego na poziomie podstawowym - obowiązkowym dla wszystkich abiturientów - poinformował w poniedziałek PAP dyrektor Centralnej Komisji Egzaminacyjnej Marcin Smolik.","Warto jeszcze raz podkreślić, że alarmy bombowe w szkołach, gdzie maturzyści mieli przystąpić do egzaminu dojrzałości to metody terrorystyczne.","Po południu będą głównie egzaminy z przedmiotów rzadziej wybieranych przez maturzystów i z języków obcych na poziomie rozszerzonym.","Wszczęto śledztwo w sprawie serii fałszywych alarmów bombowych w szkołach podczas pisemnych egzaminów maturalnych - dowiedział się reporter RM FM.","Do egzaminu w \"nowej formule\" przystąpi ogółem na poziomie podstawowym około 12 600 osób (12 100 - po raz pierwszy), a na poz. rozszerzonym - ok. 7 000 osób (6 600 - po raz 1.), na poziomie dwujęzycznym - ok. 70 osób - informuje Centralna Komisja Egzaminacyjna.","Termin egzaminów pisemnych z poszczególnych przedmiotów zdawanych w językach obcych przez abiturientów klas dwujęzycznych wyznaczono na 23 maja."],["<a href='https://www.rmf24.pl/raporty/raport-matura/2019/news-matury-2019-za-absolwentami-egzamin-z-matematyki,nId,2975942'>RMF 24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/klopoty-z-przeprowadzeniem-matur-policja-podejmuje-dzialania,933539.html'>TVN24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-23/ostatni-dzien-pisemnych-matur-dzis-egzaminy-z-jezykow-mniejszosci-narodowych/'>Polsat News<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-23/ostatni-dzien-pisemnych-matur-dzis-egzaminy-z-jezykow-mniejszosci-narodowych/'>Polsat News<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Matura-2019-POLSKI-odpowiedzi-arkusz-POZIOM-PODSTAWOWY'>Radio ZET<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/matura-2019-jezyk-francuski-harmonogram-i-terminy-matur,936355.html'>TVN24<\/a>","<a href='https://www.rmf24.pl/fakty/podsumowanie-dnia/news-pierwszy-dzien-matur-royal-baby-juz-na-swiecie-podsumowanie-,nId,2975516'>RMF 24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-21/dzis-maturzysci-zmierza-sie-z-jezykiem-hiszpanskim-matura-2019/'>Polsat News<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2305746,Dzis-matura-z-rozszerzonej-matematyki-i-filozofii-Egzamin-nie-jest-obowiazkowy'>Polskie Radio<\/a>","<a href='https://www.tvp.info/42512757/drugi-dzien-matur-kolejne-alarmy-bombowe-w-calym-kraju'>TVP INFO<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24755982,alarmy-bombowe-zgloszono-w-az-122-szkolach-szef-cke-nie-wplyna.html'>Gazeta.pl<\/a>","<a href='https://www.tvp.info/42528793/kolejny-dzien-matur-dzis-egzamin-z-jezyka-angielskiego'>TVP INFO<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/falszywe-alarmy-bombowe-w-czasie-matur-sledztwo-prokuratury,934151.html'>TVN24<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C447039%2Cegzaminem-z-jezyka-polskiego-rozpoczely-sie-matury.html'>PAP<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C447039%2Cegzaminem-z-jezyka-polskiego-rozpoczely-sie-matury.html'>PAP<\/a>","<a href='https://www.wprost.pl/kraj/10214087/malopolska-kurator-oswiaty-laczy-alarmy-bombowe-ze-strajkiem-nauczycieli-to-metody-terrorystyczne.html'>Wprost<\/a>","<a href='https://fakty.interia.pl/raporty/raport-matura-2019/aktualnosci/news-matura-2019-harmonogram-egzaminow-maturalnych,nId,2975454'>Interia<\/a>","<a href='https://www.rmf24.pl/fakty/podsumowanie-dnia/news-dziury-w-kasie-po-piatce-kaczynskiego-sledztwo-ws-alarmow-w-,nId,2981233'>RMF 24<\/a>","<a href='https://www.rmf24.pl/raporty/raport-matura/2019/news-matura-2019-dzis-egzamin-z-jezyka-niemieckiego,nId,2988306'>RMF 24<\/a>","<a href='https://fakty.interia.pl/raporty/raport-matura-2019/aktualnosci/news-matura-2019-harmonogram-egzaminow-maturalnych,nId,2975454'>Interia<\/a>"],["05-07","05-07","05-23","05-23","05-06","05-17","05-06","05-21","05-09","05-07","05-06","05-08","05-09","05-06","05-06","05-06","05-06","05-09","05-14","05-06"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-14" class="section level2">
+<h2>Temat 14</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-14.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-3c7cf81f90eaabf32f1e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3c7cf81f90eaabf32f1e">{"x":{"filter":"none","data":[["Ocenia się że jest ono skierowane głównie przeciwko chińskiemu koncernowi Huawei.","Huawei może zawsze zwrócić się ku rynkowi chińskiemu, który jest ogromny, może po prostu funkcjonować sobie tam.","Zapewniono także obecnych właścicieli Huawei i Honor, że nadal będą otrzymywać aktualizacje zabezpieczeń."," Huawei jest w Stanach Zjednoczonych postrzegany, jako firma, która szpiegowała na rzecz Chin.","Firma Panasonic zawiesiła współpracę z chińskim producentem sprzętu elektronicznego Huawei."],["<a href='https://www.pap.pl/aktualnosci/news%2C453271%2Cusa-trump-wydal-zarzadzenie-o-ochronie-amerykanskich-sieci'>PAP<\/a>","<a href='http://www.polskieradio24.pl/130/4428/Artykul/2312963,Marek-Wasinski-zamieszanie-wokol-Huawei-musimy-wiazac-z-konfliktem-miedzy-USA-a-Chinami'>Polskie Radio<\/a>","<a href='https://www.tvp.info/42706359/google-odcina-huawei-smartfony-nie-beda-mialy-dostepu-do-play-store-gmaila-czy-youtubea'>TVP INFO<\/a>","<a href='http://www.polskieradio24.pl/130/5925/Artykul/2315065,Dr-Artur-Bartoszewicz-o-sprawie-Huawei-element-amerykanskochinskiej-wojny-handlowej'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2313721,Panasonic-zawiesil-wspolprace-z-firma-Huawei'>Polskie Radio<\/a>"],["05-16","05-21","05-20","05-25","05-23"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-15" class="section level2">
+<h2>Temat 15</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-15.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-1d92b35980267674793a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1d92b35980267674793a">{"x":{"filter":"none","data":[["\"To przede wszystkim on ponosi odpowiedzialność a to, że samolot Tu-154 lądował na nieczynnym lotnisku w Smoleńsku.","Do nich też należała maszyna, w której wybuchł pożar podczas lądowania awaryjnego na Szeremietiewie.","Większość maszyn musiała lądować na innych pasach, lądowanie niektórych opóźniono.","Część maszyn przekierowano na moskiewskie lotnisko Domodiedowo, a ponad 20 samolotów lądowało w Niżnym Nowogrodzie.","Pomimo uszkodzeń Airbusa A380 i trudnych warunków pogodowych, kapitan maszyny dostał pozwolenie na lądowanie w Pekinie."],["<a href='https://fakty.interia.pl/polska/news-proces-dot-organizacji-lotu-do-smolenska-mowy-koncowe,nId,2989859'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/katastrofa-lotnicza-w-moskwie-kolejne-pytania-po-tragedii,933611.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/swiat/news-niemcy-dron-zaklocil-prace-lotniska-we-frankfurcie,nId,2984705'>Interia<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-pozar-samolotu-w-moskwie-jest-film-z-wnetrza-maszyny,nId,2975451'>RMF 24<\/a>","<a href='https://fakty.interia.pl/swiat/news-grad-rozbil-przednia-szybe-samolotu,nId,3014837'>Interia<\/a>"],["05-14","05-08","05-11","05-06","05-28"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-16" class="section level2">
+<h2>Temat 16</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-16.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-c2cae5019904e991e344" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c2cae5019904e991e344">{"x":{"filter":"none","data":[["W stolicy Wenezueli wybuchły w środę nowe starcia między zwolennikami Guaido a wierną Maduro gwardią narodową.","Pompeo ujawnił w CNN, że zamiaru opuszczenia Wenezueli odwiodła Maduro we wtorek interwencja dyplomatów rosyjskich.","Mike Pompeo w wywiadzie w CNN stwierdził, że Nicolas Maduro był gotowy opuścić Wenezuelę i zbiec do Hawany.","W lutym 2019 r. były generał poparł samozwańczego prezydenta Wenezueli Juana Guaido i wezwał członków armii do buntu przeciwko Maduro.","We wtorek tymczasowy prezydent Wenezueli Juan Guaido oświadczył, że rozpoczęła się \"końcowa faza\" jego planu odsunięcia od władzy Maduro."],["<a href='https://fakty.interia.pl/swiat/news-wenezuela-guaido-wzywa-do-strajku-generalnego,nId,2968852'>Interia<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-01/wenezuela-starcia-zwolennikow-guaido-z-policja-co-najmniej-69-rannych/'>Polsat News<\/a>","<a href='https://www.wprost.pl/swiat/10212841/niespokojnie-w-wenezueli-sekretarz-stanu-usa-nie-wyklucza-interwencji-zbrojnej.html'>Wprost<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/hiszpanski-dziennik-byly-wenezuelski-general-mial-pomoc-w-przemycie-5-6-tony-tony-kokainy,937203.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/swiat/news-wenezuela-opozycjonista-leopoldo-lopez-schronil-sie-w-rezyde,nId,2967429'>Interia<\/a>"],["05-02","05-01","05-01","05-20","05-01"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-17" class="section level2">
+<h2>Temat 17</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-17.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-a89b79b2ec34314a78e7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a89b79b2ec34314a78e7">{"x":{"filter":"none","data":[["Zełenski jest prezydentem Ukrainy od poniedziałku. - Każdy z nas jest prezydentem.","Prezydent elekt Ukrainy, showman Wołodymyr Zełenski ogłosił konkurs na swojego rzecznika.","Wołodymyr Zełenski podczas przemówienia krytykował dotychczasowe ukraińskie władze.","Chodzi o nagrany jeszcze w 2011 roku program o nazwie Magia, w którym Zełenski jest współprowadzącym.","Zełenski był w okopach w odległości 400 metrów od pozycji przeciwnika - przekazała administracja prezydencka w Kijowie."],["<a href='https://www.polsatnews.pl/wiadomosc/2019-05-21/ukraina-mozliwe-referendum-nt-pokoju-z-rosja-zeby-narod-podjal-te-decyzje/'>Polsat News<\/a>","<a href='https://fakty.interia.pl/swiat/news-ukraina-zelenski-szuka-rzecznika-w-konkursie-na-facebooku,nId,2967308'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114881,24804578,wolodymyr-zelenski-rozwiazal-parlament-to-pierwsza-decyzja.html'>Gazeta.pl<\/a>","<a href='https://www.tvp.info/42456423/zelenski-z-rosja-laczy-nas-jedynie-granica-naszych-relacji-nie-mozna-nazywac-bratnimi'>TVP INFO<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/wolodymyr-zelenski-na-linii-walk-w-donbasie,939580.html'>TVN24<\/a>"],["05-21","05-01","05-20","05-02","05-27"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-18" class="section level2">
+<h2>Temat 18</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-18.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-e2b3e7e83b10bca25fb9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e2b3e7e83b10bca25fb9">{"x":{"filter":"none","data":[["\"Nie mam żadnych wątpliwości, że to jest ta drogą, którą Gruzja powinna podążać\" - ocenił.","Podkreślił, że dla naszego kraju Gruzja jest partnerem strategicznym i przyjacielem.","Kilka lat wcześniej agresja na Gruzję, mimo moich ostrzeżeń, także wszystkich zaskoczyła  napisał Saakaszwili.","Zapewniła, że Gruzja nie będzie tej kwestii rozwiązywać siłowo i poprzez działania militarne.","Były prezydent Gruzji wskazuje przy tym na potencjał Rosji, który zbudowała ona na swojej północnej flance."],["<a href='https://www.pap.pl/aktualnosci/news%2C448048%2Cprezydent-polska-wspiera-aspiracje-gruzji-w-sprawie-przynaleznosci-do-nato'>PAP<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2312370,Stanislaw-Karczewski-chcemy-by-droga-Gruzji-do-UE-byla-jak-najkrotsza'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2302264,Szwecja-dwoje-czlonkow-grupy-Pussy-Riot-otrzymalo-azyl-w-Szwecji'>Polskie Radio<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C448048%2Cprezydent-polska-wspiera-aspiracje-gruzji-w-sprawie-przynaleznosci-do-nato'>PAP<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2302264,Szwecja-dwoje-czlonkow-grupy-Pussy-Riot-otrzymalo-azyl-w-Szwecji'>Polskie Radio<\/a>"],["05-07","05-20","05-01","05-07","05-01"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-19" class="section level2">
+<h2>Temat 19</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-19.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-4f457d9492a57ff20bd2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4f457d9492a57ff20bd2">{"x":{"filter":"none","data":[["Trump stwierdził jednak, że jest gotów rozmawiać z Iranem, \"gdy Teheran będzie na to gotowy\".","W Teheranie twierdzono także, iż zaangażowanie militarne Iranu na Bliskim Wschodzie nie powinno leżeć w kręgu zainteresowań Waszyngtonu.","Według komunikatu MSZ Francji, Paryż jest zaniepokojony groźbami Teheranu i wzywa Iran do respektowania paktu nuklearnego.","Media w Iranie utrzymują zarazem, że Teheran zamierza wznowić część wstrzymanego programu nuklearnego.","Iran zdecydował o wycofaniu się z niektórych zobowiązań zawartych w umowie nuklearnej z 2015 roku  poinformowało w środę MSZ w Teheranie."],["<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/iran-nie-widzi-mozliwosci-negocjacji-z-usa,939675.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/swiat/news-iran-wznowi-prace-nad-programem-nuklearnym,nId,2975895'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/iran-wycofuje-sie-z-niektorych-zobowiazan-jcpoa,933798.html'>TVN24<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C448545%2Cmedia-iran-oglosi-zmniejszone-zobowiazania-wobec-porozumienia-nuklearnego'>PAP<\/a>","<a href='https://wiadomosci.radiozet.pl/Swiat/Iran-wycofuje-sie-z-niektorych-zapisow-umowy-nuklearnej'>Radio ZET<\/a>"],["05-28","05-06","05-08","05-07","05-08"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-20" class="section level2">
+<h2>Temat 20</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-20.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-6a87c9f4ceb3f1d0b9a3" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6a87c9f4ceb3f1d0b9a3">{"x":{"filter":"none","data":[["Po ich rozstaniu dziewczynka zamieszkała z ojcem, który wypisał ją z lekcji religii.","Wcześniej radni postanowili, że religia powinna być pierwszą lub ostatnią lekcją, ale ich decyzję unieważnił wojewoda.","Nie uważamy, że wszystkich trzeba mierzyć równą miarą, ale nie może być tak, że państwo finansuje nauczanie lekcji religii z publicznych pieniędzy.","Prezydent miasta wskazał, że radni zobowiązali go do tego, by zwrócił się do krakowskiej kurii z propozycją ograniczenia liczby lekcji religii do jednej w tygodniu tylko w tym roku i tylko dla tego połączonego rocznika."," Do czasu wyjaśnienia niejasnych relacji między państwem, a Kościołem, nauczanie lekcji religii powinno być zawieszone, a później wycofane."],["<a href='https://www.wprost.pl/kraj/10219839/10-latka-zmuszona-przez-sad-do-chodzenia-na-religie-to-efekt-klotni-miedzy-rodzicami.html'>Wprost<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24784536,majchrowski-pisze-do-arcybiskupa-prosi-o-zmniejszenie-liczby.html'>Gazeta.pl<\/a>","<a href='https://fakty.interia.pl/polska/news-biedron-zamiast-prezydenta-na-tronie-siedzi-o-rydzyk,nId,2995735'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24793251,krakow-liczba-lekcji-religii-nie-bedzie-zmniejszona-kuria.html'>Gazeta.pl<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/biedron-na-konwencji-zadamy-komisji-dotyczacej-pedofilii-w-kosciele,936699.html'>TVN24<\/a>"],["05-25","05-14","05-17","05-16","05-18"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-21" class="section level2">
+<h2>Temat 21</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-21.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-2385a74ef8a9fb0b10c5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2385a74ef8a9fb0b10c5">{"x":{"filter":"none","data":[["Historie trójki 15-latków znajdą się w spotach telewizyjnych, radiowych oraz w reklamach w prasie i internecie.","W spocie Opioła na lotnisku wychodzi z uruchomionego śmigłowca z napisem \"Policja\" i wita się z żołnierzami.","Tymczasem Marek Opioła wydał oświadczenie, w którym informuje o wycofaniu spotu z internetu.","Po apelu Komendant Główny Policji, który oświadczył, że czuję się zbulwersowany zaistniałą sytuacją, Opioła zdejmuje swój spot.","Nowoczesna zaciągnęła także kredyt w PKO BP na 2 mln zł oraz posiada dług w wysokości 700 tys. zł za spoty w telewizji Polsat."],["<a href='https://tvn24bis.pl/z-kraju,74/dopiero15lat-w-unii-kampania-zainicjowana-przez-polskia-rade-biznesu,931694.html'>TVN24 bis<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-21/bedzie-wniosek-o-odwolanie-posla-marka-opioly-ze-stanowiska/'>Polsat News<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2312753,Szef-MSWiA-bedzie-wniosek-o-odwolanie-M-Opioly-z-funkcji-szefa-speckomisji'>Polskie Radio<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C455965%2Cpo-chce-aby-nik-i-pkw-wyjasnily-wykorzystanie-przez-brudzinskiego-i-opiole'>PAP<\/a>","<a href='https://www.tvp.info/42823807/lubnauer-o-zobowiazaniach-nowoczesnej-mamy-kilka-milionow-ale-to-nie-jest-dlug'>TVP INFO<\/a>"],["05-01","05-21","05-21","05-21","05-28"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-22" class="section level2">
+<h2>Temat 22</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-22.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-5108b6dea7b076ed0612" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5108b6dea7b076ed0612">{"x":{"filter":"none","data":[["O łódź lub motorówkę, którą można by było przewieźć psy, proszą na Facebooku pracownicy schroniska.","Dyrektor warszawskiego schroniska \"Na Paluchu\" przyznaje w rozmowie z Gazeta.pl, że co jakiś czas zdarzają się prośby ze strony właścicieli psów o przygarnięcie zwierzęcia.","Do schroniska dla bezdomnych zwierząt w Toruniu trafia miesięcznie ponad sto psów.","Jedna zginęła przygnieciona przez drzewo, a druga zmarła na zawał serca w tymczasowym schronisku.","W 2017 roku, przed tym samym schroniskiem, do którego trafiły jej psy, namawiała, by w Sylwestra zrezygnować z fajerwerków."],["<a href='https://www.tvp.info/42743204/tona-psy-w-schronisku-czekadelko-w-wadowicach-dolnych'>TVP INFO<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24816322,dyrektor-schroniska-na-paluchu-nie-przyjmujemy-psow-od-wlascicieli.html'>Gazeta.pl<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/scheuring-wielgus-oddala-psy-do-schroniska-krytykuja-ja-obroncy-zwierzat,938346.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/swiat/news-cyklon-fani-uderzyl-w-wybrzeze-indii,nId,2970569'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/scheuring-wielgus-oddala-psy-do-schroniska-krytykuja-ja-obroncy-zwierzat,938346.html'>TVN24<\/a>"],["05-22","05-23","05-24","05-03","05-24"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-23" class="section level2">
+<h2>Temat 23</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-23.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-eba0c233aa0a9e9b5585" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-eba0c233aa0a9e9b5585">{"x":{"filter":"none","data":[["Król Maha Vajiralongkorn, zwany też Ramą X, wstąpił na tron w 2016 roku po śmierci swego ojca, króla Bhumibola Adulyadeja, który panował przez 70 lat.","Niech żyje król! - krzyczeli poddani siedzący na chodnikach, gdy mijała ich królewska procesja.","Wiemy przede wszystkim, że Jezus narodził się, gdy żył jeszcze król Herod, a zmarł on w czwartym roku p.n.e.","Kazimierza, syna króla Kazimierza Jagiellończyka i patrona Rzeczypospolitej Obojga Narodów.","Sprawujący urząd króla Hiszpanii przez blisko 39 lat monarcha ustąpił 2 czerwca 2014 r."],["<a href='https://www.rmf24.pl/fakty/swiat/news-krolewski-slub-w-tajlandii-panna-mloda-kleczala-przy-butach-,nId,2970548'>RMF 24<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C446793%2Ctajlandia-mieszkancy-swietuja-koronacje-ramy-x.html'>PAP<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2307636,Bp-Artur-Mizinski-mlodzi-maja-swoje-miejsce-w-Kosciele-Obrady-Katolickiego-Stowarzyszenia-Mlodziezy'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/75/921/Artykul/2318192,Minister-srodowiska-u-Polakow-na-Bialorusi-i-u-gubernatora'>Polskie Radio<\/a>","<a href='https://fakty.interia.pl/swiat/news-emerytowany-krol-hiszpanii-wycofuje-sie-z-zycia-publicznego,nId,3014753'>Interia<\/a>"],["05-03","05-05","05-12","05-31","05-28"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-24" class="section level2">
+<h2>Temat 24</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-24.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-c51cd6452f880aa0a819" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c51cd6452f880aa0a819">{"x":{"filter":"none","data":[["Wczoraj początkowo informowano o wystrzeleniu przez Koreę Północną jednego pocisku.","W sobotę północnokoreański reżim wystrzelił szereg pocisków, które spadły do Morza Japońskiego.","Izrael poinformował, że przechwycono kilkadziesiąt z wystrzelonych na jego terytorium rakiet.","Na krótko przed przejęciem \"Wise Honest\" Korea Płn. wystrzeliła rakiety krótkiego zasięgu.","W pierwszy weekend maja (4-5.05) wystrzelono z Gazy 700 rakiet, zginęło 4 Izraelczyków."],["<a href='https://www.wprost.pl/polityka/10215319/kcna-kim-dzong-un-nadzorowal-testy-balistyczne.html'>Wprost<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/seul-korea-polnocna-znow-wystrzelila-pociski,934096.html'>TVN24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114881,24751607,strefa-gazy-w-strone-izraela-wystrzelono-90-rakiet-nie-wszystkie.html'>Gazeta.pl<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2311034,Korea-Polnocna-zwrocila-sie-do-ONZ-ws-przejetego-statku'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/8/3660/Artykul/2304865,Wzrost-napiecia-miedzy-Palestyna-i-Izraelem'>Polskie Radio<\/a>"],["05-10","05-09","05-04","05-18","05-07"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-25" class="section level2">
+<h2>Temat 25</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-25.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-34d58ddd24680d29676a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-34d58ddd24680d29676a">{"x":{"filter":"none","data":[["Dla porównania 5 lat temu do godziny 17:30 zagłosowało 16,91 procent uprawnionych.","\"Jest na niej 3200 nazwisk, to jest około 40 procent wszystkich posiadaczy paszportów\"  podkreślił.","W tym roku dynamika PKB ma wynieść 4,2 proc., natomiast w przyszłym ma zwolnić do 3,6 procent.","W perspektywie kilku lat planowane jest osiągniecie zasięgu ludnościowego do 80 procent."," Natomiast, na pewno nie było zwymiotowania na ołtarz  przeor zapewniał mnie w 100 procentach.","Wtedy jeden procent najpopularniejszych muzyków odpowiadał za 26 proc. przychodów z biletów.","To absolutny rekord, o prawie 5 milionów więcej niż w ubiegłym roku (wzrost o 40 procent)."],["<a href='http://www.polskieradio24.pl/5/1222/Artykul/2315530,Rekordowa-frekwencja-w-wyborach-do-PE-Dane-PKW-na-godz-17'>Polskie Radio<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C454847%2Ckumoch-dzieki-grupie-ladosia-od-8-do-10-tys-zydow-otrzymalo-paszporty.html'>PAP<\/a>","<a href='https://tvn24bis.pl/z-kraju,74/praca-w-polsce-stopa-bezrobocia-w-kwietniu-najnizsza-od-pazdziernika-1990-roku-mrpips,934070.html'>TVN24 bis<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2310736,Polskie-Radio-planuje-rozwoj-sieci-emisyjnej-DAB'>Polskie Radio<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Pijany-ksiadz-mial-odprawiac-msze.-Kuria-Siedlecka-odpowiada'>Radio ZET<\/a>","<a href='https://tvn24bis.pl/ze-swiata,75/wall-street-journal-1-proc-wykonawcow-zdominowalo-koncertowy-rynek,933411.html'>TVN24 bis<\/a>","<a href='https://tvn24bis.pl/z-kraju,74/pit-za-2018-rok-rekord-pit-ow-zlozonych-przez-internet-ministerstwo-finansow,933350.html'>TVN24 bis<\/a>"],["05-26","05-19","05-09","05-17","05-07","05-07","05-07"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-26" class="section level2">
+<h2>Temat 26</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-26.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-221996a5159001e45b4d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-221996a5159001e45b4d">{"x":{"filter":"none","data":[["Zaznaczył, że jego poglądy ewoluują i że jeszcze kilkanaście lat temu na problematykę związków partnerskich nie był tak otwarty.","Jak zaznaczył, związki partnerskie w 90 proc. dotyczą związków heteroseksualnych.","Eksperci PISM uważają, że nowa oferta PW po 2020 roku powinna być bardziej partnerska i musi odzwierciedlać oczekiwania państw partnerskich.","Przy czym nazywanie tamtego projektu PO \"ustawą o związkach partnerskich\" jest mocno na wyrost.","\"Nie jesteśmy jeszcze uznawani za kandydata, ale uważamy, że powinno się docenić to, gdzie jesteśmy, tj. jesteśmy najbardziej zaawansowanym krajem partnerskim."],["<a href='https://fakty.interia.pl/polska/news-andrzej-halicki-ustawowo-uregulujemy-kwestie-zwiazkow-partne,nId,3004104'>Interia<\/a>","<a href='https://fakty.interia.pl/polska/news-andrzej-halicki-ustawowo-uregulujemy-kwestie-zwiazkow-partne,nId,3004104'>Interia<\/a>","<a href='http://www.polskieradio24.pl/5/3/Artykul/2305505,Obrady-UE-na-10lecie-Partnerstwa-Wschodniego-bez-Lukaszenki'>Polskie Radio<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24846775,koalicja-przegrala-bo-byla-zbyt-liberalna-publicysci-i-politycy.html'>Gazeta.pl<\/a>","<a href='https://fakty.interia.pl/swiat/news-prezydent-gruzji-jestesmy-najblizej-drzwi-do-nato-w-historii,nId,2979342'>Interia<\/a>"],["05-22","05-22","05-08","05-31","05-08"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-27" class="section level2">
+<h2>Temat 27</h2>
+<p><img src="may_files/figure-html/unnamed-chunk-5-27.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-3cb12e3fb8213fad1d8b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3cb12e3fb8213fad1d8b">{"x":{"filter":"none","data":[["Między Chrzanowem i Krakowem ok. godz. 13 przewróciła się ciężarówka przewożącą węgiel.","Trudno więc założyć, ile pieniędzy trzeba by wydać na to, by \"wyjść\" z węgla do 2030 roku.","Z tych powodów nie jesteśmy w stanie nawet myśleć o takim postulacie jak rezygnacja z węgla do 2030 roku.","Ten węgiel pojawia się jako transport do Niemiec, bo Niemcy go zakupują, ale (...)","Zakłada ona istotny spadek, zarówno udziału węgla w \"miksie\", jak i emisji do 2040 roku."],["<a href='https://www.rmf24.pl/fakty/polska/news-wypadek-na-autostradzie-a4-na-jezdnie-wysypal-sie-wegiel,nId,2993755'>RMF 24<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2308612,Jakub-Wiech-odejscie-Polski-od-wegla-do-2030-roku-nie-jest-realne-z-uwagi-na-koszty-i-technologie'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2308612,Jakub-Wiech-odejscie-Polski-od-wegla-do-2030-roku-nie-jest-realne-z-uwagi-na-koszty-i-technologie'>Polskie Radio<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-05-06/firmy-skarbu-panstwa-nie-korzystaja-z-wegla-z-donbasu-wiceminister-komentuje-slowa-tuska/'>Polsat News<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2308612,Jakub-Wiech-odejscie-Polski-od-wegla-do-2030-roku-nie-jest-realne-z-uwagi-na-koszty-i-technologie'>Polskie Radio<\/a>"],["05-16","05-14","05-14","05-06","05-14"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+<br><br>
+&nbsp;
+<hr />
+<p style="text-align: center;"> <a href=https://www.linkedin.com/in/jakub-kubajek-869945158/>Jakub Kubajek</a></p>
+&nbsp;
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

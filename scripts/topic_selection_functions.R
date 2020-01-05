@@ -120,6 +120,24 @@ lambd_extractor <- function(list_topics, unnested_articles, general_stats, min_c
     return(list_topics)
 }
 
+date_extractor <- function(list_topics, sentences){
+    #' This is a function which add to topics' list data frame of words with their lambda value
+    #' @param list_topics List of topics
+    #' @param sentences Data frame with sentences that contains sentence_id and date
+    #' @return List of topics
+    #' @export
+    
+    
+    for(name in names(list_topics)){
+        sentences_ids <- list_topics[[name]][["sentences_ids"]]
+        sentences_ids <- data.frame(sentence_id = sentences_ids, stringsAsFactors = F) %>%
+            left_join(sentences, by = "sentence_id")
+        list_topics[[name]][["dates"]] <- sentences_ids$date
+    }
+    
+    return(list_topics)
+}
+
 arrange_topics <- function(list_topics, v_value = "max_lambda"){
     #' This is a function which sorts topics list, by v_value - it should be greates lambda value in the list
     #' @param list_topics List of topics
@@ -141,37 +159,73 @@ arrange_topics <- function(list_topics, v_value = "max_lambda"){
     return(list_topics)
 }
 
+delete_unrelevant_topics <- function(list_topics, min_singular_lambda=150,
+                                     min_topic_lambda=100){
+  
+  for(name in names(list_topics)){
+    if( (list_topics[[name]][["max_lambda"]] < min_topic_lambda)){
+      list_topics[[name]] <- NULL
+    } else if((length(list_topics[[name]][["word"]]) == 1) & (list_topics[[name]][["max_lambda"]] < min_singular_lambda)) {
+      
+    }
+  }
+  return(list_topics)
+}
+
+filter_selected_words <- function(list_topics){
+  # Correct TABS
+  selected_words <- c()
+  for(topic in list_topics){
+    selected_words <- c(selected_words, topic[["word"]])
+  }
+  return(selected_words)
+}
 
 plot_all_words_correlation <- function(words_similarity_matrix, scale_font = c(8, 4), 
-                                       class_num = 6, min_association = 0.4, lambda_daily_DF){
+                                       class_num = 6, min_association = 0.4, lambda_DF,
+                                       maximum_words_num = 200){
     #' Function plotting all words that are included in a particular report
     
     set.seed(1234)
     require(classInt)
+    
+    # Limit number of words to be displayed
+    if(nrow(lambda_DF) > maximum_words_num){
+        lambda_DF <- lambda_DF %>%
+            top_n(maximum_words_num, lambda)
+        words <- lambda_DF[["name"]]
+        words_similarity_matrix <- words_similarity_matrix[words, words]
+    }
     
     simil_df <- as.data.frame.matrix(words_similarity_matrix) %>%
         mutate(col_1 = rownames(.)) %>%
         tidyr::gather(key = "col_2", value = "simil", -col_1) %>%
         mutate(name = col_1)
     
-    values <- lambda_daily_DF[["lambda"]]
+    
+    # values <- lambda_DF[["lambda"]] %>% sqrt()
+    values <- lambda_DF[["lambda_log"]]
     
     # Znajdz breaki
-    brks <- classIntervals(values, n = class_num, style = "jenks") %>% .$brks
+    brks <- classIntervals(values, n = class_num, style = "fisher") %>% .$brks #jenks
     # Znajdz kolejnosc w skali
     intervals <- findInterval(values, brks, all.inside = T)
     # Przypsiz kolory
-    colors <- brewer.pal(9, "YlGnBu")[(10-class_num):9]
+    # colors <- brewer.pal(9, "YlGnBu")[(10-class_num):9]
+    colors <- rev(pals::ocean.haline(7))[(8-class_num):7]
+    # colors <- brewer.pal(class_num, "YlGnBu")
+    # colors <- rev(viridis::viridis(7))[(8-class_num):7]
     ordered.colors <- colors[intervals]
-    lambda_daily_DF[["color"]] <- ordered.colors
-    lambda_daily_DF[["color_num"]] <- as.character(intervals)
+    lambda_DF[["color"]] <- ordered.colors
+    lambda_DF[["color_num"]] <- as.character(intervals)
     
     # Rozmiar na wykresie
-    # freq <- lambda_daily_DF[["lambda"]]
-    freq <- lambda_daily_DF[["lambda_log"]]
+    # freq <- lambda_DF[["lambda"]]
+    freq <- lambda_DF[["lambda_log"]]
     normedFreq <-  (freq - min(freq)) / (max(freq) - min(freq))
     size <- (scale_font[1] - scale_font[2]) * normedFreq + scale_font[2]
-    lambda_daily_DF[["size_plot"]] <- size
+    lambda_DF[["size_plot"]] <- size
+    scale_font[2] <- scale_font[2]*0.5
     
     # Plot
     plot <- simil_df %>%
@@ -180,21 +234,26 @@ plot_all_words_correlation <- function(words_similarity_matrix, scale_font = c(8
         top_n(2, simil) %>%
         ungroup() %>%
         mutate(simil = simil - 0.001) %>%
-        igraph::graph_from_data_frame(vertices = lambda_daily_DF %>%
+        igraph::graph_from_data_frame(vertices = lambda_DF %>%
                                           inner_join(simil_df %>%
                                                          filter(simil > min_association) %>%
                                                          distinct(name), by = "name")) %>%
-        ggraph::ggraph(layout = "fr", niter = 4000) +
-        ggraph::geom_edge_link(aes(edge_width = simil*1.5), edge_colour = "cyan4", edge_alpha = 0.2,
-                               check_overlap = T, show.legend = F) +
-        ggraph::geom_node_point(aes(size = size_plot), color = "lightblue", show.legend = F) +
+        ggraph::ggraph(layout = "fr", niter = 5000) +
+        ggraph::geom_edge_link(aes(edge_width = simil*0.5), edge_colour = "#005353", # edge_colour = "cyan4", 
+                               edge_alpha = 0.2,
+                               check_overlap = T, show.legend = F)+
+        ggraph::geom_node_point(aes(size = size_plot*0.5), color = "lightblue", #color = "lightblue", 
+                                show.legend = F, alpha=1.0)+
         ggraph::geom_node_text(aes(label = name, size = size_plot, color = color_num), repel = TRUE,
-                               point.padding = unit(0.2, "lines"), check_overlap = T, show.legend = F) +
-        scale_size(range = c(2, 5))+
+                               point.padding = 1e-06, check_overlap = T, show.legend = F,
+                               segment.alpha=0.5, segment.size=0.2, min.segment.length=0.25,
+                               box.padding=0.175, force=2, max.iter=4000) +
+        # scale_size(range = c(2, 5))+
+        scale_size(range = rev(scale_font))+
         scale_color_manual(values = colors)+
         theme_void()
     
-    rm(simil_df, words_similarity_matrix, lambda_daily_DF, values, brks, intervals, colors, ordered.colors, freq, normedFreq, size)
+    rm(simil_df, words_similarity_matrix, lambda_DF, values, brks, intervals, colors, ordered.colors, freq, normedFreq, size)
     return(plot)
 }
 
@@ -205,33 +264,57 @@ count_quantile <- function(number_of_words){
     return(quant)
 }
 
-plot_topic_correlation <- function(topic_words, words_similarity_matrix, scale_font = c(8, 4), class_num = 6, min_association = 0.4, lambda_daily_DF){
+plot_topic_correlation <- function(topic_words, words_similarity_matrix, 
+                                   scale_font = c(8, 4), class_num = 6, 
+                                   min_association = 0.4, lambda_DF,
+                                   maximum_words_num = 40){
     #' Ploting correlation and importance of words in a particular topic
     set.seed(1234)
     library(classInt)
+    
+    
     
     similarity_df <- as.data.frame.matrix(words_similarity_matrix) %>%
         mutate(col_1 = rownames(.)) %>%
         tidyr::gather(key = "col_2", value = "simil", -col_1) %>%
         mutate(name = col_1)
     
-    values <- lambda_daily_DF[["lambda"]]
+    # values <- lambda_DF[["lambda"]] %>% sqrt()
+    values <- lambda_DF[["lambda_log"]]
     
     # Znajdz breaki
-    brks <- classIntervals(values, n = class_num, style = "jenks") %>% .$brks
+    brks <- classIntervals(values, n = class_num, style = "fisher") %>% .$brks #jenks
     # Znajdz kolejnosc w skali
     intervals <- findInterval(values, brks, all.inside = T)
     # Przypsiz kolory
-    colors <- brewer.pal(9, "YlGnBu")[(10-class_num):9]
-    ordered.colors <- colors[intervals]
-    lambda_daily_DF[["color"]] <- ordered.colors
-    lambda_daily_DF[["color_num"]] <- as.character(intervals)
+    # colors <- brewer.pal(9, "YlGnBu")[(10-class_num):9]
+    colors <- rev(pals::ocean.haline(7))[(8-class_num):7]
+    # colors <- brewer.pal(class_num, "YlGnBu")
+    # colors <- rev(viridis::viridis(7))[(8-class_num):7]
+    ordered_colors <- colors[intervals]
+    lambda_DF[["color"]] <- ordered_colors
+    lambda_DF[["color_num"]] <- as.character(intervals)
+    
+    # Limit number of words to be displayed
+    lambda_topic_DF <- lambda_DF %>%
+        filter(name %in% topic_words)
+    if(length(topic_words) > maximum_words_num){
+        lambda_topic_DF <- lambda_topic_DF %>%
+            top_n(maximum_words_num, lambda)
+        topic_words <- lambda_topic_DF[["name"]]
+        # lambda_DF <- lambda_topic_DF
+    }
+    colors_num <- lambda_topic_DF[["color_num"]] %>% unique() %>% 
+        as.numeric() %>%  base::sort()
+    colors <- colors[colors_num]
+    
     
     # Rozmiar na wykresie
-    freq <- lambda_daily_DF[["lambda_log"]]
+    freq <- lambda_DF[["lambda_log"]]
     normedFreq <-  (freq - min(freq)) / (max(freq) - min(freq))
     size <- (scale_font[1] - scale_font[2]) * normedFreq + scale_font[2]
-    lambda_daily_DF[["size_plot"]] <- size
+    lambda_DF[["size_plot"]] <- size
+    scale_font[2] <- scale_font[2]*0.5
     
     # Plot
     plot <- similarity_df %>%
@@ -249,27 +332,31 @@ plot_topic_correlation <- function(topic_words, words_similarity_matrix, scale_f
         plot <- similarity_df %>%
             filter(col_1 %in% topic_words & col_2 %in% topic_words) %>%
             mutate(simil = NA) %>%
-            igraph::graph_from_data_frame(vertices = lambda_daily_DF %>%
+            igraph::graph_from_data_frame(vertices = lambda_DF %>%
                                               filter(name %in% topic_words))
     } else {
         plot <- plot %>%
             mutate(simil = simil - 0.001) %>%
-            igraph::graph_from_data_frame(vertices = lambda_daily_DF %>%
+            igraph::graph_from_data_frame(vertices = lambda_DF %>%
                                           filter(name %in% topic_words))
     }
     
     plot <- plot %>%
         ggraph::ggraph(layout = "fr", niter = 3000)+
-        ggraph::geom_edge_link(aes(edge_width = simil*1.5), edge_colour = "cyan4", edge_alpha = 0.2,
+        ggraph::geom_edge_link(aes(edge_width = simil*0.5), edge_colour = "#005353", # edge_colour = "cyan4", 
+                               edge_alpha = 0.2,
                                check_overlap = T, show.legend = F)+
-        ggraph::geom_node_point(aes(size = size_plot), color = "lightblue", show.legend = F)+
+        ggraph::geom_node_point(aes(size = size_plot*0.5), color = "lightblue", #color = "lightblue", 
+                                show.legend = F, alpha=1.0)+
         ggraph::geom_node_text(aes(label = name, size = size_plot, color = color_num), repel = TRUE,
-                               point.padding = unit(0.2, "lines"), check_overlap = T, show.legend = F)+
+                               point.padding = 1e-06, check_overlap = T, show.legend = F,
+                               segment.alpha=0.5, segment.size=0.2, min.segment.length=0.25,
+                               box.padding=0.175, force=3, max.iter=4000)+
         scale_size(range = rev(scale_font))+
         scale_color_manual(values = colors)+
         theme_void()
     
-    rm(similarity_df, words_similarity_matrix, lambda_daily_DF, values, brks, intervals, colors, ordered.colors, freq, normedFreq, size)
+    rm(similarity_df, words_similarity_matrix, lambda_DF, values, brks, intervals, colors, ordered.colors, freq, normedFreq, size)
     return(plot)
 }
 

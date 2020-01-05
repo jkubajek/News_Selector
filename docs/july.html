@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Lipiec</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.5/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="site_libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="site_libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="site_libs/selectize-0.12.0/selectize.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141513256-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141513256-3');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Podsumowanie 2019 r.</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Wprowadzenie</a>
+</li>
+<li>
+  <a href="methodology.html">Metodologia</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Podsumowania
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="january.html">Styczeń</a>
+    </li>
+    <li>
+      <a href="february.html">Luty</a>
+    </li>
+    <li>
+      <a href="march.html">Marzec</a>
+    </li>
+    <li>
+      <a href="april.html">Kwiecień</a>
+    </li>
+    <li>
+      <a href="may.html">Maj</a>
+    </li>
+    <li>
+      <a href="june.html">Czerwiec</a>
+    </li>
+    <li>
+      <a href="july.html">Lipiec</a>
+    </li>
+    <li>
+      <a href="august.html">Sierpień</a>
+    </li>
+    <li>
+      <a href="september.html">Wrzesień</a>
+    </li>
+    <li>
+      <a href="october.html">Październik</a>
+    </li>
+    <li>
+      <a href="november.html">Listopad</a>
+    </li>
+    <li>
+      <a href="december.html">Grudzień</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="mailto:j.kubajek@gmail.com">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/jkubajek">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/jakub-kubajek-869945158/">
+    <span class="fa fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Lipiec</h1>
+
+</div>
+
+
+<div id="wstep" class="section level1">
+<h1>Wstęp</h1>
+<p>Opis modelu, wykorzystanego do wygenerowania podsumowania, znajduje się w zakładce <a href="https://jkubajek.github.io/News_Selector/methodology">Metodologia</a>.</p>
+<p>Poszczególne słowa zostały automatycznie pogrupowane w tematy na podstawie informacji o występowaniu w tych samych akapitach i artykułach.</p>
+<p>Na wykresach przedstawiono współwystępowanie poszczególnych słów oraz ich kluczowość. Im czcionka jest większa i posiada ciemniejszą barwę, tym wyższa kluczowość słowa w danym miesiącu. Linie łączące wybrane słowa oznaczają, że <a href="https://towardsdatascience.com/overview-of-text-similarity-metrics-3397c4601f50">podobieństwo cosinusowe</a> między ich embeddingami wynosi co najmniej 0,4. W celu uproszczenia wizualizacji, dla każdego punktu na grafie wybrano maksymalnie dwa połączenia o największym stopniu podobieństwa, które spełniają wskazane kryterium. Podobieństwo cosinusowe wyznaczano za pomocą embeddingów, które są wektorową reprezentacją słów i przechowują informację współwystępowaniu w tych samych akapitach i artykułach. W przypadku grafu, który prezentuje powiązania między słowami ze wszystkich tematów, minimalne podobieństwo wynosi 0,6.</p>
+<p>Na wykresach tematycznych przedstawiono nie więcej niż 40 najistotniejszych słów. Analogicznie, na głównym grafie umieszczono nie więcej niż 200 najistotniejszych słów w danym miesiącu.</p>
+</div>
+<div id="powiazania-miedzy-sowami" class="section level1">
+<h1>Powiązania między słowami<img src="july_files/figure-html/unnamed-chunk-3-1.png" width="1050" style="display: block; margin: auto;" /></h1>
+</div>
+<div id="wybrane-sowa-kluczowe" class="section level1">
+<h1>Wybrane słowa kluczowe</h1>
+<div id="htmlwidget-db9fb76fcf67120b0444" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-db9fb76fcf67120b0444">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"50\" data-max=\"8391\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"235\" data-max=\"11355\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"25\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["Leyen","dera","von","Grodzisk","Białystok","Westerplatte","rekrutacja","Równości","Dawid","Ursula","PSL","Ursuli","tankowiec","lewicowy","kandydatura","koalicja","lek","SLD","start","Timmermansa","blok","absolwent","szkoła","ojciec","Schetyna","lewica","świadczenie","Ormuz","szefowa","jesienny","Fransa","PO","socjalista","Komisji","LGBT","list","ludowiec","miejsce","kąpielisko","Mazowiecka","woda","Wiosna","samodzielny","kontrmanifestant","Marszu","Niemka","specustawa","gimnazjum","policja","egzystencja","sinica","liceum","Piontkowski","uczeń","Europejskiej","Czarzasty","cieśnina","Wojny","rocznik","uran","chłopiec","irański","marsz","frakcja","centrowy","lider","Mazowiecki","programowy","Poszukiwania","parlamentarny","niebieski","stanowisko","plaża","Muzeum","Nawalny","wzbogacać","apteka","europoseł","Hunt","poszukiwać","Koalicji","Grzegorz","Księżyc","upał","uzupełniać","przewodnicząca","Teheran","muzeum","rzucać","obsada","statek","program","KE","Bałkany","przelot","jednostka","Kamysz","Kosiniak","Katowice","dostępność","Zachodnich","Johnson","Obywatelskiej","zgłosić","niezdolność","jedynka","wakacje","zakwalifikować","Platforma","panel","białostocki","Włodzimierz","zaginiony","KO","letni","burza","Iran","wybory","Marsz","partnerski","współtworzyć","niezdolny","butelka","zaginąć","tytoniowy","Platformy","wystartować","formuła","Dulkiewicz","kilkakrotnie","podlaski","wybór","formula","Zełenskiego","Szydło","etap","samorząd","dziecko","numer","kamień","uczestnik","dostać","Timmermans","Biedroń","latko","pływać","średni","Policji","Zieloni","Parlamencie","rodzina","Frans","wybrać","aplikacja","jezioro","Stronnictwa","powstaniec","samorządowiec","partia","technik","Sejmu","PE","Merkel","mężczyzna","policjant","Rodzina","Kuchciński","pobić","Koalicja","zablokować","Obywatelską","pkt","marynarz","Powstania","ustalenie","Hongkong","poszukiwawczy","Europejskim","Razem","Zielona","teren","wiceprzewodnicząca","Koalicję","festiwal","udostępnić","próg","zatrudnić","podatek","Policja","środowisko","dochodowy","ugrupować","brakować","opozycja","ubrać","lot","budować","F","iścić","śląski","nieoficjalny","Adrian","śmiecić","Europejskiego","szeroki","przejąć","pójść","Nowacka","Obywatelska","Dariusz","wznowić","Komenda","Wyszehradzkiej","zjednoczyć","turysta","edukacja","poprawka","zgromadzenie","osoba","Policjanci","informacja","alarmowy","kanał","temperatura","kandydatka","organizm","pokład","runda","komisarz","rodzinny","sobotni","wybuch","tras","Władysław","Zełenski","impreza","znaleźć","koszt","wodny","oferta","załoga","Angel","morski","Parlamentu","telefon","Angela","Kancelaria","Kukiz","klasa","okręt","zdrowie","równość","woj","Lewicy","zwłok","PIT","strażak","województwo","podstawowy","Lider","przychod","chęcić","konserwatywny","Mężczyzna","hasło","utrata","Borys","Polsat","przemoc","praworządność","opozycyjny","Śląska","pójście","alkohol","miejski","Boris","S","kanclerz","fizyczny","pobierać","dziewczynka","przeciw","czynności","wybrzeże","węzeł","znajda","Miejskiej","dyplomacja","Zdrowia","pacjent","wiarygodność","dochód","Warszawski","podwójny","brytyjski","startować","Europejski","umiarkować","Terlecki","szef","rozszerzyć","polityk","starcie","widzieć","odnaleźć","okolica","miejscowość","Ligi","popularny","klimat","limit","Witek","widać","morze","podmiot","złozić","osobowy","koalicyjny","dom","matka","nuklearny","ustalić","pozarządowy","odpad","przekazywać","młoda","uczyć","wolne","elektroniczny","budowa","wzgląd","przysługiwać","autostrada","potwierdzać","papieros","Parlament","wartość","renta","lista","komendant","samodzielnie","zabrać","unijny","służbowy","wizerunek","pociąg","wynikać","wybierać","kandydat","pobliże","szukać","dojść","samolot"],[8391,7997,6883,4674,3151,3026,2632,2423,2405,2353,2132,1963,1911,1866,1792,1687,1596,1492,1488,1478,1365,1358,1342,1294,1275,1254,1253,1208,1193,1184,1174,1156,1050,1045,1021,978,967,953,911,903,872,862,860,853,847,842,821,819,814,801,786,785,776,774,755,745,734,728,724,710,703,699,679,678,645,635,628,625,611,609,585,571,551,521,512,512,511,509,503,484,483,473,465,461,458,456,446,445,439,437,432,428,419,413,393,392,387,383,378,365,360,358,357,356,351,343,340,338,330,329,320,319,319,313,313,311,309,299,297,295,292,291,282,280,275,275,274,274,269,268,268,264,263,260,258,255,254,252,252,250,244,244,243,242,242,242,239,236,234,228,224,224,224,224,223,222,221,220,219,219,218,218,211,207,206,201,199,199,196,194,193,188,186,182,179,179,179,178,178,177,177,168,167,167,165,164,163,163,162,161,160,160,160,159,158,156,156,151,151,149,147,146,146,144,144,142,142,142,141,137,136,135,134,133,133,131,130,126,126,125,124,122,120,119,119,119,119,118,118,118,116,115,114,113,112,110,107,106,105,103,102,100,100,99,99,98,98,98,97,97,95,93,93,92,90,90,90,89,87,87,87,87,86,86,85,85,82,82,81,81,81,80,79,79,79,78,78,77,76,75,75,75,74,73,73,73,71,71,71,71,71,70,70,70,69,68,67,67,67,67,66,66,66,66,65,65,65,65,65,65,64,64,64,64,64,62,62,62,62,62,62,62,61,60,60,60,59,59,58,57,57,57,57,56,56,55,55,54,54,54,54,54,53,53,53,53,52,52,51,51,51,51,50],[2187,2207,2081,982,1807,1272,855,1019,1208,670,3613,468,752,1299,1659,2382,1293,1945,1472,579,1325,701,3556,1805,2240,1065,1895,380,1738,761,403,4947,532,2445,995,3886,666,8181,436,532,2263,1425,804,257,729,256,331,485,5149,414,280,498,366,1561,4336,672,336,410,374,346,1247,986,1264,617,302,2716,466,784,241,1975,371,3808,493,834,245,254,318,1082,240,1490,1607,1739,300,395,395,1004,595,486,449,342,889,4174,1435,325,294,1280,807,808,1084,295,236,697,1847,1815,345,435,441,288,747,280,246,532,239,1134,3738,475,1576,6834,386,363,236,258,334,502,242,1394,543,348,421,278,447,1237,243,267,1008,1002,1156,4939,820,400,1142,1367,404,882,1724,282,1261,1048,275,428,3366,275,1628,411,354,306,302,453,4093,301,2648,1033,794,3452,2197,359,662,517,820,672,353,449,279,326,1594,418,265,474,718,454,2371,241,298,359,494,430,760,1343,792,1999,284,1417,537,2238,409,1041,1195,397,329,645,445,339,333,1179,940,894,693,251,747,571,463,893,242,302,677,1032,628,561,11355,599,4422,272,380,656,466,369,603,273,631,577,561,911,555,619,253,595,2659,1166,341,545,432,286,505,990,723,262,282,1179,530,507,1835,296,885,603,604,341,711,1453,875,372,329,369,324,602,718,441,375,363,803,646,610,270,246,668,807,274,657,485,415,282,604,710,918,324,261,401,268,724,330,632,264,717,409,261,1342,599,326,370,259,5998,418,4912,495,1360,600,819,1016,294,410,456,310,249,777,378,604,716,656,286,1852,880,542,1370,315,423,607,802,360,634,398,1514,1936,335,397,508,235,269,1606,425,508,353,242,704,1638,348,462,499,3159,514,2889,723,647,3087,1469],[1,1,1,2,3,4,5,3,2,1,6,1,7,6,1,6,8,6,6,1,6,5,5,2,6,6,9,7,1,6,1,6,1,1,3,6,6,5,10,2,10,6,9,3,3,1,4,5,2,9,10,5,5,5,1,6,7,4,5,7,2,7,3,1,6,6,2,6,2,6,2,1,10,4,11,7,8,1,7,2,6,6,12,13,9,1,7,4,3,1,7,9,1,14,15,7,6,6,5,8,14,16,6,2,9,6,10,5,6,6,3,6,2,6,2,5,7,6,3,6,6,9,3,2,17,6,6,6,4,3,3,1,6,18,1,5,5,9,2,3,3,5,1,6,2,7,5,2,6,1,9,1,5,19,10,6,20,6,6,5,15,1,1,2,2,9,15,3,6,3,6,21,7,20,2,22,2,1,6,6,4,1,6,23,15,6,1,9,2,3,9,6,8,6,2,15,6,23,6,5,2,6,10,1,6,7,6,6,6,5,7,2,1,6,10,5,9,3,9,2,2,2,24,13,1,10,15,25,1,9,3,20,2,6,18,23,2,15,10,24,7,1,10,1,2,1,15,6,5,7,8,3,5,6,2,9,5,5,5,6,9,6,6,2,3,2,9,24,3,1,6,5,6,10,11,16,23,1,9,9,2,1,2,10,2,5,2,1,8,8,6,9,20,5,7,6,1,6,17,1,9,6,6,2,2,2,3,25,8,13,7,2,22,10,17,9,15,6,2,2,7,2,6,10,2,9,5,5,9,4,9,9,2,2,17,1,1,9,6,2,6,2,1,15,3,2,2,5,1,7,2,3,15]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Słowo<\/th>\n      <th>Kluczowość<\/th>\n      <th>Liczba wystąpień<\/th>\n      <th>Temat<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="lista-tematow" class="section level1">
+<h1>Lista tematów</h1>
+<div id="temat-1" class="section level2">
+<h2>Temat 1</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-1.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-c7a3e97ea92b47b0d593" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c7a3e97ea92b47b0d593">{"x":{"filter":"none","data":[["We wtorek Parlament Europejski zdecydował o wyborze Ursuli von der Leyen na stanowisko przewodniczącej Komisji Europejskiej.","Nowa przewodnicząca Komisji Europejskiej Ursula von der Leyen to nie tylko pierwsza kobieta na tym stanowisku, ale też pierwsza szefowa KE, której nie powołała \"wielka koalicja\" socjalistów i chadeków w Parlamencie Europejskim - piszą \"Lidove Noviny\"."," Praworządność to wartość uniwersalna, która dotyczy każdego z nas - powiedziała w przemówieniu do Parlamentu Europejskiego kandydatka na szefową Komisji Europejskiej, Ursula von der Leyen.","Ursula von der Leyen została nominowana na stanowisko szefa Komisji Europejskiej jednogłośnie, przy jednym głosie wstrzymującym się - poinformowała dziennikarzy kanclerz Niemiec Angela Merkel.","Von der Leyen zapowiedziała też podczas spotkania z frakcją Odnowić Europę, że pierwszym wiceprzewodniczącym jej KE zostanie Frans Timmermans, który był kandydatem wiodącym socjalistów na stanowisko przewodniczącego Komisji.","Pytany o rozczarowanie, które we wtorek wyrażali przedstawiciele rodziny socjalistycznej, że to nie jej kandydat Frans Timmermans ostatecznie uzyskał poparcie szefów państw i rządów, odparł, iż nie spodziewa się \"sytuacji kryzysowej\" podczas głosowania w Parlamencie Europejskim, który musi jeszcze zatwierdzić m.in. kandydaturę Ursuli von der Leyen na przewodniczącą KE."," Ursula von der Leyen została wybrana na stanowisko szefowej Komisji Europejskiej dzięki głosom Prawa i Sprawiedliwości - powiedział w Parlamencie Europejskim w Strasburgu szef frakcji EKR Ryszard Legutko (PiS). - Bez głosów prawicy, w tym PiS, ten wybór nie byłby możliwy - ocenił wiceminister spraw zagranicznych Konrad Szymański.","Przewodniczący Parlamentu Europejskiego David Sassoli i szefowa unijnej dyplomacji Federica Mogherini pogratulowali Ursuli von der Leyen wyboru na nową szefową KE.","Grupa Socjalistów i Demokratów ogłosiła poparcie dla kandydatury Ursuli von der Leyen na stanowisko szefowej KE, ale około 1/3 jej europosłów będzie głosowało przeciw - wynika z nieoficjalnych informacji PAP ze źródeł w PE.","Przedstawiciele Państw Grupy Wyszehradzkiej mówią otwarcie, że kandydaturę Ursuli von der Leyen są gotowi zaakceptować  zupełnie inaczej niż Fransa Timmermansa, obecnego wiceprzewodniczącego Komisji Europejskiej.","Ursula von der Leyen, którą PiS niedawno poparło jako kandydatkę na szefową Komisji Europejskiej, zapowiedziała we wtorek podczas debaty w Parlamencie Europejskim, że nie dopuści do kompromisów, jeśli chodzi o poszanowanie zasad praworządności. - Europejczycy bardzo mocno walczyli o wolność i niepodległość.","Grupa Odnowić Europę, która zrzesza w Parlamencie Europejskim liberałów, postawiła kandydatce na szefową Komisji Europejskiej Ursuli von der Leyen warunki, od spełnienia których uzależnia poparcie dla niej.","Niezależnie od wyniku wtorkowego głosowania w Parlamencie Europejskim, w środę zrezygnuję z funkcji ministra obrony Niemiec - ogłosiła kandydatka na przewodniczącą Komisji Europejskiej Ursula von der Leyen.","W trakcie szczytu szef rządu rozmawiał również z kanclerz Niemiec Angelą Merkel, ale nie jest jasne, na ile rozmowy te dotyczyły pozycji Polski w przyszłej KE, a na ile poparcia przez szefa rządu von der Leyen i innych kandydatów na kluczowe stanowiska unijne.","Po uzyskaniu przez kandydatów pozytywnej oceny europosłów, Ursula von der Leyen pojawi się jeszcze raz w Parlamencie Europejskim jesienią, kiedy przedstawi cały skład Komisji Europejskiej i ponownie będzie musiała uzyskać poparcie europosłów.","Bardzo ostro przeciw się wypowiadają Zieloni, bardzo ostro przeciw się wypowiadają socjaldemokraci - podkreślał we \"Wstajesz i wiesz\" w TVN24 publicysta Michał Broniatowski, odnosząc się do kandydatury Ursuli von der Leyen na stanowisko szefowej Komisji Europejskiej.","W czwartek premier Mateusz Morawiecki poinformował po spotkaniu z nową szefową KE Ursulą von der Leyen, że polskim kandydatem na stanowisko komisarza w Unii Europejskiej jest szef gabinetu prezydenta Krzysztof Szczerski.","Szczyt UE nominował Niemkę Ursulę von der Leyen na szefową Komisji Europejskiej, a premiera Belgii Charlesa Michela wybrał na przewodniczącego Rady Europejskiej.Francuzka Christine Lagarde ma zostać prezesem Europejskiego Banku Centralnego, a Hiszpan Josep Borrell szefem unijnej dyplomacji.",": Czy odrzucenie kandydatury Beaty Szydło będzie miało wpływ na decyzję EKR, jeśli chodzi o wtorkowe głosowanie nad kandydaturą Ursuli von der Leyen na szefową Komisji Europejskiej?","zaznaczył, że o tym, w jakiej mierze obsada unijnych stanowisk odzwierciedla preferencje wyborców, a w jakiej jest skutkiem układów politycznych elit, będzie można powiedzieć po głosowaniu nad kandydaturą Ursuli von der Leyen. - To będzie od tego zależeć, ale niepisana umowa była taka, by to przedstawiciele największych ugrupowań zaproponowali kandydatów na szefa KE i spośród nich wybrano tego, który jest najlepszy."],["<a href='https://www.polsatnews.pl/wiadomosc/2019-07-16/wydarzenia-i-opinie-dworczyk-kierwinski-sawicki-i-waszczykowski-transmisja-od-godz-1915/'>Polsat News<\/a>","<a href='https://fakty.interia.pl/raporty/raport-ue-przed-wyborami-europejskimi/artykuly/news-ursula-von-der-leyen-szefowa-ke-komentarze-europejskiej-pras,nId,3100036'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/europarlament-zajmie-sie-kandydatura-ursuli-von-der-leyen,953177.html'>TVN24<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-koniec-szczytu-przywodcow-ue-jest-porozumienie-ws-obsady-klu,nId,3074711'>RMF 24<\/a>","<a href='https://www.tvp.info/43437010/von-der-leyen-stworzyc-mechanizm-utrzymania-praworzadnosci-w-panstwach-ue'>TVP INFO<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C477974%2Chalicki-bedziemy-bronic-praworzadnosci-w-polsce-razem-z-nowa-przewodniczaca'>PAP<\/a>","<a href='http://www.polskieradio24.pl/7/129/Artykul/2343043,Szymon-Szynkowski-vel-Sek-Ursula-von-der-Leyen-moze-odbudowac-zaufanie-do-KE'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/130/4428/Artykul/2343933,Z-Krasnodebski-o-wyborze-szefowej-KE-nasze-decyzje-byly-kluczowe'>Polskie Radio<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C484321%2Csd-popiera-von-der-leyen-ale-grupa-podzielona.html'>PAP<\/a>","<a href='http://www.polskieradio24.pl/7/4399/Artykul/2335275,Kulisy-szczytu-UE-Jacek-Zalek-nasz-region-okazal-podmiotowosc-i-swoja-sile'>Polskie Radio<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24999950,jaki-pyta-sie-von-der-leyen-o-zakonczenie-zenujacych-politycznych.html'>Gazeta.pl<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-11/liberalowie-stawiaja-von-der-leyen-warunki-sankcje-za-lamanie-praworzadnosci/'>Polsat News<\/a>","<a href='https://fakty.interia.pl/raporty/raport-ue-przed-wyborami-europejskimi/artykuly/news-von-der-leyen-rezygnuje-funkcji-ministra-obrony-rfn,nId,3096829'>Interia<\/a>","<a href='https://fakty.interia.pl/raporty/raport-ue-przed-wyborami-europejskimi/artykuly/news-nieoficjalnie-polska-targuje-sie-o-dobra-teke-w-ke,nId,3074707'>Interia<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2343007,Szef-MSZ-wybor-Ursuli-von-der-Leyen-dobry-dla-relacji-transatlantyckich'>Polskie Radio<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/ursula-von-der-leyen-na-szefowa-komisji-europejskiej-komentarze-ekspertow,949625.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/polska/news-szczerski-to-ukoronowanie-mojej-drogi-naukowej,nId,3113916'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/szczyt-ue-w-brukseli-media-angela-merkel-potrojnie-upokorzona,949631.html'>TVN24<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C484204%2Ckaczynski-do-wyborow-propozycja-porozumienia-konczacego-wojne-na-polskiej'>PAP<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2340452,Sankcje-za-lamanie-praworzadnosci-Socjalisci-stawiaja-warunki-Ursuli-von-der-Leyen'>Polskie Radio<\/a>"],["07-16","07-17","07-16","07-02","07-10","07-03","07-18","07-19","07-16","07-03","07-16","07-11","07-15","07-02","07-18","07-03","07-25","07-03","07-16","07-12"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-2" class="section level2">
+<h2>Temat 2</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-2.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-a9db5779c8b132017ea7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a9db5779c8b132017ea7">{"x":{"filter":"none","data":[["Z informacji policji wynika, że mężczyzna zabrał Dawida z domu w Grodzisku Mazowieckim około godz.","Po 11 dniach poszukiwań policja znalazła ciało 5-letniego chłopca w okolicach autostrady A2, przy węźle Pruszków, między Warszawą a Grodziskiem Mazowieckim.","Policja nadal apeluje o kontakt do tych, którzy na ustalonej przez policję trasie między Grodziskiem Mazowieckim a Lotniskiem na Okęciu  szczególnie w środę od godz. 17 do godz. 21  widzieli chłopca, jego ojca lub szarą Skodę Fabię o numerze rejestracyjnym WGM 01K9, którą mężczyzna jeździł.","Poszukiwania zaginionego Dawida rozpoczęły się o północy w środę, kiedy utratę kontaktu z nim i jego ojcem zgłosiła rodzina. 5-letni chłopiec został zabrany przez ojca z Grodziska Mazowieckiego około godz. 17 w środę.","Z informacji policji wynika, że właśnie na tej trasie logował się telefon ojca chłopca.","Wszelkie zgłoszenia na temat zaginionego Dawida, nawet anonimowe, można przekazywać policjantom z Komendy Powiatowej Policji w Grodzisku Mazowieckim, tel.","We wtorek policja przedstawiła dotychczasowe ustalenia w sprawie zaginięcia 5-letniego Dawida z Grodziska Mazowieckiego.","W środę przed 21:00 policjanci dostali zgłoszenie o śmierci mężczyzny, a około północy matka Dawida - zaniepokojona, że ojciec nie odwiózł go do domu - zaalarmowała policję.","Po całym dniu poszukiwań, odnaleźliśmy 3-letniego chłopca, którego ojciec zabrał z domu bez zgody matki.","W sobotę w okolicach autostrady A2 policja odnalazła ciało chłopca. - Z prawdopodobieństwem graniczącym z pewnością jesteśmy przekonani, że to pięcioletni Dawid - powiedział w sobotę po godzinie 16 Mariusz Mrozek z Komendy Stołecznej Policji.","Komenda Stołeczna Policji na konferencji prasowej poinformowała, że policjanci prowadzący poszukiwania 5-letniego Dawida Żukowskiego natrafili na ciało dziecka na trasie pomiędzy Warszawą a Grodziskiem Mazowieckim przy trasie A2.","Na briefingu prasowym przekazano, że ubrania zmarłego dziecka oraz inne znaki wskazują na to, że niemal na pewno są to zwłoki poszukiwanego 5-latka.  Z prawdopodobieństwem, a nawet z pewnością możemy stwierdzić, że znaleźliśmy ciało 5-letniego Dawida  powiedział na spotkaniu z dziennikarzami Mariusz Mrozek, rzecznik prasowy komendanta stołecznego policji.  Na razie nie będziemy mówić o szczegółach, w jakich chłopiec zmarł.","Warszawska policja zdecydowała opublikować wizerunek ojca zaginionego 5-latka z Grodziska Mazowieckiego."," Mamy informacje od świadków, że na tym odcinku widziano samochód ojca 5-letniego Dawida - powiedział w piątek przed południem oficer policji, który brał udział poszukiwaniach.","W środę wieczorem chłopiec był po opieką ojca, chwilę przed godz. 21 policja otrzymała zgłoszenie o śmierci mężczyzny. 32-latek rzucił się pod koła pociągu.","Po pięciu dniach policja przerwała poszukiwania 5-latka z Grodziska Mazowieckiego, ale swoje własne śledztwo prowadzą koledzy ojca chłopca, Pawła Ż.",", policja szczegółowo przeszukuje \"teren w stronę zjazdu z autostrady w kierunku Grodziska Mazowieckiego\". - Przeszukujemy wszelkie pustostany, pola, łąki i wszystkie tereny na trasie przejazdu ojca Dawida - wskazał policjant.","Jak się okazało, około 3 godziny przed zgłoszeniem zaginięcia, 32-letni ojciec został potrącony przez pociąg niedaleko stacji kolejowej Grodzisk Mazowiecki.","Od zakończenia w niedzielę poszukiwań przez pododdziały zwarte z oddziału prewencji, w wyznaczonych przez policję sektorach w Grodzisku i okolicy, szczegółowej analizie poddawane są zebrane informacje w sprawie zaginięcia chłopca.","Od północy z środy na czwartek policja prowadzi intensywne poszukiwania zaginionego 5-letniego Dawida."],["<a href='https://fakty.interia.pl/polska/news-rzeczpospolita-w-sprawie-5-letniego-dawida-siegnieto-po-meto,nId,3098248'>Interia<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Dawid-Zukowski-nie-zyje.-Policja-znalazla-cialo.-Wskazuje-na-to-ubior'>Radio ZET<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Dawid-Zukowski-poszukiwany.-WP-dotarla-do-kolegow-jego-ojca'>Radio ZET<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-16/nowe-informacje-ws-poszukiwan-5-letniego-dawida-transmisja-briefingu-od-godz-1000/'>Polsat News<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-12/dysponujemy-paszportem-5-letniego-dawida-watek-wschodniej-granicy-jest-malo-prawdopodobny/'>Polsat News<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C482437%2Cpolicja-publikuje-wizerunek-ojca-zaginionego-pieciolatka-ponawia-apel-o'>PAP<\/a>","<a href='https://fakty.interia.pl/polska/news-poszukiwania-5-letniego-dawida-zukowskiego-nowe-informacje,nId,3098295'>Interia<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-11/ta-skoda-odjechal-5-letni-dawid-to-moze-byc-klucz-do-ustalenia-gdzie-sie-znajduje/'>Polsat News<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-22/wyszla-z-domu-po-klotni-z-partnerem-gdy-wrocila-okazalo-sie-ze-porwal-jej-dziecko/'>Polsat News<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/profesor-brunon-holyst-o-ojcu-piecioletniego-dawida,954503.html'>TVN24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,25013721,rmf-fm-cialo-5-letniego-dawida-znaleziono-w-zaroslach-obok.html'>Gazeta.pl<\/a>","<a href='https://www.wprost.pl/kraj/10235564/policja-znalazla-cialo-dziecka-to-prawdopodobnie-5-letni-dawid.html'>Wprost<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Dawid-Zukowski-poszukiwany.-Policja-publikuje-wizerunek-ojca-5-latka.-Nowe-fakty'>Radio ZET<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/poszukiwania-5-letniego-dawida-dzien-po-dniu,954489.html'>TVN24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24990342,5-letniego-dawida-szukaja-setki-zolnierzy-i-policjantow-w-piatek.html'>Gazeta.pl<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Dawid-Zukowski-zaginiony.-Koledzy-jego-ojca-Pawla-Z.-prowadza-prywatne-sledztwo'>Radio ZET<\/a>","<a href='http://www.polskieradio24.pl/5/3/Artykul/2340802,Poszukiwania-Dawida-Funkcjonariusze-przeczesywali-teren-wzdluz-autostrady'>Polskie Radio<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24987571,poszukiwania-5-letniego-dawida-wspieraja-wojska-obrony-terytorialnej.html'>Gazeta.pl<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2345289,Smierc-Grazyny-Kuliszewskiej-Prokuratura-czeka-na-ekstradycje-meza-kobiety'>Polskie Radio<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24994393,poszukiwania-5-letniego-dawida-policja-zmienia-taktyke-skupimy.html'>Gazeta.pl<\/a>"],["07-16","07-20","07-15","07-16","07-12","07-12","07-16","07-11","07-22","07-20","07-21","07-20","07-12","07-20","07-13","07-15","07-13","07-12","07-23","07-15"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-3" class="section level2">
+<h2>Temat 3</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-3.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-ba3017cf1cfaa7c2b6ff" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ba3017cf1cfaa7c2b6ff">{"x":{"filter":"none","data":[["Podczas sobotniego Marszu Równości w Białymstoku kontrmanifestanci obrzucili uczestników marszu kamieniami, jajkami, petardami i butelkami.","W sobotę pod hasłem \"Białystok domem dla wszystkich\" ulicami tego miasta przeszedł pierwszy Marsz Równości, który kilkakrotnie próbowali zablokować kontrmanifestanci, w tym przedstawiciele środowisk kibicowskich.","Podczas Marszu Równości w Białymstoku doszło do starć kontrdemonstrantów z policją i przemocy wobec uczestników zgromadzenia.","Zanim doszło do zamieszek, kontrmanifestanci próbowali powstrzymać Marsz Równości, zgłaszając równolegle kilka innych zgromadzeń w centrum Białegostoku.","Natomiast w sobotę przeszedł marsz równości w Białymstoku, który był zakłócany przez kontrmanifestantów.","Kosicki odniósł się na konferencji prasowej do sobotniego Marszu Równości w Białymstoku i potępił chuligańskie zachowania, do jakich doszło w trakcie trwania marszu.","We wtorek podlaska policja opublikowała kolejne wizerunki osób, które blokowały trasę Marszu Równości i są podejrzewane o pobicie uczestników marszu.","Zachęcali oni do składania przed kościołem \"podpisów pod protestem przeciwko marszowi środowisk LGBT w Białymstoku\" i zapraszali na Piknik Rodzinny pod patronatem arcybiskupa Tadeusza Wojdy, metropolity białostockiego, który odbył się w sobotę, w tym samym czasie co Marsz Równości.","Metropolita białostocki, ksiądz arcybiskup dr Tadeusz Wojda, skomentował wydarzenia, do których doszło podczas sobotniego Marszu Równości w Białymstoku.","\"Białystok wolny od pedałów i \"zakaz pedałowania  takie hasła w stronę uczestników Marszu Równości wykrzykiwał w minioną sobotę pedagog z jednej z białostockich podstawówek.","Uczestnicy sobotniego (20 lipca) Marszu Równości w Białymstoku zostali zaatakowani przez środowiska kibicowskie i narodowe.","Według części komentatorów było ono skierowane do agresywnych uczestników kontrmanifestacji, którzy zaatakowali sobotni Marsz Równości w Białymstoku.","\"Warszawa przeciw przemocy: Solidarność z Białymstokiem\" - pod takim hasłem odbywa się w stolicy manifestacja, która ma być odpowiedzią na ataki skierowane przeciwko uczestnikom \"Marszu Równości\" tydzień temu.","Jak mówili jej uczestnicy, chcą pokazać swoje wsparcie dla środowisk LGBT i uczestników zeszłotygodniowego marszu w Białymstoku.","Do pobicia doszło przed Pierwszym Marszem Równości, który w sobotę odbył się w Białymstoku.","Jeszcze przed Marszu Równości dochodziło do utarczek słownych między jego uczestnikami a kontrmanifestantami ze środowisk kibiców.","Przypomnijmy, że w sobotę uczestnicy Marszu Równości w Białymstoku spotkali się z agresją kontrmanifestantów i przeciwników promocji LGBT.","Protest ugrupowań lewicowych pod hasłem \"Polska przeciw przemocy\" organizowany jest przez Lewicę w związku z wydarzeniami, do jakich doszło w Białymstoku w sobotę podczas Marszu Równości.","Podkreślono, że \"źródłem poważnego zaniepokojenia Rzecznika jest widoczny na nagraniach prezentowanych w mediach i dostępnych w internecie poziom agresji kierowanej przez osoby usiłujące zablokować Marsz Równości wobec jego uczestników, w tym przypadki pobicia uczestników marszu, rzucania w nich oraz w policjantów różnymi przedmiotami, wykrzykiwania obraźliwych i nawołujących do nienawiści haseł\".","Agnieszka Ścigaj (Kukiz15) mówiła, że jeżeli na zgromadzeniach publicznych, takich jak Marsz Równości w Białymstoku jest \"jakakolwiek przemoc, to trzeba reagować\"."],["<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,25026871,marsz-rownosci-w-bialymstoku-policja-zidentyfikowala-juz-92.html'>Gazeta.pl<\/a>","<a href='http://www.polskieradio24.pl/130/8249/Artykul/2347418,LGBT-i-ideologia-Czy-czeka-nas-rewolucja-obyczajowa-1968-roku'>Polskie Radio<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,25016288,elzbieta-witek-ponownie-potepila-ataki-na-marszu-rownosci-atakujacy.html'>Gazeta.pl<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/adam-t-prezes-stowarzyszenia-kibicow-jagiellonii-bialystok-z-powaznymi-zarzutami,957254.html'>TVN24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-23/karnowski-rzad-dopuscil-do-tego-ze-media-z-nim-zwiazane-wzbudzaly-nienawisc-wobec-jednej-z-grup/'>Polsat News<\/a>","<a href='https://www.tvp.info/43607171/marszalek-podlaskiego-zloze-zawiadomienie-do-prokuratury-na-prezydenta-bialegostoku'>TVP INFO<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/marsz-rownosci-w-bialymstoku-92-osoby-rozpoznane-policja-publikuje-wizerunki-kolejnych-osob,955394.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/bialystok-parafia-dziekowala-za-obrone-wartosci-chrzescijanskich-teraz-tlumaczy,954799.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/polska/news-metropolita-bialostocki-zabral-glos-ws-wydarzen-podczas-mars,nId,3108655'>Interia<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Marsz-Rownosci-Bialystok.-Pedagog-szkolny-wsrod-atakujacych-parade'>Radio ZET<\/a>","<a href='https://fakty.interia.pl/polska/news-nie-milkna-echa-zajsc-w-bialymstoku,nId,3106919'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,25017798,marsz-rownosci-w-bialymstoku-parafia-dziekowala-za-obrone.html'>Gazeta.pl<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-27/warszawa-przeciwko-przemocy-w-bialymstoku-manifestacja-przed-palacem-kultury-i-nauki/'>Polsat News<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-manifestacja-warszawa-przeciw-przemocy-solidarni-z-bialymsto,nId,3117438'>RMF 24<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Marsz-Rownosci-w-Bialymstoku.-Sprawca-pobicia-14-latka-zatrzymany'>Radio ZET<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C486261%2Cpierwszy-marsz-rownosci-w-bialymstoku.html'>PAP<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Marsz-Rownosci-Bialystok-2019.-Policja-szuka-kolejnych-osob-ZDJECIA'>Radio ZET<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-24/opozycja-parlamentarna-nie-pojedzie-na-marsz-lewicy-w-bialymstoku-upolitycznienie/'>Polsat News<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/zamieszki-podczas-marszu-rownosci-w-bialymstoku-reakcja-rpo,954880.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/o-marszach-przeciw-przemocy-i-wydarzeniach-w-bialymtoku-komentarze-w-lawie-politykow,956451.html'>TVN24<\/a>"],["07-25","07-28","07-22","07-31","07-23","07-22","07-25","07-22","07-22","07-26","07-21","07-22","07-27","07-27","07-22","07-20","07-24","07-24","07-22","07-28"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-4" class="section level2">
+<h2>Temat 4</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-4.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-023cfc89dd7579b2f452" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-023cfc89dd7579b2f452">{"x":{"filter":"none","data":[["Usprawnienie budowy Muzeum Westerplatte i Wojny 1939 w Gdańsku zakłada specustawa ws.","Muzeum Westerplatte ma w intencji jej autorów usprawnić budowę tego plenerowego muzeum.","Wiceminister zaprosił Aleksandrę Dulkiewicz na uroczystość wmurowania kamienia węgielnego pod budowę Muzeum Westerplatte i Wojny Obronnej 1939, która odbędzie się 1 września na terenie półwyspu Westerplatte, przy elektrowni, oryginalnym budynku z 1939 roku.","W Sejmie odbyło się pierwsze czytanie projektu specustawy ws. budowy Muzeum Westerplatte i Wojny 1939. - W interesie Polski i świata jest to, żeby wspólnie zbudować muzeum - ocenił wiceminister kultury Jarosław Sellin.","Trwa wzmożona dyskusja nad rządowym projektem budowy muzeum Westerplatte i Wojny 1939 roku.","Westerplatte, która ma ułatwić administrowanie tym terenem i umożliwić szybkie zagospodarowanie go w celu budowy tam muzeum.","Rzecznik rządu pytany był też o protesty przeciwko specustawie dotyczącej budowy muzeum na Westerplatte.","To będzie zagadnienie dla komitetu honorowego Muzeum Westerplatte i Wojny Roku 1939 i dla przyszłych ciał doradczych muzeum\" - tłumaczył.","Na mocy ustawy teren Westerplatte ma zostać przekazany Skarbowi Państwa pod planowaną budowę muzeum.","Aleksandra Dulkiewicz mówiła w zeszłym tygodniu na konferencji prasowej, że po uchwaleniu specustawy muzeum, które zarządza częścią terenu na Westerplatte, zostanie \"wywłaszczone na rzecz innego muzeum\".","Sellin, odnosząc się do apelu Dulkiewicz, powiedział, że \"odnotował w ubiegłym tygodniu informację o tym, że prezydent jest gotowy w miarę szybko podpisać ustawę o budowie Muzeum Westerplatte i Wojny Obronnej 1939\".","Dodał, że kierownictwo w pracach nad Muzeum Westerplatte i Wojny 1939 chce się też konsultować z międzynarodowym forum muzeów pól bitewnych.","Jednym z głównych celów na najbliższe lata jest dla ministerstwa kultury, a także dla rządu, budowa Muzeum Westerplatte i Wojny Obronnej 1939.","Senat wniósł w piątek poprawki do specustawy ws. budowy Muzeum Westerplatte; mają one charakter redakcyjny i dostosowujący ustawę do lokalnych realiów.","Po tym, jak Sejm przyjął poprawki Senatu dotyczące kontrowersyjnej specustawy dotyczącej budowy Muzeum Westerplatte, Aleksandra Dulkiewicz wysłała list...","Podkreślił też, że przedstawiana m.in. przez niego koncepcja Muzeum Westerplatte i Wojny 1939 jest otwarta na dyskusję.","Tymczasem Muzeum II Wojny Światowej już zaczęło organizować wycieczki na Westerplatte."," Nie wykluczam, że miasto Gdańsk będzie nadal właścicielem terenu kopca i stojącego na nim Pomnika Obrońców Wybrzeża  powiedział poseł PiS Kazimierz Smoliński, współautor specustawy dotyczącej budowy na terenie Westerplatte muzeum plenerowego."],["<a href='https://wiadomosci.radiozet.pl/Polska/Polityka/Sejm-przyjal-specustawe-ws.-Westerplatte'>Radio ZET<\/a>","<a href='http://www.polskieradio24.pl/7/473/Artykul/2340252,Jan-Zaryn-o-Muzeum-Westerplatte-panstwo-polskie-musi-wziac-sprawy-w-swoje-rece'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2345784,Blazej-Spychalski-samorzad-Gdanska-przez-30-lat-nie-zbudowal-muzeum'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/7/473/Artykul/2335708,Spor-o-Westerplatte-Piotr-Semka-to-miejsce-stalo-sie-polem-walki-politycznej'>Polskie Radio<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Polityka/Sejm-Sporu-o-muzeum-na-Westerplatte-ciag-dalszy.-PO-KO-chce-odrzucenia-projektu-rzadu-PiS'>Radio ZET<\/a>","<a href='http://www.polskieradio24.pl/9/300/Artykul/2336835,Sejm-przyjal-specustawe-ws-Westerplatte-Komentarze-politykow'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2345280,Po-marszu-w-Bialymstoku-Bedzie-budowanie-martyrologii-LGBT'>Polskie Radio<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C480434%2Csmolinski-bedzie-kilka-poprawek-klubu-pis-do-specustawy-ws-westerplatte'>PAP<\/a>","<a href='https://www.wprost.pl/kraj/10236319/transparenty-wokol-koszar-interweniowala-policja-westerplatte-nie-jest-na-sprzedaz.html'>Wprost<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2348802,Kolejna-prowokacja-Radni-PiS-o-swietowaniu-1-wrzesnia-w-Gdansku'>Polskie Radio<\/a>","<a href='https://fakty.interia.pl/polska/news-sellin-za-kilka-lat-prezydent-dulkiewicz-bedzie-nam-dziekowa,nId,3105467'>Interia<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C480434%2Csmolinski-bedzie-kilka-poprawek-klubu-pis-do-specustawy-ws-westerplatte'>PAP<\/a>","<a href='http://www.polskieradio24.pl/130/5925/Artykul/2348794,A-Majewski-A-Dulkiewicz-mowi-to-czego-oczekuja-srodowiska-ktore-jej-sprzyjaja'>Polskie Radio<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-senat-wniosl-poprawki-do-specustawy-ws-budowy-muzeum-westerp,nId,3092062'>RMF 24<\/a>","<a href='https://www.wprost.pl/kraj/10235655/dulkiewicz-napisala-list-do-prezydenta-dudy-chodzi-o-westerplatte.html'>Wprost<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-senacka-komisja-kultury-przyjela-specustawe-o-westerplatte,nId,3086540'>RMF 24<\/a>","<a href='https://tvn24.pl/pomorze,42/gdansk-obywatele-rp-protestuja-w-sprawie-specustawy,952572.html'>TVN24<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2341013,Specustawa-dot-Westerplatte-Pomnik-Obroncow-Wybrzeza-moze-zostac-w-rekach-miasta'>Polskie Radio<\/a>"],["07-04","07-12","07-24","07-04","07-03","07-06","07-23","07-08","07-23","07-31","07-20","07-08","07-31","07-12","07-21","07-09","07-13","07-13"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-5" class="section level2">
+<h2>Temat 5</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-5.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-3c340dbf5579fe42c729" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3c340dbf5579fe42c729">{"x":{"filter":"none","data":[["Z powodu występowania podwójnego rocznika (absolwenci gimnazjów oraz 8 klas szkoły podstawowej) wielu uczniom nie udało się uzyskać miejsc w szkołach średnich.","W woj. śląskim jest w tym roku 79 tys. 186 absolwentów gimnazjów i szkół podstawowych, którzy rozpoczynają we wrześniu kolejny etap edukacji.","\"Tak jak w poprzednich latach, uczniowie znajdą miejsce w szkołach średnich\" - zadeklarował w środę minister edukacji Dariusz Piontkowski."," Ponad tysiąc wolnych miejsc czeka na uczniów w drugim etapie rekrutacji do kieleckich szkół średnich; dostać się można jeszcze zarówno do szkół branżowych i techników, a także do liceów - poinformował w czwartek wiceprezydent Marcin Różycki.","Dodał, że z informacji od samorządów wynika, iż miejsc jest zdecydowanie więcej niż absolwentów gimnazjów i szkół podstawowych. - Po pierwszym etapie rekrutacji, z tych pierwszych wyników, które mamy widać wyraźnie, że liczba miejsc wolnych do drugiego etapu rekrutacji jest zdecydowani większa niż liczba uczniów, którzy nie znaleźli miejsca w tych wybranych przez siebie szkołach.","Dane te mogą jednak ulec zmianie w skali całej Polski  do 24 lipca absolwenci gimnazjów i szkół podstawowych, którzy zakwalifikowali się do szkół średnich, mogą potwierdzić swój wybór lub zmienić zdanie. 25 lipca placówki edukacyjne ogłoszą listy przyjętych, dokładny wykaz wolnych miejsc i wtedy też rozpocznie się drugi etap rekrutacji uzupełniającej.","Do środy kandydaci zakwalifikowani mieli potwierdzić wolę nauki w wybranej szkole, dzięki czemu w czwartek przed południem na portalu rekrutacyjnym można było opublikować listę wolnych miejsc w poszczególnych klasach z podziałem na absolwentów szkół podstawowych i liceów.","W zakończonym we wtorek pierwszym naborze w woj. łódzkim z ponad 44 tys. uczniów aplikujących do szkół średnich do wybranych przez siebie placówek nie zakwalifikowało się 1572 absolwentów, z czego 828 ukończyło gimnazja, a 744 podstawówki.","Nowakowski podkreślił, że dla ponad 4,5 tys. absolwentów podstawówek i gimnazjów, biorących tam udział w rekrutacji przygotowano aż 6,2 tys. miejsc w nowych szkołach, w tym w liceach i technikach.","Minister edukacji Dariusz Piontkowski poinformował, że po pierwszym etapie rekrutacji 93 proc. uczniów wiedziało, gdzie będzie się uczyć.","\"Gdyby po pierwszej rekrutacji nawet okazało się, że w którymś samorządzie brakuje miejsc w klasach czy to licealnych, technikach czy szkołach branżowych dla uczniów, to ten samorząd ma prawo i obowiązek, aby stworzyć nowe oddziały, w których te dzieci mogą się uczyć\" - zaznaczył.","Niemal wszystkie najpopularniejsze szkoły średnie w woj. śląskim podwoiły w tym roku liczbę miejsc w klasach pierwszych.","Poinformował, że nie wszyscy absolwenci dostaną się do wymarzonych klas, ale z całą pewnością znajdą miejsce w takim typie szkoły, jakiego poszukują.","W sumie było to 40 211 uczniów, natomiast 1 572 kandydatów nie zakwalifikowało się i mogło wziąć udział w rekrutacji uzupełniającej; jeszcze przed jej rozpoczęciem podawano, że w szkołach woj. łódzkiego było 14 404 wolnych miejsc.","Z kolei w Katowicach w 2019 r. w rekrutacji zasadniczej do szkół dostało się 97 proc. uczniów.","Minister edukacji narodowej odniósł się do problemów z rekrutacją podwójnego rocznika do szkół średnich.","Minister Piontkowski przypomniał, że w ubiegłym tygodniu wyniki pierwszego etapu rekrutacji do szkół średnich ogłoszono w ostatnich województwach, uczniowie z nich dowiedzieli się, czy zostali zakwalifikowani do szkół, do których starali się o przyjęcie.","Łąkowej oferuje 37 wolnych miejsc dla absolwentów podstawówki i 38 dla uczniów po gimnazjum.","To histeria czysto polityczna, miejsc dla tegorocznych absolwentów szkół podstawowych i gimnazjów nie zabraknie  powiedział w środę na antenie TVP Info szef MEN Dariusz Piontkowski.","We wtorek 16 lipca uczniowie podstawówek i gimnazjów z sześciu województw będą mogli sprawdzić, czy dostali się do wymarzonej szkoły średniej."],["<a href='https://www.wprost.pl/kraj/10232205/wiceminister-radzil-uczniom-aby-szukali-szkol-za-granica-podal-sie-do-dymisji.html'>Wprost<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-16/we-wtorek-uczniowie-z-mazowsza-poznaja-wyniki-rekrutacji-do-szkol-srednich/'>Polsat News<\/a>","<a href='https://fakty.interia.pl/polska/news-minister-edukacji-zapewnia-uczniowie-znajda-miejsce-w-szkola,nId,3100350'>Interia<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2346316,Rusza-rekrutacja-uzupelniajaca-do-szkol-srednich-Sprawdz-gdzie-sa-jeszcze-wolne-miejsca'>Polskie Radio<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-12/piontkowski-nadal-sa-wolne-miejsca-w-najlepszych-szkolach/'>Polsat News<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Rekrutacja-2019.-Gdzie-sa-wolne-miejsca-Licea-Warszawa-Lodz-Slask-Poznan'>Radio ZET<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2346316,Rusza-rekrutacja-uzupelniajaca-do-szkol-srednich-Sprawdz-gdzie-sa-jeszcze-wolne-miejsca'>Polskie Radio<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-17/lodzki-kurator-oswiaty-wszyscy-uczniowie-znajda-miejsca-w-szkolach-ponadpodstawowych/'>Polsat News<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-16/we-wtorek-uczniowie-z-mazowsza-poznaja-wyniki-rekrutacji-do-szkol-srednich/'>Polsat News<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,25029574,minister-piontkowski-o-rekrutacji-w-warszawie-kasandryczne.html'>Gazeta.pl<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C483973%2Cszef-men-wszyscy-uczniowie-znajda-swoje-miejsce-w-szkolach-srednich.html'>PAP<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-12/rekrutacja-do-szkol-sprawdz-jak-przedstawia-sie-sytuacja-w-poszczegolnych-wojewodztwach/'>Polsat News<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-12/rekrutacja-do-szkol-sprawdz-jak-przedstawia-sie-sytuacja-w-poszczegolnych-wojewodztwach/'>Polsat News<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2346316,Rusza-rekrutacja-uzupelniajaca-do-szkol-srednich-Sprawdz-gdzie-sa-jeszcze-wolne-miejsca'>Polskie Radio<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-26/w-szkolach-na-podkarpaciu-przyjeto-wiecej-uczniow-niz-bylo-absolwentow/'>Polsat News<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/minister-edukacji-prezydenci-duzych-miast-zamiast-plakac-powinni-uspokajac,952104.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/polska/news-piontkowski-do-szkol-srednich-dostalo-sie-89-proc-uczniow,nId,3110384'>Interia<\/a>","<a href='http://www.polskieradio24.pl/7/129/Artykul/2348142,Dariusz-Piontkowski-dodatkowy-miliard-zlotych-na-podwyzki-w-ramach-przesuniec-budzetowych'>Polskie Radio<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Szef-MEN-o-rekrutacji-slowach-Dulkiewicz-i-Trzaskowskiego'>Radio ZET<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24997614,dzis-konferencja-men-uczniowie-z-warszawy-wroclawia-k-katowic.html'>Gazeta.pl<\/a>"],["07-09","07-16","07-17","07-25","07-12","07-17","07-25","07-17","07-16","07-25","07-16","07-12","07-12","07-25","07-26","07-11","07-23","07-30","07-10","07-16"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-6" class="section level2">
+<h2>Temat 6</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-6.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-ef8679c36c1c0a1b1239" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ef8679c36c1c0a1b1239">{"x":{"filter":"none","data":[["Lider PO Grzegorz Schetyna zapowiedział start w jesiennych wyborach parlamentarnych w formule Koalicji Obywatelskiej, jednak bez PSL i SLD.","Liderzy SLD Włodzimierz Czarzasty, Lewicy Razem Adrian Zandberg i Wiosny Robert Biedroń proponują spotkania w tej sprawie m.in. szefowi PO Grzegorzowi Schetynie i prezesowi PSL Władysławowi Kosiniakowi-Kamyszowi.","W jego ocenie opozycja powinna pójść do wyborów w dwóch blokach: centrowym (PO-PSL) i liberalno-lewicowym (SLD-Wiosna-Lewica Razem).","PSL ogłosiło samodzielny start, SLD formuje koalicję wraz z Wiosną i Lewicą Razem, a Grzegorz Schetyna ogłosił, że na listach Koalicji Obywatelskiej znajdą się politycy PO, Nowoczesnej, Inicjatywy Polskiej oraz działacze samorządowi.","PSL będzie zmuszone samodzielnie wystartować w jesiennych wyborach, jeżeli PO dogada się z SLD i Wiosną - przyznają politycy Stronnictwa.","Władze Wiosny upoważniły w sobotę lidera partii Roberta Biedronia do rozmów z Koalicją Europejską (był to projekt na wybory do europarlamentu; współtworzyły go PO, PSL, Nowoczesna, SLD i Zieloni) o wspólnym starcie w wyborach parlamentarnych.","Do udziału w jak najszerszej koalicji zachęcał ludowców Grzegorz Schetyna i dodawał, że nie wyobraża sobie, by PSL mogło iść samodzielnie do wyborów, przeciwko partiom opozycyjnym.","Jeżeli Władysław Kosiniak-Kamysz po wyjściu z Koalicji Europejskiej próbuje teraz jeszcze rozbić Koalicję Obywatelską, to znaczy, że to jest decyzja o samodzielnym starcie PSL - powiedział w sobotę Sławomir Neumann (PO), komentując propozycje Polskiego Stronnictwa Ludowego, by utworzyć na opozycji dwa bloki na wybory parlamentarne. - Rozumiem, że w tej chwili celem PSL przestała być wygrana z PiS - oceniła rzeczniczka SLD Anna-Maria Żukowska.","pójdzie do wyborów w ramach Koalicji Obywatelskiej, Grzegorz Schetyna poinformował w połowie lipca.  Podjęliśmy jednogłośną decyzję o formule startu  idziemy jako Koalicja Obywatelska, nie koalicja partii, ale obywateli, ludzi aktywnych, samorządowców  powiedział Grzegorz","Czarzasty w odpowiedzi na pytanie o to, czy koalicja partii opozycyjnych (PO, Zieloni, Nowoczesna, SLD) istnieje nawet bez udziału Polskiego Stronnictwa Ludowego, odpowiedział twierdząco, podkreślając przy tym, że choć na ten moment szef PSL Władysław Kosiniak-Kamysz \"odszedł\", to w sprawie ludowców jeszcze wiele może się wydarzyć.","Część zarządów opowiedziała się za udziałem ludowców w \"jak najszerszej koalicji\", co oznaczałoby zgodę na start w formule podobnej do Koalicji Europejskiej, z którą PSL poszło w maju - wraz z PO, SLD, Nowoczesną i Zielonymi - do wyborów do Parlamentu Europejskiego.","Odnosząc się do stanowiska PSL, którego liderzy, z prezesem Władysławem Kosiniakiem-Kamyszem na czele, wykluczają wspólny start w jesiennych wyborach w koalicji z partią Wiosna, Lubnauer podkreśliła, że Ludowcy mają prawo do swojej autonomicznej decyzji i muszą przemyśleć, w jakiej formule startować w wyborach.","Jego zdaniem \"opozycja musi iść jednym blokiem\", którym będzie Koalicja Obywatelska. - Koledzy z PSL, prezes Władysław Kosiniak-Kamysz sam zachęcał na początku stycznia (kiedy powstawała Koalicja Europejska - red.) do tego, żeby budować blok z SLD, jak najszerszą koalicję - dodał Brejza.","Po decyzji lidera PO Grzegorza Schetyny o samodzielnym starcie Platformy żadnych rozmów z PSL już nie będzie; idziemy do tych wyborów jako PSL-Koalicja Polska - podkreślają w rozmowie z PAP politycy Stronnictwa.","Stanowisko rady było przesądzone już na początku jej obrad, gdy Kosiniak-Kamysz wygłosił otwarte dla mediów przemówienie podkreślając, że w wyborach powinny wystartować dwa bloki opozycyjne, oraz że PSL wyklucza wspólny start z lewicą - w tym kontekście wymienił Wiosnę, Razem i SLD.","W czwartek szef PO Grzegorz Schetyna poinformował, że po decyzji PSL-u pomysł wspólnego startu Platformy z ludowcami i SLD jest nieaktualny, ale zaprosił na listy polityków innych opcji.","Lider PSL Władysław Kosiniak-Kamysz poinformował w piątek wieczorem, że jego ugrupowanie do wyborów parlamentarnych buduje Koalicję Polską.","Pytany, co zrobi PSL, jeśli Platforma dojdzie do porozumienia z Wiosną i SLD, Kosiniak-Kamysz podkreślił, że te dwie partie powinny wystartować razem w bloku lewicowym.","Władysław Kosiniak-Kamysz podkreślił, że opozycja w dalszym ciągu może się zjednoczyć, ale PSL tworzy własny blok wyborczy  SLD chce iść we wspólnej koalicji, Wiosna także chce rozmawiać.","Lider SLD Włodzimierz Czarzasty ocenił na konferencji prasowej w Łodzi, że Koalicja Europejska - współtworzona w wyborach do PE przez PO, PSL, Nowoczesną, SLD i Partię Zieloni - była największym i najlepszym projektem po transformacji, jednoczącym opozycję."],["<a href='http://www.polskieradio24.pl/5/1222/Artykul/2344153,Dzialacze-lewicy-wsciekli-na-przewodniczacego-SLD-Powstaje-odrebny-blok'>Polskie Radio<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C489913%2Cgrabiec-o-propozycji-lewicy-nt-paktu-senackiego-z-zadowoleniem-przyjmujemy'>PAP<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Opozycja-w-rozsypce.-Wszyscy-czekaja-na-ruch-PO-i-Schetyny'>Radio ZET<\/a>","<a href='http://www.polskieradio24.pl/7/129/Artykul/2343538,Zdzislaw-Krasnodebski-Koalicja-Europejska-byla-kuriozalnym-zjawiskiem'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2334957,PSL-samodzielnie-do-wyborow-Eugeniusz-Klopotek-nie-ma-dobrego-rozwiazania'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2335556,Donald-Tusk-wroci-do-polskiej-polityki-Marek-Sawicki-on-dobrze-czuje-sie-na-salonach'>Polskie Radio<\/a>","<a href='https://www.tvp.info/43439491/kosiniak-kamysz-spotkal-sie-ze-schetyna-mozliwa-koalicja-ale-bez-sld'>TVP INFO<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/psl-proponuje-dwa-bloki-opozycyjne-na-wybory-politycy-komentuja,950697.html'>TVN24<\/a>","<a href='https://www.wprost.pl/kraj/10238114/pis-kontra-ko-oto-najciekawsze-pojedynki-jedynek-wyborczych.html'>Wprost<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-czarzasty-schetyna-musi-sie-okreslic-w-imieniu-platformy-oby,nId,3088046'>RMF 24<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-do-wyborow-z-platforma-bez-lewicy-nieoficjalne-doniesienia-z,nId,3080193'>RMF 24<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C477078%2Clubnauer-dla-pap-wyborcy-sld-wiosny-i-psl-znajda-swoje-wartosci-w-programie'>PAP<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/wybory-parlamentarne-w-polsce-2019-krzysztof-brejza-o-rozmowach-koalicyjnych,952885.html'>TVN24<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C485560%2Cpolitycy-psl-idziemy-do-wyborow-jako-psl-koalicja-polska.html'>PAP<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C479778%2Ckosiniak-kamysz-do-wyborow-parlamentarnych-dwa-bloki-lewica-i-umiarkowane'>PAP<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/waldemar-pawlak-o-prawdopodobienstwie-ze-psl-moze-zawrzec-koalicje-z-pis,953983.html'>TVN24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-12/arlukowicz-apeluje-do-wladka-budowanie-dwoch-blokow-jest-sprzyjaniem-dzisiaj-wygranej-kaczynskiego/'>Polsat News<\/a>","<a href='https://www.tvp.info/43330176/klopotek-do-koalicji-z-lewica-nie-pojdzie-albo-po-idzie-z-psl-albo-psl-idzie-samo'>TVP INFO<\/a>","<a href='http://www.polskieradio24.pl/9/299/Artykul/2342567,W-KosiniakKamysz-nie-prowadzimy-rozmow-odnosnie-ksztaltu-list-opozycji'>Polskie Radio<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-sld-wiosna-i-lewica-razem-utworza-wspolny-lewicowy-blok-na-w,nId,3101795'>RMF 24<\/a>"],["07-20","07-29","07-08","07-19","07-03","07-04","07-10","07-06","07-31","07-10","07-05","07-01","07-15","07-19","07-06","07-18","07-12","07-03","07-17","07-18"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-7" class="section level2">
+<h2>Temat 7</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-7.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-a4ab646f3324be48168a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a4ab646f3324be48168a">{"x":{"filter":"none","data":[["Londyn określił przejęcie przez Iran w piątek tankowca Stena Impero pod brytyjską flagą jako \"wrogi akt\" i odrzucił wyjaśnienia Teheranu, że jednostka była zamieszana w incydent w cieśninie Ormuz.","Zarówno przejęcie brytyjskiego tankowca w piątek przez Iran, jak i zestrzelenie przez amerykański okręt wojenny USS Boxer irańskiego drona, który zbliżył się do niego na odległość niecałego kilometra w cieśninie Ormuz w czwartek - to kolejne odsłony coraz ostrzejszego konfliktu między władzami USA oraz Iranu.","Wielka Brytania przysłała do Iranu mediatora na rozmowy w sprawie uwolnienia załogi pływającego pod brytyjską banderą tankowca Stena Impero, który Irańczycy zatrzymali 19 lipca w cieśninie Ormuz - podała półoficjalna irańska agencja Tasnim.","Według komentatorów Teheran zdecydował się na przejęcie brytyjskiego tankowca w odpowiedzi na zajęcie irańskiego statku w rejonie Gibraltaru.","Szef brytyjskiej dyplomacji Jeremy Hunt zagroził Teheranowi poważnymi konsekwencjami za przejęcie tankowca i zaznaczył, że postawa Iranu jest kompletnie nie do zaakceptowania.","Wielka Brytania złożyła w niedzielę skargę do ONZ w związku z piątkowym przejęciem w cieśninie Ormuz brytyjskiego tankowca przez Iran.","Brytyjski tankowiec został przejęty w cieśninie Ormuz w piątek przez irańską Gwardię Rewolucyjną.","W odpowiedzi na amerykańskie, brytyjskie, francuskie, a także radzieckie okręty eskortujące tankowce Iran zaminował Cieśninę Ormuz.","Propozycja takiej misji zrodziła się po przejęciu przez Iran tankowca pod banderą brytyjską.","Cytowany przez irańską agencję Fars Szarif dodał, że \"mimo oporu i ingerencji\" brytyjskiego okrętu Gwardii Rewolucyjnej udało się odprowadzić do portu tankowiec przejęty w piątek w trakcie przeprawy przez cieśninę Ormuz.","Brytyjski szef MSZ Jeremy Hunt ocenił w sobotę, że Iran \"wszedł na niebezpieczną drogę niezgodnego z prawem i destabilizującego zachowania\" po tym, jak Gwardia Rewolucyjna przejęła brytyjski tankowiec Stena Impero w trakcie przeprawy przez cieśninę Ormuz.","Z doniesień mediów wynika, że także drugi tankowiec Mesdar obsługiwany przez brytyjskiego operatora, a pływający pod liberyjską banderą skręcił gwałtownie w stronę Iranu po minięciu cieśniny Ormuz.","Wśród głównych wyzwań stojących przed nowym premierem dziennik wskazuje konflikt z Iranem po przejęciu przez Teheran brytyjskiego tankowca, a także brexit.","Podana przez oficjalne media irańskie informacja o przejęciu obcego statku wydaje się sprzeczna z wcześniejszymi komunikatami rzecznika MSZ w Teheranie, mówiącego w środę, że Iran udzielił pomocy zagranicznemu tankowcowi, którym uległ awarii.","Rzecznik MSZ w Berlinie potępił \"nieuzasadnione\" przechwycenie brytyjskiego tankowca i wezwał Iran do \"natychmiastowego uwolnienia tego statku oraz jego załogi\".","Iran twierdzi, że zatrzymał tankowiec po jego wcześniejszej kolizji z irańską jednostką rybacką.","Właściciel tankowca przejętego w piątek przez Gwardię Rewolucyjną Iranu potwierdził w nocy z piątku na sobotę, że jednostka ta nie znajduje się pod kontrolą załogi, z którą armator \"nie ma żadnego kontaktu\".","Stany Zjednoczone zestrzeliły irańskiego drona, który przeleciał w pobliżu jednego z amerykańskich okrętów stacjonujących w cieśninie Ormuz.","W ubiegłym tygodniu trzy irańskie jednostki podjęły próbę przejęcia pływającego pod brytyjską flagą statku handlowego British Heritage.","Wielka Brytania potępiła przejęcie tankowca w Zatoce Perskiej przez Iran jako \"wrogi akt\", odrzucając wyjaśnienia Teheranu, że jednostka została przez irańską Gwardię Rewolucyjną odprowadzona do portu w Bandar Abbas i będzie objęta śledztwem po kolizji z łodzią rybacką."],["<a href='https://www.pap.pl/aktualnosci/news%2C486448%2Ciran-ostrzega-wielka-brytanie-przed-eskalacja-napiecia.html'>PAP<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-amerykanie-wysla-wojska-do-arabii-saudyjskiej-to-wzmocni-reg,nId,3105364'>RMF 24<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2345857,Iran-Londyn-przyslal-mediatora-w-sprawie-zalogi-tankowca'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/130/4428/Artykul/2346145,Ekspert-Teheran-chce-pokazac-ze-jest-w-stanie-zapewnic-bezpieczenstwo-w-Zatoce-Perskiej'>Polskie Radio<\/a>","<a href='https://www.tvp.info/43580567/iran-tlumaczy-zatrzymanie-brytyjskiego-tankowca-doszlo-do-kolizji'>TVP INFO<\/a>","<a href='https://fakty.interia.pl/swiat/news-wielka-brytania-zlozyla-skarge-do-onz-w-sprawie-przejecia-ta,nId,3107088'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/iran-nagranie-zalogi-tankowca-stena-impero,954937.html'>TVN24<\/a>","<a href='https://biznes.wprost.pl/handel/10235004/iran-przechwycil-tankowiec-prawdopodobnie-jest-to-jednostka-z-ktora-utracono-kontakt-w-niedziele.html'>Wprost<\/a>","<a href='https://fakty.interia.pl/swiat/news-iran-krytykuje-plany-europejskiej-misji-morskiej-w-zatoce-pe,nId,3118888'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/iran-przejecie-tankowca-stena-impero-nagranie-z-rozkazami,954672.html'>TVN24<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C486154%2Cbrytyjski-szef-msz-jeremy-hunt-iran-wszedl-na-niebezpieczna-droge.html'>PAP<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/iran-przejelismy-brytyjski-tankowiec,954341.html'>TVN24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-24/fyou-prime-minister-celebryci-i-media-reaguja-na-nominacje-johnsona/'>Polsat News<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C485423%2Cdepartament-stanu-usa-iran-musi-natychmiast-uwolnic-przejety-tankowiec.html'>PAP<\/a>","<a href='https://fakty.interia.pl/swiat/news-ue-wyraza-glebokie-zaniepokojenie-incydentem-ws-brytyjskiego,nId,3105510'>Interia<\/a>","<a href='http://www.polskieradio24.pl/130/4428/Artykul/2346145,Ekspert-Teheran-chce-pokazac-ze-jest-w-stanie-zapewnic-bezpieczenstwo-w-Zatoce-Perskiej'>Polskie Radio<\/a>","<a href='https://fakty.interia.pl/swiat/news-armator-przejety-tankowiec-jest-poza-kontrola-zalogi,nId,3105365'>Interia<\/a>","<a href='https://www.tvp.info/43563880/usa-zestrzelily-iranskiego-drona'>TVP INFO<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/wielka-brytania-przejety-tankowiec-poza-kontrola-zalogi-szef-dyplomacji-grozi-konsekwencjami,954395.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/swiat/news-iran-cala-zaloga-brytyjskiego-tankowca-jest-bezpieczna-i-zdr,nId,3106946'>Interia<\/a>"],["07-21","07-20","07-24","07-24","07-20","07-21","07-22","07-18","07-28","07-21","07-20","07-19","07-24","07-18","07-20","07-24","07-20","07-19","07-20","07-21"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-8" class="section level2">
+<h2>Temat 8</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-8.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-0deec9fc3ac85f3ae192" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0deec9fc3ac85f3ae192">{"x":{"filter":"none","data":[["Wiceminister zdrowia odniósł się do problemu obniżenia dostępności leków dla pacjentów.","W ostatnich dniach pacjenci i farmaceuci informują, że aptekach w całym kraju brakuje leków.","Minister zdrowia Łukasz Szumowski tłumaczył w środę w \"Wydarzeniach i Opiniach\", że przez to, że leków \"czasami brakowało w aptekach\", pacjenci odczuli potrzebę zrobienia zapasów. - Trudno się temu dziwić.","Od poniedziałku pod numerem 800-190-590 można uzyskać informację o dostępności leków w aptekach.","Minister zdrowia zaznaczył, że pacjenci którzy nie znajdują leku w swojej aptece, będą mogli dowiedzieć się, dzwoniąc na infolinię, gdzie go dostaną.","Umieszczane są tam leki, których brakuje w co najmniej 5 procent aptek w danym województwie.","Jest też tworzona co dwa miesiące lista leków, których brakuje w aptekach - powiedział poseł Tomasz Latos, wiceprzewodniczący sejmowej komisji zdrowia, komentując problem z dostępnością niektórych lekarstw i aktywność mafii lekowych.","Dodał, że bardzo cieszy się z infolinii dla pacjentów, którzy poszukują brakujących leków.","Rzecznik podkreśla, że brak leków może zagrażać nie tylko zdrowiu, ale też życiu pacjentów.","Gość przypominał, ze rynek leków jest systematycznie analizowany. - Co tydzień minister zdrowia otrzymuje raport, których leków brakuje w co najmniej 5 % aptek.","Ministerstwo Zdrowia uruchamia od poniedziałku specjalną infolinię w sprawie dostępności do leków.","W poniedziałek ruszy bezpłatna infolinia, w ramach której pracownicy Głównego Inspektoratu Farmaceutycznego i Narodowego Funduszu Zdrowia będą informować pacjentów o dostępności leków lub ich zamienników.","Przekazałam Ministerstwu Zdrowia faktyczną listę leków, których brakuje w aptekach - poinformowała prezes Naczelnej Rady Aptekarskiej Elżbieta Piotrowska-Rutkowska.","Najczęściej, jak pacjent pytał o ten lek, to apteka mówiła: na jutro, pojutrze sprowadzimy.","Bodnar podkreśla, że w aptekach jednak nadal brakuje wielu leków, o czym świadczą m.in. doniesienia medialne.","Dodał, że w aptekach brakuje mniej niż 500 leków, a obecnie nie ma konieczności interwencyjnego skupu medykamentów.","Minister zdrowia Łukasz Szumowski powiedział 11 lipca, że Ministerstwo Zdrowia jest w ciągłym kontakcie z firmami farmaceutycznymi w związku z problemami z dostępnością do leków, między innymi na choroby tarczycy i cukrzycę."],["<a href='https://www.rmf24.pl/fakty/polska/news-milkowski-nie-ma-zagrozenia-przerwania-ciaglosci-terapii-u-p,nId,3098586'>RMF 24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/brak-lekow-w-aptekach-marek-tomkow-z-naczelnej-izby-aptekarskiej-o-kryzysie,951604.html'>TVN24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-17/gdzie-sa-leki-minister-zdrowia-lukasz-szumowski-w-wydarzeniach-i-opiniach/'>Polsat News<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2343438,Dzialalnosc-mafii-lekowej-jedna-z-przyczyn-braku-medykamentow'>Polskie Radio<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/brak-dostepu-do-lekow-ministerstwo-zdrowia-problem-jest-globalny,951614.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/brak-lekow-w-aptekach-marek-tomkow-z-naczelnej-rady-aptekarskiej-o-problemie,953193.html'>TVN24<\/a>","<a href='http://www.polskieradio24.pl/7/129/Artykul/2340122,T-Latos-problem-dostepnosci-lekow-zostanie-rozwiazany-w-ciagu-najblizszych-godzin'>Polskie Radio<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C484015%2Ckarczewski-spotkam-sie-z-ministrem-zdrowia-min-w-sprawie-brakujacych-lekow'>PAP<\/a>","<a href='https://fakty.interia.pl/polska/news-rpo-interweniuje-w-sprawie-braku-lekow-w-aptekach,nId,3120533'>Interia<\/a>","<a href='http://www.polskieradio24.pl/9/301/Artykul/2340529,Panstwo-coraz-skuteczniejsze-w-walce-z-mafia-lekowa'>Polskie Radio<\/a>","<a href='https://www.tvp.info/43507105/ministerstwo-zdrowia-uruchamia-infolinie-w-sprawie-dostepnosci-do-lekow'>TVP INFO<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2338745,Od-poniedzialku-bezplatna-infolinia-ws-dostepnosci-lekow'>Polskie Radio<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/lista-brakujacych-lekow-trafila-do-ministerstwa-zdrowia,951727.html'>TVN24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-17/gdzie-sa-leki-minister-zdrowia-lukasz-szumowski-w-wydarzeniach-i-opiniach/'>Polsat News<\/a>","<a href='https://fakty.interia.pl/polska/news-rpo-interweniuje-w-sprawie-braku-lekow-w-aptekach,nId,3120533'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24979202,minister-lukasz-szumowski-o-problemach-z-dostepem-do-lekow.html'>Gazeta.pl<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/brak-lekow-w-aptekach-marek-tomkow-z-naczelnej-rady-aptekarskiej-o-problemie,953193.html'>TVN24<\/a>"],["07-16","07-10","07-17","07-18","07-10","07-16","07-12","07-16","07-29","07-12","07-15","07-10","07-10","07-17","07-29","07-10","07-16"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-9" class="section level2">
+<h2>Temat 9</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-9.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-c278b1f6d700c7c7e174" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c278b1f6d700c7c7e174">{"x":{"filter":"none","data":[[" Jest to świadczenie dla osób niezdolnych do samodzielnej egzystencji, dla osób, które faktycznie są w najtrudniejszej sytuacji z tego względu, że ich niepełnosprawność nastąpiła po 18. roku życia i często nie mają prawa do renty socjalnej z tego względu, że dochód na osobę w rodzinie przekracza kryterium dochodowe.","Również do renty rodzinnej, do której jest uprawniona więcej niż jedna osoba, przysługuje jedno świadczenie.","Posłowie przyjęli poprawki do ustawy o świadczeniu uzupełniającym dla osób niezdolnych do samodzielnej egzystencji.","Do tej pory świadczenie w ramach programu Rodzina 500+ na pierwsze dziecko przysługiwało tylko tym rodzinom, w których dochód nie przekraczał 800 zł na osobę lub 1200 zł w przypadku wychowywania dziecka niepełnosprawnego.","Senator zgłaszał dwie poprawki w tej sprawie  zgodnie z jedną z nich świadczenie przysługiwałoby osobom niezdolnym do samodzielnej egzystencji bez względu na wiek, w drugiej natomiast senator proponował ustalenie kryterium wieku na poziomie 16 lat.","W uzasadnieniu do poprawki Orzechowska wskazała, że w wyniku przyjęcia zaproponowanych zmian świadczeniem może zostać dodatkowo objętych ok. 56 tys. uprawnionych z ZUS z orzeczeniem o niezdolności do samodzielnej egzystencji z tytułu podniesienia progu dochodowego do 1600 zł, ok. 360 tys. osób w wieku 75 i więcej lat, pobierających dodatek pielęgnacyjny, które mogą wystąpić o orzeczenie o niezdolności do samodzielnej egzystencji, a także ok. 31,4 tys. osób pobierających rentę socjalną w zbiegu z rentą rodzinną (w tym 12 tys. z innych organów emerytalno-rentowych niż ZUS).","Prawo do rodzicielskiego świadczenia uzupełniającego mają także osoby sprawujące opiekę nad dziećmi w ramach rodzinnej pieczy zastępczej, z wyjątkiem rodziny zastępczej zawodowej.","Wszystkie osoby, które nie są w stanie pracować, które pobierają renty socjalne z tego względu, że nie były w stanie sobie wypracować renty z tytułu niezdolności do pracy będą te świadczenia wyrównawcze otrzymywać  powiedział wiceminister.","Zgodnie z nowelą ustawy o podatku dochodowym od osób fizycznych, ustawy o świadczeniach rodzinnych oraz ustawy o świadczeniach opieki zdrowotnej finansowych ze środków publicznych, zlikwidowany ma być 18-procentowy PIT dla pracowników do 26. roku życia.","1 lipca ruszył rozszerzony program 500 plus, który zakłada przyznanie świadczenia wszystkim dzieciom do 18 lat, bez względu na dochód osiągany przez rodzinę.","Jak przypomina Polsat News, dodatkowe 500 zł będzie przyznawane osobom, które są niezdolne do samodzielnej egzystencji, a które mają ustalone prawo do świadczenia takiego jak zasiłek stały, renta czy emerytura.","Utrzymywać siebie i swoje rodziny ze świadczeń socjalnych, czyli z podatku innych pracujących osób.","Ustawa w sprawie 500 zł dla osób całkowicie niezdolnych do samodzielnej egzystencji ma wejść w życie od 1 października i od tego momentu będzie możliwe składanie wniosków o świadczenie  powiedział PAP wiceminister rodziny, pracy i polityki społecznej Krzysztof Michałkiewicz.","Zgodnie z zapisami projektu, o świadczenie uzupełniające w kwocie 500 zł miesięcznie będą mogły wystąpić osoby, które ukończyły 18 lat i posiadają orzeczenie o niezdolności do samodzielnej egzystencji.","Z podatku nie są też zwolnione osoby pobierające zasiłki chorobowe, macierzyńskie lub świadczenia rehabilitacyjne.","Premier podkreślił, że środki na realizację wypłaty świadczeń uzupełniających dla osób niezdolnych do samodzielnej egzystencji będą pochodziły z funduszu solidarnościowego. - Jesteśmy odpowiedzialnym rządem, więc w momencie, kiedy pojawiają się środki, to staramy się te najbardziej istotne potrzeby społeczeństwa zabezpieczać - zaznaczył.","Łączna kwota świadczenia dla osoby niezdolnej do samodzielnej egzystencji oraz pobieranego świadczenia z systemu emerytalno-rentowego (lub innego w ramach zabezpieczenia społecznego) nie będzie mogła przekraczać łącznej kwoty 1600 złotych\" - można przeczytać.","Przypomniała, że na początku program obowiązywał z kryterium dochodowym, a od 1 lipca tego roku świadczenie przysługuje na każde dziecko."," Myślę, że ten zbieg z rentą rodzinną zostanie tutaj także przyjęty i myślę, że będzie przyjęte rozwiązanie, które jeszcze faktycznie rozszerzy, może nawet o kilkaset tysięcy osób (grupę beneficjentów nowego świadczenia - przyp. red) - zaznaczył.","Projekt przewiduje, że świadczenie dla osób niezdolnych do samodzielnej egzystencji będzie finansowane z budżetu państwa oraz ze środków Solidarnościowego Funduszu Wsparcia Osób Niepełnosprawnych."],["<a href='http://www.polskieradio24.pl/7/473/Artykul/2342687,500-dla-os-niepelnosprawnych-Ekspert-to-fundamentalna-sprawa'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2347262,Tomasz-Siemoniak-chce-zmiany-ustawy-dezubekizacyjnej-Komentarz-publicystow'>Polskie Radio<\/a>","<a href='https://tvn24bis.pl/z-kraju,74/500-plus-dla-niepelnosprawnych-senat-przyjal-poprawki,957319.html'>TVN24 bis<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2333705,Program-Dobry-Start-Skladanie-wnioskow-o-wyprawke-szkolna-przez-internet-juz-mozliwe'>Polskie Radio<\/a>","<a href='https://tvn24bis.pl/z-kraju,74/500-plus-dla-niepelnosprawnych-senat-przyjal-poprawki,957319.html'>TVN24 bis<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C491026%2Csenat-za-poprawkami-do-ustawy-o-swiadczeniu-uzupelniajacym-dla'>PAP<\/a>","<a href='https://tvn24bis.pl/z-kraju,74/mama-4-plus-emeryture-dla-matek-otrzymuje-w-polsce-ponad-48-7-tysiaca-osob,955762.html'>TVN24 bis<\/a>","<a href='http://www.polskieradio24.pl/5/3/Artykul/2342934,Sejmowa-komisja-za-projektem-ws-500-dla-osob-niepelnosprawnych'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2336091,Sejm-za-zerowym-PITem-dla-pracujacych-do-26-roku-zycia'>Polskie Radio<\/a>","<a href='https://tvn24bis.pl/z-kraju,74/500-plus-na-pierwsze-dziecko-ile-rodzin-zlozylo-wnioski-w-pierwszym-tygodniu-lipca,951698.html'>TVN24 bis<\/a>","<a href='https://www.wprost.pl/kraj/10231995/rzad-zajmie-sie-nowym-500-plus-pieniadze-trafia-do-niepelnosprawnych.html'>Wprost<\/a>","<a href='https://www.tvp.info/43673235/niepracujace-matki-bez-500-plus-opozycja-to-prywatna-troska-ekonomisty-po'>TVP INFO<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C485249%2Cmichalkiewicz-wnioski-o-500-plus-dla-niepelnosprawnych-beda-mozliwe-od'>PAP<\/a>","<a href='https://fakty.interia.pl/polska/news-500-zl-dla-niepelnosprawnych-emerytura-lub-renta-nie-moze-pr,nId,3088167'>Interia<\/a>","<a href='https://tvn24bis.pl/pieniadze,79/zerowy-pit-do-26-roku-zycia-jak-i-kiedy-sie-rozliczyc,955697.html'>TVN24 bis<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-09/500-plus-dla-niepelnosprawnych-od-pazdziernika-rzad-przyjal-projekt-ustawy/'>Polsat News<\/a>","<a href='https://tvn24bis.pl/z-kraju,74/500-plus-dla-niepelnosprawnych-przyjete-przez-rzad-premier-mateusz-morawiecki-o-szczegolach,951358.html'>TVN24 bis<\/a>","<a href='https://fakty.interia.pl/polska/news-500-plus-dla-niepelnosprawnych-pierwsze-czytanie-projektu-w-,nId,3100208'>Interia<\/a>","<a href='https://tvn24bis.pl/z-kraju,74/500-plus-dla-niepelnosprawnych-lukasz-schreiber-zapowiada-zmiany,955699.html'>TVN24 bis<\/a>","<a href='https://fakty.interia.pl/polska/news-500-plus-dla-niepelnosprawnych-od-wrzesnia,nId,3074653'>Interia<\/a>"],["07-17","07-27","07-31","07-01","07-31","07-31","07-25","07-17","07-04","07-10","07-09","07-26","07-18","07-10","07-25","07-09","07-09","07-17","07-25","07-02"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-10" class="section level2">
+<h2>Temat 10</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-10.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-4fdb39f51c5bce0008bf" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4fdb39f51c5bce0008bf">{"x":{"filter":"none","data":[["Zamknięte jest również kąpielisko Mikoszewo w woj. pomorskim, ale nie z powodu sinic, tylko ze względu na parametry mikrobiologiczne wody morskiej.","Kąpiel w zanieczyszczonej sinicami wodzie może spowodować niekorzystne reakcje organizmu.","To co odróżnia go od innych jezior, to widok lazurowej, przejrzystej wody i złociste plaże.","W poniedziałek pływacy weszli do wody na plaży na północy jeziora Mamry koło Węgorzewa.","Na morskich plażach, gdzie są sztormy, fale, porzucone papierosy trafiają do wody, zanieczyszczają ją, są zjadane przez ryby.","Jednym z najgorszych śmieci na plażach są niedopałki papierosów - to plastikowe odpady, które nie rozłożą się przez lata; mogą zostać zjedzone przez zwierzęta; zatruwają wodę; są trudne do usunięcia.","To nasza reakcja na zaśmiecanie polskich plaż i wód petami, które są najczęściej znajdowanym toksycznym odpadem w oceanach.","Warto też pamiętać, że sinice nie występują wyłącznie w wodzie, a ich oddziaływanie na organizm jest uzależnione od tego, jak długo byliśmy narażeni na kontakt z toksynami.","Ratownicy na poszczególnych kąpieliskach obserwują wodę i to oni - w zależności od jej stanu - podejmują decyzję o tym, czy w wodzie przy danej plaży można zażywać kąpieli.","W poniedziałek 29 lipca zakaz wchodzenia do wody dotyczy aż 26 kąpielisk w Polsce.","Przez kilka godzin służby ratownicze prowadziły poszukiwania na wodzie, w okolicach dzikiej plaży i kąpieliska w Boguszach.","Otwarto już pięć kąpielisk położonych nad Zatoką Gdańską zamkniętych wcześniej z powodu sinic, które pojawiły się w przybrzeżnych wodach.","A razem z jedzonymi przez nas rybami i owocami morza, z solą morską, słodką wodą i innymi produktami - sami zjadamy plastik.","Zakwity sinic utrzymują się też w przybrzeżnych wodach przy siedmiu kąpieliskach na Półwyspie Helskim - w Kuźnicy, Chałupach i Juracie oraz wszystkich czterech zorganizowanych w Jastarni.","W próbce wody pobranej do badania we wsi Nowe Guty w jeziorze Śniardwy, Laboratorium Wojewódzkiego Inspektoratu Ochrony Środowiska wykryło sinice."," Byliśmy mniej więcej na środku jeziora, gdy zauważyliśmy, że coś się w wodzie rusza.","W wakacje do 15 września nad bezpieczeństwem plażowiczów nad wodą od 9 do 19 czuwają ratownicy.","Jak wynika z informacji zamieszczonych na stronie internetowej Głównego Inspektora Sanitarnego, w sobotę rano z powodu sinic, których zakwity pojawiły się w przybrzeżnej wodzie Bałtyku, nieczynnych jest wszystkich dziewięć kąpielisk w Sopocie, wszystkie cztery w Gdyni i pięć z ośmiu urządzonych w tym sezonie na gdańskich plażach.","Ostrzeżenie nie zniechęcają turystów, którzy chętnie pozują nad brzegami jeziora, czy młodych par, które robią sobie sesje na tle lazurowej wody."],["<a href='https://www.rmf24.pl/fakty/polska/news-10-nadmorskich-kapielisk-zamknietych-z-powodu-sinic,nId,3107018'>RMF 24<\/a>","<a href='https://fakty.interia.pl/pomorskie/news-ponad-20-kapielisk-nad-baltykiem-zamknietych-z-powodu-sinic,nId,3118868'>Interia<\/a>","<a href='https://www.rmf24.pl/raporty/raport-fakty-znad-wody/info/news-od-kurortu-do-dziewiczych-jezior-drugie-oblicze-pojezierza-l,nId,3083037'>RMF 24<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-170-kilometrow-wplaw-proba-bicia-rekordu-swiata-na-mazurach,nId,3098409'>RMF 24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24955961,hel-przystapil-do-akcji-plaza-bez-peta-burmistrz-kazda-gmina.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24941431,pozbywanie-sie-smieci-na-plazach-wymaga-milionowych-wydatkow.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24982374,kolejna-plaza-bez-peta-pojawia-sie-na-naszej-mapie-do-akcji.html'>Gazeta.pl<\/a>","<a href='https://www.wprost.pl/kraj/10233939/sinice-powrocily-te-kapieliska-nad-baltykiem-sa-zamkniete.html'>Wprost<\/a>","<a href='https://fakty.interia.pl/polska/news-sinice-znow-nad-baltykiem-zamkniete-kapieliska,nId,3101925'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,25038175,sinice-w-baltyku-gis-wydal-18-zakazow-kapieli-na-pomorzu-lista.html'>Gazeta.pl<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-24/wedkarze-znalezli-na-jeziorem-ubrania-dziecka-trwaja-poszukiwania/'>Polsat News<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-wszystkie-nadmorskie-kapieliska-na-pomorzu-sa-juz-otwarte,nId,3098285'>RMF 24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114881,24942723,w-tydzien-mozesz-jesc-tyle-plastiku-ile-jest-w-karcie-kredytowej.html'>Gazeta.pl<\/a>","<a href='https://fakty.interia.pl/pomorskie/news-ponad-20-kapielisk-nad-baltykiem-zamknietych-z-powodu-sinic,nId,3118868'>Interia<\/a>","<a href='https://fakty.interia.pl/polska/news-sinice-w-jeziorze-sniardwy,nId,3115878'>Interia<\/a>","<a href='https://tvn24.pl/wroclaw,44/opole-ptak-topil-sie-na-srodku-jeziora-pomogli-policjanci,956976.html'>TVN24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24982374,kolejna-plaza-bez-peta-pojawia-sie-na-naszej-mapie-do-akcji.html'>Gazeta.pl<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-27/niemal-wszystkie-nadmorskie-kapieliska-w-trojmiescie-zamkniete-z-powodu-sinic/'>Polsat News<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2342860,Syberyjskie-Malediwy-przyciagaja-fanow-Instagrama-Mimo-niebezpieczenstwa'>Polskie Radio<\/a>"],["07-21","07-28","07-07","07-16","07-02","07-01","07-10","07-15","07-18","07-29","07-24","07-16","07-01","07-28","07-26","07-30","07-10","07-27","07-17"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-11" class="section level2">
+<h2>Temat 11</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-11.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-0df7c17c5bc810d9b464" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0df7c17c5bc810d9b464">{"x":{"filter":"none","data":[["Zastrzegła przy tym, że Nawalny nigdy wcześniej nie uskarżał się na żadne alergie.","Kuracja powinna być jednak kontynuowana, a mimo to Nawalny został zabrany z powrotem do aresztu.","W lutym 2017 roku Nawalny został ponownie skazany na pięć lat pozbawienia wolności w zawieszeniu.","Aleksiej Nawalny, jeden z najbardziej znanych rosyjskich opozycjonistów, został w środę zatrzymany.","Za nawoływanie do nielegalnej demonstracji Nawalny został już w środę aresztowany na 30 dni."],["<a href='https://www.tvp.info/43700770/rosja-choroba-aleksieja-nawalnego-wynikiem-dzialania-osoby-trzeciej'>TVP INFO<\/a>","<a href='https://www.tvp.info/43703970/adwokat-nawalnego-zostal-otruty-nieznana-substancja-chemiczna'>TVP INFO<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/rosja-aleksiej-nawalny-zatrzymany-przez-policje,955369.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/rosja-opozycjonista-aleksiej-nawalny-skazany-na-30-dni-aresztu,955691.html'>TVN24<\/a>","<a href='https://www.wprost.pl/polityka/10237302/rosja-policja-zatrzymala-setki-osob-protestujacych-w-moskwie.html'>Wprost<\/a>"],["07-29","07-29","07-24","07-25","07-27"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-12" class="section level2">
+<h2>Temat 12</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-12.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-f59bfd9d85ce4851207b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f59bfd9d85ce4851207b">{"x":{"filter":"none","data":[["Przy okazji obserwacji zaćmienia Księżyca łatwo będzie także zobaczyć dwie planety.","Po powierzchni Księżyca Pragyan będzie poruszał się z prędkością centymetra na sekundę.","Moment, w którym Księżyc będzie całkowicie zasłaniać słoneczną tarczę potrwa 4,5 minuty.","W kulminacyjnym momencie zaćmienia cień Ziemi zakryje około 60-65 proc. tarczy Księżyca.","Dotyczy również rozwoju robotyki kosmicznej, która umożliwia eksplorację Marsa i Księżyca."],["<a href='https://www.rmf24.pl/nauka/news-w-nocy-nastapi-czesciowe-zacmienie-ksiezyca,nId,3098372'>RMF 24<\/a>","<a href='https://www.rmf24.pl/nauka/news-indie-uruchomily-misje-na-ksiezyc-naukowcy-licza-na-odkrycie,nId,3108712'>RMF 24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-02/dzis-calkowite-zacmienie-slonca-nasa-przygotowalo-transmisje/'>Polsat News<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24997677,juz-dzis-czesciowe-zacmienie-ksiezyca-ziemski-satelita-swietuje.html'>Gazeta.pl<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C479291%2Cgowin-kosmos-jest-bardzo-powazna-galezia-gospodarki.html'>PAP<\/a>"],["07-16","07-22","07-02","07-16","07-05"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-13" class="section level2">
+<h2>Temat 13</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-13.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-741089a360f405fed523" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-741089a360f405fed523">{"x":{"filter":"none","data":[["Zapytaliśmy ekspertkę od spraw klimatu, jakie konsekwencje mogą mieć dla nas rekordowo wysokie temperatury i przeciągające się fale upałów.","W tym tygodniu temperatury będą dalekie od tego, do czego przyzwyczaiły nas czerwcowe upały.","W Belgii panowały wówczas rekordowe upały - temperatury dochodziło do 40 stopni Celsjusza.","Fala upałów dotarła do Skandynawii, przynosząc nietypowo wysokie dla tego regionu temperatury.","Naukowcy ostrzegają, że fale upałów w Europie stają się coraz częstsze, a intensywne temperatury są związane ze zmianami klimatu."],["<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24952334,rekordowy-czerwiec-za-nami-a-moze-byc-tylko-gorzej-fale-upalow.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24967308,prognoza-pogody-na-tydzien-1-7-lipca.html'>Gazeta.pl<\/a>","<a href='https://auto.wprost.pl/aktualnosci/10238185/rodzina-poszukiwala-jej-przez-szesc-dni-byla-zakleszczona-w-aucie-i-przezyla.html'>Wprost<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C489513%2Cfala-upalow-dotarla-do-skandynawii-prawie-35-stopni-w-szwecji.html'>PAP<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114881,25001104,jezioro-na-lodowcu-w-alpach-na-wysokosci-3-4-km-n-p-m-czas.html'>Gazeta.pl<\/a>"],["07-01","07-06","07-31","07-28","07-17"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-14" class="section level2">
+<h2>Temat 14</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-14.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-d1bcbdf1b8afb990608d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d1bcbdf1b8afb990608d">{"x":{"filter":"none","data":[["Spór rozpoczął się w piątek podczas odbywającego się w Poznaniu Szczytu Bałkanów Zachodnich.","Jego zdaniem, przyjęcie państw Bałkanów Zachodnich do Unii powinno być celem strategicznym."," Wydaje mi się, że kluczową sprawą jest, w jaki sposób Unia Europejska będzie podchodzić do kwestii Bałkanów Zachodnich.","Dla porównania  państwa Bałkanów Zachodnich razem mają mniejsze PKB na jednego mieszkańca niż Irlandia (81,6 tys. dolarów).","PAP: Niedawno w Poznaniu odbył się szczyt Bałkanów Zachodnich, a pan gościł w Gruzji i Mołdawii z okazji 10."],["<a href='https://fakty.interia.pl/swiat/news-zaostrza-sie-spor-dyplomatyczny-pomiedzy-bulgaria-a-serbia,nId,3086658'>Interia<\/a>","<a href='https://fakty.interia.pl/polska/news-czaputowicz-polska-zobowiazala-sie-do-wplaty-pol-miliona-eur,nId,3078284'>Interia<\/a>","<a href='http://www.polskieradio24.pl/7/1696/Artykul/2336635,Ekspert-potwierdza-slowa-Andrzeja-Dudy-to-jest-bieg-w-ktorym-nie-widac-konca'>Polskie Radio<\/a>","<a href='https://wiadomosci.radiozet.pl/Swiat/Szczyt-Balkanski-Poznan-2019.-Miekka-dyplomacja-zamiast-konkretow-KOMENTARZ'>Radio ZET<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C488192%2Cczaputowicz-polska-bedzie-dzialac-razem-z-von-der-leyen-na-rzecz-umocnienia'>PAP<\/a>"],["07-09","07-04","07-05","07-05","07-25"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-15" class="section level2">
+<h2>Temat 15</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-15.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-ca4ea967a592fa2b3d34" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ca4ea967a592fa2b3d34">{"x":{"filter":"none","data":[["Wszystkie przeloty marszałka Sejmu Marka Kuchcińskiego rządowymi samolotami były związane z obowiązkami służbowymi.","W czwartek Centrum Informacyjne Sejmu poinformowało, że wszystkie loty Marka Kuchcińskiego miały charakter służbowy, a obecność dodatkowych osób na pokładzie nie wpływa na koszt przelotu.","Zwrot zryczałtowanego kosztu (572,40 zł za lot w jedną stronę) za wszystkie loty Kancelaria Sejmu oszacowała na w sumie 15 tys. zł - dla Kuchcińskiego wydawać by się mogło, że to drobniaki.","Marszałek Sejmu Marek Kuchciński po fali krytyki, która wywołała informacja, że zabierał swoją rodzinę na pokład rządowego samolotu, pokryje koszty z własnej kieszeni.","W poniedziałek dyrektor Centrum Informacyjnego Sejmu Andrzej Grzegrzółka powiedział, że Kuchciński wpłacił 15 tysięcy złotych na organizacje charytatywne w zamian za 23 loty samolotem rządowym.","CIS przypomniało również, że w poniedziałek marszałek Sejmu przekazał na cele charytatywne 15 tys. zł, co - w ocenie Centrum - odpowiada równowartości kosztów przelotów samolotami rejsowymi na tych samych trasach.","W oświadczeniu CIS raz jeszcze podkreślono też, że wszystkie loty Marszałka były służbowe, a sam Kuchciński ma pełne prawo do korzystania z rządowych samolotów.","Jak dotąd Kancelaria Sejmu nie ujawniła pełnego wykazu lotów Marszałka z całej kadencji.","Jego zdaniem marszałek Sejmu powinien złożyć wyjaśnienia w sprawie korzystania z lotów rządowym samolotem wraz z członkami swej rodziny, powinien też zwrócić koszty tych lotów i podać się do dymisji.","\"Wyborcza\" zwróciła także uwagę na to, że realne koszty podróży marszałka Kuchcińskiego, właśnie ze względu na ich specjalny status, mogą być trudne do oszacowania i wyższe niż 572 złotych i 40 groszy, które wyliczyła Kancelaria Sejmu.","W poniedziałek Centrum Informacyjne Sejmu ujawniło, że chodzi nie o sześć, a jednak o 23 loty służbowe, w których czasie Marszałek zabierał na pokład członków rodziny  córkę, synów lub żonę.","Jak przyznał Terlecki, nie widzi potrzeby, by marszałek Sejmu Marek Kuchciński zwracał pieniądze za te loty.","Jak zapewnia Kancelaria Sejmu, każda z podróży Marszałka miała charakter służbowy.","Kancelaria uznała, że członkowie rodziny Marka Kuchcińskiego - żona, syn i córki - latają rządowym samolotem po stawce jaką Kancelaria Sejmu płaci w ryczałcie za bilety dla posłów.","Zwrócę się do ministra obrony narodowej i szefa kancelarii premiera, poproszę prezydenta, by stworzyć przepisy, które uregulują kwestię służbowych lotów z rodzinami - zapowiedział prezes PiS Jarosław Kaczyński w reakcji na sprawę przelotów marszałka Sejmu Marka Kuchcińskiego.","Odniósł się w ten sposób do decyzji Kuchcińskiego o pokryciu kosztów przelotów członków jego rodziny rządowym samolotem.","W sobotnim oświadczeniu marszałek Kuchciński podkreślił: \"Osoby towarzyszące mi w podróży nie mają możliwości opłacenia swojego lotu - ich obecność na pokładzie nie wpływa na koszt transportu.","Najpierw Kancelaria Sejmu kłamiąc ukrywała informacje o lotach marszałka z rodziną.","Marszałek Sejmu Marek Kuchciński przelał 15 tys. zł na Caritas i fundację Ewy Błaszczyk - poinformowała w poniedziałek Kancelaria Sejmu.","Wskazywał, że \"marszałek Kuchciński poświadcza nieprawdę - padały stwierdzenia, że to nie były loty prywatne, tylko loty służbowe\". - Tymczasem okazuje się, że samolot był używany do celów jak najbardziej prywatnych - zauważył."],["<a href='https://www.tvp.info/43676640/marszalek-sejmu-pokryje-koszty-przelotu-czlonkow-rodziny'>TVP INFO<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-slawomir-nitras-o-lotach-marszalka-sejmu-to-co-sie-dzieje-to,nId,3113841'>RMF 24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,25042308,kiedys-marek-kuchcinski-wymyslil-haslo-tkm-dzis-mowi-nam.html'>Gazeta.pl<\/a>","<a href='https://www.wprost.pl/polityka/10237364/owsiak-zaprasza-kuchcinskiego-na-polandrock-moze-przyleciec-samolotem.html'>Wprost<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/kaczynski-chce-stworzenia-przepisow-regulujacych-loty-politykow-z-rodzinami,956902.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/polska/news-przeloty-marszalka-kuchcinskiego-fiasko-kontroli-poselskiej,nId,3124062'>Interia<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Polityka/Marek-Kuchcinski-afera-z-przelotami-z-rodzina-rzadowym-samolotem.-Marszalek-zwroci-koszty'>Radio ZET<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Polityka/Kuchcinski-zostanie-odwolany-Bedzie-posiedzenie-Sejmu-ws.-wniosku-PO'>Radio ZET<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-25/podroze-kuchcinskiego-z-rodzina-rzadowym-samolotem-cis-wszystkie-mialy-charakter-sluzbowy/'>Polsat News<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/loty-marszalka-marka-kuchcinskiego-informacja-centrum-informacyjnego-sejmu,956633.html'>TVN24<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Polityka/Kuchcinski-przekazal-pieniadze-za-23-loty-rzadowym-samolotem-z-rodzina'>Radio ZET<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/terlecki-zaluje-ze-nie-lecialem-z-marszalkiem-mialbym-co-opowiadac,955963.html'>TVN24<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Polityka/Kuchcinski-lata-z-rodzina-rzadowym-samolotem.-Mamy-dowody-News-Radia-ZET'>Radio ZET<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-po-rodzinnych-lotach-marek-kuchcinski-przelal-pieniadze-na-k,nId,3120531'>RMF 24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/kaczynski-chce-stworzenia-przepisow-regulujacych-loty-politykow-z-rodzinami,956902.html'>TVN24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-26/po-chce-odwolania-marszalka-sejmu-wydarzenia-i-opinie-od-godz-1915/'>Polsat News<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-29/marszalek-sejmu-wplacil-15-tys-zl-na-cel-charytatywny-w-zamian-za-23-loty-samolotem-rzadowym/'>Polsat News<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,25042308,kiedys-marek-kuchcinski-wymyslil-haslo-tkm-dzis-mowi-nam.html'>Gazeta.pl<\/a>","<a href='https://fakty.interia.pl/polska/news-23-loty-marszalka-kuchcinskiego-z-rodzina-w-rzadowym-samoloc,nId,3120516'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/leszek-miller-w-faktach-po-faktach-o-lotach-marszalka-sejmu-marka-kuchcinskiego,956174.html'>TVN24<\/a>"],["07-26","07-25","07-31","07-28","07-30","07-31","07-26","07-31","07-25","07-29","07-29","07-26","07-25","07-29","07-30","07-26","07-29","07-31","07-29","07-26"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-16" class="section level2">
+<h2>Temat 16</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-16.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-564407ce8e9fb3ef9fff" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-564407ce8e9fb3ef9fff">{"x":{"filter":"none","data":[["\" też skupił się w jednym z komentarzy na porównaniach między Borisem Johnsonem a Donaldem Trumpem.","Jednak, jak oceniają komentatorzy, Boris Johnson deklarował większy entuzjazm dla takiego rozwiązania.","\"Gratuluję mojemu byłemu odpowiednikowi Borisowi Johnsonowi zastania premierem Wielkiej Brytanii.","To tylko kilka przykładów na to, że Boris Johnson ma, delikatnie mówiąc, dość luźny stosunek do faktów.","Boris Johnson wprowadził się na Downing Street ze swoją przyjaciółką Carrie Symonds."],["<a href='http://www.polskieradio24.pl/5/1223/Artykul/2346336,Swiat-pisze-o-Borisie-Johnsonie-zastanawia-sie-czy-sie-utrzyma-i-co-oznacza-dla-niego-brexit'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2345206,Poznamy-nastepce-Theresy-May-Wyniki-glosowania-konserwatystow'>Polskie Radio<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/boris-johnson-liderem-partii-konserwatywnej-reakcje-swiatowych-liderow,955214.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/deutsche-welle/news-kurs-na-downing-street-nadciaga-boris-johnson,nId,3106991'>Interia<\/a>","<a href='https://fakty.interia.pl/swiat/news-boris-johnson-zamieszkal-na-downing-street-z-dziewczyna-co-n,nId,3122174'>Interia<\/a>"],["07-25","07-23","07-23","07-21","07-30"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-17" class="section level2">
+<h2>Temat 17</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-17.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-eeae846c0aae8e335f67" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-eeae846c0aae8e335f67">{"x":{"filter":"none","data":[["Znaleziono tam także bardzo dużą ilość gotowych papierosów i krajanki tytoniowej.","Jak zdradzają służby, papierosy były w paczkach jednej z kaukaskich marek tytoniowych.","Obecnie podgrzewane papierosy sprzedają dwa z czterech koncernów tytoniowych działających w naszym kraju.","Według radia \"przedstawiciele korporacji zaprezentowali badania o potencjalnie mniejszej szkodliwości nowoczesnych wyrobów tytoniowych takich jak podgrzewane papierosy\".","Śledczy sprawdzą, czy przechwycone papierosy były legalne, czy też to tylko podróbki, wytworzone w jednej z dziesiątek nielegalnych fabryk tytoniowych działających w Azji, a zwłaszcza w Chinach."],["<a href='https://www.polsatnews.pl/wiadomosc/2019-07-05/sg-policja-i-kas-zlikwidowaly-nielegalna-fabryke-papierosow-zatrzymano-14-osob/'>Polsat News<\/a>","<a href='https://tvn24.pl/pomorze,42/gdansk-kontrabanda-przechwycona-przez-cbsp-i-kas,953518.html'>TVN24<\/a>","<a href='https://www.rmf24.pl/fakty/news-kontrowersyjne-spotkanie-przedstawicieli-tytoniowego-giganta,nId,3077847'>RMF 24<\/a>","<a href='https://tvn24bis.pl/z-kraju,74/jaroslaw-kaczynski-zakazal-udzialu-w-spotkaniach-o-charakterze-lobbystycznym,950061.html'>TVN24 bis<\/a>","<a href='https://www.tvp.info/43528187/gdansk-cbsp-i-kas-przechwycily-papierosy-z-chin'>TVP INFO<\/a>"],["07-05","07-17","07-04","07-04","07-17"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-18" class="section level2">
+<h2>Temat 18</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-18.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-4c7033f81b55cd4a041f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4c7033f81b55cd4a041f">{"x":{"filter":"none","data":[["Ugrupowanie Wołodymyra Zełenskiego miało poparcie około 50 proc., teraz to około 42-43 proc.","Słowa te padły w odpowiedzi na pytanie o apel prezydenta Ukrainy Wołodymyra Zełenskiego."," Zełenski ma 40 lat, nie załapał się na taką służbę wojskową jak Petro Poroszenko.","Prezydent Ukrainy Wołodymyr Zełenski zaproponował w piątek wymianę więźniów z Rosją.","Ekipa Zełenskiego zamierza także przeprowadzić deregulację, debiurokratyzację i poprawić warunki dla prowadzenia biznesu."],["<a href='http://www.polskieradio24.pl/5/1223/Artykul/2338238,Propozycja-Zelenskiego-Brakuje-wypowiedzi-innych-przywodcow'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2337775,Akcja-telemost-Rosja-siega-po-ukrainskie-media-przed-wyborami'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2343515,Na-Ukrainie-ostatni-dzien-kampanii-wyborczej-przed-wyborami-parlamentarnymi'>Polskie Radio<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/oleh-sencow-skazany-w-rosji-prezydent-ukrainy-chce-wymiany-wiezniow,954165.html'>TVN24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-28/doradca-zelenskiego-przygotowujemy-inicjatywy-dla-poprawy-stosunkow-z-polska/'>Polsat News<\/a>"],["07-09","07-08","07-19","07-19","07-28"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-19" class="section level2">
+<h2>Temat 19</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-19.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-ae7b785abe6af836ce8a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ae7b785abe6af836ce8a">{"x":{"filter":"none","data":[["Należy również pamiętać o wylogowywaniu się z aplikacji za każdym razem po zakończeniu ich użytkowania.","Następnie ukończył aplikację adwokacką; praktykował jako adwokat od 1978 r. do 1995 r.","W drugim można okazać mLegitymację, która również jest częścią aplikacji mObywatel.","Sukces aplikacji FaceApp jest bezsprzeczny - ściągnęło ją już ponad 100 milionów użytkowników.","\"Można już przy pomocy aplikacji mObywatel legitymować się w pociągach Intercity."],["<a href='https://tvn24bis.pl/z-kraju,74/policja-ostrzega-przed-oszustwami-na-blika,956819.html'>TVN24 bis<\/a>","<a href='https://fakty.interia.pl/polska/news-prezydent-powola-sedziego-wojciecha-sycha-w-sklad-pkw,nId,3115415'>Interia<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C487379%2Czagorski-pkp-intercity-zaczyna-honorowac-aplikacje-mobywatel.html'>PAP<\/a>","<a href='https://www.wprost.pl/prime-time/10234494/zapanowala-moda-na-starosc-filtr-faceapp-podbija-media-spolecznosciowe.html'>Wprost<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C487379%2Czagorski-pkp-intercity-zaczyna-honorowac-aplikacje-mobywatel.html'>PAP<\/a>"],["07-29","07-26","07-23","07-17","07-23"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-20" class="section level2">
+<h2>Temat 20</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-20.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-c5f92f4ff2e06547e563" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c5f92f4ff2e06547e563">{"x":{"filter":"none","data":[["Uroczystości są częścią obchodów zbliżającej się 75. rocznicy wybuchu Powstania Warszawskiego.","Przemysław Łuszczki wyraził radość, że może obchodzić rocznicę Powstania Warszawskiego w otoczeniu samych powstańców.","Prezydent Andrzej Duda mówił podczas wieczornych uroczystości w przeddzień 75. rocznicy wybuchu Powstania Warszawskiego, że było ono nie tylko zbrojnym zrywem, ale i ideą.","Ze swoją niezwykłą, wieczorną oprawą, historyczną trasą, oświetloną zniczami, wpisuje się spektakularnie w formę i tradycję corocznych obchodów wybuchu Powstania Warszawskiego","Na Placu Krasińskich, pod Pomnikiem Powstania Warszawskiego odprawiono mszę polową za Ojczyznę, w intencji poległych powstańców, ich dowódców oraz cywilnej ludności Warszawy.","Ów duchowny tworzył też struktury duszpasterskie na czas Powstania Warszawskiego."],["<a href='https://www.polsatnews.pl/wiadomosc/2019-07-30/rozpoczely-sie-uroczystosci-w-muzeum-powstania-warszawskiego/'>Polsat News<\/a>","<a href='https://www.tvp.info/43738635/w-warszawie-upamietniono-antka-rozpylacza'>TVP INFO<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2349130,Prezydent-nigdy-nie-zapomnimy-o-wartosciach-powstancow'>Polskie Radio<\/a>","<a href='https://www.wprost.pl/warszawa/10237285/13-tys-osob-pobiegnie-aby-uczcic-rocznice-powstania-warszawskiego-beda-utrudnienia-w-ruchu.html'>Wprost<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2349130,Prezydent-nigdy-nie-zapomnimy-o-wartosciach-powstancow'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2349186,Premier-powstancy-warszawscy-wzorem-dla-tych-ktorzy-sluza-Polsce'>Polskie Radio<\/a>"],["07-30","07-31","07-31","07-27","07-31","07-31"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-21" class="section level2">
+<h2>Temat 21</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-21.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-f37f25db7afcf6832018" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f37f25db7afcf6832018">{"x":{"filter":"none","data":[["To 14,2 proc. ludności kraju  o 4 pkt proc. więcej niż w pierwszym kwartale 2018 roku.","W skali całego roku 2019 daje to obniżkę o 0,25 pkt proc. w stosunku do roku ubiegłego.","Zgodnie z art. 53 pkt. 5 ustawy o prawie łowieckim grozi za to kara do 5 lat więzienia.","Równie silny był wzrost frekwencji w grupie wiekowej 25-39 lat - o 12 pkt proc., z 35 proc. do 47 proc.","W klasyfikacji sezonu RSMP na prowadzeniu umocnił się Marczyk z dorobkiem 110 pkt."],["<a href='https://tvn24bis.pl/ze-swiata,75/wiedomosti-w-rosji-wzrosla-liczba-biednych,956963.html'>TVN24 bis<\/a>","<a href='https://tvn24bis.pl/pieniadze,79/pit-2019-do-sejmu-wplynal-projekt-obnizki-podatkow-z-18-do-17-proc,956114.html'>TVN24 bis<\/a>","<a href='https://tvn24.pl/krakow,50/zgoda-bobry-wpadly-we-wnyki-pomogli-policjanci,952931.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/raporty/raport-ue-przed-wyborami-europejskimi/artykuly/news-eurobarometr-poparcie-dla-ue-najwyzsze-od-1983-roku,nId,3101910'>Interia<\/a>","<a href='https://www.rmf24.pl/sport/news-rajdowe-mp-mikolaj-marczyk-triumfuje-na-litwie,nId,3093581'>RMF 24<\/a>"],["07-30","07-26","07-15","07-18","07-13"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-22" class="section level2">
+<h2>Temat 22</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-22.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-3b46771048fa57938be0" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3b46771048fa57938be0">{"x":{"filter":"none","data":[["\"Jeśli (porównać - przyp. red.) demonstracje uliczne w Hongkongu z sytuacją na Tajwanie, to myślę, że widać duże różnice.","Były to największe demonstracje w Hongkongu od jego przyłączenia do Chin w 1997 roku.","Już w poniedziałek z posadami pożegnali się managerowie m.in. z Sydney, Hongkongu.","Inni manifestanci wymachiwali flagami USA i Wielkiej Brytanii, której Hongkong był kiedyś kolonią, widać było też plakaty nawołujące do ochrony autonomii Hongkongu oraz hasła takie jak \"Policja kłamie\" i \"Brońcie Hongkongu\".","\"To całkowicie niemożliwe do zaakceptowania w Hongkongu, który jest społeczeństwem praworządnym."],["<a href='https://fakty.interia.pl/swiat/news-szef-msz-tajwanu-sympatyzujemy-z-mieszkancami-hongkongu,nId,3090013'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/protesty-w-hongkongu-unia-europejska-apelujemy-o-dialog,949190.html'>TVN24<\/a>","<a href='https://biznes.wprost.pl/finanse-i-inwestycje/10231664/ogromne-ciecia-etatow-w-deutsche-bank-prace-straci-nawet-18-tys-osob.html'>Wprost<\/a>","<a href='https://fakty.interia.pl/swiat/news-tysiace-osob-na-kolejnym-protescie-w-hongkongu,nId,3095099'>Interia<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2344632,Kolejne-brutalne-starcia-w-Hongkongu-Policja-uzyla-gazu-lzawiacego'>Polskie Radio<\/a>"],["07-11","07-01","07-08","07-14","07-21"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-23" class="section level2">
+<h2>Temat 23</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-23.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-d6e17c3ff64b196fed81" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d6e17c3ff64b196fed81">{"x":{"filter":"none","data":[["Dariusz D. i Rafał F., którzy ostrzelali małżeństwo S. usłyszeli wyroki po 25 lat więzienia.","Najobszerniejsze wyjaśnienia złożył w poniedziałek Mateusz S., który powiedział, że obchody urodzin Hitlera w maju 2017 r. były niepubliczną, prywatną imprezą w lesie, zorganizowaną dla grona znajomych.","Dariusz S. był dyrektorem do spraw bezpieczeństwa i BHP w Agencji Ochrony Tajfun, która odpowiadała za bezpieczeństwo uczestników imprezy.","Zwyciężyła w tej imprezie siedmiokrotnie - w latach 2002-2003, 2009-2010, 2012, 2015-2016.","Wcześniej Stany Zjednoczone występowały przeciwko dostawom systemu S-400 do Turcji obawiając się, że groziłoby to ujawnieniem tajemnic konstrukcyjnych ich myśliwców F-35, których Turcja jest zarówno nabywcą, jak i częściowym producentem.","Według amerykańskich ekspertów S-500 może jednocześnie unieszkodliwić do 10 rakiet przeciwnika."],["<a href='https://www.tvp.info/43421717/lekarze-specjalisci-pomagali-groznym-przestepcom-w-unikaniu-kar'>TVP INFO<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C477182%2Cprokurator-wykazemy-publiczny-charakter-obchodow-urodzin-hitlera.html'>PAP<\/a>","<a href='https://tvn24.pl/pomorze,42/gdansk-akt-oskarzenia-w-sprawie-ochroniarza-dariusza-s,949921.html'>TVN24<\/a>","<a href='https://www.rmf24.pl/raporty/raport-tenis-na-rmf24/najnowszefakty/news-wimbledon-2019-serena-williams-po-raz-11-w-finale,nId,3090083'>RMF 24<\/a>","<a href='https://www.tvp.info/43295663/turcja-prezydent-recep-tayyip-erdogan-powiedzial-kiedy-rosyjskie-rakiety-trafia-do-turcji'>TVP INFO<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-rosja-rusza-z-produkcja-systemu-rakietowego-s-500-bedzie-w-c,nId,3072885'>RMF 24<\/a>"],["07-09","07-01","07-04","07-11","07-01","07-01"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-24" class="section level2">
+<h2>Temat 24</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-24.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-68c78a5e0614f6c6c5dd" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-68c78a5e0614f6c6c5dd">{"x":{"filter":"none","data":[["· bogactwem treści  w ofercie jest ponad 100 kanałów, w tym filmowe i sportowe kanały premium, a dekoder po podłączeniu anteny DVB-T umożliwia dostęp do bezpłatnych kanałów naziemnej telewizji cyfrowej,","Polsatem Sport Premium 1 i 2 HD, kanałami Eleven Sports czy Eurosport 1 i 2 HD  45 zł/mies.","Nowa usługa w Cyfrowym Polsacie - telewizja internetowa OTT, która umożliwia odbiór kanałów telewizyjnych przez Internet od dowolnego dostawcy (po Wi-Fi lub kablu)."," Grupy do transportu w kanałach formowaliśmy tak, żeby można było nad nimi panować.","Tylko jedna z nich - ONE Sotheby's, chwali się, że ma w ofercie aż 45 tys. nieruchomości.","Swoje cacka oferowali do sprzedaży na Instagramie oraz na własnym kanale na Youtubeie.","Jestem przekonany, że wypracujemy ofertę, która będzie korzystną dla obywateli, ale zrozumiała."],["<a href='https://www.polsatnews.pl/wiadomosc/2019-07-16/tv-z-internetem-od-dowolnego-dostawcy-nowosc-w-cyfrowym-polsacie/'>Polsat News<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-16/tv-z-internetem-od-dowolnego-dostawcy-nowosc-w-cyfrowym-polsacie/'>Polsat News<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-16/tv-z-internetem-od-dowolnego-dostawcy-nowosc-w-cyfrowym-polsacie/'>Polsat News<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2348696,Na-Wojskowych-Powazkach-pochowano-plk-Ryszarda-Bialousa-dowodce-batalionu-Zoska'>Polskie Radio<\/a>","<a href='https://nieruchomosci.wprost.pl/inwestowanie-w-nieruchomosci/10230577/miami-marzenia-na-wyciagniecie-reki.html'>Wprost<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-fabryka-podrobek-ferrari-i-lamborghini-auta-byly-oferowane-w,nId,3101999'>RMF 24<\/a>","<a href='https://fakty.interia.pl/polska/news-powstal-klub-psl-koalicja-polska-po-ko-traci-poslow,nId,3078252'>Interia<\/a>"],["07-16","07-16","07-16","07-31","07-03","07-18","07-04"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-25" class="section level2">
+<h2>Temat 25</h2>
+<p><img src="july_files/figure-html/unnamed-chunk-5-25.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-5d63a9cacb7d598a5f13" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5d63a9cacb7d598a5f13">{"x":{"filter":"none","data":[["Piast Gliwice wierzy w zwycięstwo i awans do drugiej rundy eliminacji Ligi Mistrzów.","Gliwiczanie rozpoczęli obecny sezon od 1. rundy eliminacji Ligi Mistrzów, ale odpadli w niej po dwumeczu z BATE Borysów (1:1, 1:2).","Można by tak wyliczać dalej, bo do Ligi Mistrzów BATE meldowało się także w 2010, 2009 i 2008.","\"Nie byliśmy dziś słabsi, ale rywal skuteczniejszy\" - powiedział po rewanżowym meczu 1. rundy kwalifikacji Ligi Mistrzów trener piłkarzy Piasta Gliwice Waldemar Fornalik.","Więcej zgarnęli jedynie w 2016 roku, kiedy to awansowali do fazy grupowej Ligi Mistrzów."],["<a href='https://www.rmf24.pl/sport/news-pilkarska-lm-piast-gliwice-wierzy-w-zwyciestwo,nId,3100016'>RMF 24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-07-22/crvena-zvezda-lub-hjk-potencjalnym-rywalem-piasta-w-3-rundzie-ligi-europy/'>Polsat News<\/a>","<a href='https://www.wprost.pl/liga-mistrzow-uefa/10232595/eliminacje-do-ligi-mistrzow-piast-nie-dal-sie-faworyzowanemu-bate.html'>Wprost<\/a>","<a href='https://www.rmf24.pl/sport/news-pilkarska-lm-fornalik-nie-bylismy-slabsi-ale-rywal-skuteczni,nId,3101718'>RMF 24<\/a>","<a href='https://www.wprost.pl/sport/10236981/legia-ma-o-co-grac-pilkarze-moga-dostac-35-mln-zl-premii.html'>Wprost<\/a>"],["07-17","07-22","07-11","07-18","07-26"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+<br><br>
+&nbsp;
+<hr />
+<p style="text-align: center;"> <a href=https://www.linkedin.com/in/jakub-kubajek-869945158/>Jakub Kubajek</a></p>
+&nbsp;
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

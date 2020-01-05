@@ -1,0 +1,12 @@
+---
+title: "Wprowadzenie"
+---
+
+Na portalach informacyjnych każdego dnia pojawiają się setki artykułów, w ciągu miesiąca jest to już kilkanaście tysięcy artykułów, a w całym roku są ich setki tysięcy. To powoduje, że jeżeli ktoś chce być na bierząco z najważniejszymi wydarzeniami w Polsce i na Świecie musi poświęcić bardzo dużo czasu na śledzenie wiadomości. Na szczęście, z pomocą przychodzi statystyka oraz *text mining*, które umożliwiają automatyczne wygenerowanie podsumowania najważniejszych informacji.
+
+Na tej stronie znajdują się automatycznie wygenerowane podsumowania najważniejszych wiadomości w poszczególnych miesiącach 2019 roku. W analizie uwzględniono artykuły, które opublikowano w wybranych polskich mediach internetowych. Wśród nich są RMF 24, TVN24, TVN24 bis, Radio ZET, Gazeta.pl, Polsat News, Wprost, Polskie Radio, TVP Info, PAP oraz Interia.
+
+Model służący do generowania podsumowań w pierwszym kroku wybiera najistotniejsze słowa w danym miesiącu. Następnie, przy pomocy algorytmu [silhouette](https://en.wikipedia.org/wiki/Silhouette_(clustering)) grupuje je do jak najbardziej jednolitych tematów. Na koniec, z wykorzystaniem algorytmu [LexRank](https://blog.nus.edu.sg/soctalent/2010/02/11/a-brief-summary-of-lexrank-graph-based-lexical-centrality-as-salience-in-text-summarization/) oraz [podobieństwa cosinusowego](https://towardsdatascience.com/overview-of-text-similarity-metrics-3397c4601f50) wybiera około 0,05% (od 5 do 20) zdań z artykułów, które zawierają słowa kluczowe. Dokładniejszy opis modelu znajduje się w zakładce [Metodologia](https://jkubajek.github.io/News_Selector/methodology) oraz w [prezentacji](https://jkubajek.github.io/News_Selector/News_Selector.pdf).
+
+Podsumowania poszczególnych miesięcy można znaleźć w zakładce **Podsumowania**.
+
