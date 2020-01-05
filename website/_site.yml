@@ -1,0 +1,57 @@
+name: "News_Selector"
+title: "Podsumowanie 2019 r. w mediach"
+base_url: https://jkubajek.github.io/News_Selector/index
+google_analytics: "UA-141513256-3"
+output_dir: "docs"
+exclude: ["*.txt", "*.csv", "*.xlsx", "*.RData", "*.R", "*.xls", "*.md"] 
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    include:
+      after_body: footer.html
+      in_header: GA_script.html
+    css: style.css
+navbar:
+  title: "Podsumowanie 2019 r."
+  left:
+    - text: "Wprowadzenie"
+      href: index.html
+    - text: "Metodologia"
+      href: methodology.html
+    - text: "Podsumowania"
+      menu:
+        - text: "Styczeń"
+          href: january.html
+        - text: "Luty"
+          href: february.html
+        - text: "Marzec"
+          href: march.html
+        - text: "Kwiecień"
+          href: april.html
+        - text: "Maj"
+          href: may.html
+        - text: "Czerwiec"
+          href: june.html
+        - text: "Lipiec"
+          href: july.html
+        - text: "Sierpień"
+          href: august.html
+        - text: "Wrzesień"
+          href: september.html
+        - text: "Październik"
+          href: october.html
+        - text: "Listopad"
+          href: november.html
+        - text: "Grudzień"
+          href: december.html
+  right:
+    - icon: fa-envelope fa-lg
+      href: mailto:j.kubajek@gmail.com
+    - icon: fa-github fa-lg
+      href: http://github.com/jkubajek
+    - icon: fa-linkedin fa-lg
+      href: https://www.linkedin.com/in/jakub-kubajek-869945158/

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Styczeń</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.5/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="site_libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="site_libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="site_libs/selectize-0.12.0/selectize.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141513256-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141513256-3');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Podsumowanie 2019 r.</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Wprowadzenie</a>
+</li>
+<li>
+  <a href="methodology.html">Metodologia</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Podsumowania
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="january.html">Styczeń</a>
+    </li>
+    <li>
+      <a href="february.html">Luty</a>
+    </li>
+    <li>
+      <a href="march.html">Marzec</a>
+    </li>
+    <li>
+      <a href="april.html">Kwiecień</a>
+    </li>
+    <li>
+      <a href="may.html">Maj</a>
+    </li>
+    <li>
+      <a href="june.html">Czerwiec</a>
+    </li>
+    <li>
+      <a href="july.html">Lipiec</a>
+    </li>
+    <li>
+      <a href="august.html">Sierpień</a>
+    </li>
+    <li>
+      <a href="september.html">Wrzesień</a>
+    </li>
+    <li>
+      <a href="october.html">Październik</a>
+    </li>
+    <li>
+      <a href="november.html">Listopad</a>
+    </li>
+    <li>
+      <a href="december.html">Grudzień</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="mailto:j.kubajek@gmail.com">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/jkubajek">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/jakub-kubajek-869945158/">
+    <span class="fa fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Styczeń</h1>
+
+</div>
+
+
+<div id="wstep" class="section level1">
+<h1>Wstęp</h1>
+<p>Opis modelu, wykorzystanego do wygenerowania podsumowania, znajduje się w zakładce <a href="https://jkubajek.github.io/News_Selector/methodology">Metodologia</a>.</p>
+<p>Poszczególne słowa zostały automatycznie pogrupowane w tematy na podstawie informacji o występowaniu w tych samych akapitach i artykułach.</p>
+<p>Na wykresach przedstawiono współwystępowanie poszczególnych słów oraz ich kluczowość. Im czcionka jest większa i posiada ciemniejszą barwę, tym wyższa kluczowość słowa w danym miesiącu. Linie łączące wybrane słowa oznaczają, że <a href="https://towardsdatascience.com/overview-of-text-similarity-metrics-3397c4601f50">podobieństwo cosinusowe</a> między ich embeddingami wynosi co najmniej 0,4. W celu uproszczenia wizualizacji, dla każdego punktu na grafie wybrano maksymalnie dwa połączenia o największym stopniu podobieństwa, które spełniają wskazane kryterium. Podobieństwo cosinusowe wyznaczano za pomocą embeddingów, które są wektorową reprezentacją słów i przechowują informację współwystępowaniu w tych samych akapitach i artykułach. W przypadku grafu, który prezentuje powiązania między słowami ze wszystkich tematów, minimalne podobieństwo wynosi 0,6.</p>
+<p>Na wykresach tematycznych przedstawiono nie więcej niż 40 najistotniejszych słów. Analogicznie, na głównym grafie umieszczono nie więcej niż 200 najistotniejszych słów w danym miesiącu.</p>
+</div>
+<div id="powiazania-miedzy-sowami" class="section level1">
+<h1>Powiązania między słowami<img src="january_files/figure-html/unnamed-chunk-3-1.png" width="1050" style="display: block; margin: auto;" /></h1>
+</div>
+<div id="wybrane-sowa-kluczowe" class="section level1">
+<h1>Wybrane słowa kluczowe</h1>
+<div id="htmlwidget-5c508f07ec27e1db575d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5c508f07ec27e1db575d">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"50\" data-max=\"44050\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"250\" data-max=\"16563\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"21\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["Adamowicz","Gdańsk","Paweł","WOŚP","Stefan","NBP","escape","prezydent","nienawiść","Świątecznej","finał","Orkiestry","dzik","Owsiak","scena","zmarły","Pomocy","Klinicznego","Wenezuela","Uniwersyteckiego","nóż","śnieg","Madura","Mariackiej","żałoba","śmierć","Guaido","przemoc","Glapiński","roomie","Koszalin","odstrzał","pogrzeb","Wojciechowska","Andruszkiewicz","wtargnąć","zarobek","tragicznie","Panama","roomów","zaatakować","Wawryniuk","pogrzebowy","Bazylice","lawinowy","Huawei","gdański","wynagrodzenie","Centrum","tragiczny","Dulkiewicz","Samorządowiec","wenezuelski","PGZ","Rybak","gdańszczanin","Juan","ASF","śnieżny","Salvini","nożownik","lawina","Bank","wyjście","Wielkiej","Martyn","Davos","zabójstwo","przeciwpożarowy","kondolencyjny","mur","Młodzieży","kondolencja","gdańska","atak","miasto","Srebrna","tragedia","wieżowiec","niebo","bank","współczucie","wieczor","departament","May","Bartłomiej","Nicolas","impreza","ugodzić","zamordować","Auschwitz","publiczny","dyrektor","MSWiA","poinformować","Wschód","jawność","Joachim","S","częściowy","przyjaciel","pożegnać","Brudziński","Grażyna","zemrzeć","napad","trumna","msza","konferencja","kamizelka","pomieszczenie","polować","Meksyk","modlitwa","wstrząsnąć","tymczasowy","Irlandia","prokuratura","Gazeta_Wyborcza","prezes","szpiegostwo","Pałacu","Kanada","opad","schronisko","TVP","Bliskiego","żółty","Gmin","Bliskim","mowa","Twitter","obiekt","Chrzanowski","serce","Adam","Matteo","rzeczniczka","Prezydenta","Gerald","potępić","kierowniczy","centymetr","cisz","pokój","krew","rodzina","traktat","psychiatryczny","rozporządzenie","domowy","projekt","przedterminowy","biznesmen","wyraz","umowa","Miasta","polityczny","pomorski","zarząd","psychiczna","świadek","napisać","samorządowiec","zeznać","działalność","uczcić","federalny","Prezydenckim","Jerzy","ewakuacja","Aleksander","spółka","Jarosław","austriacki","kontrola","przestępstwo","budynek","rana","media","przeciwdziałać","cyfryzacja","telefon","zakład","południe","zatrzymać","religia","ratownik","spotkać","Mazurek","zasługiwać","milczeć","nawoływać","CBA","ochrona","wyrządzić","niedziela","nagrać","ub.r","Magdalena","wiatr","pracownik","Narodowym","chiński","groźba","firma","wystawić","sprawca","brexit","KNF","nieprawidłowość","apelować","miast","ciężki","wiadomość","brat","solidarność","bezpieczeństwo","SA","zgon","poświęcić","Okręgowej","telewizja","Brazylia","metropolita","głęboki","akt","usiłować","gatunek","Gazeta","Wyborcza","Brytania","warunek","Piotr","zdarzenie","intencja","pożar","letni","zabezpieczenie","aresztować","dyplomata","zaapelować","ubiegły","zażalenie","przesłuchać","zawalić","Wspólnoty","noc","Dariusz","szlak","budżetowy","Iran","koncert","intensywny","opuszczenie","górnik","niedzielny","centrum","organizator","lekcja","zło","Kaczyńska","Reprezentantów","zamach","uroczystości","IMGW","choroba","miłość","Ameryka","Solidarności","ratusz","doprowadzenie","więzić","gazowy","zmarła","MON","budowa","typ","powiązać","prasowy","siedzieć","drugi","napastnik","uczciwy","ostrzec","Prezydent","scenariusz","godzina","kopalnia","stopić","VAT","pożarny","Pompeo","koncern","stopień","agresja","pamięć","odbyć","Kaczyński","wybuch","czynności","niebezpieczeństwo","dobro","brutalny","zastępca","ABW","wewnątrz","występować","śledztwo","użytkować","zdrowie","składać","gest","wysokość","centralne","Okręgowa","morderstwo","podejrzany","wczoraj","liczny","wyjść","turysta","bliscy","doniesienie","zabezpieczać","Mike","wpis","zagrozić","włoski","więzień","gospodarczy","ogłosić","masowy","wydarzenie","Leszek","napaść","imienie","wypracować","gospodarz","twardy","powodować","Rzeczniczka","góra","proponować","MSW","miesięczny","Antoni","wspominać","umorzyć","poprosić","miesięcznie","Wielka","Franciszek","Forum","komunikacja","podziać","zamknąć","kara","związek","temperatura","pełnić","wszelki","myśl","medialny"],[44050,33637,20012,7743,6718,6679,5715,5595,4161,3939,3814,3520,3202,2821,2771,2702,2678,2659,2578,2420,2416,2368,2263,2055,2045,1879,1823,1806,1798,1683,1616,1586,1572,1534,1451,1387,1344,1330,1330,1322,1189,1147,1146,1136,1135,1134,1132,1124,1102,1101,1079,1062,1005,991,980,964,962,956,955,927,926,918,908,898,897,869,865,856,843,826,823,810,797,779,776,760,737,721,717,700,697,696,686,674,666,651,621,617,610,572,539,538,514,513,507,491,481,480,480,477,471,467,462,461,457,453,438,437,424,420,413,409,408,405,397,393,391,370,367,365,364,357,351,349,349,341,334,331,327,326,324,324,322,322,319,318,317,311,311,311,310,310,298,297,292,291,290,288,286,286,285,284,284,281,276,272,264,264,263,262,259,258,252,250,250,249,245,239,235,233,227,223,222,215,205,202,202,202,202,201,200,199,197,196,196,195,195,194,191,189,188,187,185,185,183,182,181,179,175,175,174,173,172,171,171,170,169,168,168,167,163,161,161,161,159,157,156,156,155,151,151,150,148,145,145,142,141,140,138,136,135,134,133,132,130,126,126,126,126,125,123,123,122,120,120,118,118,117,116,114,113,112,112,112,110,109,107,106,104,103,102,101,101,98,98,97,95,93,92,92,91,90,89,89,89,88,88,87,84,84,84,84,83,83,83,83,83,83,82,81,80,80,79,79,78,77,77,77,77,76,76,76,76,75,75,75,74,74,74,73,72,71,71,70,70,70,70,70,69,69,68,68,68,67,67,65,65,65,64,64,64,64,63,63,62,61,61,60,60,60,60,60,59,59,59,58,57,56,55,55,54,54,54,53,53,53,52,52,52,52,51,51,51,50],[10266,12731,9854,1817,2435,2321,1164,16563,2156,1008,1665,928,963,825,1733,1261,1111,627,1473,636,1449,1315,1147,473,720,3398,854,1726,651,336,744,430,718,430,521,621,813,481,402,250,1331,485,567,291,377,498,561,1924,1699,1017,700,265,502,380,280,323,526,437,391,534,354,415,1262,1808,2123,281,324,1795,314,254,706,470,339,585,2883,4149,462,1022,434,450,1470,366,1710,543,1034,544,414,886,277,907,590,3315,1919,833,7115,858,289,638,930,311,805,347,747,329,1054,353,291,677,2466,452,463,352,586,511,255,938,747,3197,396,4006,260,459,554,819,332,962,288,432,511,412,804,1829,776,408,797,1180,290,1169,672,253,485,288,399,258,856,543,3231,601,299,602,688,3762,350,591,462,2031,494,4043,695,1035,292,1452,3264,445,938,1815,314,400,264,803,340,765,1847,2388,356,1661,1738,1406,1352,2927,345,250,773,738,1109,3217,350,741,4816,545,321,267,261,894,1656,296,2829,1308,284,483,578,1765,296,691,452,2755,568,1084,925,601,498,709,679,1065,312,427,532,2812,326,308,659,629,895,297,317,689,1116,471,272,619,475,1822,1697,1505,1423,396,1092,3126,499,1040,304,605,1509,280,1023,275,344,1147,516,343,410,1239,365,384,357,344,603,946,567,278,328,269,305,682,942,276,623,357,438,552,339,293,1544,310,257,672,1466,936,588,2311,304,609,378,298,690,1644,457,2608,457,260,731,447,356,449,1362,438,669,2315,2256,796,855,426,329,313,659,362,276,692,1739,266,1653,1044,255,1343,280,253,256,777,385,568,656,560,396,705,265,286,601,1880,485,354,1533,1758,414,1279,464,303,666,397,268,317,591,312,502,652,329,275,426,414,333,458,315,464,604,314,425,267,954,887,3640,532,845,801,572,433],[1,1,1,1,1,2,3,1,1,1,1,1,4,1,1,1,1,1,5,1,1,6,5,1,1,1,5,1,2,3,3,4,1,2,7,1,2,1,8,3,1,1,1,1,6,9,1,2,1,1,1,1,5,10,1,1,5,4,6,11,1,6,2,12,12,2,13,1,3,1,14,8,1,1,1,1,15,1,15,1,2,1,1,2,12,10,5,1,1,1,1,1,2,1,1,16,2,1,17,14,1,1,1,1,1,1,1,1,16,18,3,4,14,1,1,5,12,1,15,2,9,1,9,6,6,1,16,18,12,16,1,1,3,1,1,7,11,1,1,15,1,2,6,1,16,1,1,12,1,10,1,2,12,15,1,12,1,1,1,2,1,1,1,1,17,3,1,14,1,1,3,1,15,15,15,3,1,3,1,1,1,7,1,1,6,10,19,6,1,2,1,1,1,10,1,10,1,15,1,1,6,2,2,9,1,9,1,1,12,1,3,1,1,1,1,1,1,16,15,1,16,1,1,13,1,1,1,1,4,15,15,12,6,1,1,1,3,1,1,1,1,1,20,1,1,3,12,1,17,6,14,16,1,6,12,21,1,6,1,19,1,11,14,1,1,6,4,1,5,1,1,10,1,1,1,10,14,3,15,1,1,12,1,15,6,1,12,1,21,6,10,3,16,9,6,1,1,1,15,3,1,10,1,1,2,9,1,1,1,3,1,17,1,2,2,1,1,1,1,6,1,6,1,2,1,16,1,6,11,1,3,5,1,1,1,1,1,12,16,12,6,2,6,12,11,2,10,1,1,1,2,12,8,13,2,1,3,1,1,6,1,1,1,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Słowo<\/th>\n      <th>Kluczowość<\/th>\n      <th>Liczba wystąpień<\/th>\n      <th>Temat<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="lista-tematow" class="section level1">
+<h1>Lista tematów</h1>
+<div id="temat-1" class="section level2">
+<h2>Temat 1</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-1.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-900126e51e3c0c818dfa" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-900126e51e3c0c818dfa">{"x":{"filter":"none","data":[["Prezydent Gdańska Paweł Adamowicz został zaatakowany w niedzielę przez nożownika w trakcie gdańskiego finału Wielkiej Orkiestry Świątecznej Pomocy. 27-letni sprawca ugodził prezydenta kilkukrotnie nożem.","Badanie krwi Stefana W. wykazało, że w niedzielę, gdy zaatakował on nożem prezydenta Gdańska Pawła Adamowicza, nie był pod wpływem alkoholu  poinformowała PAP rzeczniczka prasowa prokuratury Okręgowej w Gdańsku Grażyna Wawryniuk.","W poniedziałek przed godz. 15 poinformowano o śmierci Pawła Adamowicza, który w niedzielę wieczorem został ugodzony nożem przez napastnika, który wtargnął na scenę WOŚP, podczas światełka do nieba.","Paweł Adamowicz zmarł w poniedziałek w Uniwersyteckim Centrum Klinicznym w Gdańsku, gdzie trafił po tym jak został zaatakowany nożem w centrum miasta przez 27-letniego Stefana W., który podczas finału WOŚP wtargnął na scenę.","W gdańskiej Bazylice Mariackiej w sobotę odbyły się uroczystości pogrzebowe zmarłego tragicznie prezydenta miasta Pawła Adamowicza.","Jak poinformowała media w poniedziałek Grażyna Wawryniuk, rzeczniczka Prokuratury Okręgowej w Gdańsku, zatrzymany po ataku Stefan W. usłyszał zarzut zabójstwa z zamiarem bezpośrednim z motywacji zasługującej na szczególne potępienie - pierwotnie miał to być zarzut usiłowania zabójstwa. - To bardzo tragiczna informacja (o śmierci prezydenta - red.).","Po tym, jak w wyniku ran odniesionych po ataku nożownika podczas finału WOŚP, zmarł prezydent Gdańska Paweł Adamowicz, pełniącą obowiązki prezydenta miasta została jego zastępczyni Aleksandra Dulkiewicz.","Dziękujemy za wszystkie wyrazy współczucia, solidarności i dobrych myśli - przede wszystkim w imieniu rodziny zmarłego prezydenta Pawła Adamowicza - podkreśliła we wtorek wiceprezydent Gdańska Aleksandra Dulkiewicz.","Kilka dni przed atakiem na Pawła Adamowicza gdańska prokuratura umorzyła trwające niespełna cztery miesiące śledztwo, w którym badała czy Młodzież Wszechpolska złamała prawo wystawiając \"polityczne akty zgonu\" prezydentom 11 miast, w tym Gdańska. - Nie ma związku między tym postępowaniem, a zdarzeniem, które zaistniało wczoraj - powiedziała w poniedziałek polsatnews.pl rzecznik prokuratury.","\"Wciąż trudno nam uwierzyć, że Prezydent Miasta Gdańska, Paweł Adamowicz, zmarł wskutek ciosów zadanych przez napastnika podczas 27. finału WOŚP\" - napisano we wspólnej deklaracji organizacji żydowskich przeciwko agresji i mowie nienawiści w życiu publicznym, opublikowanej we wtorek na Twitterze AJC Central Europe."," Żałoba w Gdańsku w związku ze śmiercią prezydenta miasta Pawła Adamowicza może zostać ogłoszona przez wojewodę pomorskiego - poinformowała rzeczniczka prasowa nieżyjącego samorządowca Magdalena Skorupka-Kaczmarek.","Zabójstwo prezydenta Gdańska Pawła Adamowicza jest dla nas wszystkich ogromną tragedią; to wielkie zło, które budzi potępienie, najgłębsze wyrazy współczucia dla rodziny - napisał na Twitterze premier Mateusz Morawiecki.","W czwartek o godzinie 17:00 w Europejskim Centrum Solidarności została wystawiona trumna z ciałem tragicznie zmarłego prezydenta Gdańska, gdzie przez 24 godziny będzie można pożegnać się z Pawłem Adamowiczem.","Prokuratura Okręgowa w Gdańsku wszczęła osobne śledztwo, w którym będzie sprawdzać prawidłowość organizacji i zabezpieczenia niedzielnego gdańskiego finału WOŚP, w czasie której to imprezy zaatakowany został prezydent Gdańska Paweł Adamowicz.","Prezydent Gdańska Paweł Adamowicz, zaatakowany przez nożownika podczas \"Światełka do nieba\" WOŚP, po reanimacji na miejscu zdarzenia został przewieziony do Uniwersyteckiego Centrum Klinicznego w Gdańsku.","Modlitwą i myślą staję przy trumnie świętej pamięci Pana Prezydenta Pawła Adamowicza, aby dziękować Bogu za wszelkie dobro, jakie przez Jego ręce i serce stało się udziałem wielu osób - napisał prymas Polski w liście kondolencyjnym po śmierci prezydenta Gdańska, Pawła Adamowicza.","9 stycznia, na pięć dni przed śmiercią Adamowicza z rąk nożownika, Grażyna Wawryniuk z prokuratury przekazała nam, że prokuratura uznała, iż akty nie zawierały gróźb i nawoływania do nienawiści, na które to elementy wskazywali przesłuchani w śledztwie prezydenci.","Prezydent zwrócił przy tym uwagę, że pozytywnie odebrał spotkanie przedstawicieli ugrupowań politycznych ws. inicjatywy wspólnego marszu przeciwko przemocy i nienawiści po ataku na prezydenta Gdańska Pawła Adamowicza, które odbyło się 14 stycznia w Pałacu Prezydenckim.","\"Polska płacze\",\"niestrudzony prezydent\", \"jego zabójstwo odkryło głębokie podziały\" - tak zagraniczne media, wspominając Pawła Adamowicza, opisywały w sobotę uroczystości pogrzebowe zamordowanego prezydenta Gdańska.","O śmierci prezydenta miasta poinformowali w poniedziałek przed godz. 15 lekarze z Uniwersyteckiego Centrum Klinicznego w Gdańsku, którzy po ataku nożownika ratowali bardzo ciężko rannego polityka."],["<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24360730,pawel-adamowicz.html'>Gazeta.pl<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/We-krwi-Stefana-W.-nie-bylo-alkoholu.-Atak-na-prezydenta-Gdanska-Pawla-Adamowicza'>Radio ZET<\/a>","<a href='https://www.tvp.info/40857055/skutki-nienawisci-niemieckie-media-o-smierci-adamowicza'>TVP INFO<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-majchrowski-ze-smiercia-prezydenta-adamowicza-trudno-sie-pog,nId,2789969'>RMF 24<\/a>","<a href='https://fakty.interia.pl/raporty/raport-pawel-adamowicz-nie-zyje/aktualnosci/news-dar-od-papieza-franciszka-dla-najblizszej-rodziny-pawla-adam,nId,2791684'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/atak-na-prezydenta-gdanska-zarzut-zabojstwa-i-areszt-dla-napastnika,900161.html'>TVN24<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C391920%2Cdworczyk-wybory-na-prezydenta-gdanska-najprawdopodobniej-3-marca.html'>PAP<\/a>","<a href='https://www.rmf24.pl/raporty/raport-prezydent-gdanska-nie-zyje/fakty/news-dulkiewicz-przyjelam-propozycje-objecia-funkcji-komisarza-w-,nId,2784427'>RMF 24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-14/adamowicz-zapowiadal-walke-z-mowa-nienawisci-prokuratura-umorzyla-postepowanie-ws-aktow-zgonu/'>Polsat News<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/organizacje-zydowskie-podpisaly-deklaracje-przeciwko-agresji-i-mowie-nienawisci,900752.html'>TVN24<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2245468,Po-ataku-na-prezydenta-Gdanska-Pawla-Adamowicza-Wyrazy-wsparcia-od-politykow'>Polskie Radio<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C387871%2Cpremier-zabojstwo-prezydenta-gdanska-pawla-adamowicza-wielkie-zlo'>PAP<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24376740,pogrzeb-pawla-adamowicza-ktorzy-politycy-zapowiedzieli-udzial.html'>Gazeta.pl<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/ziobro-o-szczegolach-sledztwa-w-sprawie-ataku-na-prezydenta-gdanska,900328.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/atak-na-prezydenta-adamowicza-przewieziony-do-szpitala-i-operowany,900174.html'>TVN24<\/a>","<a href='https://www.tvp.info/40902613/kondolencje-prymasa-polski-po-smierci-prezydenta-pawla-adamowicza'>TVP INFO<\/a>","<a href='https://tvn24.pl/pomorze,42/szczecin-prawinik-zawiadamia-prokurature-o-aktach-zgonu-prezydentow,904494.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/raporty/raport-pawel-adamowicz-nie-zyje/aktualnosci/news-prezydent-duda-bardzo-prosze-wszystkie-strony-sceny-politycz,nId,2794961'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/pogrzeb-prezydenta-adamowicza-w-relacji-zagranicznych-mediow,901991.html'>TVN24<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Pawel-Adamowicz-nie-zyje.-Lech-Walesa-zegna-prezydenta-Gdanska'>Radio ZET<\/a>"],["01-14","01-15","01-15","01-18","01-19","01-14","01-21","01-15","01-14","01-15","01-14","01-14","01-18","01-14","01-14","01-17","01-28","01-21","01-19","01-14"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-2" class="section level2">
+<h2>Temat 2</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-2.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-2ea7889b8f6345f7bf1a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2ea7889b8f6345f7bf1a">{"x":{"filter":"none","data":[["Konferencja prasowa w siedzibie Narodowego Banku Polskiego była wynikiem medialnych doniesień dotyczących wysokości zarobków współpracownic Adama Glapińskiego - szefowej departamentu komunikacji i promocji Martyny Wojciechowskiej oraz dyrektor gabinetu prezesa NBP Kamili Sukiennik.","W środę Mazurek zapowiedziała, że PiS przedstawi projekt ustawy, która wprowadzi jawność wysokości wynagrodzeń w Narodowym Banku Polskim zarówno obecnie, jak i za poprzednich zarządów; ustali ona również górną granicę zarobków dla osób zajmujących funkcje kierownicze w NBP.","Pod koniec roku \"Gazeta Wyborcza\" informowała, że współpracownica szefa NBP Adama Glapińskiego, szefowa departamentu komunikacji banku centralnego Martyna Wojciechowska, zarabia 65 tys. zł miesięcznie, przy czym wynagrodzenie poprzedniego szefa banku centralnego Marka Belki - według \"GW\" - wynosiło 57 tys. zł miesięcznie.","W ustawie znalazł się też przepis, nakazujący ujawnienie zarobki prezesów, wiceprezesów, członków zarządu NBP oraz pracowników banku zajmujących stanowiska dyrektora oddziału okręgowego, dyrektora departamentu i ich zastępców.","Ewa Raczko, zastępca dyrektora departamentu kadr NBP nie podała jednak konkretnych zarobków Martyny Wojciechowskiej.","Także w środę prezes NBP Adam Glapiński mówił, że \"ustawę o jawności wynagrodzeń w Narodowym Banku Polskim podpisze obydwoma rękoma\".","Zgodnie z projektem propozycje wynagrodzeń w pracowników NBP miałby przedkładać prezes banku.","Z projektu wynika, że wysokość wynagrodzeń prezesów, wiceprezesów, członków zarządów i osób pełniących kierownicze stanowiska w NBP będzie publikowana w BIP.","Zainteresowanie sprawą zarobków w NBP to pokłosie publikacji Gazety Wyborczej, której dziennikarze ujawnili, że jedna z współpracowniczek prezesa Glapińskiego  Martyna Wojciechowska  zarabiała około 65 tys. zł miesięcznie.","W środę zastępca dyrektora Departamentu Kadr NBP Ewa Raczko poinformowała, że \"żaden z dyrektorów w Narodowym Banku Polskim nie otrzymuje wynagrodzenia w wysokości około 65 tysięcy złotych bądź wyższej\".","Jak mówiła, wynagrodzenie kadry kierowniczej NBP (dyrektorzy i zastępcy dyrektora) w latach 2015-18 kształtowało się na porównywalnym poziomie zarówno za kadencji prezesa Marka Belki, jak i kadencji prezesa Adama Glapińskiego.","Gowin nawiązał do projektu PiS zmian w ustawie o NBP, która wprowadza jawność zarobków kadry kierowniczej w banku.","Z kolei projekt Kukiz'15 miał odebrać kontrolę zarządowi NBP nad wysokością i zasadami wynagrodzeń w banku i przekazać ją Sejmowi.","Tomczyk zwrócił uwagę, że projekt PiS miałby dotyczyć tylko wynagrodzeń zarządu NBP, nie obejmując pensji dyrektorów departamentów w tej instytucji.","Pani Martyna Wojciechowska [dyrektorka departamentu komunikacji w NBP - red.] była radną, więc musiała wpisać do oświadczenia majątkowego, że jej zarobki wzrosły po awansie.","W NBP została zatrudniona na stanowisku kierowniczym 1 lipca 2016 roku, niedługo po tym, jak prezesem banku został Adam Glapiński.","Wynagrodzenie pracownika banku centralnego nie mogłoby przekroczyć 60 proc. całkowitych poborów prezesa NBP.","W dalszej, poważniejszej części wywiadu, Witold Waszczykowski pytany był m.in. o zarobki dyrektorów w NBP i ogólnej postawy prezesa banku  Adama Glapińskiego.","Ustawa ma na celu ujawnienie wynagrodzenia kadry kierowniczej NBP i reguluje wysokość jej zarobków.","Wicepremier skomentował doniesienia o wysokich zarobkach współpracowniczek prezesa NBP Adama Glapińskiego."],["<a href='https://fakty.interia.pl/polska/news-zarobki-w-nbp-udzielanie-informacji-to-nie-jest-laska-to-jes,nId,2774372'>Interia<\/a>","<a href='https://fakty.interia.pl/polska/news-swita-prezesa-glapinskiego-nazwiska-zaskakuja,nId,2776246'>Interia<\/a>","<a href='https://tvn24bis.pl/z-kraju,74/nbp-to-coroczna-i-rutynowa-kontrola-nik,897459.html'>TVN24 bis<\/a>","<a href='https://www.rmf24.pl/ekonomia/news-ustawa-ujawniajaca-zarobki-w-nbp-przeglosowana-w-sejmie,nId,2810418'>RMF 24<\/a>","<a href='https://www.rmf24.pl/ekonomia/news-suski-trzeba-ujawnic-zarobki-dyrektorow-wszystkich-bankow-w-,nId,2777915'>RMF 24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/zarobki-w-nbp-czy-bedzie-gorna-granica-komentarze-politykow,899445.html'>TVN24<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C385961%2Ckukiz15-sklada-projekt-ustawy-w-sprawie-jawnosci-wynagrodzen-w-nbp.html'>PAP<\/a>","<a href='https://fakty.interia.pl/polska/news-pis-zlozy-projekt-ustawy-dot-jawnosci-zarobkow-w-nbp,nId,2796634'>Interia<\/a>","<a href='https://www.wprost.pl/kraj/10187440/jawne-zarobki-w-nbp-jest-kolejna-poprawka-glosowanie-przelozone.html'>Wprost<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/zarobki-w-nbp-czy-bedzie-gorna-granica-komentarze-politykow,899445.html'>TVN24<\/a>","<a href='https://www.tvp.info/40776908/nbp-zaden-z-dyrektorow-nie-zarabia-65-tys-zl'>TVP INFO<\/a>","<a href='https://fakty.interia.pl/polska/news-gowin-szlag-mnie-trafil-jak-uslyszalem-doniesienia-o-zarobka,nId,2810108'>Interia<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C397400%2Csejm-uchwalil-poselska-nowele-ustawy-dot-jawnosci-wynagrodzen-w-nbp.html'>PAP<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/zarobki-w-nbp-czy-bedzie-gorna-granica-komentarze-politykow,899445.html'>TVN24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24347293,dr-jacek-sokolowski-trudno-sobie-wyobrazic-cos-bardziej-niszczacego.html'>Gazeta.pl<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/oko-press-byla-dyrektorka-w-nbp-zarobila-ponad-273-tysiace-zl-w-pol-roku,899222.html'>TVN24<\/a>","<a href='https://www.wprost.pl/kraj/10187440/jawne-zarobki-w-nbp-jest-kolejna-poprawka-glosowanie-przelozone.html'>Wprost<\/a>","<a href='https://www.wprost.pl/polityka/10182649/waszczykowski-na-wywiad-przyszedl-w-koszuli-z-regionu-san-escobar-to-juz-druga-rocznica.html'>Wprost<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2255709,Senacka-komisja-nie-wniosla-poprawek-do-ustawy-dot-zarobkow-w-NBP'>Polskie Radio<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24339411,gowin-o-szokujaco-wysokich-zarobkach-dworek-glapinskiego.html'>Gazeta.pl<\/a>"],["01-09","01-10","01-04","01-30","01-11","01-11","01-10","01-22","01-30","01-11","01-09","01-30","01-31","01-11","01-10","01-10","01-30","01-10","01-31","01-07"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-3" class="section level2">
+<h2>Temat 3</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-3.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-4881feba5041c2d167e9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4881feba5041c2d167e9">{"x":{"filter":"none","data":[["Po tragicznym pożarze w escape roomie w Koszalinie kontrole w tego typu obiektach w całym kraju zarządził szef MSWiA.","Zmiany dotyczą m.in. ewakuacji w obiektach, w których prowadzona jest działalność gospodarcza, w tym escape roomów.","Wielkopolska straż pożarna podała w poniedziałek, po kontroli 57 escape roomów w Wielkopolsce, że nieprawidłowości stwierdzono w 53 obiektach.","W piątek po godzinie 17.00 w pożarze, który wybuchł w budynku mieszkalnym w Koszalinie, w pomieszczeniu typu \"escape room\" zginęło pięć osób.","26 zamkniętych obiektów i 1115 nieprawidłowości - to najnowsze dane po strażackich kontrolach w escape roomach w całym kraju.","PSP przeprowadziła do tej pory 22 kontrole escape roomów na Mazowszu; jeden obiekt nie spełniał wymogów przeciwpożarowych i został zamknięty, w pozostałych stwierdzono drobne nieprawidłowości - powiedział PAP rzecznik Mazowieckiego Komendanta Wojewódzkiego PSP mł. bryg.","15.30 przeprowadzono ok. 200 kontroli escape roomów w całej Polsce, 13 z nich zostało zamkniętych.","W piątek wieczorem, gdy pojawiły się informacje o tragedii w Koszalinie, Joachim Brudziński napisał na Twitterze, że polecił komendantowi głównemu straży pożarnej wszczęcie kontroli przeciwpożarowych we wszystkich obiektach typu escape room w kraju.","Nowelizacja ma wzmocnić ochronę przeciwpożarową budynków, w których prowadzi się działalność gospodarczą o charakterze rozrywkowym, m.in. takich jak escape roomy.","Dodał, że najgorszym wnioskiem z kontroli jest liczba 52 escape roomów zamkniętych decyzją straży pożarnej.  Stanowiły potencjalne takie samo zagrożenie, jak to, z którym mieliśmy do czynienia w Koszalinie  stwierdził.","\"Zleciliśmy pilne kontrole w tego typu działalności gospodarczej na terenie Koszalina.","Arkadiusz Piętak, we wszystkich 14 escape roomach wykryto w ramach kontroli 33 nieprawidłowości w zakresie przepisów przeciwpożarowych i 12 związanych z ewakuacją.","Kilkanaście nieprawidłowości dotyczących ochrony przeciwpożarowej i zasad ewakuacji wykazały przeprowadzone w sobotę do popołudnia kontrole w trzech escape roomach w Podlaskiem: w Białymstoku, Łomży i Suwałkach - podała straż pożarna.","Państwowa Straż Pożarna na polecenie ministra rozpoczęła kontrole przeciwpożarowe w obiektach typu escape room na terenie całego kraju.","Do wybuchu pożaru w koszalińskim escape roomie doszło w piątek około godz. 17 w trzykondygnacyjnym budynku w centrum miasta.","W woj. warmińsko-mazurskim w każdym z siedmiu skontrolowanych dotychczas obiektów typu escape room wykryto jakieś nieprawidłowości z zakresu ochrony przeciwpożarowej - poinformowała komenda wojewódzka straży pożarnej w Olsztynie.","W niedzielę Miłoszowi S., wnukowi osoby, która zarejestrowała działalność gospodarczą i prowadziła escape room w Koszalinie, prokuratura postawiła zarzut umyślnego stworzenia niebezpieczeństwa wybuchu pożaru w escape roomie i nieumyślnego doprowadzenia do śmierci osób.","Jeden z escape roomów w Grudziądzu został wyłączony z użytkowania po kontroli straży pożarnej - powiedział PAP rzecznik prasowy wojewódzkiej PSP w Toruniu Arkadiusz Piątek.","Jacek Starczewski.Jak wyjaśnił, w czasie kontroli escape roomów stwierdzono \"nieprawidłowości zarówno w zakresie braku dokumentacji obiektu pod względem budowlanym, jak i braku dokumentów z przeglądu instalacji elektrycznej czy sprzętu przeciwpożarowego\".","Rozporządzenie zakłada, że właściciel, zarządca lub użytkownik budynku, w którym prowadzona jest działalność typu escape room, powinien przed rozpoczęciem takiej działalności, oraz co najmniej raz na dwa lata, przeprowadzać praktyczne sprawdzenie organizacji ewakuacji ludzi, a także sprawdzenie spełnienia wymagań ochrony przeciwpożarowej."],["<a href='https://tvn24.pl/wiadomosci-z-kraju,3/kontrole-escape-roomow-zarzadzone-w-calym-kraju-pierwsze-wyniki,897695.html'>TVN24<\/a>","<a href='http://www.polskieradio24.pl/130/5925/Artykul/2244431,Gen-Ryszard-Grosset-escape-roomy-formalnie-nie-istnialy-wiec-straz-pozarna-udawala-ze-o-nich-nie-wie'>Polskie Radio<\/a>","<a href='https://tvn24.pl/poznan,43/wojewoda-wielkopolski-zleca-kontrole-miejsc-rozrywki,900600.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/polska/news-piec-radosnych-wchodzacych-w-zycie-dziewczat-zostalo-z-zycia,nId,2766205'>Interia<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-nowe-dane-po-kontrolach-w-escape-roomach-26-zamknietych-obie,nId,2770538'>RMF 24<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-straz-pozarna-kontroluje-escape-roomy-nieprawidlowosci-w-wie,nId,2769040'>RMF 24<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C383501%2Cpremier-poprosilem-o-szczegolowy-raport-z-kontroli-wszystkich-escape-roomow'>PAP<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/koszalin-tragiczny-pozar-w-w-escape-roomie,897487.html'>TVN24<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Jest-projekt-nowelizacji-przepisow-ws.-escape-roomow.-Przygotowalo-go-MSWiA'>Radio ZET<\/a>","<a href='http://www.polskieradio24.pl/9/299/Artykul/2242381,Szef-MSWiA-do-tragedii-w-Koszalinie-by-nie-doszlo-gdyby-przestrzegano-przepisow'>Polskie Radio<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-kontrole-po-tragedii-w-koszalinie-sa-przypadki-zaprzestania-,nId,2766227'>RMF 24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24334852,kontrole-escape-roomow-w-calej-polsce-w-grudziadzu-zamkneli.html'>Gazeta.pl<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2241469,Andrzej-Duda-laczymy-sie-z-mieszkancami-Koszalina-w-myslach-bolu-i-modlitwie'>Polskie Radio<\/a>","<a href='https://www.tvp.info/40727676/escape-room-pokoj-zagadek-czy-pulapka-tylko-w-stolicy-jest-ich-ponad-120'>TVP INFO<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24334802,pozar-w-koszalinie-wlasciciele-polskich-escape-roomow-wydali.html'>Gazeta.pl<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-kolejne-escape-roomy-zamkniete-tylko-w-krakowie-to-juz-12-lo,nId,2770878'>RMF 24<\/a>","<a href='https://fakty.interia.pl/polska/news-dystrybutor-wstrzymal-premiere-filmu-escape-room,nId,2770702'>Interia<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-escape-roomy-w-grudziadzu-i-plocku-zamkniete-po-kontroli-str,nId,2767684'>RMF 24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/kontrole-escape-roomow-zarzadzone-w-calym-kraju-pierwsze-wyniki,897695.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/polska/news-wiceszef-mswia-nieprawidlowosci-w-437-escape-roomach,nId,2788033'>Interia<\/a>"],["01-05","01-11","01-15","01-04","01-07","01-06","01-06","01-04","01-09","01-08","01-04","01-05","01-06","01-05","01-05","01-07","01-07","01-05","01-05","01-17"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-4" class="section level2">
+<h2>Temat 4</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-4.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-c7600e1106e5815dc301" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c7600e1106e5815dc301">{"x":{"filter":"none","data":[["Minister podkreślił, że polowania na dziki mają być skoordynowane w jednym czasie w pasie rozdzielającym obszar, gdzie jest ASF od tego, gdzie nie ma choroby.","Natomiast jeśli chodzi o ASF to dziki nie są głównym wektorem przenoszenia tej choroby, jest jednym z kilku.","Według nich, zgoda ministra środowisk, na odstrzał dzików, jako forma walki z ASF, może jednak oznaczać wyeliminowanie tego gatunku z polskiej przyrody.","Rząd - aby walczyć z ASF - zdecydował się na odstrzał dzików na określonych terenach.","Uzgodniono wówczas, że jednym ze skutecznych sposobów walki z ASF jest \"odpowiedni odstrzał dzików\"."],["<a href='https://fakty.interia.pl/polska/news-nie-beda-strzelac-do-ciezarnych-loch-zapowiedz-ministra,nId,2777652'>Interia<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-probuje-sie-z-nas-zrobic-bezmyslnych-rzeznikow,nId,2776131'>RMF 24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-09/faszystowska-etyka-eksterminacji-profesor-elzanowski-o-masowym-odstrzale-dzikow/'>Polsat News<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C385859%2Ckukiz-strzelanie-do-prosnych-loch-bandytka-tak-jak-kiedys-bandera-i-upa'>PAP<\/a>","<a href='https://fakty.interia.pl/polska/news-rmf-komisja-europejska-popiera-plan-odstrzalu-dzikow-i-chwal,nId,2777667'>Interia<\/a>"],["01-11","01-10","01-09","01-10","01-11"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-5" class="section level2">
+<h2>Temat 5</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-5.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-10f2e8b55dd7fdb4dc1a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-10f2e8b55dd7fdb4dc1a">{"x":{"filter":"none","data":[["Prezydent Wenezueli Nicolas Maduro ogłosił, że zamknie ambasadę i konsulaty w USA.","Biały Dom zaapelował do wenezuelskiej armii, by ta zaakceptowała \"pokojowy\" i \"demokratyczny\" transfer władzy od Nicolasa Maduro do Juana Guaido.","W komunikacie ogłoszonym w mediach państwowych rząd kubański ponowił deklarację niezmiennego poparcia dla swego sojusznika Nicolasa Maduro i energicznie potępił próbę narzucenia Wenezueli w drodze zamachu stanu marionetkowego rządu tymczasowego w służbie Stanów Zjednoczonych, jak nazywa tymczasowy gabinet, który zamierza powołać Juan Guaido.","Prezydent Wenezueli Nicolas Maduro odrzucił wystosowane przez kilka państw zachodnich ultimatum wzywające do rozpisania nowych wyborów w ciągu ośmiu dniu i oświadczył, że lider opozycji Juan Guaido, deklarując się tymczasowym przywódcą państwa, złamał konstytucję.","Przedstawicielka ONZ przypomniała, że kulminacją protestów opozycji była deklaracja ogłoszona 23 stycznia przez Juana Guaido, przewodniczącego zdominowanego przez opozycję parlamentu Wenezueli (Zgromadzenia Narodowego), że nie uznaje Maduro i jego rządu.","Juan Guaido próbuje obalić Nicolasa Maduro, który po kontrowersyjnych wyborach, został zaprzysiężony na drugą kadencję.","\"Postawienie w Wenezueli na Nicolasa Maduro może okazać się kosztowne dla Kremla.","Departament Stanu USA uznał przedstawiciela przywódcy wenezuelskiej opozycji Juana Guaido jako charge d'affaires Wenezueli w Waszyngtonie.","\"W przeciwieństwie do Maduro, Zgromadzenie Narodowe, w tym Juan Guaido, ma demokratyczny mandat od obywateli Wenezueli\" - napisał na Twitterze Donald Tusk.","Ogłoszone przez Juana Guaido przejęcie władzy w Wenezueli uznały Stany Zjednoczone, Kanada, większość państw Ameryki Łacińskiej (z wyjątkiem m.in.","Setki tysięcy mieszkańców Wenezueli domagają się zakończenia rządów Nicolasa Maduro.","\"Przewodniczący Juan Guaido jest jedynym instytucjonalnym rozmówcą w Wenezueli, ponieważ ma demokratyczną legitymację.","Nicolas Maduro zaapelował do wojska o mobilizację i zachowanie jedności wobec wezwań do rebelii, o którą apeluje wspierany przez Stany Zjednoczone Juan Guaido.","W oświadczeniu amerykański sekretarz stanu powiedział, że Waszyngton poprze przywódcę opozycji Juana Guaido, gdy utworzy on rząd tymczasowy i przygotuje kraj do wyborów. - Wenezuelczycy cierpieli wystarczająco długo pod (rządami - red.) katastrofalnej dyktatury Nicolasa Maduro - powiedział Pompeo.","Państwa członkowskie Unii Europejskiej stawiają ultimatum przywódcy Wenezueli Nicolasowi Maduro."],["<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114881,24397671,nicolas-maduro-zapowiedzial-zamkniecie-ambasady-i-konsulatow.html'>Gazeta.pl<\/a>","<a href='https://www.rmf24.pl/raporty/raport-kryzys-w-wenezueli/fakty/news-waszyngton-wzywa-armie-wenezueli-do-zaakceptowania-demokraty,nId,2808241'>RMF 24<\/a>","<a href='https://www.tvp.info/41007167/kuba-za-kryzysem-w-wenezueli-kryje-sie-walka-o-kontrole-nad-ropa-naftowa'>TVP INFO<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-27/maduro-odrzuca-ultimatum-ws-wyborow-ale-gotowy-jest-rozmawiac/'>Polsat News<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-26/apel-przedstawicielki-onz-o-polityczne-rozwiazanie-kryzysu-w-wenezueli/'>Polsat News<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114881,24402879,trzy-kraje-unii-stawiaja-ultimatum-maduro-daja-osiem-dni-na.html'>Gazeta.pl<\/a>","<a href='https://fakty.interia.pl/swiat/news-niezawisimaja-gazieta-stawianie-na-maduro-moze-drogo-kosztow,nId,2801781'>Interia<\/a>","<a href='https://www.rmf24.pl/raporty/raport-kryzys-w-wenezueli/fakty/news-waszyngton-uznal-przedstawiciela-juana-guaido-jako-charge-d-,nId,2806494'>RMF 24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114881,24402879,trzy-kraje-unii-stawiaja-ultimatum-maduro-daja-osiem-dni-na.html'>Gazeta.pl<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/maduro-trump-nakazal-zabicie-mnie-kolumbijskiemu-rzadowi-i-mafii,905026.html'>TVN24<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-lider-wenezuelskiej-opozycji-oglosil-sie-tymczasowym-prezyde,nId,2798444'>RMF 24<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/antonio-tajani-prezydent-wenezueli-nicolas-maduro-musi-odejsc,903661.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/usa-trump-w-wenezueli-rozpoczela-sie-walka-o-wolnosc,905338.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/usa-trump-dla-wenezueli-wszystkie-opcje-sa-mozliwe,903300.html'>TVN24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114881,24402879,trzy-kraje-unii-stawiaja-ultimatum-maduro-daja-osiem-dni-na.html'>Gazeta.pl<\/a>"],["01-24","01-29","01-24","01-27","01-26","01-26","01-25","01-28","01-26","01-30","01-23","01-25","01-31","01-23","01-26"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-6" class="section level2">
+<h2>Temat 6</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-6.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-debb4802447e41121905" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-debb4802447e41121905">{"x":{"filter":"none","data":[["Wszystko z powodu intensywnych opadów śniegu i czwartego stopnia zagrożenia lawinowego.","Dyrekcja Babiogórskiego Parku Narodowego zaapelowała natomiast do turystów, aby w związku z utrzymującymi się bardzo trudnymi warunkami panującymi na zboczach Babiej Góry, zagrożeniem lawinowym trzeciego stopnia i bardzo silnym wiatrem połączonym z opadami śniegu, słabą widocznością i niską temperaturą, nie wybierali się w najbliższym czasie na babiogórskie szlaki.","IMGW wydało w czwartek po południu ostrzeżenie pierwszego stopnia przed intensywnymi opadami śniegu na południu kraju.","Opady śniegu, które są przewidywane na najbliższą dobę w górach, nie powinny jednak przekroczyć kilkunastu centymetrów, ale mogą powodować zagrożenie lawinowe ze względu na to, że ma wzrosnąć prędkość wiatru - dodał.","W południowych częściach województw śląskiego, małopolskiego i podkarpackiego obowiązuje ostrzeżenie drugiego stopnia w związku z intensywnymi opadami śniegu powodującymi przyrost pokrywy śnieżnej od 40 cm do 50 cm.","IMGW ostrzega przed silnym wiatrem, intensywnymi opadami śniegu, zamieciami i zawiejami śnieżnymi.","W czwartek przed południem poinformowano, że ratownikom TOPR udało się dolecieć śmigłowcem do schroniska w Dolinie Pięciu Stawów Polskich i przetransportować wszystkich turystów, których uwięziły tam obfite opady śniegu i najwyższy stopień zagrożenia lawinowego.","Według komunikatu wydanego przez karkonoską grupę GOPR, w ciągu ostatniej doby spadło w Karkonoszach kolejne 20 cm świeżego śniegu, co powoduje utrzymanie wysokiego stopnia zagrożenia lawinowego.","Zasypane drogi, wstrzymany ruch kolejowy, zagrożenie lawinami - przez intensywne opady śniegu niektóre miejscowości na południu Niemiec zostały odcięte od świata."," Po opadach deszczu, deszczu ze śniegiem i mokrego śniegu na tych obszarach w nocy będzie bardzo ślisko - ostrzega przed niebezpieczną pogodą Maria Waliniowska z Instytutu Meteorologii i Gospodarki Wodnej.W nocy temperatura minimalna wyniesie od -7 stopni na Podlasiu, przez -5 w centrum, do 0 na zachodzie. - Silniej zawieje tylko na Wybrzeżu Wschodnim, tam porywy wiatru sięgną 65 kilometrów na godzinę - informuje Maria Waliniowska.Pokrywa śnieżna na Kasprowym Wierchu wynosi 195 cm, na Śnieżce - 142 cm.","Grupa Krynicka GOPR informuje na swojej stronie o bardzo trudnych warunkach na szlakach z powodu dużych opadów śniegu i silnego wiatru.","Nie dość, że musi być odporne na mróz dochodzący do -20 stopni i opady śniegu to dodatkowo, przez umieszczenie na zboczu góry, wystawione jest na działanie bardzo silnych wiatrów.","Jeżeli nadal będzie tak intensywnie padać śnieg wprowadzony ma zostać trzeci stopień zagrożenia lawinowego.","Himalaiści na bieżąco monitorują prognozy pogody w obawie przed opadami śniegu, lawinami i wiatrami.","Padający od kilku dni w Tatrach śnieg spowodował wzrost zagrożenia lawinowego także po słowackiej stronie gór.","W Warszawie (1 stopień), Trójmieście (2 stopnie) i Krakowie (1 stopień) będzie pochmurno z opadami śniegu.","Kluczowym problemem lawinowym są niestabilne depozyty śniegu naniesionego przez wiatr\" - ostrzegają w komunikacie ratownicy TOPR.","Nieustające opady śniegu sprawiają, że w górach zwiększa się ryzyko samoczynnego zejścia lawin.","W Bieszczadach zagrożenie lawinowe występuje w miejscach, gdzie bardzo silny i silny wiatr odłożył większe ilości śniegu i uformował tzw. deski śnieżne - dotyczy to głównie stromych stoków, zagłębień terenowych oraz miejsc za przełamaniami terenu.","Mimo czwartego stopnia zagrożenia lawinowego i ostrzeżeń ratowników górskich i władz Tatrzańskiego Parku Narodowego (TPN), na niektóre szlaki..."],["<a href='https://wiadomosci.radiozet.pl/Polska/Tatry-turysci-utkneli-w-schroniskach-czwarty-stopien-zagrozenia-lawinowego'>Radio ZET<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C382632%2Costrzezenia-przed-intensywnymi-opadami-sniegu-na-poludniu-polski-i-lawinami'>PAP<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/IMGW-ostrzezenia-przed-intensywnymi-opadami-sniegu-i-lawinami-w-gorach'>Radio ZET<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-posiedzenie-kryzysowe-w-malopolsce-nie-bedzie-zimy-stulecia,nId,2770694'>RMF 24<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Pogoda-w-czwartek.-Ostrzezenia-IMGW.-Silny-wiatr-i-zawieje-sniezne'>Radio ZET<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/IMGW-15.01.2019.Ostrzezenia-przed-intensywnymi-opadami-sniegu-wiatrem-i-zamieciami'>Radio ZET<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-w-gorach-sytuacja-jest-katastrofalna-ratownicy-apeluja-by-ni,nId,2765689'>RMF 24<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-niebezpieczenstwo-nie-mija-ekstremalne-warunki-w-beskidach-i,nId,2767587'>RMF 24<\/a>","<a href='https://fakty.interia.pl/swiat/news-niz-beniamin-i-turbulencje-pogodowe-ostrzezenie-dla-baltyku,nId,2772670'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24334623,kierowcy-uwaga-na-slizgawice-imgw-ostrzega-przed-lodem-na.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24337505,trudna-noc-gopr-owcow-dopiero-co-dotarli-do-poszukiwanych-turystow.html'>Gazeta.pl<\/a>","<a href='https://nieruchomosci.wprost.pl/hotele-i-turystyka/10184505/dom-3-tysiace-m-npm-na-zboczu-alpejskiego-szczytu-powstal-niezwykly-projekt.html'>Wprost<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-w-gorach-sytuacja-jest-katastrofalna-ratownicy-apeluja-by-ni,nId,2765689'>RMF 24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-21/polacy-znow-pod-k2-kowalewski-klonowski-i-dunaj-w-ekipie-txikona/'>Polsat News<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114881,24333552,slowacy-wywolali-dwie-lawiny-w-tatrach-zachodnich-jedna-z-nich.html'>Gazeta.pl<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Prognoza-pogody-9-stycznia.-Snieg-deszcz-ze-sniegiem-pochmurno'>Radio ZET<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-lawinowa-czworka-w-tatrach-taka-sytuacja-zdarza-sie-raz-na-k,nId,2763886'>RMF 24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24332504,obfite-opady-sniegu-imgw-ostrzega-przed-opadami-w-tatrach.html'>Gazeta.pl<\/a>","<a href='https://tvn24.pl/krakow,50/turysci-uwiezieni-w-schroniskach-gorskich-trudna-sytuacja-w-gorach,897325.html'>TVN24<\/a>","<a href='https://www.tvp.info/40728376/stan-zagrozenia-o-znamionach-kleski-zywiolowej-w-szczyrku'>TVP INFO<\/a>"],["01-03","01-03","01-03","01-07","01-03","01-15","01-04","01-05","01-08","01-05","01-06","01-18","01-04","01-21","01-04","01-09","01-03","01-04","01-04","01-05"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-7" class="section level2">
+<h2>Temat 7</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-7.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-36ae90d1b36718633dc2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-36ae90d1b36718633dc2">{"x":{"filter":"none","data":[["Adam Andruszkiewicz nie kojarzy się z jakimiś specjalnymi kompetencjami w dziedzinie cyfryzacji.","Więcej, również powołaniu na stanowisko wiceministra cyfryzacji Adama Andruszkiewicza w dalszej części programu.","Transfer popularnego na Facebooku narodowca Adama Andruszkiewicza do rządu PiS ma pomóc w cyfryzacji państwa.","Jak tłumaczono w rządzie, Adam Andruszkiewicz cieszy się dużymi zasięgami w serwisach społecznościowych, stąd na cyfryzacji zna się jak mało kto.","Serwis Pikio.pl opublikował artykuł, w którym oskarża współpracownika wiceministra cyfryzacji Adama Andruszkiewicza o skłonności nazistowskie.","To dlaczego do rządu bierzecie kogoś spoza klubu i fotel wiceministra cyfryzacji dajecie Adamowi Andruszkiewiczowi, posłowi niezrzeszonemu?","PO pyta, czy ABW sprawdziła ewentualne powiązania nowego wiceministra cyfryzacji Adama Andruszkiewicza z Rosją.","Karczewski zapytany w Polsat News, czy podoba mu się nowy wiceminister cyfryzacji Adam Andruszkiewicz, odpowiedział: \"To nie jest kwestia tego, czy mi się podoba, czy nie."],["<a href='http://www.polskieradio24.pl/5/1222/Artykul/2240684,Prokuratura-przerwala-przesluchanie-bylej-tlumaczki-Donalda-Tuska-Komentarze'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/7/129/Artykul/2240696,Adam-Szlapka-chcemy-zbudowac-szeroki-front-partii-opozycyjnych'>Polskie Radio<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24325898,oficjalna-wersja-brzmi-jak-zart-nominacja-dla-andruszkiewicza.html'>Gazeta.pl<\/a>","<a href='https://fakty.interia.pl/polska/news-adam-andruszkiewicz-cytaty-zebrane,nId,2764012'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24331661,byly-asystent-wiceministra-heilowal-do-zdjecia-nigdy-nie-zostalem.html'>Gazeta.pl<\/a>","<a href='https://www.rmf24.pl/tylko-w-rmf24/popoludniowa-rozmowa/news-kuzmiuk-o-wypowiedziach-andruszkiewicza-spuscmy-na-to-zaslon,nId,2766046'>RMF 24<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C381896%2Cpo-pyta-czy-abw-sprawdzila-ewentualne-powiazania-andruszkiewicza-z-rosja'>PAP<\/a>","<a href='https://fakty.interia.pl/polska/news-karczewski-o-andruszkiewiczu-ocenimy-go-za-jakis-czas,nId,2764303'>Interia<\/a>"],["01-04","01-04","01-02","01-03","01-04","01-04","01-03","01-03"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-8" class="section level2">
+<h2>Temat 8</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-8.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-bac6b13f22038565d95e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bac6b13f22038565d95e">{"x":{"filter":"none","data":[["Papież Franciszek jest już w Panamie, gdzie bierze udział w Światowych Dniach Młodzieży.","W środę rano papież Franciszek wyrusza do Panamy na XXXIV Światowe Dni Młodzieży.","Podczas Światowych Dni Młodzieży w Panamie Franciszek podszedł do pielgrzymów, wśród których stała kobieta w tekturowej tiarze papieskiej na głowie.","Od wtorku w Panamie będzie żaglowiec \"Dar Młodzieży\" płynący w Rejsie Niepodległości.","W historii Światowych Dni Młodzieży Panama jest najmniejszym krajem, w którym je zorganizowano."],["<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/swiatowe-dni-mlodziezy-w-panamie-incydent-podczas-przejazdu-papieza,903385.html'>TVN24<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-we-wtorek-startuja-swiatowe-dni-mlodziezy-w-panamie,nId,2794683'>RMF 24<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/panama-sto-lat-od-papieza-franciszka,904000.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/swiat/news-3500-polakow-wezmie-udzial-w-swiatowych-dniach-mlodziezy-w-p,nId,2794681'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/swiatowe-dni-mlodziezy-panama-gotowa-na-przyjecie-pielgrzymow,902666.html'>TVN24<\/a>"],["01-24","01-21","01-26","01-21","01-22"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-9" class="section level2">
+<h2>Temat 9</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-9.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-5932ad1c5292381df2c9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5932ad1c5292381df2c9">{"x":{"filter":"none","data":[["Na mocy dokumentu amerykańskie firmy nie mogłyby korzystać ze sprzętu telekomunikacyjnego wyprodukowanego przez dwa chińskie koncerny - Huawei i ZTE.","Brytyjski dziennik gospodarczy \"Financial Times\" ocenił w poniedziałek w komentarzu redakcyjnym, że chiński koncern Huawei \"będzie miał problemy z uspokojeniem zachodnich obaw\", związanych z pojawiającymi się wobec firmy zarzutami o szpiegostwo.","Już w 2012 roku Huawei i inna wielka firma chińska ZTE były w USA przedmiotem śledztwa pod zarzutem szpiegostwa i stwarzania zagrożenia dla krytycznej infrastruktury.","Resort sprawiedliwości USA zapowiedział we wtorek, że będzie kontynuował starania o ekstradycję aresztowanej w grudniu w Kanadzie wiceprezes chińskiej firmy Huawei, Meng Wanzhou.","USA i niektórzy ich sojusznicy podejrzewają firmę Huawei o niejawne związki z chińskim rządem.","Oficjalnie głównym tematem światowego forum ma być przemysł 4.0. - Ale i ten temat zdominują wątki mniej oficjalne jak choćby oskarżenia o szpiegostwo kierowane pod adresem chińskiej firmy Huawei - mówił Zuber.","W zeszłym tygodniu ABW zatrzymała dwie osoby podejrzane o szpiegostwo, wśród nich przedstawiciela chińskiej firmy telekomunikacyjnej."," ABW przygotowało rekomendacje i zalecenia dotyczące korzystania z produktów i usług chińskich firm telekomunikacyjnych.","Według obserwatorów działania przeciwko obywatelom północnoamerykańskiego kraju to odpowiedź chińskiego rządu na aresztowanie wiceprezes i dyrektor finansowej firmy Huawei w Kanadzie.","Chiński MSZ jest \"wysoce zaniepokojony\" aresztowaniami pracowników firmy Huawei pod zarzutem szpiegostwa.","Chińskie władze wezwały USA do \"zaprzestania bezpodstawnej rozprawy\" z koncernem Huawei i zapowiedziały \"stanowczą obronę\" krajowych firm.","We wrześniu 2018 roku własny czip AI wydała firma Nvidia, miesiąc później czipy AI Ascend zaprezentował chiński Huawei.","Zatrzymani to Chińczyk Wang Weijing, który został zwolniony z firmy Huawei, a także Piotr D., były wysoki funkcjonariusz ABW.","Przypominamy tę aferę chociażby z zatrzymaniem przedstawicielki tej chińskiej firmy w Kanadzie.","Publikacja stanowi komentarz do zatrzymania w Polsce chińskiego pracownika koncernu Huawei, którego podejrzewa się o szpiegostwo.","\"Od wielu tygodni, miesięcy, lat pojawiają się informację, że firma Huawei jest silnie powiązana z państwem chińskim i służbami chińskimi oraz jest narzędziem w tych służbach\" - podkreślił Szłapka.","wskazuje, że w ciągu ostatniego roku Stany Zjednoczone rozpoczęły globalną kampanię, aby uniemożliwić Huawei oraz innym firmom chińskim uczestnictwo w największych zmianach związanych z telekomunikacją i internetem.","Ponadto od każdego swojego pracownika Spółka Huawei wymaga stosowania się do przepisów prawnych oraz zasad obowiązujących w krajach, w których firma ma swoje oddziały\" - zapewniła chińska firma.","Tam jednak poczyniono zupełnie inne kroki - na początku grudnia zatrzymano Meng Wangzhou, jedną z dyrektorek Huawei, a przy okazji córkę założyciela chińskiej firmy."],["<a href='http://www.polskieradio24.pl/5/1222/Artykul/2244590,Po-zatrzymaniu-podejrzanych-o-szpiegostwo-Czy-mozna-sie-spodziewac-odpowiedzi-Chin'>Polskie Radio<\/a>","<a href='https://fakty.interia.pl/swiat/news-ft-o-obawach-zachodnich-panstw-dotyczacych-dzialalnosci-huaw,nId,2806913'>Interia<\/a>","<a href='https://wiadomosci.radiozet.pl/Swiat/Pekin-zaniepokojony-informacjami-o-areszcie-dla-Chinczyka-podejrzanego-o-szpiegostwo'>Radio ZET<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-22/usa-planuje-wystapic-z-formalnym-wnioskiem-o-ekstradycje-wiceprezes-huawei/'>Polsat News<\/a>","<a href='https://wiadomosci.radiozet.pl/Swiat/Pekin-zaniepokojony-informacjami-o-areszcie-dla-Chinczyka-podejrzanego-o-szpiegostwo'>Radio ZET<\/a>","<a href='http://www.polskieradio24.pl/42/273/Artykul/2249725,Rusza-forum-w-Davos-Prezydent-celem-jest-realizacja-polskich-interesow'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/7/129/Artykul/2245511,Atak-na-Pawla-Adamowicza-Minister-rolnictwa-to-jest-straszne-wydarzenie'>Polskie Radio<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-14/rzeczpospolita-rzad-odlozy-chinskie-komorki/'>Polsat News<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/chiny-wyrok-smierci-dla-obywatela-kanady,900416.html'>TVN24<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2244440,Zatrzymania-w-Huawei-ws-szpiegostwa-Chinski-MSZ-wysoce-zaniepokojony'>Polskie Radio<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-chiny-wzywaja-usa-do-zaprzestania-rozprawy-z-huawei,nId,2808284'>RMF 24<\/a>","<a href='https://tvn24bis.pl/tech,80/ces-2019-nowosci-zaprezentowane-podczas-targow-w-las-vegas,898781.html'>TVN24 bis<\/a>","<a href='https://fakty.interia.pl/polska/news-chinski-dziennik-polska-musi-zaplacic-za-zniewage,nId,2781031'>Interia<\/a>","<a href='https://fakty.interia.pl/polska/news-brudzinski-w-rmf-glapinski-przegral-te-debate-w-sferze-komun,nId,2779499'>Interia<\/a>","<a href='https://fakty.interia.pl/swiat/news-global-times-polska-przegra-jesli-kwestii-huawei-pojdzie-w-s,nId,2779490'>Interia<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C394067%2Cnowoczesna-chce-kontroli-poswiadczenia-bezpieczenstwa-marka-suskiego.html'>PAP<\/a>","<a href='https://www.wprost.pl/kraj/10187079/nyt-usa-wywieraja-presje-na-polske-stawka-stala-obecnosc-wojsk-usa.html'>Wprost<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C386350%2Cwasik-abw-zatrzymala-polaka-i-chinczyka-podejrzanych-o-szpiegostwo.html'>PAP<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-huawei-pod-ostrzalem-gdzie-jeszcze-koncern-ma-problemy,nId,2777734'>RMF 24<\/a>"],["01-11","01-28","01-11","01-22","01-11","01-22","01-14","01-14","01-14","01-11","01-29","01-09","01-13","01-12","01-12","01-24","01-29","01-11","01-11"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-10" class="section level2">
+<h2>Temat 10</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-10.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-0e356a0e338b0e31df77" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0e356a0e338b0e31df77">{"x":{"filter":"none","data":[["W poniedziałek CBA zatrzymało 6 osób w śledztwie dotyczącym doprowadzenia PGZ S.A. do niekorzystnego rozporządzenia mieniem znacznej wartości i sprowadzenia bezpośredniego niebezpieczeństwa wyrządzenia znacznej szkody majątkowej.","Wśród zatrzymanych przez CBA osób są były rzecznik MON Bartłomiej M. i były poseł PiS Mariusz Antoni K.","CBA przekazało, że wśród zatrzymanych jest były szef gabinetu politycznego MON Bartłomiej M., były członek zarządu spółki PGZ S.A.","Bartłomiej M. jest wśród sześciorga zatrzymanych przez CBA w śledztwie dotyczącym m.in. powoływania się na wpływy w MON i zawierania fikcyjnych i zawyżonych umów na niekorzyść Polskiej Grupy Zbrojeniowej właśnie w czasach, kiedy szefem MON był Antoni Macierewicz.","Jak dodał, zatrzymanie Bartłomieja M. to duży problem dla Antoniego Macierewicza.","Jak ustaliło TVN24.pl, jedną z zatrzymanych przez CBA jest Agnieszka M., była pracownica MON.","W poniedziałek, najpóźniej we wtorek dojdzie do przesłuchania zatrzymanych przez CBA w związku z nieprawidłowościami w PGZ.","Spotkanie mogło mieć związek z porannym zatrzymaniem przez CBA Bartłomieja M. i pięciu innych osób."," Rozmawiałem m.in. z ojcem Tadeuszem Rydzykiem, który złożył poręczenie osobiste za uczciwość i rzetelność pana Bartłomieja M. - przyznał Antoni Macierewicz, były szef MON, odnosząc się do poniedziałkowego zatrzymania swojego byłego współpracownika.","Pytany, czy zatrzymanie Bartłomieja M. nie obciąża Antoniego Macierewicza, ponieważ  jak zauważył dziennikarz  Bartłomiej M. był jednym z najbardziej zaufanych współpracowników b. szefa MON, Dworczyk powiedział: Moim zdaniem dzisiaj formułowanie jakichkolwiek tez jest absolutnie przedwczesne i byłoby nieodpowiedzialne.","Nowoczesna domaga się informacji ministra koordynatora służb specjalnych ws. zatrzymania byłego rzecznika MON Bartłomieja M."," Antoni Macierewicz nie jest winien jakiejś nieprawidłowości, ale ponosi pełną odpowiedzialność za działania Bartłomieja M., który był jego najbliższym współpracownikiem  powiedział na antenie radiowej Jedynki wiceprzewodniczący PO Tomasz Siemoniak, odnosząc się do poniedziałkowego zatrzymania grupy sześciu osób przez CBA.","Partii publikacja ta tym bardziej doskwiera, bo po zatrzymaniu Bartłomieja M. (byłego rzecznika MON i bliskiego współpracownika Antoniego Macierewicza) Nowogrodzka chciała narzucić nową tematykę mediom.","W poniedziałek rano CBA zatrzymało sześć osób m.in. pod zarzutem powoływania się na wpływy w MON w celu czerpania osobistych korzyści.","Dodał, że wiadomość o zatrzymaniu Bartłomieja M. jest jednocześnie \"smutna i budująca\".","Z kolei jak podaje wrocławska \"Gazeta Wyborcza\", w związku z zatrzymaniem Bartłomieja M. agenci CBA przeszukali także dwie firmy we Wrocławiu.","W internetowej części Popołudniowej rozmowy w RMF FM Marcin Zaborski pytał swojego gościa o zatrzymanie i postawienie zarzutów Bartłomiejowi M., byłemu rzecznikowi MON.","Śledztwo prowadzi Prokuratura Okręgowa w Tarnobrzegu, która w tej sprawie wystawiła nakazy zatrzymania i przeszukań.Jedna ze spraw, którą objęte jest śledztwo, dotyczy interesów Bartłomieja M. z PGZ, opisanych przez tygodnik Sieci.","Zakładam, że jest to element wewnętrznych rozgrywek w Prawie i Sprawiedliwości, natomiast bardzo dobrze, że Bartłomiej M. został zatrzymany - powiedział w środę w Radiu Zet wicemarszałek Sejmu Stanisław Tyszka (Kukiz'15) o zatrzymaniu byłego rzecznika MON.","Tak naprawdę chodzi o \"odcinanie\" w tym przypadku Antoniego Macierewicza  podkreślił poseł PO Stanisław Gawłowski odnosząc się do zatrzymania w poniedziałek sześciu osób w śledztwie dotyczącym działania na szkodę PGZ."],["<a href='https://www.pap.pl/aktualnosci/news%2C396790%2Cmacierewicz-ws-bartlomieja-m-nieprawidlowosci-musza-byc-scigane-pytanie-na'>PAP<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24408292,bartlomiej-m-pracowal-u-mariusza-antoniego-k-mial-oferowac.html'>Gazeta.pl<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C395672%2Ctvp-info-nieoficjalnie-b-rzecznik-mon-bartlomiej-m-i-b-posel-pis-mariusz'>PAP<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-rzecznik-andrzeja-dudy-o-zatrzymaniu-bartlomieja-m-to-dla-an,nId,2806588'>RMF 24<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Rzecznik-prezydenta-Blazej-Spychalski-Nie-jestem-zaskoczony-zatrzymaniem-Bartlomieja-M.'>Radio ZET<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24407070,agnieszka-m-wsrod-zatrzymanych-przez-cba-w-2017-r-nie-dala.html'>Gazeta.pl<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2253326,Byly-rzecznik-MON-i-byly-posel-PiS-w-rekach-CBA-Przesluchanie-dzis-lub-jutro'>Polskie Radio<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Nagla-narada-w-siedzibie-PiS-Na-Nowogrodzka-przyjechal-m-in-Macierewicz'>Radio ZET<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2254594,Antoni-Macierewicz-Bartlomieja-M-polecil-mi-ojciec-Tadeusz-Rydzyk'>Polskie Radio<\/a>","<a href='https://www.tvp.info/41052072/dworczyk-o-zatrzymaniach-cba-w-polsce-wszyscy-sa-rowni-wobec-prawa'>TVP INFO<\/a>","<a href='https://fakty.interia.pl/polska/news-zatrzymanie-bartlomieja-m-nowoczesna-domaga-sie-informacji,nId,2806585'>Interia<\/a>","<a href='http://www.polskieradio24.pl/7/129/Artykul/2254082,Tomasz-Siemoniak-zaczyna-sie-okres-rozliczen-Antoniego-Macierewicza-w-MON'>Polskie Radio<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24409606,poploch-w-pis-po-ujawnieniu-tasm-j-kaczynskiego-trzeba-z.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24407070,agnieszka-m-wsrod-zatrzymanych-przez-cba-w-2017-r-nie-dala.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24406093,politycy-pis-komentuja-zatrzymanie-bartlomieja-m-przez-cba.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24408292,bartlomiej-m-pracowal-u-mariusza-antoniego-k-mial-oferowac.html'>Gazeta.pl<\/a>","<a href='https://fakty.interia.pl/polska/news-sasin-o-tasmach-kaczynskiego-nie-przekroczono-granic-prawa-a,nId,2808595'>Interia<\/a>","<a href='https://www.tvp.info/41051687/byly-rzecznik-mon-i-byly-posel-pis-w-rekach-cba'>TVP INFO<\/a>","<a href='https://fakty.interia.pl/polska/news-tyszka-zatrzymanie-bartlomieja-m-to-element-wewnetrznych-roz,nId,2810128'>Interia<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C395945%2Cgawlowski-w-pis-rozpoczely-sie-wzajemne-rozgrywki-chodzi-o-odcinanie'>PAP<\/a>"],["01-30","01-28","01-28","01-28","01-28","01-28","01-28","01-28","01-30","01-28","01-28","01-29","01-29","01-28","01-28","01-28","01-29","01-28","01-30","01-28"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-11" class="section level2">
+<h2>Temat 11</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-11.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-8d7f0a613065713cd952" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8d7f0a613065713cd952">{"x":{"filter":"none","data":[["W środę w Warszawie będzie przebywał wicepremier i szef MSW Włoch Matteo Salvini.","W czwartek szef włoskiego MSW Matteo Salvini powtórzył, że porty w tym kraju są zamknięte dla statków z migrantami ratowanymi na morzu.","Matteo Salvini jest w partii współrządzącej we Włoszech i zawsze dobrze jest rozmawiać.","Dlatego, że Matteo Salvini jest bardzo poważnym politykiem, a poza tym Włochy są bardzo ważnym w Polsce inwestorem.","Matteo Salvini jest szefem Ligi Północnej - najpopularniejszej w sondażach włoskiej partii z separatystycznymi korzeniami i antyeuropejskim programem. - Polityk w randze wicepremiera przyjeżdża do szeregowego posła.","Szef włoskiego MSW, wicepremier Matteo Salvini i lider Ruchu Pięciu Gwiazd, wicepremier Luigi Di Maio wyrazili w poniedziałek poparcie dla ruchu \"żółtych kamizelek\" we Francji."],["<a href='https://fakty.interia.pl/raporty/raport-ue-przed-wyborami-europejskimi/artykuly/news-schetyna-o-spotkaniu-salvini-kaczynski-absurdalne-i-szokujac,nId,2774126'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/morze-srodziemne-w-2018-roku-utonelo-2262-migrantow,897109.html'>TVN24<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2241042,Matteo-Salvini-prawdziwym-zagrozeniem-dla-Europy-sa-islamscy-terrorysci'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/9/301/Artykul/2243358,Wizyta-Matteo-Salviniego-w-Polsce-Komentarze-politykow-PiS-i-PO'>Polskie Radio<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/spotkanie-kaczynski-salvini-9-stycznia-magazyn-polska-i-swiat,897560.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/wlochy-rzadzacy-politycy-wspieraja-zolte-kamizelki-we-francji,898195.html'>TVN24<\/a>"],["01-09","01-03","01-05","01-09","01-05","01-07"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-12" class="section level2">
+<h2>Temat 12</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-12.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-dcd5bcd4e1db0684de51" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dcd5bcd4e1db0684de51">{"x":{"filter":"none","data":[["Oznacza to, że coraz bardziej prawdopodobny staje się twardy brexit, czyli wyjście Wielkiej Brytanii ze Wspólnoty bez umowy.","Brytyjska Izba Gmin zagłosowała 15 stycznia przeciw proponowanej przez rząd May umowie wyjścia Wielkiej Brytanii z UE.","Wśród możliwych scenariuszy wyjścia z impasu są m.in.: powtórzenie głosowania w Izbie Gmin po uzyskaniu dalszych zapewnień politycznych ze strony UE, przedłużenie procedury wyjścia ze Wspólnoty na mocy art. 50 traktatu, wyjście z UE bez umowy, organizacja drugiego referendum lub rozpisanie przedterminowych wyborów parlamentarnych w Wielkiej Brytanii.","May odrzuciła sugestie dotyczące organizacji drugiego referendum w sprawie brexitu lub przynajmniej wykluczenia wyjścia Wielkiej Brytanii ze Wspólnoty bez umowy, czego domagały się partie opozycji. - Właściwym sposobem, żeby (uniknąć takiego scenariusza - red.) jest zaaprobowanie przez tę izbę projektu porozumienia z Unią Europejską - zaznaczyła.","We wtorek wieczorem posłowie Izby Gmin przyjęli dwie poprawki do uchwały w sprawie brexitu, sugerujące konieczność znalezienia alternatywnego rozwiązania wobec wynegocjowanego przez rząd May kontrowersyjnego mechanizmu awaryjnego dla Irlandii Północnej (ang. backstop) i wskazujące zarazem na sprzeciw wobec scenariusza wyjścia Wielkiej Brytanii z UE bez umowy.","W razie braku poparcia brytyjskiego parlamentu dla porozumienia proponowanego przez premier Theresę May lub alternatywnego rozwiązania na mocy procedury wyjścia opisanej w art. 50 traktatu o UE Wielka Brytania opuści Wspólnotę bez żadnej umowy regulującej warunki brexitu.","W ramach ostatniej próby przekonania deputowanych do swoich racji premier May wezwała ich w poniedziałek do \"ponownego spojrzenia\" na proponowaną umowę regulującą wyjście kraju z UE i ostrzegła, że jej odrzucenie może zagrozić jedności Wielkiej Brytanii przez wzmocnienie ruchów nacjonalistycznych: niepodległościowego w Szkocji i zjednoczeniowego w Irlandii Płn.","Irlandzki premier Leo Varadkar ostrzegł w piątek przed możliwością powrotu wojska na granicę z Irlandią Północną w razie \"chaotycznego brexitu\" - wyjścia Wielkiej Brytanii z Unii Europejskiej bez umowy.","Zapytany o możliwe scenariusze dziennikarz stwierdził że \"nie postawi pieniędzy na żadna z możliwych opcji\". - Być może będziemy mieli do czynienia z tzw. twardym brexitem, czego domagają się m. in. przeciwnicy May wewnątrz Partii Konserwatywnej, tj. opuszczaniem Wielkiej Brytanii Unii Europejskiej bez zdanej umowy - powiedział Adrian Wachowiak.","Wśród przedstawicieli Izby Gmin można było wyróżnić kilka frakcji  od zwolenników tzw. twardego brexitu, czyli wyjścia z UE bez umowy po takich, którzy chcieliby drugiego referendum czy renegocjacji warunków brexitu.","W grupie \"rozłamowców\" w Partii Konserwatywnej są także posłowie, którzy opowiadają się za całkowitym zerwaniem negocjacji z UE i wyjściem ze Wspólnoty bez umowy, argumentując, że proponowane warunki są niekorzystne dla Wielkiej Brytanii.","Brytyjska premier Theresa May zaapelowała w poniedziałek w liście do przywódców Unii Europejskiej o udzielenie dalszych gwarancji dotyczących statusu Irlandii Północnej w obliczu planowanego wyjścia Wielkiej Brytanii ze Wspólnoty.","Posłowie z Izby Gmin opowiedzieli się za renegocjacją umowy brexitowej i przeciwko wyjściu Wielkiej Brytanii z Unii bez porozumienia.","Powodem jest widmo dotkliwej porażki i odrzucenie wyjścia Wielkiej Brytanii z Unii Europejskiej w proponowanej przez Therese May wersji.","Zrobimy wszystko, by naszym obywatelom i firmom zapewnić maksimum przewidywalności i bezpieczeństwa - zapowiedział premier Mateusz Morawiecki po tym, gdy Izba Gmin nie poparła umowy wyjścia Wielkiej Brytanii ze Wspólnoty.","Brytyjskie media zwróciły w piątek uwagę, że jej wystąpienie w Women's Institute zostało wygłoszone na ledwie 64 dni przed planowanym wyjściem Wielkiej Brytanii z Unii Europejskiej oraz na kilka dni przed wtorkowymi głosowaniami w Izbie Gmin, dotyczącymi dalszego planu negocjacji z Brukselą po tym, jak posłowie odrzucili wypracowaną przez rząd propozycję umowy wyjścia ze Wspólnoty.","Jeśli we wtorek Izba Gmin odrzuci zaakceptowane przez Unię Europejską warunki wyjścia Wielkiej Brytanii ze Wspólnoty, opozycja wystąpi z wotum nieufności wobec rządu i przeć będzie do zwołania przedterminowych wyborów parlamentarnych.","W trakcie cotygodniowej sesji pytań i odpowiedzi w Izbie Gmin szef laburzystów pytał Theresę May, czy jest w stanie wykluczyć scenariusz opuszczenia Wspólnoty bez umowy; jest to stawiany przez niego warunek włączenia się do rozmów w sprawie brexitu.","Przyznał, że w Wielkiej Brytanii trwają przygotowania do wszelkich możliwych scenariuszy, ale nie znaczy to, że Wielka Brytania i UE są przygotowane na \"twardy brexit\".","Prezydent podkreślił, że to Wielka Brytania straci najwięcej, jeśli dojdzie do brexitu bez umowy z Unią, jednak taki scenariusz \"przeraża wszystkich\"."],["<a href='http://www.polskieradio24.pl/5/1223/Artykul/2246802,Wazne-spotkanie-liderow-grup-w-Parlamencie-Europejskim-ws-Brexitu'>Polskie Radio<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C393777%2Cmorawiecki-w-bbc-najlepszy-wariant-decyzja-brytyjczykow-o-pozostaniu-w-ue'>PAP<\/a>","<a href='https://www.rmf24.pl/raporty/raport-brexit/fakty/news-may-nie-bedzie-oplaty-za-rejestracje-obywateli-ue,nId,2795056'>RMF 24<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/theresa-may-jeremy-corbyn-rozmawial-z-hamasem-a-nie-chce-ze-mna,903189.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/irlandia-premier-i-szef-msz-odrzucaja-probe-renegocjacji-brexitu,905233.html'>TVN24<\/a>","<a href='https://fakty.interia.pl/raporty/raport-brytyjskie-referendum/aktualnosci/news-brytyjski-rzad-obawia-sie-fali-powrotow-emerytow-mieszkajacy,nId,2808609'>Interia<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-15/parlament-brytyjski-zaglosuje-we-wtorek-wieczorem-nad-umowa-wyjscia-z-ue/'>Polsat News<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/irlandia-premier-mozliwe-wojsko-na-granicy-w-razie-brexitu-bez-umowy,903847.html'>TVN24<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2248165,Konsultacje-ws-Brexitu-Jeszcze-dzis-rozmowa-szefa-KE-z-brytyjska-premier'>Polskie Radio<\/a>","<a href='https://www.wprost.pl/polityka/10183867/izba-gmin-podjela-decyzje-ws-brexitu-jest-komentarz-szefa-rady-europejskiej-donalda-tuska.html'>Wprost<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-15/parlament-brytyjski-zaglosuje-we-wtorek-wieczorem-nad-umowa-wyjscia-z-ue/'>Polsat News<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C387716%2Cwielka-brytania-premier-may-apeluje-do-ue-o-gwarancje-ws-irlandii-pln.html'>PAP<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2254946,W-PE-o-brexicie-wiekszosc-przeciwna-renegocjacji-umowy'>Polskie Radio<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2246756,Szef-KE-czas-sie-konczy-Wielka-Brytania-ma-przedstawic-swoje-zamiary'>Polskie Radio<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/premier-morawiecki-komentuje-odrzucenie-umowy-w-sprawie-brexitu,900842.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/elzbieta-ii-wzywa-do-szanowania-roznych-punktow-widzenia,903728.html'>TVN24<\/a>","<a href='https://www.rmf24.pl/raporty/raport-brexit/fakty/news-brexitu-nie-bedzie-we-wtorek-decydujace-glosowanie,nId,2782770'>RMF 24<\/a>","<a href='https://www.rmf24.pl/raporty/raport-brexit/fakty/news-may-krytykuje-lidera-opozycji-cobryn-rozmawial-z-hamasem-a-n,nId,2798416'>RMF 24<\/a>","<a href='https://fakty.interia.pl/raporty/raport-brytyjskie-referendum/aktualnosci/news-bielan-zaniepokojony-tzw-otwartym-brexitem,nId,2787932'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/porozumienie-ws-brexitu-odrzucona-macron-komentuje,900886.html'>TVN24<\/a>"],["01-16","01-24","01-21","01-23","01-30","01-29","01-15","01-25","01-18","01-15","01-15","01-14","01-30","01-16","01-15","01-25","01-14","01-23","01-17","01-16"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-13" class="section level2">
+<h2>Temat 13</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-13.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-33f47ea6a00f92e5308d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-33f47ea6a00f92e5308d">{"x":{"filter":"none","data":[["Światowe Forum Ekonomiczne 2019 w szwajcarskim Davos rozpoczyna się we wtorek i potrwa do piątku.","Obecność Polski w Davos podczas Światowego Forum Ekonomicznego będzie w tym roku wyraźna jak nigdy wcześniej.","Duque wygłosił swój apel w Davos, gdzie uczestniczy w Światowym Forum Ekonomicznym.","Trump, który był w Davos rok temu, już w minionym tygodniu zapowiedział, że tym razem nie weźmie udziału w Forum.","Po płomiennym przemówieniu podczas Forum Ekonomicznego w Davos Szwedka została okrzyknięta Eko-Pippi."],["<a href='https://www.pap.pl/aktualnosci/news%2C392251%2Cpzu-oraz-bank-pekao-w-davos-otworza-polish-house.html'>PAP<\/a>","<a href='https://fakty.interia.pl/swiat/news-davos-2019-w-tym-roku-silna-widocznosc-polski,nId,2796469'>Interia<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-24/antyrzadowe-protesty-w-wenezueli-zginelo-13-osob/'>Polsat News<\/a>","<a href='https://wiadomosci.radiozet.pl/Swiat/Prezydent-USA-Donald-Trump-odwolal-wyjazdy-Nancy-Pelosi-i-delegacji-do-Davos'>Radio ZET<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-eko-pippi-16-letnia-aktywistka-ze-szwecji-ma-juz-tysiace-nas,nId,2803630'>RMF 24<\/a>"],["01-21","01-22","01-24","01-18","01-26"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-14" class="section level2">
+<h2>Temat 14</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-14.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-1b86e6983dce37c704a5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1b86e6983dce37c704a5">{"x":{"filter":"none","data":[["Spór o finansowanie budowy muru na granicy USA z Meksykiem doprowadził do częściowego paraliżu funkcjonowania rządu federalnego (tzw. shutdown).","11 miliardów dolarów - tyle kosztowało amerykańską gospodarkę częściowe zawieszenie działalności służb federalnych spowodowane sporem o budowę muru na granicy z Meksykiem.","Demokraci - którzy dysponują większością w Izbie Reprezentantów - sprzeciwiają się przeznaczeniu w budżecie 5,7 mld dolarów na budowę muru na granicy z Meksykiem.","Chuck Schumer przypomniał również, że Meksyk nie zgodził się na sfinansowanie budowy muru.","Izba Reprezentantów przegłosowała w czwartek dwie ustawy budżetowe, których celem jest zakończenie częściowego zawieszenia rządu federalnego.","Doszło do tego, ponieważ Donald Trump odmówił podpisania prowizorium budżetowego, gdy demokraci w Kongresie nie chcieli przeznaczyć 5,7 miliarda dolarów na budowę muru na granicy z Meksykiem.","To część kampanii na rzecz pozyskania federalnych funduszy na budowę muru na granicy z Meksykiem, co według Donalda Trumpa ma powstrzymać nielegalne przekraczanie granicy przez imigrantów z południa.","Trump zapowiedział, że nie podpisze ustawy budżetowej, jeśli nie zostaną w nim uwzględnione środki na budowę muru.","Jak podaje CNN, w zawartym porozumieniu nie ma zapisów dotyczących budowy muru na granicy z Meksykiem.","Głównym przedmiotem sporu są pieniądze na budowę muru na granicy z Meksykiem, co było jedną z najważniejszych obietnic wyborczych Trumpa.","Stojąca na czele Izby Reprezentantów Nancy Pelosi, a także inni prominentni działacze Partii Demokratycznej, wskazali w swych wystąpieniach dla prasy, że prezydencka propozycja jest nie do zaakceptowania, ponieważ stanowi jedynie wybieg służący wymuszeniu przyznania środków budżetowych na budowę muru."],["<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/trump-sklada-noworoczne-zyczenia-hejterom-i-fakenewsowym-mediom,896541.html'>TVN24<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2253599,Shutdown-kosztowal-11-miliardow-dolarow-amerykanska-gospodarke'>Polskie Radio<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-trump-proponuje-ochrone-marzycieli-demokraci-mowia-stanowczo,nId,2793137'>RMF 24<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-trump-migracja-na-naszej-granicy-to-kryzys-humanitarny,nId,2774065'>RMF 24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-04/trump-domaga-sie-srodkow-na-budowe-muru-i-nie-wyklucza-stanu-wyjatkowego/'>Polsat News<\/a>","<a href='https://www.tvp.info/40806539/prezydent-donald-trump-odwoluje-wizyte-w-davos'>TVP INFO<\/a>","<a href='https://www.tvp.info/40756417/donald-trump-zapowiedzial-oredzie-ws-kryzysu-granicznego-z-meksykiem'>TVP INFO<\/a>","<a href='https://fakty.interia.pl/swiat/news-usa-trwa-najdluzszy-shutdown-w-historii-kraju,nId,2779489'>Interia<\/a>","<a href='https://www.wprost.pl/swiat/10186374/koniec-najdluzszego-shutdownu-w-historii-usa-trump-podpisal-ustawe.html'>Wprost<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-03/usa-nancy-pelosi-wybrana-na-szefowa-izby-reprezentantow/'>Polsat News<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-trump-proponuje-ochrone-marzycieli-demokraci-mowia-stanowczo,nId,2793137'>RMF 24<\/a>"],["01-01","01-28","01-20","01-09","01-04","01-10","01-08","01-12","01-26","01-03","01-20"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-15" class="section level2">
+<h2>Temat 15</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-15.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-cbff424eda6283b2f3bf" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cbff424eda6283b2f3bf">{"x":{"filter":"none","data":[["\"Gazeta Wyborcza\" opublikowała we wtorek stenogram nagrania rozmowy m.in. prezesa PiS Jarosława Kaczyńskiego z austriackim biznesmenem Geraldem Birgfellnerem, która dotyczy planów budowy w Warszawie dwóch wieżowców przez powiązaną z jego środowiskiem spółkę Srebrna.","W środę GW napisała, że Jarosław Kaczyński 20 razy spotykał się w centrali partii z austriackim biznesmenem, który miał w imieniu spółki Srebrna zbudować biurowiec.","Wtedy Kaczyński mówił austriackiemu biznesmenowi Geraldowi Birgfellnerowi, dlaczego spółka Srebrna nie może wypłacić mu pieniędzy za 14 miesięcy pracy nad przygotowaniem inwestycji.","Mielibyśmy kolejny taki przykład, ponieważ mieliśmy już np. sprawę Chrzanowskiego  mówił szef portalu tvp.info Samuel Pereira , komentując w O co chodzi aferę z tzw. taśmami Jarosława Kaczyńskiego, który negocjował z austriackim biznesmenem budowę wieżowców przez spółkę Srebrna.","Jarosław Kaczyński został nagrany, a opis jego biznesowych dyskusji opublikowała wtorkowa Gazeta Wyborcza."," Zawsze Jarosław Kaczyński zdecydowanie się odcinał od działalności spółki Srebrna.","W nagraniach o których pisze \"GW\" Jarosław Kaczyński miał stwierdzić: \"jeśli nie wygramy wyborów, to nie zbudujemy wieżowca w Warszawie\".","W ten sposób skomentował dzisiejsze publikacje Gazety Wyborczej na temat wieżowca, który chciała wybudować spółka Srebrna kojarzona z partią Jarosława Kaczyńskiego.","Informacją dnia były także ujawnione przez \"Gazetę Wyborczą\" nagrania, na których Jarosław Kaczyński opowiada za zamkniętymi drzwiami o wartej 1,3 mld zł inwestycji spółki Srebrna.","Jak często w siedzibie na Nowogrodzkiej Jarosław Kaczyński gościł austriackiego biznesmena?"," Wystąpimy również z powództwem cywilnym w odniesieniu do spółki Srebrna i wobec pana Jarosława Kaczyńskiego - zapowiedział w \"Kropce nad i\" Roman Giertych, jeden z pełnomocników Geralda Birgfellnera.","Dubois wyjaśniał, że to \"dotyczy pana Jarosława Kaczyńskiego, który w imieniu spółki Srebrna prosił, by nasz klient nadzorował wszystkie działania związane z wykonywaniem zlecenia budowy wieżowca\".","Jarosław Kaczyński z kolei zasiada w Radzie Nadzorczej fundacji, a jednocześnie - jak wynika z ujawnionych nagrań - posiada pełnomocnictwo, aby reprezentować zarząd spółki Srebrna.","Prezes PiS Jarosław Kaczyński tłumaczy na nich m.in., dlaczego rezygnuje z budowy wież na terenie Srebrnej, której wykonawcą miał być austriacki biznesmen Gerald Birgfellner.","Wzięli w niej udział Jarosław Kaczyński, jego brat cioteczny Grzegorz Tomaszewski, austriacki biznesmen Gerald Birgfellner powiązanym rodzinnie z prezesem PiS i jego wspólniczka, pełniąca jednocześnie rolę tłumaczki.","Według \"Gazety Wyborczej\" z nagrań wynika, że Jarosław Kaczyński to biznesmen twardo stąpający po ziemi.","Chodzi o nieruchomość należącą do spółki Srebrna, powiązanej z prezesem PiS Jarosławem Kaczyńskim.","Natomiast - dodał - z nagranych rozmów wynika, że \"prezes Kaczyński dysponuje znaczącym majątkiem spółki Srebrna\".","To właśnie tam spółka Srebrna powiązana ze środowiskiem Prawa i Sprawiedliwości planowała wybudować wieżowiec.","Pytany, czy po artykule \"GW\" słowa Jarosława Kaczyńskiego o tym, że polityka to pokora i obszar, gdzie nie idzie się po pieniądze, będą niewiarygodne, Gowin odpowiedział, że \"kompletnie nie ma takiego wrażenia\". - Te nagrania dowodzą ogromnej uczciwości Jarosława Kaczyńskiego, on wielokrotnie powtarza, że chce uczciwie rozliczyć się ze spółką reprezentowaną przez austriackiego przedsiębiorcę, ale nie godzi się na to, żeby do takich rozliczeń doszło bez podstaw prawnych."],["<a href='https://www.polsatnews.pl/wiadomosc/2019-01-30/emerytura-minimalna-w-wysokosci-1600-zl-wyzsze-skladki-krus-propozycje-biedronia/'>Polsat News<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Tasmy-Kaczynskiego.-PO-sklada-zawiadomienie-do-prokuratury'>Radio ZET<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/tasmy-kaczynskiego-kolejne-nagranie-z-prezesem-pis,905327.html'>TVN24<\/a>","<a href='https://www.tvp.info/41089353/samuel-pereira-kto-wpadl-na-pomysl-nagrania-jaroslawa-kaczynskiego'>TVP INFO<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Tasmy-Kaczynskiego.-Wyborcza-ujawnia-nagrania-prezesa-PiS.-Afera-ktora-obali-rzad-DZIEN-NA-ZYWO'>Radio ZET<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/wojciech-czuchnowski-o-tasmach-kaczynskiego-w-wyborczej,904745.html'>TVN24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-29/tomczyk-kaczynski-przez-lata-tropil-uklad-zadnego-nie-znalazl-ale-jeden-stworzyl/'>Polsat News<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/Rafal-Trzaskowski-w-Radiu-ZET-Do-tej-pory-Jaroslaw-Kaczynski-nie-wystepowal-w-roli-takiego-twardego-biznesmena'>Radio ZET<\/a>","<a href='https://www.rmf24.pl/fakty/news-wstrzas-w-kopalni-rudna-tasmy-kaczynskiego-zarzuty-dla-b-rze,nId,2808350'>RMF 24<\/a>","<a href='https://tvn24bis.pl/z-kraju,74/tasmy-kaczynskiego-wszystkie-liczby-ktore-padaja-w-nagraniach,904774.html'>TVN24 bis<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24415491,tasmy-kaczynskiego-giertych-wystapimy-z-powodztwem-wobec.html'>Gazeta.pl<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/zawiadomienie-do-prokuratury-w-sprawie-jaroslawa-kaczynskiego,904811.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/mecenas-zbigniew-roman-o-tasmach-kaczynskiego,905373.html'>TVN24<\/a>","<a href='https://wiadomosci.radiozet.pl/Polska/NOWE-tasmy-Kaczynskiego-Prezes-PiS-beda-sugestie-ze-jestem-niezwykle-zamozny'>Radio ZET<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C396193%2Cgazeta-wyborcza-ujawnia-nagranie-min-prezesa-pis-dot-inwestycji-spolki'>PAP<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-gazeta-wyborcza-ujawnia-tasmy-kaczynskiego-tak-prezes-pis-pr,nId,2808234'>RMF 24<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-mocne-slowa-o-zalatwieniu-srebrnej-16-przed-komisja-ds-repry,nId,2812095'>RMF 24<\/a>","<a href='https://fakty.interia.pl/polska/news-mazurek-tekst-gazety-wyborczej-okazal-sie-niewypalem,nId,2808397'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114884,24415699,rafal-trzaskowski-zapowiada-plan-dla-dzialki-przy-srebrnej.html'>Gazeta.pl<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/tasmy-kaczynskiego-komentarze-obozu-rzadowego-po-publikacji-nagran,904771.html'>TVN24<\/a>"],["01-30","01-30","01-31","01-30","01-29","01-29","01-29","01-29","01-29","01-29","01-30","01-29","01-31","01-31","01-29","01-29","01-31","01-29","01-31","01-29"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-16" class="section level2">
+<h2>Temat 16</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-16.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-427f0c9a358d3d8775e2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-427f0c9a358d3d8775e2">{"x":{"filter":"none","data":[["Pence i Pompeo będą uczestniczyć w Warszawie w ministerialnej konferencji poświęconej budowaniu pokoju i bezpieczeństwa na Bliskim Wschodzie, a zaplanowanej w dniach 13-14 lutego.","Podkreślił, że jest to konferencja dotycząca całego Bliskiego Wschodu, a nie tylko Iranu.","Wcześniej konferencję zapowiedział w stacji Fox News sekretarz stanu Mike Pompeo; wyjaśnił, że szczególna uwaga poświęcona zostanie wpływom Iranu w regionie Bliskiego Wschodu.","Szef polskiej dyplomacji Jacek Czaputowicz zapewnił już, że konferencja nie jest skierowana przeciwko Iranowi, a główny jej temat to budowanie pokoju i bezpieczeństwa na Bliskim Wschodzie.","\"Nasze intencje i oczekiwania będą takie, że (uczestnicy konferencji - PAP) skoncentrują się na tym, w jaki sposób można zagwarantować pokój, stabilność, bezpieczeństwo na Bliskim Wschodzie\" - powiedział."," Rozmowy będą się koncentrować na stabilności, pokoju, wolności i bezpieczeństwie tu, w regionie Bliskiego Wschodu, a ważnym elementem ma być zapewnienie, że Iran nie jest destabilizującym czynnikiem  powiedział Pompeo."," Zawsze mieliśmy z Iranem bardzo dobre relacje i teraz w Polsce, nie wiedzieć czemu, jakby nie było innych krajów, musi być konferencja na temat bezpieczeństwa na Bliskim Wschodzie - dziwił się poseł PSL.","Jak sama nazwa wskazuje, konferencja jest poświęcona kwestiom pokoju i bezpieczeństwa - mówił.","Jej gospodarzami będą Stany Zjednoczone i Polska, a tematami - teoretycznie - mają być pokój, bezpieczeństwo i stabilizacja na Bliskim Wschodzie.","\"Magyar Idoek\" wyjaśnia, że amerykański sekretarz stanu Mike Pompeo zapowiedział w piątek, iż Stany Zjednoczone chcą zorganizować w lutym w Polsce globalną konferencję na temat sytuacji na Bliskim Wschodzie, a jej ważnym elementem ma być zapewnienie, że Iran nie jest destabilizującym czynnikiem.","Spotykamy się ze względu na informację o polsko-amerykańskiej konferencji poświęconej sytuacji na Bliskim Wschodzie.","Amerykański sekretarz stanu Mike Pompeo ogłosił plany zorganizowania konferencji podczas wizyty w Kairze, jednej z serii wizyt w czasie jego podróży po Bliskim Wschodzie.","W dniach 13-14 lutego w Warszawie odbędzie się konferencja ws. sytuacji na Bliskim Wschodzie ze szczególnym uwzględnieniem roli Iranu w regionie - poinformował w piątek amerykański Sekretarz Stanu Mike Pompeo."," Założenia konferencji są niepokojące, ponieważ Iran jest krajem niezwykle ważnym w jakimkolwiek pokojowym rozwiązaniu na Bliskim Wschodzie.","Wiceprezydent USA stanie na czele delegacji Stanów Zjednoczonych, która przyleci do Warszawy na konferencję dotyczącą bezpieczeństwa na Bliskim Wschodzie.","Także izraelskie media komentowały, że jednym z celów całego tournee sekretarza po Bliskim Wschodzie jest propagowanie \"antyirańskiego przekazu\". - Ważnym elementem będzie upewnienie się, że Iran nie będzie destabilizującą siłą w regionie - mówił o konferencji w Warszawie Pompeo.","Pompeo podkreślił, że wśród gości konferencji znajdą się przedstawiciele Azji, Afryki, obu Ameryk, Europy i Bliskiego Wschodu.","Czy Warszawa powinna być gospodarzem międzynarodowej konferencji na temat sytuacji na Bliskim Wschodzie? - na takie pytanie odpowiedzieli uczestnicy sondażu dla serwisu rp.pl.","Iran mógł odpowiedzieć negatywnie na ewentualne zaproszenie na taką konferencję, ale Polska, jako kraj, który pretenduje do neutralności w sprawach Bliskiego Wschodu, powinna nas zaprosić.","W RMF FM przypominał o \"długiej historii relacji\" naszych krajów i przekonywał, że jeśli konferencja ma dotyczyć pokoju na Bliskim Wschodzie, to powinno się zaprosić wszystkie tamtejsze kraje."],["<a href='https://www.rmf24.pl/fakty/swiat/news-wiceprezydent-usa-mike-pence-przyleci-wkrotce-do-polski,nId,2810340'>RMF 24<\/a>","<a href='https://fakty.interia.pl/polska/news-spychalski-decyzja-o-wspolorganizacji-konferencji-bliskowsch,nId,2794744'>Interia<\/a>","<a href='https://www.tvp.info/40950040/czaputowicz-konferencja-bliskowschodnia-nie-jest-skierowana-przeciw-zadnym-krajom'>TVP INFO<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24365779,waszczykowski-spieciu-z-iranem-nie-chce-palenia-mostow-ale.html'>Gazeta.pl<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C390509%2Czrodlo-unijne-mogherini-nie-wezmie-udzialu-w-konferencji-w-warszawie.html'>PAP<\/a>","<a href='https://www.tvp.info/40813209/sekretarz-stanu-usa-planujemy-zorganizowac-w-polsce-konferencje-nt-bliskiego-wschodu'>TVP INFO<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/politycy-o-szczycie-ktory-ma-sie-odbyc-w-polsce-w-sprawie-iranu,900014.html'>TVN24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24372322,iran-wsciekly-na-konferencje-w-warszawie-msz-zapewnia-to-nie.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24372322,iran-wsciekly-na-konferencje-w-warszawie-msz-zapewnia-to-nie.html'>Gazeta.pl<\/a>","<a href='https://fakty.interia.pl/swiat/news-wegierska-prasa-polska-zostala-wzieta-w-dwa-ognie,nId,2786202'>Interia<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-ambasador-iranu-o-konferencji-ws-bliskiego-wschodu-nikt-sie-,nId,2786467'>RMF 24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24372322,iran-wsciekly-na-konferencje-w-warszawie-msz-zapewnia-to-nie.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114881,24359295,msz-komentuje-reakcje-iranu-na-szczyt-ws-bliskiego-wschodu.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24376330,orientalista-krytykuje-konferencje-bliskowschodnia-w-warszawie.html'>Gazeta.pl<\/a>","<a href='https://fakty.interia.pl/raporty/raport-bliski-wschod-konferencja/aktualnosci/news-wiceprezydent-usa-przyleci-w-lutym-do-polski,nId,2810345'>Interia<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24372322,iran-wsciekly-na-konferencje-w-warszawie-msz-zapewnia-to-nie.html'>Gazeta.pl<\/a>","<a href='https://www.wprost.pl/swiat/10186708/kontrowersje-wokol-konferencji-w-polsce-to-czesc-kampanii-zachodu-przeciwko-wladzom-w-teheranie.html'>Wprost<\/a>","<a href='https://fakty.interia.pl/raporty/raport-bliski-wschod-konferencja/aktualnosci/news-czy-o-bliskim-wschodzie-nalezy-rozmawiac-w-warszawie-sondaz-,nId,2793256'>Interia<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-ambasador-iranu-o-konferencji-ws-bliskiego-wschodu-nikt-sie-,nId,2786467'>RMF 24<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24372322,iran-wsciekly-na-konferencje-w-warszawie-msz-zapewnia-to-nie.html'>Gazeta.pl<\/a>"],["01-30","01-21","01-21","01-15","01-17","01-11","01-13","01-21","01-21","01-16","01-17","01-21","01-13","01-21","01-30","01-21","01-27","01-20","01-17","01-21"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-17" class="section level2">
+<h2>Temat 17</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-17.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-4ddcc47bff47519ea803" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4ddcc47bff47519ea803">{"x":{"filter":"none","data":[["Zresztą Dariusz S. też ma inne zarzuty, bo dotyczą one składanych przez niego fałszywych zeznań.","Sąd uznał, że Miłosz S. mógłby mataczyć, choćby nakłaniać inne osoby, które będzie trzeba przesłuchać, do składania fałszywych zeznań.","Oskarżony Dariusz S. nie stawił się w sądzie, składając zaświadczenie lekarskie, które stwierdzały jego niezdolność do uczestnica w procesie."," Dariusz S. zeznał nieprawdę, próbując ukryć zaniedbania w trakcie zabezpieczania imprezy - powiedziała Wawryniuk.","Na razie nie ma decyzji, czy wobec byłego policjanta Dariusza S. zostanie zastosowany areszt.","Dodała, że w kolejnych dniach po zdarzeniu Dariusz S. próbował nakłonić innych pracowników ochrony, aby złożyli zeznania, które miałyby potwierdzać przedstawioną przez niego wersję zdarzeń."," Informacja o tym, że plakietkę miał sprawca, została nam przekazana przez Dariusza S.","Potwierdzone zostały doniesienia, dotyczące kwestii procesu Dariusza S. o pobicie.","Dariusz S. i Krzysztof M. byli z tym mężczyzną w »osiedlowych zatargach« powiedziała PAP Adamska-Okońska.","Ta sprawa z 2016 roku nie miała żadnego związku z wykonywaną przez niego pracą w policji - wskazał adwokat Dariusza S.","Ochroniarze Mirosław R. i Dariusz L., którzy byli świadkami w procesie byłego senatora, składając zeznania w styczniu 2016 roku, twierdzili, że nie mają \"nic wspólnego ze sprawą dziennikarza\".","Dariuszowi S. przedstawiono również. zarzut kierowania pod adresem pokrzywdzonego gróźb karalnych.","8 czerwca 2009 roku minister spraw wewnętrznych nadał Dariuszowi S. brązową odznakę \"zasłużony policjant\".","Aresztowany ochroniarz agencji Tajfun Dariusz S. był wielokrotnie nagradzanym policjantem."],["<a href='http://www.polskieradio24.pl/5/1222/Artykul/2252049,Obronca-aresztowany-Dariusz-S-byl-wielokrotnie-nagradzanym-policjantem'>Polskie Radio<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-tragedia-w-escape-roomie-mswia-ma-projekt-zmiany-przepisow,nId,2774431'>RMF 24<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-25/obronca-dariusz-s-byl-wielokrotnie-nagradzanym-policjantem-wydzialu-kryminalnego/'>Polsat News<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24386157,dariusz-s-szef-ochrony-na-gdanskim-wosp-probowal-ukryc-zaniedbania.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24386157,dariusz-s-szef-ochrony-na-gdanskim-wosp-probowal-ukryc-zaniedbania.html'>Gazeta.pl<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/dariusz-s-nie-stawil-sie-na-swoj-proces-dwukrotnie-badany-przez-psychiatrow,903034.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/zatrzymany-ochroniarz-z-finalu-wosp-w-gdansku-byl-juz-oskarzony,902530.html'>TVN24<\/a>","<a href='https://www.rmf24.pl/fakty/polska/news-obronca-dariusza-s-zaprzecza-ze-jego-klient-byl-szefem-ochro,nId,2798352'>RMF 24<\/a>","<a href='https://www.tvp.info/40963624/szef-ochrony-imprezy-wosp-w-gdansku-byl-oskarzony-o-pobicie-i-grozby-musial-odejsc-z-policji'>TVP INFO<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-25/obronca-dariusz-s-byl-wielokrotnie-nagradzanym-policjantem-wydzialu-kryminalnego/'>Polsat News<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2242534,Zginal-bo-byl-dziennikarzem-Rusza-proces-ws-uprowadzenia-Jaroslawa-Zietary'>Polskie Radio<\/a>","<a href='https://www.tvp.info/40983295/szef-ochrony-gdanskiego-finalu-wosp-bedzie-odbywal-areszt-w-szpitalu'>TVP INFO<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-25/obronca-dariusz-s-byl-wielokrotnie-nagradzanym-policjantem-wydzialu-kryminalnego/'>Polsat News<\/a>","<a href='http://www.polskieradio24.pl/5/1222/Artykul/2252049,Obronca-aresztowany-Dariusz-S-byl-wielokrotnie-nagradzanym-policjantem'>Polskie Radio<\/a>"],["01-25","01-09","01-25","01-21","01-21","01-23","01-21","01-23","01-22","01-25","01-08","01-23","01-25","01-25"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-18" class="section level2">
+<h2>Temat 18</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-18.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-0cbe965949361e02a108" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0cbe965949361e02a108">{"x":{"filter":"none","data":[["Od listopada w Paryżu organizowane są cykliczne demonstracje żółtych kamizelek.","Reakcje \"żółtych kamizelek\" na debatę społeczną wydają się być bardzo podzielone.","Porównywane są do manifestacji \"żółtych kamizelek\", lecz nie ma w nich żadnej agresji, a cel jest pozytywny.","Pozostałe 69 osób ma wyłonić do 10 lutego głosowanie wśród aktywistów żółtych kamizelek.","Agencja Reutera przypomina, że żółte kamizelki zorganizowały w sobotę protesty po raz jedenasty."],["<a href='https://www.wprost.pl/swiat/10181208/zolte-kamizelki-wtargnely-do-biura-rzecznika-rzadu-ten-musial-uciekac.html'>Wprost<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C389312%2Cmacron-zainaugurowal-w-normandii-wielka-debate-narodowa.html'>PAP<\/a>","<a href='https://www.rmf24.pl/fakty/swiat/news-belgia-chodza-na-wagary-by-pojsc-w-marszu-na-rzecz-klimatu,nId,2800333'>RMF 24<\/a>","<a href='http://www.polskieradio24.pl/5/1223/Artykul/2252085,Beda-kolejne-protesty-we-Francji-Zolte-kamizelki-sparalizuja-francuskie-miasta'>Polskie Radio<\/a>","<a href='https://www.wprost.pl/swiat/10186627/zdjecie-z-protestu-zoltych-kamizelek-stalo-sie-viralem-pobili-mnie.html'>Wprost<\/a>"],["01-06","01-15","01-24","01-25","01-27"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-19" class="section level2">
+<h2>Temat 19</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-19.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-2c75f0e28569258ccd91" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2c75f0e28569258ccd91">{"x":{"filter":"none","data":[["\"Czy wiesz, że lekcje religii wymagają zatrudniania ok. 30 tys. księży i katechetów?","50 proc. badanych Polaków uważa, że lekcje religii nie powinny odbywać się w szkołach.","Przypomniała też, że kwestia niefinansowania lekcji religii od początku jest w programie Nowoczesnej.","Z kolei ocena z lekcji religii ma być nieumieszczana na świadectwie i niewliczana do średniej ocen.","Dodał, że \"religia powinna być na pierwszej albo ostatniej lekcji\". - Nie powinno się stygmatyzować dzieci, które na religię nie chodzą."],["<a href='https://fakty.interia.pl/polska/news-koniec-finansowania-religii-to-rodzaj-rywalizacji,nId,2770801'>Interia<\/a>","<a href='https://fakty.interia.pl/polska/news-super-express-polacy-nie-chca-religii-w-szkolach-sondaz,nId,2796442'>Interia<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C383680%2Clubnauer-bedziemy-wspolpracowac-z-inicjatywa-polska-na-rzecz-rozdzielenia'>PAP<\/a>","<a href='https://fakty.interia.pl/polska/news-projekt-nowoczesnej-znoszacy-m-in-finansowanie-religii-przez,nId,2777955'>Interia<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/trzaskowski-o-religii-w-szkolach-i-w-urzedzie-miasta-warszawy,898685.html'>TVN24<\/a>"],["01-07","01-22","01-06","01-11","01-09"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-20" class="section level2">
+<h2>Temat 20</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-20.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-bc55b1527f1d7a911361" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bc55b1527f1d7a911361">{"x":{"filter":"none","data":[["W ubiegłym roku popełniono ich prawie 23,5 tys. podczas, gdy w roku 2017 - 243,1 tys.","Nadal jednak jest ich nieco mniej niż w okresie od sierpnia do listopada ubiegłego roku - zaznaczono.","W ub. roku spadła również wartość wskaźnika EBITDA, z prawie 4,8 mld zł do ponad 3,4 mld zł.","W 2017 roku zabezpieczyli majątek o łącznej wartości 1,45 mld zł, zaś w roku ubiegłym ponad 1,8 mld zł.","Oznacza to, że każdego miesiąca do ZUS trzeba będzie wpłacić 1316,97 zł, a więc o 88,27 zł więcej niż roku ubiegłym.","Ostatecznie, według \"Wyborczej\", do wypłaty nie dochodzi, ponieważ w lipcu ub. r.","Od ubiegłego poniedziałku do 17 stycznia odwołano spektakle w Teatrze Muzycznym im.","Portugalczyk trenerem zespołu z księstwa przestał być w październiku ubiegłego roku.","Masło, które drożało na początku ubiegłego roku może w 2019 roku być w sklepach tańsze nawet o 10 proc.","Dotąd podkomisja ta zebrała się na merytorycznym posiedzeniu tylko raz - w marcu ubiegłego roku.","To znacznie więcej niż w ubiegłym roku, kiedy uczestników forum przewiozło ponad 1,3 tys. maszyn."],["<a href='https://fakty.interia.pl/polska/news-kgp-u-ubieglym-roku-zgloszono-prawie-800-tys-przestepstw-wzr,nId,2774073'>Interia<\/a>","<a href='https://fakty.interia.pl/polska/news-cbos-rzad-odrabia-straty-w-poparciu,nId,2801911'>Interia<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C394560%2Cmniejsze-wydobycie-wegla-i-zyski-gornictwa-w-11-miesiacach-2018-r.html'>PAP<\/a>","<a href='https://fakty.interia.pl/polska/news-kgp-u-ubieglym-roku-zgloszono-prawie-800-tys-przestepstw-wzr,nId,2774073'>Interia<\/a>","<a href='https://www.wprost.pl/kraj/10185311/zla-informacja-dla-przedsiebiorcow-znaczny-wzrost-skladek-zus-w-2019-roku.html'>Wprost<\/a>","<a href='https://www.polsatnews.pl/wiadomosc/2019-01-30/gazeta-wyborcza-bank-pekao-sa-wspieral-wieze/'>Polsat News<\/a>","<a href='https://www.pap.pl/aktualnosci/news%2C389298%2Cimprezy-kulturalne-odwolane-w-zwiazku-z-zaloba-po-smierci-pawla-adamowicza'>PAP<\/a>","<a href='https://www.rmf24.pl/sport/news-stary-nowy-trener-w-as-monaco-powrot-jardima,nId,2801762'>RMF 24<\/a>","<a href='https://biznes.wprost.pl/gospodarka/10180534/prognozy-gospodarcze-na-2019-rok-podrozeja-warzywa-i-pieczywo.html'>Wprost<\/a>","<a href='https://www.rmf24.pl/ekonomia/news-pomoc-dla-frankowiczow-bedzie-ograniczona-pis-zlozyl-poprawk,nId,2800195'>RMF 24<\/a>","<a href='https://tvn24bis.pl/ze-swiata,75/forum-w-davos-2019-rekordowy-ruch-samolotow-nad-davos,902784.html'>TVN24 bis<\/a>"],["01-09","01-25","01-25","01-09","01-21","01-30","01-15","01-25","01-03","01-24","01-22"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="temat-21" class="section level2">
+<h2>Temat 21</h2>
+<p><img src="january_files/figure-html/unnamed-chunk-5-21.png" width="900" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-8296f0e748dafc46849b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8296f0e748dafc46849b">{"x":{"filter":"none","data":[["Ostatni  poszukiwany od wtorku  górnik z kopalni Rudna w Polkowicach został odnaleziony cały i zdrowy.","W wyniku wstrząsu w kopalni \"Rydułtowy\" zginął jeden górnik, a ośmiu jest rannych.","Większość poszkodowanych wyszła z kopalni o własnych siłach i tylko jeden z górników został wyniesiony na noszach.","Wielu górników z miejscowej kopalni przebywało właśnie na stołówce, która została całkowicie zalana przez falę błota.","Zmarły górnik to piąta w tym roku śmiertelna ofiara w polskim górnictwie i trzecia w kopalniach węgla."],["<a href='https://wiadomosci.radiozet.pl/Polska/Polkowice-wstrzas-w-kopalni-Rudna.-Ostatni-gornik-odnaleziony-caly-i-zdrowy'>Radio ZET<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24389484,wstrzas-w-kopalni-rydultowy-nie-zyje-jeden-gornik-osmiu.html'>Gazeta.pl<\/a>","<a href='http://wiadomosci.gazeta.pl/wiadomosci/7,114883,24389484,wstrzas-w-kopalni-rydultowy-nie-zyje-jeden-gornik-osmiu.html'>Gazeta.pl<\/a>","<a href='https://tvn24.pl/wiadomosci-ze-swiata,2/lawina-blotna-w-brazylii-relacje,904256.html'>TVN24<\/a>","<a href='https://tvn24.pl/wiadomosci-z-kraju,3/wstrzas-w-kopalni-rydultowy-zginal-gornik-sa-ranni,902998.html'>TVN24<\/a>"],["01-30","01-23","01-23","01-27","01-23"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Tekst<\/th>\n      <th>Strona<\/th>\n      <th>Data<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"scrollX":true,"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+<br><br>
+&nbsp;
+<hr />
+<p style="text-align: center;"> <a href=https://www.linkedin.com/in/jakub-kubajek-869945158/>Jakub Kubajek</a></p>
+&nbsp;
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

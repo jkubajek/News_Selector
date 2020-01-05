@@ -16,7 +16,8 @@ def space_tokenizer(text):
 
 
 def create_embeddings(articles, lambda_statistics,
-                      log_lambda_statistics_df, pipeline=False):
+                      log_lambda_statistics_df, pipeline=False,
+                      embedding_size=256):
     """
     This function creates embeddings for each word in data frame.
     
@@ -34,7 +35,7 @@ def create_embeddings(articles, lambda_statistics,
     tfidf_matrix = vectorizer.fit_transform(corpus)
     tfidf_matrix = tfidf_matrix.transpose()
 
-    svd = TruncatedSVD(n_components=256, n_iter=15, random_state=42)
+    svd = TruncatedSVD(n_components=embedding_size, n_iter=15, random_state=42)
     embeddings = svd.fit_transform(tfidf_matrix)
 
     # Scale embeddings by log lambda
@@ -233,7 +234,9 @@ class TopicsSummariser:
     def __init__(self, topics, lemmatized_sentences, lemmatized_articles,
                  sentences_text, log_lambda_statistics_df, embeddings,
                  embeddings_vocab, min_key_freq=0.8, max_sentence_simil=0.5,
-                 section_id="section_id", word_col="word", use_sparse=True):
+                 section_id="section_id", word_col="word", use_sparse=True,
+                 freq_to_lex_rank=0.25, max_sentences_num=10, min_sentences_num=3,
+                 freq_to_show=0.05):
         self.topics = topics
         self.lemmatized_sentences = lemmatized_sentences
         self.lemmatized_articles = lemmatized_articles
@@ -253,6 +256,10 @@ class TopicsSummariser:
         self.selected_sentences = []
         self.sentences_in_articles = []
         self.use_sparse = use_sparse
+        self.freq_to_lex_rank = freq_to_lex_rank
+        self.max_sentences_num = max_sentences_num
+        self.min_sentences_num = min_sentences_num
+        self.freq_to_show = freq_to_show
         self.vectorizer_sentences = CountVectorizer(lowercase=False,
                                                     tokenizer=space_tokenizer,
                                                     min_df=1)
@@ -358,7 +365,9 @@ class TopicsSummariser:
         selected_sentences_ids = list(order[selected_sentences])
         zero_rankings = np.sum(ranking == 0.0)
         non_zero_sentences = sentence_number - zero_rankings
-        num_selected = min(max(math.ceil(non_zero_sentences * 0.05), 3), 10)
+        num_selected = min(max(math.ceil(non_zero_sentences * self.freq_to_show),
+                               self.min_sentences_num),
+                           self.max_sentences_num)
         selected_sentences_ids = selected_sentences_ids[:num_selected]
         selected_sentences_ids = [topic_sentences[topic_index] for topic_index in selected_sentences_ids]
         return selected_sentences_ids
@@ -424,7 +433,7 @@ class TopicsSummariser:
 
         # Select 25% the most similar sentences to the topic
         order = np.argsort(ranking)[::-1]
-        selected_number = math.ceil(len(order) * 0.25)
+        selected_number = math.ceil(len(order) * self.freq_to_lex_rank)
         order = order[:selected_number]
         ranking_simil = ranking[order]
         topic_sentences = [topic_sentences[_id] for _id in order]
@@ -493,7 +502,9 @@ def summarise_topics(topics, lemmatized_sentences, lemmatized_articles,
                      sentences_text, log_lambda_statistics_df, embeddings,
                      embeddings_vocab, min_key_freq=0.8, max_sentence_simil=0.5,
                      section_id="section_id", word_col="word",
-                     use_sparse=True):
+                     use_sparse=True, freq_to_lex_rank=0.25,
+                     max_sentences_num=10, min_sentences_num=3,
+                     freq_to_show=0.01):
     """
     Function that uses TopicsSummariser class to summarise documents.
 
@@ -512,12 +523,17 @@ def summarise_topics(topics, lemmatized_sentences, lemmatized_articles,
     :param word_col string name of data frame column with tokens
     :param use_sparse bool value - for True cosine similarity between sentences is calculated with the use
     of scipy sparse matrix
+    :param freq_to_lex_rank float with the percentage of most similar sentences that are forwarded to LexRank
+    :param max_sentences_num int of the maximal number of sentences to include in the summary of the topic
+    :param min_sentences_num int of the minimal number of sentences to include in the summary of the topic
+    :param freq_to_show float Percentage of sentences to show in the summary of the topic
     """
 
     summariser = TopicsSummariser(topics, lemmatized_sentences, lemmatized_articles,
                                   sentences_text, log_lambda_statistics_df, embeddings,
                                   embeddings_vocab, min_key_freq, max_sentence_simil,
-                                  section_id, word_col, use_sparse)
+                                  section_id, word_col, use_sparse, freq_to_lex_rank,
+                                  max_sentences_num, min_sentences_num, freq_to_show)
     summariser.vectorize_sentences()
     summariser.vectorize_articles()
     summariser.group_sentences_into_articles()
@@ -555,7 +571,9 @@ def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
                           sentences_text, log_lambda_statistics_df,
                           min_key_freq=0.8, max_sentence_simil=0.5,
                           section_id="section_id", word_col="word",
-                          use_sparse=True):
+                          use_sparse=True, freq_to_lex_rank=0.25,
+                          max_sentences_num=10, min_sentences_num=3,
+                          freq_to_show=0.01, embedding_size=256):
     """
     Function merging full pipeline. At first it creates tokens' embeddings. Then it cluster them to topics.
     And at the end, it summarise topics.
@@ -580,13 +598,18 @@ def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
     :param word_col string name of data frame column with tokens
     :param use_sparse bool value - for True cosine similarity between sentences is calculated with the use
     of scipy sparse matrix
+    :param freq_to_lex_rank float with the percentage of most similar sentences that are forwarded to LexRank
+    :param max_sentences_num int of the maximal number of sentences to include in the summary of the topic
+    :param min_sentences_num int of the minimal number of sentences to include in the summary of the topic
+    :param freq_to_show float Percentage of sentences to show in the summary of the topic
     """
 
     # Create embeddings
     outputs = create_embeddings(sections_and_articles,
                                 filtered_lambda_statistics,
                                 log_lambda_statistics_df,
-                                pipeline=True)
+                                pipeline=True,
+                                embedding_size=int(embedding_size))
 
     similarity_matrix = outputs[0]
     # distribution_matrix = outputs[1] 
@@ -606,7 +629,9 @@ def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
     topics = summarise_topics(topics, lemmatized_sentences, lemmatized_articles,
                               sentences_text, log_lambda_statistics_df, embeddings,
                               embeddings_vocab, min_key_freq, max_sentence_simil,
-                              section_id, word_col, use_sparse)
+                              section_id, word_col, use_sparse, freq_to_lex_rank,
+                              int(max_sentences_num), int(min_sentences_num),
+                              freq_to_show)
 
     return topics, similarity_matrix, selected_tokens, silhouette_history, max_simil_history
 
@@ -614,20 +639,20 @@ def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
 #     # create logger
 #     logger = logging.getLogger('memory_profile_log')
 #     logger.setLevel(logging.DEBUG)
-# 
+#
 #     # create file handler which logs even debug messages
 #     fh = logging.FileHandler("D:/Osobiste/GitHub/files/memory_profile.log")
 #     fh.setLevel(logging.DEBUG)
-# 
+#
 #     # create formatter
 #     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 #     fh.setFormatter(formatter)
-# 
+#
 #     # add the handlers to the logger
 #     logger.addHandler(fh)
-# 
+#
 #     sys.stdout = LogFile('memory_profile_log', reportIncrementFlag=False)
-# 
+#
 #     main_dir = "D:/Osobiste/GitHub/files/"
 #     file = main_dir + "sections_and_articles.csv"
 #     sections_and_articles = pd.read_csv(file)
@@ -641,8 +666,8 @@ def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
 #     sentences_text = pd.read_csv(file)
 #     file = main_dir + "log_lambda_statistics_df.csv"
 #     log_lambda_statistics_df = pd.read_csv(file)
-# 
-# 
+#
+#
 #     cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
 #                           # Clustering
 #                           min_association=0.01, do_silhouette=True, singularity_penalty=0.0,
