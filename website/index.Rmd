@@ -2,11 +2,178 @@
 title: "Wprowadzenie"
 ---
 
-Na portalach informacyjnych każdego dnia pojawiają się setki artykułów, w ciągu miesiąca jest to już kilkanaście tysięcy artykułów, a w całym roku są ich setki tysięcy. To powoduje, że jeżeli ktoś chce być na bierząco z najważniejszymi wydarzeniami w Polsce i na Świecie musi poświęcić bardzo dużo czasu na śledzenie wiadomości. Na szczęście, z pomocą przychodzi statystyka oraz *text mining*, które umożliwiają automatyczne wygenerowanie podsumowania najważniejszych informacji.
+Na portalach informacyjnych każdego dnia pojawiają się setki artykułów. W ciągu miesiąca jest to już kilkanaście tysięcy artykułów, a w całym roku setki tysięcy. To powoduje, że jeżeli ktoś chce być na bieżąco z najważniejszymi wydarzeniami w Polsce i na świecie, musi poświęcić bardzo dużo czasu na śledzenie wiadomości. Na szczęście z pomocą przychodzi statystyka oraz *text mining*, które umożliwiają automatyczne wygenerowanie podsumowania najważniejszych informacji.
 
-Na tej stronie znajdują się automatycznie wygenerowane podsumowania najważniejszych wiadomości w poszczególnych miesiącach 2019 roku. W analizie uwzględniono artykuły, które opublikowano w wybranych polskich mediach internetowych. Wśród nich są RMF 24, TVN24, TVN24 bis, Radio ZET, Gazeta.pl, Polsat News, Wprost, Polskie Radio, TVP Info, PAP oraz Interia.
+Na tej stronie znajdują się automatycznie wygenerowane podsumowania najważniejszych wiadomości w poszczególnych miesiącach 2019 roku. W analizie uwzględniono artykuły, które opublikowano w wybranych polskich mediach internetowych - RMF 24, TVN24, TVN24 bis, Radio ZET, Gazeta.pl, Polsat News, Wprost, Polskie Radio, TVP Info, PAP oraz Interia.
 
-Model służący do generowania podsumowań w pierwszym kroku wybiera najistotniejsze słowa w danym miesiącu. Następnie, przy pomocy algorytmu [silhouette](https://en.wikipedia.org/wiki/Silhouette_(clustering)) grupuje je do jak najbardziej jednolitych tematów. Na koniec, z wykorzystaniem algorytmu [LexRank](https://blog.nus.edu.sg/soctalent/2010/02/11/a-brief-summary-of-lexrank-graph-based-lexical-centrality-as-salience-in-text-summarization/) oraz [podobieństwa cosinusowego](https://towardsdatascience.com/overview-of-text-similarity-metrics-3397c4601f50) wybiera około 0,05% (od 5 do 20) zdań z artykułów, które zawierają słowa kluczowe. Dokładniejszy opis modelu znajduje się w zakładce [Metodologia](https://jkubajek.github.io/News_Selector/methodology) oraz w [prezentacji](https://jkubajek.github.io/News_Selector/News_Selector.pdf).
+Model służący do generowania podsumowań w pierwszym kroku wybiera najistotniejsze słowa w danym miesiącu. Następnie przy pomocy algorytmu [silhouette](https://en.wikipedia.org/wiki/Silhouette_(clustering)) grupuje je do jak najbardziej jednolitych tematów. Na koniec z wykorzystaniem algorytmu [LexRank](https://blog.nus.edu.sg/soctalent/2010/02/11/a-brief-summary-of-lexrank-graph-based-lexical-centrality-as-salience-in-text-summarization/) oraz [podobieństwa cosinusowego](https://towardsdatascience.com/overview-of-text-similarity-metrics-3397c4601f50) wybiera około 0,05% (od 5 do 20) zdań z artykułów, które zawierają słowa kluczowe. Dokładniejszy opis modelu znajduje się w zakładce [Metodologia](https://jkubajek.github.io/News_Selector/methodology) oraz w [prezentacji](https://jkubajek.github.io/News_Selector/News_Selector.pdf).
 
-Podsumowania poszczególnych miesięcy można znaleźć w zakładce **Podsumowania**.
+**Streszczenia najważniejszych tematów w poszczególnych miesięcy 2019 r. można znaleźć w zakładce Podsumowania**.
 
+## Dynamiczna wizualizacja słów kluczowych
+Poniższa animacja przedstawia najważniejsze słowa w ciągu 2019 r. Wizualizacja składa się z następujących po sobie tygodniowych okresów.
+
+Im czcionka jest większa i ma ciemniejszą barwę, tym wyższa kluczowość danego słowa. Dokładną wartość statystyki istotności można odczytać po kliknięciu w węzeł. Połączenie pomiędzy wyrazami oznacza, że występowały one często w tych samych artykułach i akapitach.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	cashe = TRUE
+)
+```
+
+```{r echo=FALSE, message=FALSE, include=FALSE}
+library(dplyr)
+library(magrittr)
+library(ndtv)
+library(networkDynamic)
+library(network)
+library(classInt)
+
+working_dir <- "D:/Osobiste/GitHub/"
+min_association <- 0.5
+
+add_words_to_list <- function(words_list, new_words){
+    for(word in new_words){
+        if(!(word %in% names(words_list))){
+            words_list[[word]] <- length(words_list) + 1
+        }
+    }
+    return(words_list)
+}
+
+extract_ids <- function(words_list, words){
+    ids <- c()
+    for(word in words){
+        ids <- c(ids, words_list[[word]])
+    }
+    return(ids)
+}
+
+max_words <- 20
+word_ids <- list()
+nodes_old <- data.frame(label=character(), pid=numeric(), stringsAsFactors = F)
+nodes_changes <- data.frame(time=NULL, pid=NULL, direction=NULL, stringsAsFactors = F)
+iter <- 1
+nets <- list()
+labels <- c()
+scale_font <- c(3, 1)
+colors <- rev(pals::ocean.haline(6))[(7-5):6]
+start_dates <- as.Date("2019-01-01") + seq(0, 358)
+end_dates <- as.Date("2019-01-07") + seq(0, 358)
+dates <- paste0("Okres: ", format(start_dates, "%d.%m"), " - ", format(end_dates, "%d.%m"))
+
+lambda_DF <- data.frame(name=character(), lambda=numeric(), 
+                        lambda_log=numeric(), stringsAsFactors = F)
+for(i in seq(1, 359)){
+    file_name <- paste0(working_dir, 
+                        "News_Selector/data/topics/weeks/weekly_topics_", 
+                        start_dates[i], "-", end_dates[i], ".RData")
+    load(file_name)
+    
+    lambda_DF <- lambda_DF %>%
+        union_all(lambda_daily_DF %>%
+                      top_n(max_words, lambda))
+    
+}
+
+values_all <- lambda_DF[["lambda_log"]]
+brks <- classIntervals(values_all, n = 5, style = "fisher") %>% .$brks #jenks
+
+for(i in seq(1, 359)){
+# for(i in seq(1, 31)){
+    file_name <- paste0(working_dir, 
+                        "News_Selector/data/topics/weeks/weekly_topics_", 
+                        start_dates[i], "-", end_dates[i], ".RData")
+    load(file_name)
+    
+    new_words <- lambda_daily_DF$name[1:max_words]
+    word_ids <- add_words_to_list(word_ids, new_words)
+    new_ids <- extract_ids(word_ids, new_words)
+    nodes_new <- data.frame(id=seq(1, length(new_words)), 
+                            label=new_words, 
+                            pid=new_ids, 
+                            stringsAsFactors = F)
+    
+    
+    ids_df_from <- data.frame(word=new_words, from=seq(1, length(new_words)))
+    ids_df_to <- data.frame(word=new_words, to=seq(1, length(new_words)))
+    
+    # Add changes in edges
+    edges <- as.data.frame.matrix(words_similarity_matrix[new_words, new_words]) %>%
+        mutate(col_1 = rownames(.)) %>%
+        tidyr::gather(key = "col_2", value = "simil", -col_1) %>%
+        mutate(name = col_1) %>%
+        filter(simil > min_association) %>%
+        group_by(name) %>%
+        top_n(2, simil) %>%
+        ungroup() %>%
+        mutate(simil = round(simil, 2)) %>%
+        left_join(ids_df_from, by=c("col_1"="word")) %>%
+        left_join(ids_df_to, by=c("col_2"="word")) %>%
+        dplyr::select(-col_1, -col_2, -name)
+    edges <- edges[c("from", "to", "simil")]
+    
+    nodes_new <- nodes_new %>%
+        left_join(lambda_daily_DF %>%
+                      mutate(lambda_log = lambda_log,
+                             lambda = round(lambda, 0)) %>%
+                      dplyr::select(name, lambda, lambda_log),
+                  by=c("label"="name"))
+    nodes_new <- nodes_new[c("id", "label", "lambda", "pid", "lambda_log")]
+    
+    nets[[iter]] <- network(edges,  vertex.attr=nodes_new, matrix.type="edgelist", 
+                    loops=F, multiple=F, ignore.eval = F)
+    # Set color
+    values <- lambda_daily_DF[["lambda_log"]][1:max_words]
+    color_groups <- findInterval(values, brks, all.inside = T)
+    nets[[iter]] %v% 'color' <- colors[color_groups]
+    
+    # Scaling of font
+    values <- values_all
+    normedFreq <-  (values - min(values)) / (max(values) - min(values))
+    size <- (scale_font[1] - scale_font[2]) * normedFreq + scale_font[2]
+    nets[[iter]] %v% 'size' <- size
+    
+    iter <- iter + 1
+}
+
+net.dyn <- networkDynamic(network.list = nets,
+                          vertex.pid = 'pid',
+                          create.TEAs=T,
+                          vertex.TEA.names = c("id", "label", "lambda.cex", "lambda", 
+                                               "lambda_log"))
+# reconcile things
+reconcile.vertex.activity(net.dyn, mode = "match.to.edges")
+
+pp <- compute.animation(net.dyn, animation.mode = "kamadakawai",
+                  slice.par=list(start=0, end=length(nets), interval=1, 
+                                 aggregate.dur=1, rule='earliest',
+                                 tween.frames=10))
+```
+
+
+```{r echo=FALSE, message=FALSE, results='asis'}
+render.d3movie(pp, usearrows = F, 
+               displaylabels = T, 
+               main = function(s){dates[min(s, length(dates))]},
+               label=function(slice){(slice %v% 'label')},
+               bg="#ffffff", vertex.border="#333333",
+               vertex.cex = function(slice){(slice %v% 'size')},
+               vertex.col = 'lightblue',
+               label.col = function(slice){(slice %v% 'color')},
+               label.cex = function(slice){(slice %v% 'size')},
+               edge.lwd = 'simil', 
+               edge.col = '#005353',
+               vertex.tooltip = function(slice) {
+                   paste("<b>", (slice %v% 'label'), ":</b>",
+                         (slice %v% 'lambda'))},
+               edge.tooltip = function(slice) {
+                   paste("<b>Podobieństwo:</b>", (slice %e% "simil") )},
+               launchBrowser=F, filename="Media-Network-Dynamic.html",
+               render.par=list(tween.frames = 10, show.time = F),
+               plot.par=list(mar=c(0,0,0,0)), output.mode='htmlWidget',
+               jitter=F)
+```

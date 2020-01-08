@@ -236,7 +236,8 @@ class TopicsSummariser:
                  embeddings_vocab, min_key_freq=0.8, max_sentence_simil=0.5,
                  section_id="section_id", word_col="word", use_sparse=True,
                  freq_to_lex_rank=0.25, max_sentences_num=10, min_sentences_num=3,
-                 freq_to_show=0.05):
+                 freq_to_show=0.05, min_sent_to_lexrank=10,
+                 weighted_unique_scaling=False):
         self.topics = topics
         self.lemmatized_sentences = lemmatized_sentences
         self.lemmatized_articles = lemmatized_articles
@@ -260,6 +261,8 @@ class TopicsSummariser:
         self.max_sentences_num = max_sentences_num
         self.min_sentences_num = min_sentences_num
         self.freq_to_show = freq_to_show
+        self.min_sent_to_lexrank = min_sent_to_lexrank
+        self.weighted_unique_scaling = weighted_unique_scaling
         self.vectorizer_sentences = CountVectorizer(lowercase=False,
                                                     tokenizer=space_tokenizer,
                                                     min_df=1)
@@ -310,8 +313,7 @@ class TopicsSummariser:
         ordered_embeddings = [self.embeddings_vocab[inv_vocab[i]] for i in range(len(inv_vocab))]
         self.embeddings = self.embeddings[ordered_embeddings, :].copy()
 
-    @staticmethod
-    def scale_ranking(ranking, unique_topic_words, all_words_sums):
+    def scale_ranking(self, ranking, unique_topic_words, all_words_sums):
         """
         Scale PageRank ranking by log(topic_words)/log(all_words).
         This modification upscales sentences with more topic words and
@@ -326,7 +328,11 @@ class TopicsSummariser:
         all_words_sums = np.array(all_words_sums)
 
         unique_topic_words.resize(all_words_sums.shape)
-        unique_topic_words = np.log(unique_topic_words + 1.0)
+        if self.weighted_unique_scaling:
+            # unique_topic_words = unique_topic_words # alternative
+            unique_topic_words = np.sqrt(unique_topic_words)
+        else:
+            unique_topic_words = np.log(unique_topic_words + 1.0)
 
         all_tokens_count_log = np.log(all_words_sums)
         all_pos = all_tokens_count_log > 0
@@ -431,9 +437,10 @@ class TopicsSummariser:
         ranking = sentences_topic_simil
         ranking = ranking.flatten()
 
-        # Select 25% the most similar sentences to the topic
+        # Select x% the most similar sentences to the topic
         order = np.argsort(ranking)[::-1]
-        selected_number = math.ceil(len(order) * self.freq_to_lex_rank)
+        selected_number = max(math.ceil(len(order) * self.freq_to_lex_rank),
+                              min(self.min_sent_to_lexrank, math.ceil(len(order) * 0.5)))
         order = order[:selected_number]
         ranking_simil = ranking[order]
         topic_sentences = [topic_sentences[_id] for _id in order]
@@ -451,9 +458,21 @@ class TopicsSummariser:
         ranking = np.multiply(ranking, ranking_simil, out=ranking)
 
         # Scale ranking
+        # Scale by log_lambda
         topic_sentences_tf_matrix = self.tf_matrix_sentences[topic_sentences, :]
-        unique_topic_words = topic_sentences_tf_matrix[:, topic_words_indices].getnnz(axis=1)
-        unique_topic_words = np.divide(unique_topic_words, len(topic_words))
+        # Test
+        if self.weighted_unique_scaling:
+            unique_topic_words = topic_sentences_tf_matrix[:, topic_words_indices] > 0
+            unique_topic_words = unique_topic_words.todense()
+            unique_topic_words = np.dot(unique_topic_words, 
+                                        self.log_lambda_statistics[topic_words_indices])
+            unique_topic_words = np.divide(unique_topic_words, 
+                                        np.sum(self.log_lambda_statistics[topic_words_indices]))
+        else:
+            unique_topic_words = topic_sentences_tf_matrix[:, topic_words_indices].getnnz(axis=1)
+            unique_topic_words = np.divide(unique_topic_words, len(topic_words))
+            
+        
         all_words_sums = topic_sentences_tf_matrix.sum(axis=1)
         ranking = self.scale_ranking(ranking, unique_topic_words, all_words_sums)
 
@@ -504,7 +523,8 @@ def summarise_topics(topics, lemmatized_sentences, lemmatized_articles,
                      section_id="section_id", word_col="word",
                      use_sparse=True, freq_to_lex_rank=0.25,
                      max_sentences_num=10, min_sentences_num=3,
-                     freq_to_show=0.01):
+                     freq_to_show=0.01, min_sent_to_lexrank=10,
+                     weighted_unique_scaling=False):
     """
     Function that uses TopicsSummariser class to summarise documents.
 
@@ -527,13 +547,16 @@ def summarise_topics(topics, lemmatized_sentences, lemmatized_articles,
     :param max_sentences_num int of the maximal number of sentences to include in the summary of the topic
     :param min_sentences_num int of the minimal number of sentences to include in the summary of the topic
     :param freq_to_show float Percentage of sentences to show in the summary of the topic
+    :param min_sent_to_lexrank int Minimal number of sentences that are included in LexRank; the true minimal number
+    can not be greater than 50% of initial number of sentences.
     """
 
     summariser = TopicsSummariser(topics, lemmatized_sentences, lemmatized_articles,
                                   sentences_text, log_lambda_statistics_df, embeddings,
                                   embeddings_vocab, min_key_freq, max_sentence_simil,
                                   section_id, word_col, use_sparse, freq_to_lex_rank,
-                                  max_sentences_num, min_sentences_num, freq_to_show)
+                                  max_sentences_num, min_sentences_num, freq_to_show,
+                                  min_sent_to_lexrank, weighted_unique_scaling)
     summariser.vectorize_sentences()
     summariser.vectorize_articles()
     summariser.group_sentences_into_articles()
@@ -573,7 +596,9 @@ def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
                           section_id="section_id", word_col="word",
                           use_sparse=True, freq_to_lex_rank=0.25,
                           max_sentences_num=10, min_sentences_num=3,
-                          freq_to_show=0.01, embedding_size=256):
+                          freq_to_show=0.01, embedding_size=256,
+                          only_groups=False, min_sent_to_lexrank=10,
+                          weighted_unique_scaling=False):
     """
     Function merging full pipeline. At first it creates tokens' embeddings. Then it cluster them to topics.
     And at the end, it summarise topics.
@@ -602,6 +627,10 @@ def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
     :param max_sentences_num int of the maximal number of sentences to include in the summary of the topic
     :param min_sentences_num int of the minimal number of sentences to include in the summary of the topic
     :param freq_to_show float Percentage of sentences to show in the summary of the topic
+    :param embedding_size int Number of components in Truncated SVD - size of embedding
+    :param only_groups bool For True only clusters and similarity between important words are returned
+    :param min_sent_to_lexrank int Minimal number of sentences that are included in LexRank; the true minimal number
+    can not be greater than 50% of initial number of sentences.
     """
 
     # Create embeddings
@@ -624,6 +653,9 @@ def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
     topics = outputs[0]
     max_simil_history = outputs[1]
     silhouette_history = outputs[2]
+    
+    if only_groups:
+        return topics, similarity_matrix, selected_tokens, silhouette_history, max_simil_history
 
     # Summarise topics
     topics = summarise_topics(topics, lemmatized_sentences, lemmatized_articles,
@@ -631,7 +663,8 @@ def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
                               embeddings_vocab, min_key_freq, max_sentence_simil,
                               section_id, word_col, use_sparse, freq_to_lex_rank,
                               int(max_sentences_num), int(min_sentences_num),
-                              freq_to_show)
+                              freq_to_show, int(min_sent_to_lexrank),
+                              weighted_unique_scaling)
 
     return topics, similarity_matrix, selected_tokens, silhouette_history, max_simil_history
 

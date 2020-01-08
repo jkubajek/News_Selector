@@ -23,8 +23,8 @@ v_min_lambda_daily <- 50
 
 # Loading functions
 # Setting main directory
-# working_dir <- "D:/Osobiste/GitHub/"
-working_dir <- "/home/j.kubajek/projekty/News_Selector/"
+working_dir <- "D:/Osobiste/GitHub/"
+# working_dir <- "/home/j.kubajek/projekty/News_Selector/"
 
 # Sourcing R code
 source(paste0(working_dir, "News_Selector/scripts/dunning_functions.R"), encoding = "UTF8")
@@ -54,6 +54,13 @@ end_dates <- c("2019-01-31", "2019-02-28", "2019-03-31", "2019-04-30",
 load(paste0(working_dir, "News_Selector/data/grammar_data.RData"))
 
 gc(reset = T)
+
+# ###################################################################
+# General statistics needed for Dunning statistic
+# ###################################################################
+# Statistics
+load(paste0(working_dir, "News_Selector/data/general_stats_2018-2019.RData"))
+
 # ###################################################################
 # Load files
 # ###################################################################
@@ -68,6 +75,7 @@ for(i in seq(1, 12)){
     DF <- DF %>%
         mutate(date = date %>% as.character()) %>%
         filter(date %in% selected_dates)
+    gc(reset=TRUE)
     
     # ###################################################################
     # Modification of dataset
@@ -96,6 +104,7 @@ for(i in seq(1, 12)){
         
     # Unnest sentences
     articles_unnested <- articles_sentences %>%
+        dplyr::select(id, paragraph_id, sentence_id, text) %>%
         unnest_tokens(word, text, to_lower = F) %>%
         group_by(sentence_id) %>%
         mutate(position = seq(1, n())) %>%
@@ -113,11 +122,6 @@ for(i in seq(1, 12)){
         group_by(word) %>%
         summarise(counts = n())
     v_min_counts <- quantile(data_grouped$counts, probs = 0.97) 
-    # ###################################################################
-    # General statistics needed for Dunning statistic
-    # ###################################################################
-    # Statistics
-    load(paste0(working_dir, "News_Selector/data/general_stats_2018-2019.RData"))
     
     #####################################################################
     # Cluster and summarise with embeddings in Python
@@ -155,7 +159,8 @@ for(i in seq(1, 12)){
                                    section_id="section_id", word_col="word",
                                    use_sparse=TRUE, freq_to_lex_rank=0.05,
                                    max_sentences_num=20, min_sentences_num=5,
-                                       freq_to_show=0.01, embedding_size=512)
+                                   freq_to_show=0.01, embedding_size=512,
+                                   min_sent_to_lexrank=500)
     
     list_topics <- topics[[1]]
     words_similarity_matrix <- topics[[2]]
@@ -176,7 +181,9 @@ for(i in seq(1, 12)){
     list_topics <- date_extractor(list_topics, articles_sentences)
     list_topics <- arrange_topics(list_topics, "max_lambda")
     list_topics <- clear_sentences(list_topics)
-    list_topics <- delete_unrelevant_topics(list_topics, 150, 100)
+    list_topics <- delete_unrelevant_topics(list_topics, 
+                                            min_singular_lambda=150,
+                                            min_topic_lambda=100)
     
     # Select filtered topic words
     selected_words <- filter_selected_words(list_topics)

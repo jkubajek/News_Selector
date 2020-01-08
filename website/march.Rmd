@@ -39,7 +39,7 @@ library(lexRankr)
 # library(arrangements)
 
 load(paste0(working_dir, 
-            "News_Selector/data/topics/monthly_topics_2019-03_singularity_penalty_01_512.RData"))
+            "News_Selector/data/topics/monthly_topics_2019-03_weighted_scaling_singularity_penalty_01_512.RData"))
 
 source(paste0(working_dir, "News_Selector/scripts/topic_selection_functions.R"), encoding = "UTF8")
 
