@@ -6,6 +6,8 @@ To run the pipeline, you need to change directiories in some files: **news_selec
 
 Presentation describing the whole pipeline can be found in [docs](https://jkubajek.github.io/News_Selector/News_Selector.pdf).
 
+On [GitHub Pages](https://jkubajek.github.io/News_Selector/index.html) there is the page with the summary of the 2019 in Polish media, created with the use of this model.
+
 An an example of daily report for 9th December 2019 is present on [GitHub Pages](https://jkubajek.github.io/News_Selector/daily_report_2019_12_09).
 
 In addition, there is the [report](https://jkubajek.github.io/News_Selector/BBC_2019_12_01-09) for BBC articles published between 1st and 9th December 2019.
