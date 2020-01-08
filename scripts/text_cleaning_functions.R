@@ -3,7 +3,7 @@ options(stringsAsFactors = F)
 
 sites <- tibble(site = c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
                     site_name = c("RMF 24", "Gazeta.pl", "Interia", "Radio ZET", "Dziennik.pl", 
-                                  "PAP", "TVN24", "TVN24 bis", "TVP INFO",
+                                  "PAP", "TVN24", "TVN24 bis", "TVP Info",
                                   "Polskie Radio", "Polsat News", "Wprost"))
 
 clean_RMF <- function(data){
