@@ -24,7 +24,6 @@ v_min_lambda_daily <- 100
 # Loading functions
 # Setting main directory
 working_dir <- "D:/Osobiste/GitHub/"
-# working_dir <- "/home/j.kubajek/projekty/News_Selector/"
 
 # Sourcing R code
 source(paste0(working_dir, "News_Selector/scripts/dunning_functions.R"), encoding = "UTF8")
@@ -148,7 +147,7 @@ for(i in seq(48, 52)){
     topics <- cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
                                    # Clustering
                                    min_association=0.25, do_silhouette=TRUE, 
-                                   singularity_penalty=-0.1,
+                                   singularity_penalty=0.0,
                                    # Summarization
                                    lemmatized_sentences=lemmatized_sentences, 
                                    lemmatized_articles=lemmatized_articles,

@@ -38,14 +38,18 @@ source(paste0(working_dir, "News_Selector/scripts/PL_stop_words.R"), encoding = 
 # ###################################################################
 # Load files
 # ###################################################################
-DF_1 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_RMF_daily.json")) %>% clean_RMF(.)
-DF_2 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_Gazeta_daily.json")) %>% clean_Gazeta(.)
-DF_3 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_Interia_daily.json")) %>% clean_Interia(.)
-DF_4 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_Dziennik_daily.json")) %>% clean_Dziennik(.)
-DF_5 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_RadioZET_daily.json")) %>% clean_RadioZET(.)
-DF_6 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_PAP_daily.json")) %>% clean_PAP(.)
-DF_7 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_TVN24_daily.json")) %>% clean_TVN24(.)
-DF_8 <- fromJSON(file = paste0(working_dir, "News_Selector/data/daily_articles/page_TVN24bis_daily.json")) %>% clean_TVN24bis(.)
+DF_1 <- fromJSON(file = paste0(working_dir, "News_Selector/data/weekly_articles/page_RMF_weekly.json")) %>% clean_RMF(.)
+DF_2 <- fromJSON(file = paste0(working_dir, "News_Selector/data/weekly_articles/page_Gazeta_weekly.json")) %>% clean_Gazeta(.)
+DF_3 <- fromJSON(file = paste0(working_dir, "News_Selector/data/weekly_articles/page_Interia_weekly.json")) %>% clean_Interia(.)
+# DF_4 <- fromJSON(file = paste0(working_dir, "News_Selector/data/weekly_articles/page_Dziennik_weekly.json")) %>% clean_Dziennik(.)
+DF_5 <- fromJSON(file = paste0(working_dir, "News_Selector/data/weekly_articles/page_RadioZET_weekly.json")) %>% clean_RadioZET(.)
+DF_6 <- fromJSON(file = paste0(working_dir, "News_Selector/data/weekly_articles/page_PAP_weekly.json")) %>% clean_PAP(.)
+DF_7 <- fromJSON(file = paste0(working_dir, "News_Selector/data/weekly_articles/page_TVN24_weekly.json")) %>% clean_TVN24(.)
+DF_8 <- fromJSON(file = paste0(working_dir, "News_Selector/data/weekly_articles/page_TVN24bis_weekly.json")) %>% clean_TVN24bis(.)
+DF_9 <- fromJSON(file = paste0(working_dir, "News_Selector/data/weekly_articles/page_TVP_INFO_weekly.json")) %>% clean_TVP_INFO(.)
+DF_10 <- fromJSON(file = paste0(working_dir, "News_Selector/data/weekly_articles/page_Polskie_Radio_weekly.json")) %>% clean_Polskie_Radio(.)
+DF_11 <- fromJSON(file = paste0(working_dir, "News_Selector/data/weekly_articles/page_Polsat_News_weekly.json")) %>% clean_Polsat_News(.)
+DF_12 <- fromJSON(file = paste0(working_dir, "News_Selector/data/weekly_articles/page_Wprost_weekly.json")) %>% clean_Wprost(.)
 
 # Meeging all sites
 DF <- DF_1 %>%
@@ -54,8 +58,8 @@ DF <- DF_1 %>%
                   dplyr::select(id, date, time, site, url, text)) %>%
     union_all(DF_3 %>%
                   dplyr::select(id, date, time, site, url, text)) %>%
-    union_all(DF_4 %>%
-                  dplyr::select(id, date, time, site, url, text)) %>%
+    # union_all(DF_4 %>%
+    #               dplyr::select(id, date, time, site, url, text)) %>%
     union_all(DF_5 %>%
                   dplyr::select(id, date, time, site, url, text)) %>%
     union_all(DF_6 %>%
@@ -63,14 +67,22 @@ DF <- DF_1 %>%
     union_all(DF_7 %>%
                   dplyr::select(id, date, time, site, url, text)) %>%
     union_all(DF_8 %>%
+                  dplyr::select(id, date, time, site, url, text))%>%
+    union_all(DF_9 %>%
+                  dplyr::select(id, date, time, site, url, text))%>%
+    union_all(DF_10 %>%
+                  dplyr::select(id, date, time, site, url, text))%>%
+    union_all(DF_11 %>%
+                  dplyr::select(id, date, time, site, url, text))%>%
+    union_all(DF_12 %>%
                   dplyr::select(id, date, time, site, url, text))
-rm(DF_1, DF_2, DF_3, DF_4, DF_5, DF_6, DF_7, DF_8)
+rm(DF_1, DF_2, DF_3, DF_5, DF_6, DF_7, DF_8, DF_9, DF_10, DF_11, DF_12)
 
 # Setting as date to analyse yesterday
 v_date_0 <- Sys.time() %>% ymd_hms() %>% as.Date() - 1
 v_date_1 <- Sys.time() %>% ymd_hms() %>% as.Date() - 7
-v_date_0 <- as.Date("2019-12-06", format="%Y-%m-%d")
-v_date_1 <- as.Date("2019-12-12", format="%Y-%m-%d")
+v_date_0 <- as.Date("2019-12-23", format="%Y-%m-%d")
+v_date_1 <- as.Date("2019-12-29", format="%Y-%m-%d")
 selected_dates <- seq(from=v_date_0, to=v_date_1, by="day")
 selected_dates <- selected_dates %>% as.character()
 

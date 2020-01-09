@@ -212,7 +212,7 @@ plot_all_words_correlation <- function(words_similarity_matrix, scale_font = c(8
     intervals <- findInterval(values, brks, all.inside = T)
     # Przypsiz kolory
     # colors <- brewer.pal(9, "YlGnBu")[(10-class_num):9]
-    colors <- rev(pals::ocean.haline(7))[(8-class_num):7]
+    colors <- rev(pals::ocean.haline(class_num+1))[2:(class_num+1)]
     # colors <- brewer.pal(class_num, "YlGnBu")
     # colors <- rev(viridis::viridis(7))[(8-class_num):7]
     ordered.colors <- colors[intervals]
@@ -288,7 +288,7 @@ plot_topic_correlation <- function(topic_words, words_similarity_matrix,
     intervals <- findInterval(values, brks, all.inside = T)
     # Przypsiz kolory
     # colors <- brewer.pal(9, "YlGnBu")[(10-class_num):9]
-    colors <- rev(pals::ocean.haline(7))[(8-class_num):7]
+    colors <- rev(pals::ocean.haline(class_num+1))[2:(class_num+1)]
     # colors <- brewer.pal(class_num, "YlGnBu")
     # colors <- rev(viridis::viridis(7))[(8-class_num):7]
     ordered_colors <- colors[intervals]
