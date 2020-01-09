@@ -20,7 +20,8 @@ knitr::opts_chunk$set(
 	echo = FALSE,
 	message = FALSE,
 	warning = FALSE,
-	cashe = TRUE
+	cashe = TRUE,
+	dev="png", dev.args=list(type="cairo"), dpi = 300
 )
 ```
 
@@ -59,7 +60,8 @@ nodes_changes <- data.frame(time=NULL, pid=NULL, direction=NULL, stringsAsFactor
 iter <- 1
 nets <- list()
 labels <- c()
-scale_font <- c(3, 1)
+# scale_font <- c(3, 1)
+scale_font <- c(2.4, 0.8)
 colors <- rev(pals::ocean.haline(6))[(7-5):6]
 start_dates <- as.Date("2019-01-01") + seq(0, 358)
 end_dates <- as.Date("2019-01-07") + seq(0, 358)
@@ -149,13 +151,14 @@ net.dyn <- networkDynamic(network.list = nets,
 reconcile.vertex.activity(net.dyn, mode = "match.to.edges")
 
 pp <- compute.animation(net.dyn, animation.mode = "kamadakawai",
+                        chain.direction='reverse',
                   slice.par=list(start=0, end=length(nets), interval=1, 
                                  aggregate.dur=1, rule='earliest',
                                  tween.frames=10))
 ```
 
 
-```{r echo=FALSE, message=FALSE, results='asis'}
+```{r echo=FALSE, message=FALSE, results='asis', fig.width=2, fig.height=1.6, fig.align = 'center'}
 render.d3movie(pp, usearrows = F, 
                displaylabels = T, 
                main = function(s){dates[min(s, length(dates))]},
@@ -174,6 +177,8 @@ render.d3movie(pp, usearrows = F,
                    paste("<b>Podobieństwo:</b>", (slice %e% "simil") )},
                launchBrowser=F, filename="Media-Network-Dynamic.html",
                render.par=list(tween.frames = 10, show.time = F),
-               plot.par=list(mar=c(0,0,0,0)), output.mode='htmlWidget',
+               plot.par=list(mar=c(0,0,0,0)), 
+               d3.options=list(margin=list(x=200,y=5)),
+               output.mode='htmlWidget',
                jitter=F)
 ```

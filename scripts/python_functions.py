@@ -331,10 +331,11 @@ class TopicsSummariser:
         if self.weighted_unique_scaling:
             # unique_topic_words = unique_topic_words # alternative
             unique_topic_words = np.sqrt(unique_topic_words)
+            all_tokens_count_log = np.ones(all_words_sums.shape)
         else:
             unique_topic_words = np.log(unique_topic_words + 1.0)
-
-        all_tokens_count_log = np.log(all_words_sums)
+            all_tokens_count_log = np.log(all_words_sums)
+            
         all_pos = all_tokens_count_log > 0
         scaling_factors = np.zeros(all_tokens_count_log.shape)
         scaling_factors[all_pos] = np.divide(unique_topic_words[all_pos],
@@ -410,24 +411,15 @@ class TopicsSummariser:
         topic_sentences = list(chain.from_iterable(topic_sentences))
         topic_sentences_tf_matrix = self.tf_matrix_sentences[topic_sentences, :].copy()
 
-        # Calculate cosine simillarity between words and topic
+        # Calculate cosine similarity between words and topic
+        # Embeddings have already been weighted by lambda during embedding creation
         topic_embedding = np.sum(self.embeddings[topic_words_indices, :], axis=0, keepdims=True)
-        # words_topic_simil = cos(self.embeddings, topic_embedding).flatten()
-
-        # Tokens importance
-        # importance = np.multiply(words_topic_simil, self.log_lambda_statistics)
-        # importance = self.log_lambda_statistics
 
         # Multiplication of sentence TF matrix by log_lambda_statistic and cosine 
         # simillarity between words and topic
         if self.use_sparse:
-            # importance = sp.csr_matrix(importance)
-            # topic_sentences_tf_matrix = topic_sentences_tf_matrix.multiply(importance)
             topic_sentences_tf_matrix = topic_sentences_tf_matrix.dot(self.sparse_embeddings)
         else:
-            # topic_sentences_tf_matrix = topic_sentences_tf_matrix.toarray()
-            # topic_sentences_tf_matrix = np.multiply(topic_sentences_tf_matrix,
-            #                                         importance)
             topic_sentences_tf_matrix = np.dot(topic_sentences_tf_matrix,
                                                self.embeddings)
 
@@ -458,9 +450,8 @@ class TopicsSummariser:
         ranking = np.multiply(ranking, ranking_simil, out=ranking)
 
         # Scale ranking
-        # Scale by log_lambda
         topic_sentences_tf_matrix = self.tf_matrix_sentences[topic_sentences, :]
-        # Test
+        # Weighting by lambda
         if self.weighted_unique_scaling:
             unique_topic_words = topic_sentences_tf_matrix[:, topic_words_indices] > 0
             unique_topic_words = unique_topic_words.todense()
@@ -468,6 +459,7 @@ class TopicsSummariser:
                                         self.log_lambda_statistics[topic_words_indices])
             unique_topic_words = np.divide(unique_topic_words, 
                                         np.sum(self.log_lambda_statistics[topic_words_indices]))
+        # Unweighted scaling need correction for number of tokens
         else:
             unique_topic_words = topic_sentences_tf_matrix[:, topic_words_indices].getnnz(axis=1)
             unique_topic_words = np.divide(unique_topic_words, len(topic_words))
