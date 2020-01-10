@@ -148,7 +148,7 @@ net.dyn <- networkDynamic(network.list = nets,
                           vertex.TEA.names = c("id", "label", "lambda.cex", "lambda", 
                                                "lambda_log"))
 # reconcile things
-reconcile.vertex.activity(net.dyn, mode = "match.to.edges")
+# reconcile.vertex.activity(net.dyn, mode = "match.to.edges")
 
 pp <- compute.animation(net.dyn, animation.mode = "kamadakawai",
                         chain.direction='reverse',
