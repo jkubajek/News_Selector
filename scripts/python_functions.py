@@ -59,7 +59,7 @@ def create_embeddings(articles, lambda_statistics,
     if pipeline:
         return (similarity_matrix, distribution_matrix,
                 selected_words, selected_embeddings,
-                embeddings, vectorizer.vocabulary_)
+                embeddings, vectorizer.vocabulary_, tfidf_matrix)
     else:
         return (similarity_matrix, np.transpose(svd.components_),
                 distribution_matrix, selected_words, selected_embeddings)
@@ -335,7 +335,7 @@ class TopicsSummariser:
         else:
             unique_topic_words = np.log(unique_topic_words + 1.0)
             all_tokens_count_log = np.log(all_words_sums)
-            
+
         all_pos = all_tokens_count_log > 0
         scaling_factors = np.zeros(all_tokens_count_log.shape)
         scaling_factors[all_pos] = np.divide(unique_topic_words[all_pos],
@@ -455,16 +455,15 @@ class TopicsSummariser:
         if self.weighted_unique_scaling:
             unique_topic_words = topic_sentences_tf_matrix[:, topic_words_indices] > 0
             unique_topic_words = unique_topic_words.todense()
-            unique_topic_words = np.dot(unique_topic_words, 
+            unique_topic_words = np.dot(unique_topic_words,
                                         self.log_lambda_statistics[topic_words_indices])
-            unique_topic_words = np.divide(unique_topic_words, 
-                                        np.sum(self.log_lambda_statistics[topic_words_indices]))
+            unique_topic_words = np.divide(unique_topic_words,
+                                           np.sum(self.log_lambda_statistics[topic_words_indices]))
         # Unweighted scaling need correction for number of tokens
         else:
             unique_topic_words = topic_sentences_tf_matrix[:, topic_words_indices].getnnz(axis=1)
             unique_topic_words = np.divide(unique_topic_words, len(topic_words))
-            
-        
+
         all_words_sums = topic_sentences_tf_matrix.sum(axis=1)
         ranking = self.scale_ranking(ranking, unique_topic_words, all_words_sums)
 
@@ -578,6 +577,52 @@ def set_lambda_order(log_lambda_statistics_df, vocabulary):
     return log_lambda_statistics
 
 
+def _weighted_mean(df, avg_name, weight_name):
+    """ http://stackoverflow.com/questions/10951341/pandas-dataframe-aggregate-function-using-multiple-columns
+    In rare instance, we may not have weights, so just return the mean. Customize this if your business case
+    should return otherwise.
+    """
+    d = df[avg_name]
+    w = df[weight_name]
+    try:
+        return (d * w).sum() / w.sum()
+    except ZeroDivisionError:
+        return d.mean()
+
+
+def topic_attribution(tf_matrix, embeddings, embeddings_vocab, topics, sites):
+    embeddings = sp.csr_matrix(np.copy(embeddings))
+    tf_matrix = tf_matrix.transpose()
+    corpus_embeddings = tf_matrix.dot(embeddings).toarray()
+    embeddings_arr = embeddings.toarray()
+    for index, topic in enumerate(topics):
+        words = topic["word"]
+        words_ids = [embeddings_vocab[word] for word in words]
+        topic_embedding = np.sum(embeddings_arr[words_ids, :], axis=0, keepdims=True)
+        df = pd.DataFrame({'corpus_simil': cos(corpus_embeddings, topic_embedding).flatten().tolist(),
+                           'counts': np.array(tf_matrix.sum(axis=1)).flatten().tolist(),
+                           'site': sites})
+        mean_simil = df.groupby('site').apply(_weighted_mean, 'corpus_simil', 'counts')
+        topics[index]['mean_simil'] = {'site': mean_simil.index.values,
+                                       'mean_simil': mean_simil.values}
+    # # Sites similarity
+    # sites_dict = {}
+    # for index, element in enumerate(sites):
+    #     if element in sites_dict.keys():
+    #         sites_dict[element].append(index)
+    #     else:
+    #         sites_dict[element] = [index]
+    #
+    # sites_corpus = np.zeros((len(sites_dict.keys()), corpus_embeddings.shape[1]))
+    # site_names = []
+    # for index, (site, indices) in enumerate(sites_dict.items()):
+    #     site_names.append(site)
+    #     sites_corpus[index, :] = np.sum(corpus_embeddings[indices, :], axis=0, keepdims=True)
+    # sites_simil = cos(sites_corpus)
+
+    return topics
+
+
 def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
                           # Clustering
                           min_association, do_silhouette, singularity_penalty,
@@ -638,6 +683,7 @@ def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
     selected_embeddings = outputs[3]
     embeddings = outputs[4]
     embeddings_vocab = outputs[5]
+    tf_matrix = outputs[6]
 
     # Cluster tokens
     outputs = cosine_clustering(similarity_matrix, selected_embeddings,
@@ -645,9 +691,12 @@ def cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
     topics = outputs[0]
     max_simil_history = outputs[1]
     silhouette_history = outputs[2]
-    
+
     if only_groups:
         return topics, similarity_matrix, selected_tokens, silhouette_history, max_simil_history
+
+    topics = topic_attribution(tf_matrix, embeddings, embeddings_vocab, topics,
+                               list(sections_and_articles["site"]))
 
     # Summarise topics
     topics = summarise_topics(topics, lemmatized_sentences, lemmatized_articles,

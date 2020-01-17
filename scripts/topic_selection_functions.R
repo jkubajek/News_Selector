@@ -55,6 +55,13 @@ prepare_python_inputs <- function(articles_unnested,
         ungroup() %>%
         union_all(sections)
     
+    ids_to_sites <- sentences_text %>%
+      dplyr::select(id, site) %>%
+      distinct(id, .keep_all = T)
+    
+    sections_and_articles <- sections_and_articles %>%
+      left_join(ids_to_sites, by = "id")
+    
     lemmatized_sentences <- articles_unnested %>%
         group_by(!!article_id, !!sentence_id) %>%
         summarise(text = paste(word, collapse = " ")) %>%
