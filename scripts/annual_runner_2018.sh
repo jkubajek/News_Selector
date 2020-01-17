@@ -10,7 +10,7 @@ scrapy runspider scrapy/scraper.py -a domain="gazeta" -a ranges_start="540,285,3
 scrapy runspider scrapy/scraper.py -a domain="rmf" -a ranges_start="1530" -a ranges_end="3150" -t json --nolog -o - > data/annual_articles/page_RMF_2018.json
 scrapy runspider scrapy/scraper.py -a domain="tvn24" -a ranges_start="2040" -a ranges_end="4170" -t json --nolog -o - > data/annual_articles/page_TVN24_2018.json
 scrapy runspider scrapy/scraper.py -a domain="interia" -a ranges_start="180,850,530" -a ranges_end="340,1680,1190" -t json --nolog -o - > data/annual_articles/page_Interia_2018.json
-#scrapy runspider scrapy/scraper.py -a domain="dziennik" -a ranges_start="1,1,1,1,1" -a ranges_end="40,35,35,8,22" -t json --nolog -o - > data/annual_articles/page_Dziennik_annual.json
+scrapy runspider scrapy/scraper.py -a domain="dziennik" -a ranges_start="379" -a ranges_end="743" -t json --nolog -o - > data/annual_articles/page_Dziennik_2018.json
 scrapy runspider scrapy/scraper.py -a domain="radio_zet" -a ranges_start="290,80,70" -a ranges_end="555,160,150" -t json --nolog -o - > data/annual_articles/page_RadioZET_2018.json
 scrapy runspider scrapy/scraper.py -a domain="pap" -a ranges_start="980,405,240" -a ranges_end="1700,800,490" -t json --nolog -o - > data/annual_articles/page_PAP_2018.json
 scrapy runspider scrapy/scraper.py -a domain="tvn24bis" -a ranges_start="430" -a ranges_end="1030" -t json --nolog -o - > data/annual_articles/page_TVN24bis_2018.json
@@ -20,6 +20,8 @@ scrapy runspider scrapy/scraper.py -a domain="polskie_radio" -a ranges_start="98
 #scrapy runspider scrapy/scraper.py -a domain="wprost" -a ranges_start="1, 1, 1" -a ranges_end="120,477,360" -t json --nolog -o - > data/annual_articles/page_Wprost_2018.json
 
 
-
-#Rscript scripts/news_selector_annual.R
-#Rscript scripts/knitting_button.R
+#scrapy runspider scrapy/scraper.py -a domain="do_rzeczy" -a ranges_start="20, 5, 1" -a ranges_end="435,130,20" -t json --nolog -o - > data/annual_articles/page_Do_Rzeczy_2018.json
+scrapy runspider scrapy/scraper.py -a domain="niezalezna" -a ranges_start="1900, 380, 120" -a ranges_end="3400,720,230" -t json --nolog -o - > data/annual_articles/page_Niezalezna_2018.json
+scrapy runspider scrapy/scraper.py -a domain="tok_fm" -a ranges_start="379" -a ranges_end="743" -t json --nolog -o - > data/annual_articles/page_TOK_FM_2018.json
+scrapy runspider scrapy/scraper.py -a domain="w_polityce" -a ranges_start="535, 80, 32" -a ranges_end="1100,180,70" -t json --nolog -o - > data/annual_articles/page_wPolityce_2018.json
+scrapy runspider scrapy/scraper.py -a domain="onet" -a ranges_start="380" -a ranges_end="744" -t json --nolog -o - > data/annual_articles/page_Onet_2018.json

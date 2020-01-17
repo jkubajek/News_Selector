@@ -4,7 +4,7 @@ title: "Wprowadzenie"
 
 Na portalach informacyjnych każdego dnia pojawiają się setki artykułów. W ciągu miesiąca jest to już kilkanaście tysięcy artykułów, a w całym roku setki tysięcy. To powoduje, że jeżeli ktoś chce być na bieżąco z najważniejszymi wydarzeniami w Polsce i na świecie, musi poświęcić bardzo dużo czasu na śledzenie wiadomości. Na szczęście z pomocą przychodzi statystyka oraz *text mining*, które umożliwiają automatyczne wygenerowanie podsumowania najważniejszych informacji.
 
-Na tej stronie znajdują się automatycznie wygenerowane podsumowania najważniejszych wiadomości w poszczególnych miesiącach 2019 roku. W analizie uwzględniono artykuły, które opublikowano w wybranych polskich mediach internetowych - RMF 24, TVN24, TVN24 bis, Radio ZET, Gazeta.pl, Polsat News, Wprost, Polskie Radio, TVP Info, PAP oraz Interia.
+Na tej stronie znajdują się automatycznie wygenerowane podsumowania najważniejszych wiadomości w poszczególnych miesiącach 2019 roku. W analizie uwzględniono artykuły, które opublikowano w wybranych polskich mediach internetowych - Onet, Interia, PAP, RMF 24, Polskie Radio, Radio ZET, Tok FM, TVN24, TVN24 bis, Polsat News, TVP Info, Gazeta.pl, Wprost, Dziennik.pl, Niezależna.pl, Do Rzeczy oraz wPolityce.
 
 Model służący do generowania podsumowań w pierwszym kroku wybiera najistotniejsze słowa w danym miesiącu. Następnie przy pomocy algorytmu [silhouette](https://en.wikipedia.org/wiki/Silhouette_(clustering)) grupuje je do jak najbardziej jednolitych tematów. Na koniec z wykorzystaniem algorytmu [LexRank](https://blog.nus.edu.sg/soctalent/2010/02/11/a-brief-summary-of-lexrank-graph-based-lexical-centrality-as-salience-in-text-summarization/) oraz [podobieństwa cosinusowego](https://towardsdatascience.com/overview-of-text-similarity-metrics-3397c4601f50) wybiera około 0,05% (od 5 do 20) zdań z artykułów, które zawierają słowa kluczowe. Dokładniejszy opis modelu znajduje się w zakładce [Metodologia](https://jkubajek.github.io/News_Selector/methodology) oraz w [prezentacji](https://jkubajek.github.io/News_Selector/News_Selector.pdf).
 
@@ -76,7 +76,7 @@ for(i in seq(1, 359)){
     load(file_name)
     
     lambda_DF <- lambda_DF %>%
-        union_all(lambda_daily_DF %>%
+        union_all(lambda_DF %>%
                       top_n(max_words, lambda))
     
 }
@@ -91,7 +91,7 @@ for(i in seq(1, 359)){
                         start_dates[i], "-", end_dates[i], ".RData")
     load(file_name)
     
-    new_words <- lambda_daily_DF$name[1:max_words]
+    new_words <- lambda_DF$name[1:max_words]
     word_ids <- add_words_to_list(word_ids, new_words)
     new_ids <- extract_ids(word_ids, new_words)
     nodes_new <- data.frame(id=seq(1, length(new_words)), 
@@ -119,7 +119,7 @@ for(i in seq(1, 359)){
     edges <- edges[c("from", "to", "simil")]
     
     nodes_new <- nodes_new %>%
-        left_join(lambda_daily_DF %>%
+        left_join(lambda_DF %>%
                       mutate(lambda_log = lambda_log,
                              lambda = round(lambda, 0)) %>%
                       dplyr::select(name, lambda, lambda_log),
@@ -129,7 +129,7 @@ for(i in seq(1, 359)){
     nets[[iter]] <- network(edges,  vertex.attr=nodes_new, matrix.type="edgelist", 
                     loops=F, multiple=F, ignore.eval = F)
     # Set color
-    values <- lambda_daily_DF[["lambda_log"]][1:max_words]
+    values <- lambda_DF[["lambda_log"]][1:max_words]
     color_groups <- findInterval(values, brks, all.inside = T)
     nets[[iter]] %v% 'color' <- colors[color_groups]
     

@@ -1,10 +1,13 @@
 # This file should be sourced
 options(stringsAsFactors = F)
 
-sites <- tibble(site = c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
+sites <- tibble(site = c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12",
+                         "13", "14", "15", "16", "17"),
                     site_name = c("RMF 24", "Gazeta.pl", "Interia", "Radio ZET", "Dziennik.pl", 
                                   "PAP", "TVN24", "TVN24 bis", "TVP Info",
-                                  "Polskie Radio", "Polsat News", "Wprost"))
+                                  "Polskie Radio", "Polsat News", "Wprost",
+                                  "Onet", "Tok FM", "Niezależna.pl",
+                                  "Do Rzeczy", "wPolityce"))
 
 clean_RMF <- function(data){
     data <- do.call("rbind", lapply(data, as.data.frame))
@@ -154,7 +157,8 @@ clean_Dziennik <- function(data){
                text = str_replace_all(text, pattern = "czytaj więcej  ", replacement = " "),
                text = str_replace_all(text, pattern = "^<U\\+\\w+>a(?=.)", replacement = " "),
                text = str_replace_all(text, pattern = "(\\s{2,20})", replacement = " ")) %>%
-        mutate(date = date %>% as.Date(format = "%d-%m-%Y") %>% format("%Y-%m-%d") %>% as.Date()) %>%
+        # mutate(date = date %>% as.Date(format = "%d-%m-%Y") %>% format("%Y-%m-%d") %>% as.Date()) %>%
+        mutate(date = date %>% as.Date(format = "%Y-%m-%d")) %>%
         unnest_tokens(text, text, token = "regex", to_lower = F, pattern = " \\|\\| ") %>%
         mutate(text = gsub(text, pattern = "|| ", replacement = " ", fixed = T)) %>%
         filter(! grepl(text, patter = "twitter.com", fixed = T)) %>%
@@ -375,6 +379,134 @@ clean_Wprost <- function(data){
         summarise(text = paste0(text, collapse = " || ")) %>%
         ungroup() %>%
         mutate(site = "12") %>% 
+        rename(id_site = id) %>% # id na stronie
+        group_by(date) %>%
+        arrange(time) %>%
+        mutate(num = seq(1, n()),
+               id = paste0(str_remove_all(date, "-"), site, ifelse(num < 10, paste0("00", num),
+                                                                   ifelse(num < 100, paste0("0", num), num)))) %>% # data 0 kolejnosc
+        ungroup() %>%
+        dplyr::select(-num) %>%
+        arrange(desc(id))
+    
+    return(data)
+}
+
+clean_Onet <- function(data){
+    data <- do.call("rbind", lapply(data, function(x) try(as.data.frame(x))))
+    data <- data %>% 
+        distinct(id, .keep_all = T) %>%
+        mutate(date = date %>% as.Date(format = "%Y-%m-%d")) %>%
+        unnest_tokens(text, text, token = "regex", to_lower = F, pattern = " \\|\\| ") %>%
+        mutate(text = gsub(text, pattern = "|| ", replacement = "", fixed = T)) %>%
+        filter(nchar(text) > 100) %>%
+        group_by(id, url, date, time, title, lead, autor, source, tags) %>%
+        summarise(text = paste0(text, collapse = " || ")) %>%
+        ungroup() %>%
+        mutate(site = "13") %>% 
+        rename(id_site = id) %>% # id na stronie
+        group_by(date) %>%
+        arrange(time) %>%
+        mutate(num = seq(1, n()),
+               id = paste0(str_remove_all(date, "-"), site, ifelse(num < 10, paste0("00", num),
+                                                                   ifelse(num < 100, paste0("0", num), num)))) %>% # data 0 kolejnosc
+        ungroup() %>%
+        dplyr::select(-num) %>%
+        arrange(desc(id))
+    
+    return(data)
+}
+
+clean_tok_fm <- function(data){
+    data <- do.call("rbind", lapply(data, function(x) try(as.data.frame(x))))
+    data <- data %>% 
+        mutate(id = ifelse(is.na(id), strsplit(url, ",")[3], id)) %>%
+        distinct(id, .keep_all = T) %>%
+        mutate(date = date %>% as.Date(format = "%Y-%m-%d")) %>%
+        unnest_tokens(text, text, token = "regex", to_lower = F, pattern = " \\|\\| ") %>%
+        mutate(text = gsub(text, pattern = "|| ", replacement = "", fixed = T)) %>%
+        filter(nchar(text) > 100) %>%
+        group_by(id, url, date, time, title, lead, autor, source, tags) %>%
+        summarise(text = paste0(text, collapse = " || ")) %>%
+        ungroup() %>%
+        mutate(site = "14") %>% 
+        rename(id_site = id) %>% # id na stronie
+        group_by(date) %>%
+        arrange(time) %>%
+        mutate(num = seq(1, n()),
+               id = paste0(str_remove_all(date, "-"), site, ifelse(num < 10, paste0("00", num),
+                                                                   ifelse(num < 100, paste0("0", num), num)))) %>% # data 0 kolejnosc
+        ungroup() %>%
+        dplyr::select(-num) %>%
+        arrange(desc(id))
+    
+    return(data)
+}
+
+clean_niezalezna <- function(data){
+    data <- do.call("rbind", lapply(data, function(x) try(as.data.frame(x))))
+    data <- data %>% 
+        distinct(id, .keep_all = T) %>%
+        mutate(date = date %>% as.Date(format = "%d.%m.%Y") %>% 
+                   format("%Y-%m-%d") %>% as.Date(format = "%Y-%m-%d")) %>%
+        unnest_tokens(text, text, token = "regex", to_lower = F, pattern = " \\|\\| ") %>%
+        mutate(text = gsub(text, pattern = "|| ", replacement = "", fixed = T)) %>%
+        filter(nchar(text) > 100) %>%
+        group_by(id, url, date, time, title, lead, autor, source, tags) %>%
+        summarise(text = paste0(text, collapse = " || ")) %>%
+        ungroup() %>%
+        mutate(site = "15") %>% 
+        rename(id_site = id) %>% # id na stronie
+        group_by(date) %>%
+        arrange(time) %>%
+        mutate(num = seq(1, n()),
+               id = paste0(str_remove_all(date, "-"), site, ifelse(num < 10, paste0("00", num),
+                                                                   ifelse(num < 100, paste0("0", num), num)))) %>% # data 0 kolejnosc
+        ungroup() %>%
+        dplyr::select(-num) %>%
+        arrange(desc(id))
+    
+    return(data)
+}
+
+clean_do_rzeczy <- function(data){
+    data <- do.call("rbind", lapply(data, function(x) try(as.data.frame(x))))
+    data <- data %>% 
+        distinct(id, .keep_all = T) %>%
+        mutate(date = date %>% as.Date(format = "%Y-%m-%d")) %>%
+        unnest_tokens(text, text, token = "regex", to_lower = F, pattern = " \\|\\| ") %>%
+        mutate(text = gsub(text, pattern = "|| ", replacement = "", fixed = T)) %>%
+        filter(nchar(text) > 100) %>%
+        filter(! grepl(text, pattern = "(Do Rzeczy)", fixed=F)) %>%
+        group_by(id, url, date, time, title, lead, autor, source, tags) %>%
+        summarise(text = paste0(text, collapse = " || ")) %>%
+        ungroup() %>%
+        mutate(site = "16") %>% 
+        rename(id_site = id) %>% # id na stronie
+        group_by(date) %>%
+        arrange(time) %>%
+        mutate(num = seq(1, n()),
+               id = paste0(str_remove_all(date, "-"), site, ifelse(num < 10, paste0("00", num),
+                                                                   ifelse(num < 100, paste0("0", num), num)))) %>% # data 0 kolejnosc
+        ungroup() %>%
+        dplyr::select(-num) %>%
+        arrange(desc(id))
+    
+    return(data)
+}
+
+clean_wPolityce <- function(data){
+    data <- do.call("rbind", lapply(data, function(x) try(as.data.frame(x))))
+    data <- data %>% 
+        distinct(id, .keep_all = T) %>%
+        mutate(date = date %>% as.Date(format = "%Y-%m-%d")) %>%
+        unnest_tokens(text, text, token = "regex", to_lower = F, pattern = " \\|\\| ") %>%
+        mutate(text = gsub(text, pattern = "|| ", replacement = "", fixed = T)) %>%
+        filter(nchar(text) > 100) %>%
+        group_by(id, url, date, time, title, lead, autor, source, tags) %>%
+        summarise(text = paste0(text, collapse = " || ")) %>%
+        ungroup() %>%
+        mutate(site = "17") %>% 
         rename(id_site = id) %>% # id na stronie
         group_by(date) %>%
         arrange(time) %>%

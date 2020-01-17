@@ -2,6 +2,7 @@ import scrapy
 from w3lib.html import remove_tags
 from w3lib.html import replace_escape_chars
 import lxml
+import datetime
 import re
 import json
 
@@ -14,11 +15,11 @@ def clear_text(text: str):
 
 
 def isfloat(value):
-  try:
-    float(value)
-    return True
-  except ValueError:
-    return False
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
 
 
 class DOMAINS:
@@ -34,14 +35,20 @@ class DOMAINS:
     POLSKIE_RADIO = 'polskie_radio'
     WPROST = 'wprost'
     POLSAT_NEWS = 'polsat_news'
+    NIEZALEZNA = 'niezalezna'
+    WPOLITYCE = 'w_polityce'
+    DO_RZECZY = 'do_rzeczy'
+    TOK_FM = 'tok_fm'
+    ONET = 'onet'
 
 
 DOMAIN_URLS = {
-    DOMAINS.DZIENNIK: ['https://wiadomosci.dziennik.pl/polityka,',  # Polityka
-                       'https://wiadomosci.dziennik.pl/wydarzenia,',  # Polska
-                       'https://wiadomosci.dziennik.pl/swiat,',  # Swiat
-                       'https://wiadomosci.dziennik.pl/media,',  # Media
-                       'https://gospodarka.dziennik.pl/news,'],  # Gospodarka
+    # DOMAINS.DZIENNIK: ['https://wiadomosci.dziennik.pl/polityka,',  # Polityka
+    #                    'https://wiadomosci.dziennik.pl/wydarzenia,',  # Polska
+    #                    'https://wiadomosci.dziennik.pl/swiat,',  # Swiat
+    #                    'https://wiadomosci.dziennik.pl/media,',  # Media
+    #                    'https://gospodarka.dziennik.pl/news,'],  # Gospodarka
+    DOMAINS.DZIENNIK: ['https://www.dziennik.pl/archiwum/'],
     DOMAINS.GAZETA: ['http://wiadomosci.gazeta.pl/wiadomosci/0,114871.html?str=',  # Najnowsze
                      'http://wiadomosci.gazeta.pl/wiadomosci/0,114884.html?str=',  # Polityka
                      'http://wiadomosci.gazeta.pl/wiadomosci/0,114883.html?str=',  # Polska
@@ -56,7 +63,7 @@ DOMAIN_URLS = {
                         'https://wiadomosci.radiozet.pl/Swiat/(offset)/',  # Swiat
                         'https://biznes.radiozet.pl/Newsy/(offset)/'],  # Swiat
     DOMAINS.RMF: ['https://www.rmf24.pl/fakty,nPack,'],
-    DOMAINS.TVN24: ['https://tvn24.pl/najnowsze,49/'],
+    DOMAINS.TVN24: ['https://tvn24.pl/najnowsze/'],
     DOMAINS.TVN24bis: ['https://tvn24bis.pl/najnowsze,72/'],
     DOMAINS.TVP_INFO: ['https://www.tvp.info/191866/polska?page=',
                        'https://www.tvp.info/191867/swiat?page='],
@@ -68,18 +75,31 @@ DOMAIN_URLS = {
     DOMAINS.POLSAT_NEWS: ['https://www.polsatnews.pl/wyszukiwarka/?text=polska&type=event&page=',
                           'https://www.polsatnews.pl/wyszukiwarka/?text=swiat&type=event&page=',
                           'https://www.polsatnews.pl/wyszukiwarka/?text=polityka&page=',
-                          'https://www.polsatnews.pl/wyszukiwarka/?text=Biznes&type=event&page=']
+                          'https://www.polsatnews.pl/wyszukiwarka/?text=Biznes&type=event&page='],
+    DOMAINS.NIEZALEZNA: ['https://niezalezna.pl/dzial/polska/',
+                         'https://niezalezna.pl/dzial/swiat/',
+                         'https://niezalezna.pl/dzial/gospodarka/'],
+    DOMAINS.WPOLITYCE: ['https://wpolityce.pl/api/polityka/publikacje?page=',
+                        'https://wpolityce.pl/api/swiat/publikacje?page=',
+                        'https://wpolityce.pl/api/gospodarka/publikacje?page='],
+    DOMAINS.DO_RZECZY: ['https://dorzeczy.pl/kraj/',
+                        'https://dorzeczy.pl/swiat/',
+                        'https://dorzeczy.pl/ekonomia/',
+                        'https://dorzeczy.pl/szukaj/polityka/',
+                        'https://dorzeczy.pl/szukaj/polska/'],
+    # DOMAINS.TOK_FM: ['http://www.tokfm.pl/Tokfm/0,103085.html?str=',
+    #                  'http://www.tokfm.pl/Tokfm/0,103086.html?str=',
+    #                  'http://www.tokfm.pl/Tokfm/0,103087.html?str=',
+    #                  'http://www.tokfm.pl/Tokfm/0,103090.html?str='],
+    DOMAINS.TOK_FM: ['http://www.tokfm.pl/Tokfm/3660000,0,,1,,'],
+    DOMAINS.ONET: ['https://wiadomosci.onet.pl/archiwum/']
 }
-    # DOMAINS.GAZETA_PRAWNA: ['https://www.gazetaprawna.pl/wiadomosci,',
-    #                         'https://podatki.gazetaprawna.pl/dzial/wiadomosci,',
-    #                         'https://praca.gazetaprawna.pl/dzial/wiadomosci,']
+# DOMAINS.GAZETA_PRAWNA: ['https://www.gazetaprawna.pl/wiadomosci,',
+#                         'https://podatki.gazetaprawna.pl/dzial/wiadomosci,',
+#                         'https://praca.gazetaprawna.pl/dzial/wiadomosci,']
 
 DOMAIN_ENDINGS = {
-    DOMAINS.DZIENNIK: ['',  # Polityka
-                       '',  # Polska
-                       '',  # Swiat
-                       '',  # Media
-                       ''],  # Gospodarka
+    DOMAINS.DZIENNIK: [''],
     DOMAINS.GAZETA: ['',  # Najnowsze
                      '_19834947',  # Polityka
                      '',  # Polska
@@ -106,11 +126,30 @@ DOMAIN_ENDINGS = {
     DOMAINS.POLSAT_NEWS: ['',
                           '',
                           '',
-                          '']
+                          ''],
+    DOMAINS.NIEZALEZNA: ['',
+                         '',
+                         ''],
+    DOMAINS.WPOLITYCE: ['',
+                        '',
+                        ''],
+    DOMAINS.DO_RZECZY: ['',
+                        '',
+                        '',
+                        '',
+                        ''],
+    # DOMAINS.TOK_FM: ['_22958567',
+    #                  '_22958563',
+    #                  '_22958568',
+    #                  '_22960069'],
+    DOMAINS.TOK_FM: [''],
+    DOMAINS.ONET: ['']
 }
 
 ALLOWED_DOMAINS = {
-    DOMAINS.DZIENNIK: None,
+    DOMAINS.DZIENNIK: ['wiadomosci.dziennik.pl',
+                       'gospodarka.dziennik.pl'
+                       ],
     DOMAINS.GAZETA: None,
     DOMAINS.INTERIA: None,
     DOMAINS.PAP: None,
@@ -121,23 +160,34 @@ ALLOWED_DOMAINS = {
     DOMAINS.TVP_INFO: None,
     DOMAINS.POLSKIE_RADIO: None,
     DOMAINS.WPROST: None,
-    DOMAINS.POLSAT_NEWS: None
+    DOMAINS.POLSAT_NEWS: None,
+    DOMAINS.NIEZALEZNA: None,
+    DOMAINS.WPOLITYCE: None,
+    DOMAINS.DO_RZECZY: None,
+    DOMAINS.TOK_FM: ['tokfm.pl'],
+    DOMAINS.ONET: ['wiadomosci.onet.pl']
+    # DOMAINS.ONET: None
 }
 
 ARTICLES_LINKS = {
-    # DOMAINS.DZIENNIK: '.widget-box .widget-list-content-box div.widget-list-content h4 a::attr("href")',
-    DOMAINS.DZIENNIK: '.itarticle a::attr("href")',
+    # DOMAINS.DZIENNIK: '.itarticle a::attr("href")',
+    DOMAINS.DZIENNIK: 'section.stream .dayInArchive a::attr("href")',
     DOMAINS.GAZETA: '.entry .article a ::attr("href")',
     DOMAINS.INTERIA: '.brief-list-item .tile-magazine-title-url ::attr("href")',
     DOMAINS.PAP: 'div.newsList div.imageWrapper a::attr("href")',
     DOMAINS.RADIO_ZET: 'div.list-element__image a::attr("href")',
     DOMAINS.RMF: '.article .thumbnail:not(.thumbnail.sponsored) .image ::attr("href")',
-    DOMAINS.TVN24: 'article h1 a ::attr("href")',
+    DOMAINS.TVN24: '.wide-column .teaser-wrapper .link__content a.default-teaser__link::attr("href")',
     DOMAINS.TVN24bis: 'article div.photo-container a ::attr("href")',
     DOMAINS.POLSKIE_RADIO: '.article a.main-link ::attr("href")',
     # DOMAINS.WPROST: '.section-main-list .box-list-item .news-data a.news-open ::attr("href")',
     DOMAINS.WPROST: '.box-list-item .news-data::attr("data-href")',
-    DOMAINS.POLSAT_NEWS: '#searchwrap article.news a::attr("href")'
+    DOMAINS.POLSAT_NEWS: '#searchwrap article.news a::attr("href")',
+    DOMAINS.NIEZALEZNA: 'div#content.mainpage div.columnLeft a.uitemUnderline::attr("href")',
+    DOMAINS.DO_RZECZY: '#main-list .box-list-item div.news-data::attr("data-href")',
+    # DOMAINS.TOK_FM: 'div.body li.entry a::attr("href")',
+    DOMAINS.TOK_FM: '#results li a ::attr("href")',
+    DOMAINS.ONET: 'section.stream .dayInArchive a::attr("href")'
 }
 
 
@@ -154,11 +204,36 @@ class PageSpider(scrapy.Spider):
         self.start_urls = []
         domain_urls = DOMAIN_URLS[domain]
         domain_endings = DOMAIN_ENDINGS[domain]
-        for url_num in range(0, len(domain_urls)):
-            self.start_urls += [domain_urls[url_num] + str(i) + domain_endings[url_num] for i in
-                                range(ranges_start[url_num], ranges_end[url_num])]
+        if domain in [DOMAINS.ONET, DOMAINS.DZIENNIK]:
+            this_day = datetime.datetime.now()
+            start_date = this_day - datetime.timedelta(days=ranges_end[0])
+            end_date = this_day - datetime.timedelta(days=ranges_start[0])
+            delta = end_date - start_date
+
+            date_list = [start_date + datetime.timedelta(days=x) for x in range(delta.days + 1)]
+            date_list = [date.strftime("%Y-%m-%d") for date in date_list]
+            self.start_urls += [domain_urls[0] + date for date in date_list]
+        elif domain == DOMAINS.TOK_FM:
+            this_day = datetime.datetime.now()
+            start_date = this_day - datetime.timedelta(days=ranges_end[0])
+            end_date = this_day - datetime.timedelta(days=ranges_start[0])
+            delta = end_date - start_date
+
+            date_list = [start_date + datetime.timedelta(days=x) for x in range(delta.days + 1)]
+            date_list = [date.strftime("%Y-%m-%d") for date in date_list]
+            self.start_urls += [domain_urls[0] + date + '.html' for date in date_list]
+        else:
+            for url_num in range(0, len(domain_urls)):
+                self.start_urls += [domain_urls[url_num] + str(i) + domain_endings[url_num] for i in
+                                    range(ranges_start[url_num], ranges_end[url_num])]
 
         self.allowed_domains = ALLOWED_DOMAINS[domain]
+
+    # def make_requests_from_url(self, url):
+    #     return scrapy.Request(url, dont_filter=True, meta={
+    #         'dont_redirect': True,
+    #         'handle_httpstatus_list': [301, 302]
+    #     })
 
     def parse(self, response):
         if self.domain == DOMAINS.DZIENNIK:
@@ -185,6 +260,16 @@ class PageSpider(scrapy.Spider):
             domain_parser = self.parse_wprost
         elif self.domain == DOMAINS.POLSAT_NEWS:
             domain_parser = self.parse_polsat_news
+        elif self.domain == DOMAINS.NIEZALEZNA:
+            domain_parser = self.parse_niezalezna
+        elif self.domain == DOMAINS.WPOLITYCE:
+            domain_parser = self.parse_wpolityce
+        elif self.domain == DOMAINS.DO_RZECZY:
+            domain_parser = self.parse_do_rzeczy
+        elif self.domain == DOMAINS.TOK_FM:
+            domain_parser = self.parse_tok_fm
+        elif self.domain == DOMAINS.ONET:
+            domain_parser = self.parse_onet
         else:
             print("Wrong domain: " + self.domain)
 
@@ -195,13 +280,21 @@ class PageSpider(scrapy.Spider):
             data = json.loads(data)
             items = data['items']
             links = [item['url'] for item in items]
+        elif self.domain == DOMAINS.WPOLITYCE:
+            data = json.loads(response.body_as_unicode())
+            links = [item.get('url', '') for item in data]
+        elif self.domain == DOMAINS.ONET:
+            links = response.css(ARTICLES_LINKS[self.domain]).extract()
+            links = [link for link in links
+                     if not any([garbage in link for garbage in
+                                 ['losowanie-lotto', 'prognoza-pogody', '/pogoda/']])]
         else:
             links = response.css(ARTICLES_LINKS[self.domain]).extract()
 
         for article_url in links:
             article_url = re.sub('\s+', '', article_url)
             yield response.follow(article_url, callback=domain_parser)
-        # https://docs.scrapy.org/en/latest/topics/dynamic-content.html
+    # https://docs.scrapy.org/en/latest/topics/dynamic-content.html
 
     def parse_dziennik(self, response):
         '''Parser for dziennik.pl'''
@@ -210,7 +303,6 @@ class PageSpider(scrapy.Spider):
         art_id = art_id.split(',')[0]
 
         date = response.xpath("//meta[@property='article:published_time']/@content").extract()[0]
-        print(date)
         date = date.split(' ')
         time = date[1]
         date = date[0]
@@ -221,7 +313,7 @@ class PageSpider(scrapy.Spider):
         lead = ' '.join(lead)
         lead = remove_tags(lead)
 
-        text = response.css('article .detail p').extract()
+        text = response.css('article .detail p.hyphenate').extract()
 
         # W R usunac akapity ze zdjeciami oraz wpisami z twittera - https://t.co/ lub pic.twitter.com/               
         text = ' || '.join(text)
@@ -321,7 +413,7 @@ class PageSpider(scrapy.Spider):
         )
         selector = '//div[@class = "article-container"]/' \
                    'div[not(*/@class = "embed")]/' \
-                    '*[%s]' % exclude_selectors
+                   '*[%s]' % exclude_selectors
         text = response.xpath(selector)
 
         text = text.extract()
@@ -520,38 +612,18 @@ class PageSpider(scrapy.Spider):
                'tags': ', '.join(tags)}
 
     def parse_tvn24(self, response):
-        url = response.url
-        art_id = url.split(',')[-1].split('.')[0]
+        url = response.xpath("//link[@rel='canonical']/@href").extract_first()
+        art_id = url.split('-')[-1]
 
-        date = response.css('div.articleDateContainer time::attr("datetime")').extract_first()
-        date = date.split(' ')
+        title = response.xpath("//meta[@property='og:title']/@content").extract_first()
+
+        lead = response.xpath("//meta[@name='description']/@content").extract_first()
+
+        date = response.css('.article-story-header .article-top-bar time::attr("datetime")').extract_first()
+        date = date.split('T')
         time = date[1]
         date = date[0]
 
-        title = response.css("div.mainContainer h1 ::text").extract_first()
-        title = replace_escape_chars(title).strip()
-
-        lead = response.css("article h2 span.black ::text").extract_first()
-        lead = replace_escape_chars(lead).strip()
-
-        # text = response.xpath(
-        #     '//*[not(contains(self, "em") or contains(self, "figure")'
-        #     ' or contains(self, "aside")'
-        #     ' or contains(@class, "innerArticleModule.onRight.cols.externalContent.innerText")'
-        #     ' or contains(@class, "lead"))]/'
-        #     'div[@class="textArticleDefault"]//'
-        #     'article/'
-        #     'p[not(contains(self, "em")'
-        #     ' or contains(self, "figure")'
-        #     ' or contains(self, "aside")'
-        #     ' or contains(@class, "innerArticleModule.onRight.cols.externalContent.innerText")'
-        #     ' or contains(@class, "innerText")'
-        #     ' or contains(@class, "lead")'
-        #     ' or contains(@class, "textHolder")'
-        #     ' or contains(self, "div")'
-        #     ' or starts_with(text(), "czytaj"))]/'
-        #     # ' and contains(@class, "xmsonormal")]/'
-        #     'text()').extract()
 
         exclude_selectors = (
             ''
@@ -572,15 +644,23 @@ class PageSpider(scrapy.Spider):
             ' and not(descendant-or-self::blockquote)'
             ' and not(self::*[contains(@class, "innerArticleModule")])'
             # ' and not(ancestor::twitter-tweet)'
-            ' and (self::p[not(contains(@dir, "ltr"))])'
+            ' and (self::p[contains(@class, "paragraph") and not(contains(@dir, "ltr"))])'
+            # ' and (self::p[contains(@class, "hyphenate") and not(contains(@dir, "ltr"))])'
         )
 
-        selector_text = '//div[@class="mainLeftColumn"]/' \
-                        'div[@class="textArticleDefault"]/' \
-                        'div[@class="articleDetailHolder"]/' \
-                        'article//' \
+        selector_text = '//div[contains(@class, "article-story-content__elements")]/' \
+                        'div[contains(@class, "article-element--paragraph")]/' \
                         '*[%s]' % exclude_selectors
         text = response.xpath(selector_text).extract()
+
+        if ('Autor:' in text[-1]) and ('Źródło:' in text[-1]):
+            source = remove_tags(text[-1]).split(' / ')
+            autor = source[0].replace('Autor: ', '')
+            source = source[1].replace('Źródło: ', '')
+            text = text[:-1]
+        else:
+            autor = ''
+            source = ''
 
         text = ' || '.join(text)
         text = remove_tags(text)
@@ -589,15 +669,13 @@ class PageSpider(scrapy.Spider):
         # Joining lead with text
         text = ' || '.join([lead, text])
         text = clear_text(text)
-        autor = response.css("div.articleAuthors ::text").extract()
-        source = autor[2].strip().replace('Źródło: ', '')
-        autor = autor[0].strip().replace('Autor: ', '')
+
 
         yield {'id': art_id,
                'url': url,
                'date': date,
                'time': time,
-               'title': ''.join(title),
+               'title': title,
                'lead': lead,
                'text': text,
                'autor': autor,
@@ -903,3 +981,302 @@ class PageSpider(scrapy.Spider):
                'autor': autor,
                'tags': tags,
                'source': source}
+
+    def parse_do_rzeczy(self, response):
+        '''Parser for Do Rzeczy'''
+        url = response.xpath("//link[@rel='canonical']/@href").extract_first()
+        art_id = url.split('/')[-2]
+
+        date = response.css('article.article header .art-details-datetime time::attr("datetime")').extract_first()
+        date = date.split('T')
+        time = date[1]
+        date = date[0]
+
+        title = response.xpath("//meta[@property='og:title']/@content").extract_first()
+
+        lead = response.xpath("//meta[@name='description']/@content").extract_first()
+
+        exclude_selectors = (
+            ''
+            'not(self::*[contains(@class, "advert")])'
+            ' and not(self::*[contains(@class, "embed__article")])'
+            ' and not(self::*[contains(@class, "SandboxRoot")])'
+            ' and not(self::*[contains(@class, "twitter-tweet")])'
+            ' and not(self::*[contains(@class, "am-article__image")])'
+            ' and not(self::*[contains(@class, "facebook-paragraph")])'
+            ' and not(self::*[contains(@class, "am-article__source")])'
+            ' and not(self::*[contains(@class, "article-tags")])'
+            ' and not(self::*[contains(@class, "tweet")])'
+            ' and not(self::*[contains(@class, "emb")])'
+            ' and not(self::*[contains(@class, "social-article")])'
+            ' and not(self::*[contains(@class, "video-module")])'
+            ' and not(self::*[contains(@class, "related")])'
+            ' and not(self::*[contains(@class, "imgdesc")])'
+            ' and not(self::*[contains(@class, "app-ad")])'
+            ' and not(self::*[contains(@class, "comments")])'
+            ' and not(self::a)'
+            ' and not(self::span)'
+            ' and not(self::b)'
+            ' and not(self::blockquote)'
+            # ' and not(ancestor::twitter-tweet)'
+            ' and (self::p[not(contains(@dir, "ltr"))])'
+        )
+
+        selector_text = '//div[contains(@class, "art-text-inner")]//*[%s]/text()' % exclude_selectors
+        text = response.xpath(selector_text).extract()
+        text = ' || '.join(text)
+        text = clear_text(text)
+        text = ' || '.join([lead, text])
+
+        autor = ''
+        tags = response.xpath("//meta[@name='keywords']/@content").extract_first()
+        # tags = response.css(".tags a::text").extract()
+        source = ''
+
+        yield {'id': art_id,
+               'url': url,
+               'date': date,
+               'time': time,
+               'title': title,
+               'lead': lead,
+               'text': text,
+               'autor': autor,
+               'tags': tags,
+               'source': source}
+
+    def parse_niezalezna(self, response):
+        '''Parser for Niezalezna'''
+        url = response.xpath("//link[@rel='canonical']/@href").extract_first()
+        art_id = url.split('/')[-1]
+        art_id = art_id.split('-')[0]
+
+        date = response.css('.articleContent .newsTime::text').extract_first()
+        date = date.split(', godz. ')
+        time = date[1]
+        date = date[0]
+
+        title = response.xpath("//meta[@property='og:title']/@content").extract_first()
+
+        lead = response.xpath("//meta[@name='description']/@content").extract_first()
+
+        exclude_selectors = (
+            ''
+            'not(self::*[contains(@class, "advert")])'
+            ' and not(self::*[contains(@class, "embed__article")])'
+            ' and not(self::*[contains(@class, "SandboxRoot")])'
+            ' and not(self::*[contains(@class, "twitter-tweet")])'
+            ' and not(self::*[contains(@class, "am-article__image")])'
+            ' and not(self::*[contains(@class, "facebook-paragraph")])'
+            ' and not(self::*[contains(@class, "am-article__source")])'
+            ' and not(self::*[contains(@class, "article-tags")])'
+            ' and not(self::*[contains(@class, "tweet")])'
+            ' and not(self::*[contains(@class, "emb")])'
+            ' and not(self::*[contains(@class, "social-article")])'
+            ' and not(self::*[contains(@class, "video-module")])'
+            ' and not(self::*[contains(@class, "related")])'
+            ' and not(self::*[contains(@class, "imgdesc")])'
+            ' and not(self::*[contains(@class, "app-ad")])'
+            ' and not(self::*[contains(@class, "comments")])'
+            ' and not(self::a)'
+            ' and not(self::span)'
+            ' and not(self::b)'
+            ' and not(self::blockquote)'
+            # ' and not(ancestor::twitter-tweet)'
+            ' and (self::p[not(contains(@dir, "ltr"))])'
+        )
+
+        selector_text = '//div[@id="article1"]' \
+                        '//div[contains(@class, "articleBody")]//*[%s]/text()' % exclude_selectors
+        text = response.xpath(selector_text).extract()
+        text = ' || '.join(text)
+        text = clear_text(text)
+        text = ' || '.join([lead, text])
+
+        autor = ''
+        tags = response.xpath("//meta[@name='keywords']/@content").extract_first()
+        # tags = response.css(".tags a::text").extract()
+        source = ''
+
+        yield {'id': art_id,
+               'url': url,
+               'date': date,
+               'time': time,
+               'title': title,
+               'lead': lead,
+               'text': text,
+               'autor': autor,
+               'tags': tags,
+               'source': source}
+
+    def parse_tok_fm(self, response):
+        '''Parser for TOK FM'''
+        url = response.xpath("//link[@rel='canonical']/@href").extract_first()
+        art_id = response.css('div.main_content article::attr("data-id")').extract_first()
+
+        date = response.css('.author_and_date .article_date time::attr("datetime")').extract_first()
+        date = date.split(' ')
+        time = date[1]
+        date = date[0]
+
+        title = response.xpath("//meta[@property='og:title']/@content").extract_first()
+
+        lead = response.xpath("//meta[@property='og:description']/@content").extract_first()
+
+        text = response.css('p.art_paragraph').extract()
+        text = ' || '.join(text)
+        text = remove_tags(text)
+
+        # Joining lead with text
+        text = ' || '.join([lead, text])
+        text = clear_text(text)
+
+        autor = ''
+        tags = response.xpath("//meta[@name='Keywords']/@content").extract_first()
+        # tags = response.css(".tags a::text").extract()
+        source = ''
+
+        yield {'id': art_id,
+               'url': url,
+               'date': date,
+               'time': time,
+               'title': title,
+               'lead': lead,
+               'text': text,
+               'autor': autor,
+               'tags': tags,
+               'source': source}
+
+    def parse_wpolityce(self, response):
+        '''Parser for wPolityce'''
+        url = response.xpath("//link[@rel='canonical']/@href").extract_first()
+        art_id = url.split('/')[-1]
+        art_id = art_id.split('-')[0]
+
+        date = response.css('header .article-meta time::attr("title")').extract_first()
+        date = date.split(' ')
+        time = date[1]
+        date = date[0]
+
+        title = response.xpath("//meta[@property='og:title']/@content").extract_first()
+
+        lead = response.xpath("//meta[@property='og:description']/@content").extract_first()
+
+        exclude_selectors = (
+            ''
+            'not(self::*[contains(@class, "advert")])'
+            ' and not(self::*[contains(@class, "embed__article")])'
+            ' and not(self::*[contains(@class, "SandboxRoot")])'
+            ' and not(self::*[contains(@class, "twitter-tweet")])'
+            ' and not(self::*[contains(@class, "am-article__image")])'
+            ' and not(self::*[contains(@class, "facebook-paragraph")])'
+            ' and not(self::*[contains(@class, "am-article__source")])'
+            ' and not(self::*[contains(@class, "article-tags")])'
+            ' and not(self::*[contains(@class, "tweet")])'
+            ' and not(self::*[contains(@class, "emb")])'
+            ' and not(self::*[contains(@class, "social-article")])'
+            ' and not(self::*[contains(@class, "video-module")])'
+            ' and not(self::*[contains(@class, "related")])'
+            ' and not(self::*[contains(@class, "imgdesc")])'
+            ' and not(self::*[contains(@class, "app-ad")])'
+            ' and not(self::*[contains(@class, "comments")])'
+            ' and not(self::a)'
+            ' and not(self::span)'
+            ' and not(self::b)'
+            ' and not(self::blockquote)'
+            # ' and not(ancestor::twitter-tweet)'
+            ' and (self::p[not(contains(@dir, "ltr"))])'
+        )
+
+        selector_text = '//div[contains(@class, "intext-links")]//*[%s]//text()' % exclude_selectors
+        text = response.xpath(selector_text).extract()
+        text = ' || '.join(text)
+        text = clear_text(text)
+        # text = ' || '.join([lead, text])
+
+        autor = ''
+        tags = ''
+        # tags = response.css(".tags a::text").extract()
+        source = ''
+
+        yield {'id': art_id,
+               'url': url,
+               'date': date,
+               'time': time,
+               'title': title,
+               'lead': lead,
+               'text': text,
+               'autor': autor,
+               'tags': tags,
+               'source': source}
+
+    def parse_onet(self, response):
+        '''Parser for Onet'''
+        article_url = response.css('.content .showMore a ::attr("href")').extract_first()
+        if article_url:
+            yield response.follow(article_url, callback=self.parse_onet)
+        else:
+            url = response.xpath("//link[@rel='canonical']/@href").extract_first()
+            art_id = url.split('/')[-1]
+            # art_id = url
+
+            date = response.xpath("//meta[@property='article:published_time']/@content").extract_first()
+            date = date.split(' ')
+            time = date[1]
+            date = date[0]
+            # time = ''
+
+            title = response.xpath("//meta[@property='og:title']/@content").extract_first()
+
+            lead = response.xpath("//meta[@name='description']/@content").extract_first()
+
+            # exclude_selectors = (
+            #     ''
+            #     'not(self::*[contains(@class, "advert")])'
+            #     ' and not(self::*[contains(@class, "embed__article")])'
+            #     ' and not(self::*[contains(@class, "SandboxRoot")])'
+            #     ' and not(self::*[contains(@class, "twitter-tweet")])'
+            #     ' and not(self::*[contains(@class, "am-article__image")])'
+            #     ' and not(self::*[contains(@class, "facebook-paragraph")])'
+            #     ' and not(self::*[contains(@class, "am-article__source")])'
+            #     ' and not(self::*[contains(@class, "article-tags")])'
+            #     ' and not(self::*[contains(@class, "tweet")])'
+            #     ' and not(self::*[contains(@class, "emb")])'
+            #     ' and not(self::*[contains(@class, "social-article")])'
+            #     ' and not(self::*[contains(@class, "video-module")])'
+            #     ' and not(self::*[contains(@class, "related")])'
+            #     ' and not(self::*[contains(@class, "imgdesc")])'
+            #     ' and not(self::*[contains(@class, "app-ad")])'
+            #     ' and not(self::*[contains(@class, "comments")])'
+            #     ' and not(self::a)'
+            #     ' and not(self::span)'
+            #     ' and not(self::b)'
+            #     ' and not(self::blockquote)'
+            #     # ' and not(ancestor::twitter-tweet)'
+            #     # ' and (self::p[not(contains(@dir, "ltr"))])'
+            #     # ' and (self::p[contains(@class, "hyphenate")])'
+            #     ' and (self::p[contains(@class, "hyphenate") and not(contains(@dir, "ltr"))])'
+            # )
+            #
+            # selector_text = '//div[contains(@class, "articleBody")]//*[%s]' % exclude_selectors
+            # text = response.xpath(selector_text).extract()
+            text = response.css('article .detail p.hyphenate').extract()
+            text = ' || '.join(text)
+            text = remove_tags(text)
+            text = clear_text(text)
+            text = ' || '.join([lead, text])
+
+            autor = ''
+            tags = ''
+            source = response.css('.authorsSources .sourceOrganization ::text').extract()
+            source = ', '.join(source)
+
+            yield {'id': art_id,
+                   'url': url,
+                   'date': date,
+                   'time': time,
+                   'title': title,
+                   'lead': lead,
+                   'text': text,
+                   'autor': autor,
+                   'tags': tags,
+                   'source': source}

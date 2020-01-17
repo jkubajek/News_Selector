@@ -39,7 +39,7 @@ library(lexRankr)
 # library(arrangements)
 
 load(paste0(working_dir, 
-            "News_Selector/data/topics/monthly_topics_2019-09_weighted_scaling_singularity_penalty_01_512.RData"))
+            "News_Selector/data/topics/monthly_topics_2019-09_weighted_scaling_singularity_penalty_0_512.RData"))
 
 source(paste0(working_dir, "News_Selector/scripts/topic_selection_functions.R"), encoding = "UTF8")
 
@@ -104,7 +104,7 @@ for(text in all_text){
 ```{r echo = FALSE, message=FALSE, fig.width=3.5, fig.height=4, fig.align = 'center', results='asis'}
 # knitr::opts_current$set(fig.width=7, fig.height=8) 
 quant <- count_quantile(nrow(words_similarity_matrix))
-.wykres <- plot_all_words_correlation(words_similarity_matrix, scale_font = c(2.4, 1.0), class_num = 6, min_association = 0.6, lambda_DF=lambda_daily_DF, maximum_words_num = 200)
+.wykres <- plot_all_words_correlation(words_similarity_matrix, scale_font = c(2.4, 1.0), class_num = 6, min_association = 0.6, lambda_DF=lambda_DF, maximum_words_num = 200)
 # c(3.5, 0.8)
 
 cat("  \n") 
@@ -169,7 +169,7 @@ for(name in names(list_topics)){
     }
     
     
-    .wykres <- plot_topic_correlation(topic_words, words_similarity_matrix, scale_font = scale_font, class_num = 6, min_association = 0.4, lambda_DF = lambda_daily_DF, maximum_words_num = 40)
+    .wykres <- plot_topic_correlation(topic_words, words_similarity_matrix, scale_font = scale_font, class_num = 6, min_association = 0.4, lambda_DF = lambda_DF, maximum_words_num = 40)
     
     print(.wykres)
     

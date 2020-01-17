@@ -19,7 +19,7 @@ library(stringr)
 print_topics <- FALSE
 
 # Minimal lambda value
-v_min_lambda_daily <- 100
+v_min_lambda_daily <- 250
 
 # Loading functions
 # Setting main directory
@@ -54,7 +54,7 @@ gc(reset = T)
 # Statistics
 load(paste0(working_dir, "News_Selector/data/general_stats_2018-2019.RData"))
 # ###################################################################
-# Annual data
+# General statistics needed for Dunning statistic
 # ###################################################################
 load(paste0(working_dir, "News_Selector/data/annual_articles/articles_2019.RData"))
 DF_all <- DF
@@ -63,7 +63,7 @@ gc(reset=T)
 # ###################################################################
 # Load files
 # ###################################################################
-for(i in seq(48, 52)){
+for(i in seq(1, 359)){
     
     v_date_0 <- as.Date(start_dates[i], format="%Y-%m-%d")
     v_date_1 <- as.Date(end_dates[i], format="%Y-%m-%d")
@@ -112,7 +112,7 @@ for(i in seq(48, 52)){
         mutate(word = ifelse(is.na(slowo), word, slowo)) %>%
         dplyr::select(-slowo) %>%
         mutate(word = gsub(" ", "", word)) %>%
-        filter(!word %in% stop_words_pl) 
+        filter(!word %in% stop_words_pl)
     
     # Select minimum number of tokens occurence basing on distribution of data
     data_grouped <-  articles_unnested %>%
@@ -138,7 +138,6 @@ for(i in seq(48, 52)){
     lemmatized_sentences <- inputs[[4]]
     lemmatized_articles <- inputs[[5]]
     sentences_text <- inputs[[6]]
-    
     
     # Sending data to Python for clustering and summarisation with the
     # use of dimensions reduction (LSA)
@@ -173,11 +172,11 @@ for(i in seq(48, 52)){
     names(list_topics) <- paste0("Gr_", seq(length(list_topics)))
     
     # Add info about Dunning statistics, sort topics and clean sentences
-    # list_topics <- lambd_extractor(list_topics, articles_unnested, 
-    #                                general_stats, min_counts = v_min_counts, 
-    #                                min_lambda_daily = v_min_lambda_daily)
+    list_topics <- lambd_extractor(list_topics, articles_unnested,
+                                   general_stats, min_counts = v_min_counts,
+                                   min_lambda_daily = v_min_lambda_daily)
     # list_topics <- date_extractor(list_topics, articles_sentences)
-    # list_topics <- arrange_topics(list_topics, "max_lambda")
+    list_topics <- arrange_topics(list_topics, "max_lambda")
     # list_topics <- clear_sentences(list_topics)
     # list_topics <- delete_unrelevant_topics(list_topics, 150, 100)
     # 
@@ -185,12 +184,11 @@ for(i in seq(48, 52)){
     # selected_words <- filter_selected_words(list_topics)
     selected_words <- filtered_lambda_statistics$word[1:30]
     words_similarity_matrix <- words_similarity_matrix[selected_words, selected_words]
-    
     #####################################################################
     # Saving output for report
     # ###################################################################
     # Data frame with Dunning statistics for plotting
-    lambda_daily_DF <- calculate_lambda_statistics(articles_unnested, general_stats, 
+    lambda_DF <- calculate_lambda_statistics(articles_unnested, general_stats, 
                                                    min_counts = v_min_counts, 
                                                    min_lambda_daily = v_min_lambda_daily) %>% 
         mutate(lambda_log = log(lambda + 1) ) %>%
@@ -204,7 +202,7 @@ for(i in seq(48, 52)){
                         start_dates[i], "-", end_dates[i], ".RData")
     save(list_topics, 
          words_similarity_matrix, 
-         lambda_daily_DF, 
+         lambda_DF, 
          file = file_name)
 }
     

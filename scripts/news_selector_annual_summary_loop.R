@@ -19,12 +19,11 @@ library(stringr)
 print_topics <- FALSE
 
 # Minimal lambda value
-v_min_lambda_daily <- 50
+v_min_lambda_daily <- 100 # 50
 
 # Loading functions
 # Setting main directory
 working_dir <- "D:/Osobiste/GitHub/"
-# working_dir <- "/home/j.kubajek/projekty/News_Selector/"
 
 # Sourcing R code
 source(paste0(working_dir, "News_Selector/scripts/dunning_functions.R"), encoding = "UTF8")
@@ -60,19 +59,21 @@ gc(reset = T)
 # ###################################################################
 # Statistics
 load(paste0(working_dir, "News_Selector/data/general_stats_2018-2019.RData"))
-
+# ###################################################################
+# General statistics needed for Dunning statistic
+# ###################################################################
+load(paste0(working_dir, "News_Selector/data/annual_articles/articles_2019.RData"))
+DF_all <- DF
 # ###################################################################
 # Load files
 # ###################################################################
 for(i in seq(1, 12)){
-    load(paste0(working_dir, "News_Selector/data/annual_articles/articles_2019.RData"))
-    
     v_date_0 <- as.Date(start_dates[i], format="%Y-%m-%d")
     v_date_1 <- as.Date(end_dates[i], format="%Y-%m-%d")
     selected_dates <- seq(from=v_date_0, to=v_date_1, by="day")
     selected_dates <- selected_dates %>% as.character()
     
-    DF <- DF %>%
+    DF <- DF_all %>%
         mutate(date = date %>% as.character()) %>%
         filter(date %in% selected_dates)
     gc(reset=TRUE)
@@ -141,7 +142,6 @@ for(i in seq(1, 12)){
     lemmatized_articles <- inputs[[5]]
     sentences_text <- inputs[[6]]
     
-    
     # Sending data to Python for clustering and summarisation with the
     # use of dimensions reduction (LSA)
     # The algorithm is to select approximately 5% of the sentences that include 
@@ -149,7 +149,7 @@ for(i in seq(1, 12)){
     topics <- cluster_and_summarise(sections_and_articles, filtered_lambda_statistics,
                                    # Clustering
                                    min_association=0.25, do_silhouette=TRUE, 
-                                   singularity_penalty=-0.1,
+                                   singularity_penalty=0.0,
                                    # Summarization
                                    lemmatized_sentences=lemmatized_sentences, 
                                    lemmatized_articles=lemmatized_articles,
@@ -160,7 +160,8 @@ for(i in seq(1, 12)){
                                    use_sparse=TRUE, freq_to_lex_rank=0.05,
                                    max_sentences_num=20, min_sentences_num=5,
                                    freq_to_show=0.01, embedding_size=512,
-                                   min_sent_to_lexrank=500)
+                                   min_sent_to_lexrank=500,
+                                   weighted_unique_scaling=TRUE)
     
     list_topics <- topics[[1]]
     words_similarity_matrix <- topics[[2]]
@@ -183,11 +184,20 @@ for(i in seq(1, 12)){
     list_topics <- clear_sentences(list_topics)
     list_topics <- delete_unrelevant_topics(list_topics, 
                                             min_singular_lambda=150,
-                                            min_topic_lambda=100)
+                                            min_topic_lambda=150)
     
     # Select filtered topic words
     selected_words <- filter_selected_words(list_topics)
     words_similarity_matrix <- words_similarity_matrix[selected_words, selected_words]
+    
+    for(iter in 1:length(list_topics)){
+        topic_num <- iter
+        res <- list_topics[[topic_num]][["mean_simil"]] 
+        res <- tibble(site=res[["site"]], mean_simil=res[["mean_simil"]]) %>%
+            left_join(sites, by="site") %>%
+            arrange(desc(mean_simil))
+        list_topics[[topic_num]][["mean_simil"]] <- res
+    }
     #####################################################################
     # Topics listing
     # ###################################################################
@@ -201,27 +211,35 @@ for(i in seq(1, 12)){
             print("")
             print(paste0(list_topics[[name]][["site_name"]], ": ", list_topics[[name]][["sentences"]]))
             print("----------------------------------")
-            if ( iter == 50) break
+            if ( iter == 40) break
             iter = iter +1
         }
+        # iter = 0
+        # for(iter in 1:length(list_topics)){
+        #     topic_num <- iter
+        #     print(list_topics[[topic_num]][["word"]])
+        #     res <- list_topics[[topic_num]][["mean_simil"]] 
+        #     print(res)
+        #     if ( iter == 40) break
+        # }
     }
     
-    len <- c()
-    max_val <- c()
-    for(element in list_topics){
-        len <- c(len, length(element[["word"]]))
-        max_val <- c(max_val, element[["max_lambda"]])
-        print(element[["word"]])
-    }
-    print(len)
-    print(max_val)
+    # len <- c()
+    # max_val <- c()
+    # for(element in list_topics){
+    #     len <- c(len, length(element[["word"]]))
+    #     max_val <- c(max_val, element[["max_lambda"]])
+    #     print(element[["word"]])
+    # }
+    # print(len)
+    # print(max_val)
     print(paste0("Month: ", i))
     print(paste0("Topics: ", length(list_topics)))
     #####################################################################
     # Saving output for report
     # ###################################################################
     # Data frame with Dunning statistics for plotting
-    lambda_daily_DF <- calculate_lambda_statistics(articles_unnested, general_stats, 
+    lambda_DF <- calculate_lambda_statistics(articles_unnested, general_stats, 
                                                    min_counts = v_min_counts, 
                                                    min_lambda_daily = v_min_lambda_daily) %>% 
         mutate(lambda_log = log(lambda + 1) ) %>%
@@ -231,10 +249,10 @@ for(i in seq(1, 12)){
     
     # Saving topics list, similarity matrix and df with Dunning statistics
     month_number <- months_numbers[i]
-    file_name <- paste0(working_dir, "News_Selector/data/topics/monthly_topics_2019-", month_number, "_singularity_penalty_01_512.RData")
+    file_name <- paste0(working_dir, "News_Selector/data/topics/monthly_topics_2019-", month_number, "_weighted_scaling_singularity_penalty_0_512.RData")
     save(list_topics, 
          words_similarity_matrix, 
-         lambda_daily_DF, 
+         lambda_DF, 
          file = file_name)
 }
     
