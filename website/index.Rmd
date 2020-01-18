@@ -67,7 +67,7 @@ start_dates <- as.Date("2019-01-01") + seq(0, 358)
 end_dates <- as.Date("2019-01-07") + seq(0, 358)
 dates <- paste0("Okres: ", format(start_dates, "%d.%m"), " - ", format(end_dates, "%d.%m"))
 
-lambda_DF <- data.frame(name=character(), lambda=numeric(), 
+lambda_DF_all <- data.frame(name=character(), lambda=numeric(), 
                         lambda_log=numeric(), stringsAsFactors = F)
 for(i in seq(1, 359)){
     file_name <- paste0(working_dir, 
@@ -75,13 +75,13 @@ for(i in seq(1, 359)){
                         start_dates[i], "-", end_dates[i], ".RData")
     load(file_name)
     
-    lambda_DF <- lambda_DF %>%
+    lambda_DF_all <- lambda_DF_all %>%
         union_all(lambda_DF %>%
                       top_n(max_words, lambda))
     
 }
 
-values_all <- lambda_DF[["lambda_log"]]
+values_all <- lambda_DF_all[["lambda_log"]]
 brks <- classIntervals(values_all, n = 5, style = "fisher") %>% .$brks #jenks
 
 for(i in seq(1, 359)){
